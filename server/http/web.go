@@ -1,22 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
-	"os"
-	"runtime"
 )
 
 func main() {
-	http.HandleFunc("/", hello)
-	bind := fmt.Sprintf("%s:%s", os.Getenv("OPENSHIFT_GO_IP"), os.Getenv("OPENSHIFT_GO_PORT"))
-	fmt.Printf("listening on %s...", bind)
-	err := http.ListenAndServe(bind, nil)
-	if err != nil {
-		panic(err)
-	}
-}
-
-func hello(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(res, "hello, world from %s", runtime.Version())
+	// Simple static webserver:
+	log.Fatal(http.ListenAndServe(":8080", http.FileServer(http.Dir("./client/web"))))
 }
