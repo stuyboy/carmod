@@ -1,0 +1,6 @@
+framework module UIImage_AF_Additions {
+  umbrella header "UIImage+AF+Additions-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "UIImage+AF+Additions",
+  "version": "2.02",
+  "platforms": {
+    "ios": null
+  },
+  "license": "MIT",
+  "summary": "Convenience additions for UIImage",
+  "homepage": "https://github.com/melvitax/UIImageAFAdditions",
+  "authors": {
+    "Melvin Rivera": "melvin@allforces.com"
+  },
+  "source": {
+    "git": "https://github.com/melvitax/UIImageAFAdditions.git",
+    "tag": "2.02"
+  },
+  "description": "A simple UIImage convenience addition for handling image creation and manipulation.",
+  "source_files": "UIImage+AF+Additions/*",
+  "frameworks": "QuartzCore",
+  "requires_arc": true
+}
