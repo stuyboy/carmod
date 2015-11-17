@@ -376,6 +376,7 @@
 				40722E171BFA98B000D6F10C /* Resources */,
 				8664005BE8A5BC12EAFB1191 /* Embed Pods Frameworks */,
 				DB627A4FDB5C44B5BEFD7785 /* Copy Pods Resources */,
+				40B0CECB1BFAD669001D3033 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -492,6 +493,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		40B0CECB1BFAD669001D3033 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 92b3269561c64d53c7835a573b253a2cca8ada7d 933fc9d15c188576f1facb694a3b12e1ac728ba8206dbbb25f96ce767c7a37f8";
+		};
 		8664005BE8A5BC12EAFB1191 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,9 +708,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thad Hwang (35AR497389)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = carmod/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -704,6 +718,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
 				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
 			};
 			name = Debug;
@@ -712,9 +727,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thad Hwang (35AR497389)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = carmod/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -722,6 +737,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
 				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
 			};
 			name = Release;

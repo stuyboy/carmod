@@ -3,6 +3,8 @@ import Parse
 //import ParseCrashReporting
 import ParseFacebookUtils
 import MBProgressHUD
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelegate, UITabBarControllerDelegate {
@@ -44,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     // Enable public read access by default, with any newly created PFObjects belonging to the current user
     defaultACL.setPublicReadAccess(true)
     PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser: true)
+    
+    Fabric.with([Crashlytics.self])
     
     // Set up our app's global UIAppearance
     self.setupAppearance()
