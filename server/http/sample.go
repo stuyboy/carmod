@@ -1,5 +1,7 @@
 package main
 
+// This was the original sample file from OpenShift.  Removing the main.
+
 import (
 	"fmt"
 	"net/http"
@@ -7,7 +9,7 @@ import (
 	"runtime"
 )
 
-func main() {
+func notMain() {
 	http.HandleFunc("/", hello)
 	bind := fmt.Sprintf("%s:%s", os.Getenv("OPENSHIFT_GO_IP"), os.Getenv("OPENSHIFT_GO_PORT"))
 	fmt.Printf("listening on %s...", bind)
