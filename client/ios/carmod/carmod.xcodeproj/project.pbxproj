@@ -1,0 +1,819 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27D8A4232B999A07EF0DE4E8 /* Pods_carmod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */; };
+		40678E091BFA9A860071BCB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E071BFA9A850071BCB8 /* Constants.swift */; };
+		40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E081BFA9A850071BCB8 /* Global.swift */; };
+		40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */; };
+		40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0D1BFA9AA90071BCB8 /* PAPLogInViewController.swift */; };
+		40678E101BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0F1BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift */; };
+		40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E111BFA9AC40071BCB8 /* PAPHomeViewController.swift */; };
+		40678E141BFA9AD10071BCB8 /* PAPAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E131BFA9AD10071BCB8 /* PAPAccountViewController.swift */; };
+		40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */; };
+		40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E171BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift */; };
+		40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E191BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift */; };
+		40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E1B1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift */; };
+		40678E1F1BFA9B280071BCB8 /* PAPTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E1E1BFA9B280071BCB8 /* PAPTabBarController.swift */; };
+		40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E201BFA9B3E0071BCB8 /* PAPConstants.swift */; };
+		40678E231BFA9B490071BCB8 /* PAPUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E221BFA9B490071BCB8 /* PAPUtility.swift */; };
+		40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E241BFA9B530071BCB8 /* PAPCache.swift */; };
+		40678E271BFA9B590071BCB8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E261BFA9B590071BCB8 /* Reachability.swift */; };
+		40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E291BFA9B770071BCB8 /* UIExtensions.swift */; };
+		40678E2C1BFA9B7E0071BCB8 /* String+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E2B1BFA9B7E0071BCB8 /* String+Common.swift */; };
+		40678E311BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E301BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift */; };
+		40678E341BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E321BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift */; };
+		40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E331BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift */; };
+		40678E381BFA9BE80071BCB8 /* PAPLoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */; };
+		40678E391BFA9BE80071BCB8 /* PAPPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */; };
+		40678E3E1BFA9BFF0071BCB8 /* PAPActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E3B1BFA9BFF0071BCB8 /* PAPActivityCell.swift */; };
+		40678E3F1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E3C1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift */; };
+		40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E3D1BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift */; };
+		40678E441BFA9C270071BCB8 /* PAPImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E411BFA9C270071BCB8 /* PAPImageView.swift */; };
+		40678E451BFA9C270071BCB8 /* PAPProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */; };
+		40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */; };
+		40722E1D1BFA98B000D6F10C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E1C1BFA98B000D6F10C /* AppDelegate.swift */; };
+		40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40722E231BFA98B000D6F10C /* Assets.xcassets */; };
+		40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E311BFA98B100D6F10C /* carmodTests.swift */; };
+		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40722E2E1BFA98B100D6F10C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40722E111BFA98B000D6F10C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40722E181BFA98B000D6F10C;
+			remoteInfo = carmod;
+		};
+		40722E391BFA98B100D6F10C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40722E111BFA98B000D6F10C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40722E181BFA98B000D6F10C;
+			remoteInfo = carmod;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.release.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.release.xcconfig"; sourceTree = "<group>"; };
+		2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carmod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40678E071BFA9A850071BCB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		40678E081BFA9A850071BCB8 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPWelcomeViewController.swift; sourceTree = "<group>"; };
+		40678E0D1BFA9AA90071BCB8 /* PAPLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPLogInViewController.swift; sourceTree = "<group>"; };
+		40678E0F1BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoTimelineViewController.swift; sourceTree = "<group>"; };
+		40678E111BFA9AC40071BCB8 /* PAPHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPHomeViewController.swift; sourceTree = "<group>"; };
+		40678E131BFA9AD10071BCB8 /* PAPAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPAccountViewController.swift; sourceTree = "<group>"; };
+		40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPEditPhotoViewController.swift; sourceTree = "<group>"; };
+		40678E171BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPActivityFeedViewController.swift; sourceTree = "<group>"; };
+		40678E191BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		40678E1B1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsViewController.swift; sourceTree = "<group>"; };
+		40678E1E1BFA9B280071BCB8 /* PAPTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPTabBarController.swift; sourceTree = "<group>"; };
+		40678E201BFA9B3E0071BCB8 /* PAPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPConstants.swift; sourceTree = "<group>"; };
+		40678E221BFA9B490071BCB8 /* PAPUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPUtility.swift; sourceTree = "<group>"; };
+		40678E241BFA9B530071BCB8 /* PAPCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPCache.swift; sourceTree = "<group>"; };
+		40678E261BFA9B590071BCB8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		40678E291BFA9B770071BCB8 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		40678E2B1BFA9B7E0071BCB8 /* String+Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Common.swift"; sourceTree = "<group>"; };
+		40678E301BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoHeaderView.swift; sourceTree = "<group>"; };
+		40678E321BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoDetailsFooterView.swift; sourceTree = "<group>"; };
+		40678E331BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoDetailsHeaderView.swift; sourceTree = "<group>"; };
+		40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPLoadMoreCell.swift; sourceTree = "<group>"; };
+		40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoCell.swift; sourceTree = "<group>"; };
+		40678E3B1BFA9BFF0071BCB8 /* PAPActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPActivityCell.swift; sourceTree = "<group>"; };
+		40678E3C1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPBaseTextCell.swift; sourceTree = "<group>"; };
+		40678E3D1BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsCell.swift; sourceTree = "<group>"; };
+		40678E411BFA9C270071BCB8 /* PAPImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPImageView.swift; sourceTree = "<group>"; };
+		40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPProfileImageView.swift; sourceTree = "<group>"; };
+		40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPSettingsButtonItem.swift; sourceTree = "<group>"; };
+		40678E471BFA9E010071BCB8 /* carmod-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "carmod-bridging-header.h"; sourceTree = "<group>"; };
+		40722E191BFA98B000D6F10C /* carmod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carmod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40722E1C1BFA98B000D6F10C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		40722E231BFA98B000D6F10C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		40722E281BFA98B000D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40722E2D1BFA98B100D6F10C /* carmodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carmodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40722E311BFA98B100D6F10C /* carmodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodTests.swift; sourceTree = "<group>"; };
+		40722E331BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40722E381BFA98B100D6F10C /* carmodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carmodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40722E3C1BFA98B100D6F10C /* carmodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodUITests.swift; sourceTree = "<group>"; };
+		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.debug.xcconfig"; sourceTree = "<group>"; };
+		A4E53314AABF5BB21948A9D2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C9D03E08477D6374FC24CE69 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		40722E161BFA98B000D6F10C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D8A4232B999A07EF0DE4E8 /* Pods_carmod.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E2A1BFA98B100D6F10C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E351BFA98B100D6F10C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40678DFC1BFA99140071BCB8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				40678E011BFA99810071BCB8 /* Login */,
+				40678E031BFA998F0071BCB8 /* Home */,
+				40678E1D1BFA9B1C0071BCB8 /* Navigation */,
+				40678E021BFA99880071BCB8 /* Take Photo */,
+				40678E041BFA99990071BCB8 /* Activity */,
+				40678E051BFA99BB0071BCB8 /* Details */,
+				40678E061BFA99BF0071BCB8 /* Settings */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		40678DFD1BFA99190071BCB8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40678E2D1BFA9B900071BCB8 /* TimelineViews */,
+				40678E2E1BFA9BA10071BCB8 /* PhotoDetailsViews */,
+				40678E2F1BFA9BAB0071BCB8 /* UITableViewCells */,
+				40678E411BFA9C270071BCB8 /* PAPImageView.swift */,
+				40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */,
+				40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		40678DFE1BFA99270071BCB8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40678E001BFA993F0071BCB8 /* Resources */,
+				40678DFF1BFA99380071BCB8 /* Extensions */,
+				40722E1C1BFA98B000D6F10C /* AppDelegate.swift */,
+				40678E071BFA9A850071BCB8 /* Constants.swift */,
+				40678E081BFA9A850071BCB8 /* Global.swift */,
+				40678E241BFA9B530071BCB8 /* PAPCache.swift */,
+				40678E201BFA9B3E0071BCB8 /* PAPConstants.swift */,
+				40678E221BFA9B490071BCB8 /* PAPUtility.swift */,
+				40678E261BFA9B590071BCB8 /* Reachability.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40678DFF1BFA99380071BCB8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40678E2B1BFA9B7E0071BCB8 /* String+Common.swift */,
+				40678E291BFA9B770071BCB8 /* UIExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		40678E001BFA993F0071BCB8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				40722E231BFA98B000D6F10C /* Assets.xcassets */,
+				40722E281BFA98B000D6F10C /* Info.plist */,
+				40678E471BFA9E010071BCB8 /* carmod-bridging-header.h */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		40678E011BFA99810071BCB8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */,
+				40678E0D1BFA9AA90071BCB8 /* PAPLogInViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		40678E021BFA99880071BCB8 /* Take Photo */ = {
+			isa = PBXGroup;
+			children = (
+				40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */,
+			);
+			name = "Take Photo";
+			sourceTree = "<group>";
+		};
+		40678E031BFA998F0071BCB8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				40678E0F1BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift */,
+				40678E111BFA9AC40071BCB8 /* PAPHomeViewController.swift */,
+				40678E131BFA9AD10071BCB8 /* PAPAccountViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		40678E041BFA99990071BCB8 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				40678E171BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		40678E051BFA99BB0071BCB8 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				40678E191BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
+		40678E061BFA99BF0071BCB8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				40678E1B1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		40678E1D1BFA9B1C0071BCB8 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				40678E1E1BFA9B280071BCB8 /* PAPTabBarController.swift */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		40678E2D1BFA9B900071BCB8 /* TimelineViews */ = {
+			isa = PBXGroup;
+			children = (
+				40678E301BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift */,
+			);
+			name = TimelineViews;
+			sourceTree = "<group>";
+		};
+		40678E2E1BFA9BA10071BCB8 /* PhotoDetailsViews */ = {
+			isa = PBXGroup;
+			children = (
+				40678E321BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift */,
+				40678E331BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift */,
+			);
+			name = PhotoDetailsViews;
+			sourceTree = "<group>";
+		};
+		40678E2F1BFA9BAB0071BCB8 /* UITableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				40678E3A1BFA9BEB0071BCB8 /* PAPBaseTextCell */,
+				40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */,
+				40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */,
+			);
+			name = UITableViewCells;
+			sourceTree = "<group>";
+		};
+		40678E3A1BFA9BEB0071BCB8 /* PAPBaseTextCell */ = {
+			isa = PBXGroup;
+			children = (
+				40678E3B1BFA9BFF0071BCB8 /* PAPActivityCell.swift */,
+				40678E3C1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift */,
+				40678E3D1BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift */,
+			);
+			name = PAPBaseTextCell;
+			sourceTree = "<group>";
+		};
+		40722E101BFA98B000D6F10C = {
+			isa = PBXGroup;
+			children = (
+				40722E1B1BFA98B000D6F10C /* carmod */,
+				40722E301BFA98B100D6F10C /* carmodTests */,
+				40722E3B1BFA98B100D6F10C /* carmodUITests */,
+				40722E1A1BFA98B000D6F10C /* Products */,
+				C1AEC74E1393950B34EEB50D /* Pods */,
+				97F53FF168AA83CBC46AC5CF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		40722E1A1BFA98B000D6F10C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40722E191BFA98B000D6F10C /* carmod.app */,
+				40722E2D1BFA98B100D6F10C /* carmodTests.xctest */,
+				40722E381BFA98B100D6F10C /* carmodUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40722E1B1BFA98B000D6F10C /* carmod */ = {
+			isa = PBXGroup;
+			children = (
+				40678DFC1BFA99140071BCB8 /* Controllers */,
+				40678DFD1BFA99190071BCB8 /* Views */,
+				40678DFE1BFA99270071BCB8 /* Supporting Files */,
+			);
+			path = carmod;
+			sourceTree = "<group>";
+		};
+		40722E301BFA98B100D6F10C /* carmodTests */ = {
+			isa = PBXGroup;
+			children = (
+				40722E311BFA98B100D6F10C /* carmodTests.swift */,
+				40722E331BFA98B100D6F10C /* Info.plist */,
+			);
+			path = carmodTests;
+			sourceTree = "<group>";
+		};
+		40722E3B1BFA98B100D6F10C /* carmodUITests */ = {
+			isa = PBXGroup;
+			children = (
+				40722E3C1BFA98B100D6F10C /* carmodUITests.swift */,
+				40722E3E1BFA98B100D6F10C /* Info.plist */,
+			);
+			path = carmodUITests;
+			sourceTree = "<group>";
+		};
+		97F53FF168AA83CBC46AC5CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */,
+				4C740DDEEA01BA57AD7DDC61 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C1AEC74E1393950B34EEB50D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C9D03E08477D6374FC24CE69 /* Pods.debug.xcconfig */,
+				A4E53314AABF5BB21948A9D2 /* Pods.release.xcconfig */,
+				67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */,
+				15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		40722E181BFA98B000D6F10C /* carmod */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40722E411BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmod" */;
+			buildPhases = (
+				A1ED8D7CC8251DD62DB10ABD /* Check Pods Manifest.lock */,
+				40722E151BFA98B000D6F10C /* Sources */,
+				40722E161BFA98B000D6F10C /* Frameworks */,
+				40722E171BFA98B000D6F10C /* Resources */,
+				8664005BE8A5BC12EAFB1191 /* Embed Pods Frameworks */,
+				DB627A4FDB5C44B5BEFD7785 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = carmod;
+			productName = carmod;
+			productReference = 40722E191BFA98B000D6F10C /* carmod.app */;
+			productType = "com.apple.product-type.application";
+		};
+		40722E2C1BFA98B100D6F10C /* carmodTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40722E441BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmodTests" */;
+			buildPhases = (
+				40722E291BFA98B100D6F10C /* Sources */,
+				40722E2A1BFA98B100D6F10C /* Frameworks */,
+				40722E2B1BFA98B100D6F10C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40722E2F1BFA98B100D6F10C /* PBXTargetDependency */,
+			);
+			name = carmodTests;
+			productName = carmodTests;
+			productReference = 40722E2D1BFA98B100D6F10C /* carmodTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		40722E371BFA98B100D6F10C /* carmodUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40722E471BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmodUITests" */;
+			buildPhases = (
+				40722E341BFA98B100D6F10C /* Sources */,
+				40722E351BFA98B100D6F10C /* Frameworks */,
+				40722E361BFA98B100D6F10C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40722E3A1BFA98B100D6F10C /* PBXTargetDependency */,
+			);
+			name = carmodUITests;
+			productName = carmodUITests;
+			productReference = 40722E381BFA98B100D6F10C /* carmodUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		40722E111BFA98B000D6F10C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Thunderchicken Labs, LLC";
+				TargetAttributes = {
+					40722E181BFA98B000D6F10C = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = M9343M6EJU;
+					};
+					40722E2C1BFA98B100D6F10C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 40722E181BFA98B000D6F10C;
+					};
+					40722E371BFA98B100D6F10C = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 40722E181BFA98B000D6F10C;
+					};
+				};
+			};
+			buildConfigurationList = 40722E141BFA98B000D6F10C /* Build configuration list for PBXProject "carmod" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 40722E101BFA98B000D6F10C;
+			productRefGroup = 40722E1A1BFA98B000D6F10C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				40722E181BFA98B000D6F10C /* carmod */,
+				40722E2C1BFA98B100D6F10C /* carmodTests */,
+				40722E371BFA98B100D6F10C /* carmodUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		40722E171BFA98B000D6F10C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E2B1BFA98B100D6F10C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E361BFA98B100D6F10C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8664005BE8A5BC12EAFB1191 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-carmod/Pods-carmod-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1ED8D7CC8251DD62DB10ABD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DB627A4FDB5C44B5BEFD7785 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-carmod/Pods-carmod-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40722E151BFA98B000D6F10C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */,
+				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
+				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
+				40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */,
+				40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */,
+				40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */,
+				40722E1D1BFA98B000D6F10C /* AppDelegate.swift in Sources */,
+				40678E231BFA9B490071BCB8 /* PAPUtility.swift in Sources */,
+				40678E391BFA9BE80071BCB8 /* PAPPhotoCell.swift in Sources */,
+				40678E2C1BFA9B7E0071BCB8 /* String+Common.swift in Sources */,
+				40678E271BFA9B590071BCB8 /* Reachability.swift in Sources */,
+				40678E101BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift in Sources */,
+				40678E441BFA9C270071BCB8 /* PAPImageView.swift in Sources */,
+				40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */,
+				40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */,
+				40678E3E1BFA9BFF0071BCB8 /* PAPActivityCell.swift in Sources */,
+				40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */,
+				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
+				40678E091BFA9A860071BCB8 /* Constants.swift in Sources */,
+				40678E451BFA9C270071BCB8 /* PAPProfileImageView.swift in Sources */,
+				40678E141BFA9AD10071BCB8 /* PAPAccountViewController.swift in Sources */,
+				40678E341BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift in Sources */,
+				40678E381BFA9BE80071BCB8 /* PAPLoadMoreCell.swift in Sources */,
+				40678E3F1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift in Sources */,
+				40678E311BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift in Sources */,
+				40678E1F1BFA9B280071BCB8 /* PAPTabBarController.swift in Sources */,
+				40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */,
+				40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */,
+				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,
+				40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E291BFA98B100D6F10C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40722E341BFA98B100D6F10C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		40722E2F1BFA98B100D6F10C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40722E181BFA98B000D6F10C /* carmod */;
+			targetProxy = 40722E2E1BFA98B100D6F10C /* PBXContainerItemProxy */;
+		};
+		40722E3A1BFA98B100D6F10C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40722E181BFA98B000D6F10C /* carmod */;
+			targetProxy = 40722E391BFA98B100D6F10C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		40722E3F1BFA98B100D6F10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		40722E401BFA98B100D6F10C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		40722E421BFA98B100D6F10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = carmod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
+			};
+			name = Debug;
+		};
+		40722E431BFA98B100D6F10C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = carmod/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
+			};
+			name = Release;
+		};
+		40722E451BFA98B100D6F10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = carmodTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmodTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/carmod.app/carmod";
+			};
+			name = Debug;
+		};
+		40722E461BFA98B100D6F10C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = carmodTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmodTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/carmod.app/carmod";
+			};
+			name = Release;
+		};
+		40722E481BFA98B100D6F10C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = carmodUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = carmod;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		40722E491BFA98B100D6F10C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = carmodUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = carmod;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40722E141BFA98B000D6F10C /* Build configuration list for PBXProject "carmod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40722E3F1BFA98B100D6F10C /* Debug */,
+				40722E401BFA98B100D6F10C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40722E411BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40722E421BFA98B100D6F10C /* Debug */,
+				40722E431BFA98B100D6F10C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40722E441BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmodTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40722E451BFA98B100D6F10C /* Debug */,
+				40722E461BFA98B100D6F10C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40722E471BFA98B100D6F10C /* Build configuration list for PBXNativeTarget "carmodUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40722E481BFA98B100D6F10C /* Debug */,
+				40722E491BFA98B100D6F10C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 40722E111BFA98B000D6F10C /* Project object */;
+}
