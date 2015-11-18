@@ -241,7 +241,7 @@ class PAPPhotoDetailsHeaderView: UIView {
       let userButton = UIButton(type: UIButtonType.Custom)
       self.nameHeaderView!.addSubview(userButton)
       userButton.backgroundColor = UIColor.clearColor()
-      userButton.titleLabel!.font = UIFont.boldSystemFontOfSize(15.0)
+      userButton.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
       userButton.setTitle(nameString, forState: UIControlState.Normal)
       userButton.setTitleColor(UIColor.fromRGB(COLOR_NEAR_BLACK), forState: UIControlState.Normal)
       userButton.setTitleColor(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forState: UIControlState.Highlighted)
@@ -265,12 +265,12 @@ class PAPPhotoDetailsHeaderView: UIView {
       let timeString: String = timeFormatter!.stringForTimeIntervalFromDate(NSDate(), toDate: self.photo!.createdAt!)
       let timeLabelSize: CGSize = timeString.boundingRectWithSize(CGSizeMake(nameLabelMaxWidth, CGFloat.max),
         options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
-        attributes: [NSFontAttributeName: UIFont.systemFontOfSize(11.0)],
+        attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!],
         context: nil).size
       
       let timeLabel = UILabel(frame: CGRectMake(timeLabelX, nameLabelY+userButtonSize.height, timeLabelSize.width, timeLabelSize.height))
       timeLabel.text = timeString
-      timeLabel.font = UIFont.systemFontOfSize(11.0)
+      timeLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
       timeLabel.textColor = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
       timeLabel.backgroundColor = UIColor.clearColor()
       self.nameHeaderView!.addSubview(timeLabel)
@@ -292,7 +292,7 @@ class PAPPhotoDetailsHeaderView: UIView {
     likeButton!.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
     likeButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
     likeButton!.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-    likeButton!.titleLabel!.font = UIFont.systemFontOfSize(12.0)
+    likeButton!.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
     likeButton!.titleLabel!.minimumScaleFactor = 0.8
     likeButton!.titleLabel!.adjustsFontSizeToFitWidth = true
     likeButton!.adjustsImageWhenDisabled = false

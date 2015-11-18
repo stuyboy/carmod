@@ -32,6 +32,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
   - MBProgressHUD (0.9.1)
+  - MGSwipeTableCell (1.5.2)
   - Parse (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
   - ParseCrashReporting (1.7.5.3):
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - Fabric
   - FormatterKit (~> 1.8.0)
   - MBProgressHUD (~> 0.9.1)
+  - MGSwipeTableCell
   - Parse (~> 1.7.5)
   - ParseCrashReporting (~> 1.7.5)
   - ParseFacebookUtils (~> 1.7.5)
@@ -82,6 +84,7 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MGSwipeTableCell: b931684841160dfd1aa134eb04ea266c66aead85
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   ParseCrashReporting: 36d2e2770d7502d943b81c013acd5193946ced46
   ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9

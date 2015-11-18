@@ -41,6 +41,10 @@
 		40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40722E231BFA98B000D6F10C /* Assets.xcassets */; };
 		40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E311BFA98B100D6F10C /* carmodTests.swift */; };
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
+		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
+		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
+		40B0CEDD1BFC3F16001D3033 /* Arimo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */; };
+		40B0CEDE1BFC3F16001D3033 /* Arimo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +96,7 @@
 		40678E411BFA9C270071BCB8 /* PAPImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPImageView.swift; sourceTree = "<group>"; };
 		40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPProfileImageView.swift; sourceTree = "<group>"; };
 		40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPSettingsButtonItem.swift; sourceTree = "<group>"; };
-		40678E471BFA9E010071BCB8 /* carmod-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "carmod-bridging-header.h"; sourceTree = "<group>"; };
+		40678E471BFA9E010071BCB8 /* carmod-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "carmod-Bridging-Header.h"; sourceTree = "<group>"; };
 		40722E191BFA98B000D6F10C /* carmod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carmod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40722E1C1BFA98B000D6F10C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40722E231BFA98B000D6F10C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +107,10 @@
 		40722E381BFA98B100D6F10C /* carmodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carmodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40722E3C1BFA98B100D6F10C /* carmodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodUITests.swift; sourceTree = "<group>"; };
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
+		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Regular.ttf"; sourceTree = "<group>"; };
+		40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Bold.ttf"; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.debug.xcconfig"; sourceTree = "<group>"; };
 		A4E53314AABF5BB21948A9D2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +173,7 @@
 		40678DFE1BFA99270071BCB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				40B0CED01BFBE167001D3033 /* Fonts */,
 				40678E001BFA993F0071BCB8 /* Resources */,
 				40678DFF1BFA99380071BCB8 /* Extensions */,
 				40722E1C1BFA98B000D6F10C /* AppDelegate.swift */,
@@ -192,7 +201,7 @@
 			children = (
 				40722E231BFA98B000D6F10C /* Assets.xcassets */,
 				40722E281BFA98B000D6F10C /* Info.plist */,
-				40678E471BFA9E010071BCB8 /* carmod-bridging-header.h */,
+				40678E471BFA9E010071BCB8 /* carmod-Bridging-Header.h */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -267,8 +276,9 @@
 		40678E2E1BFA9BA10071BCB8 /* PhotoDetailsViews */ = {
 			isa = PBXGroup;
 			children = (
-				40678E321BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift */,
 				40678E331BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift */,
+				40678E321BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift */,
+				40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */,
 			);
 			name = PhotoDetailsViews;
 			sourceTree = "<group>";
@@ -279,6 +289,7 @@
 				40678E3A1BFA9BEB0071BCB8 /* PAPBaseTextCell */,
 				40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */,
 				40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */,
+				40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -341,6 +352,15 @@
 				40722E3E1BFA98B100D6F10C /* Info.plist */,
 			);
 			path = carmodUITests;
+			sourceTree = "<group>";
+		};
+		40B0CED01BFBE167001D3033 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */,
+				40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		97F53FF168AA83CBC46AC5CF /* Frameworks */ = {
@@ -472,6 +492,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B0CEDD1BFC3F16001D3033 /* Arimo-Regular.ttf in Resources */,
+				40B0CEDE1BFC3F16001D3033 /* Arimo-Bold.ttf in Resources */,
 				40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */,
 				40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */,
 				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
 				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
@@ -573,6 +596,7 @@
 				40678E441BFA9C270071BCB8 /* PAPImageView.swift in Sources */,
 				40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */,
 				40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */,
+				40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */,
 				40678E3E1BFA9BFF0071BCB8 /* PAPActivityCell.swift in Sources */,
 				40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */,
 				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
@@ -719,7 +743,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
-				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -738,7 +762,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
-				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-bridging-header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-Bridging-Header.h";
 			};
 			name = Release;
 		};

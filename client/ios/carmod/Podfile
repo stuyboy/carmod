@@ -17,6 +17,7 @@ pod 'FormatterKit', '~> 1.8.0'
 pod 'UIImageEffects', '~> 0.0.1'
 pod 'UIImage+AF+Additions', :git => 'https://github.com/melvitax/UIImageAFAdditions.git'
 pod 'Synchronized', '~> 2.0.0'
+pod 'MGSwipeTableCell'    # UITableViewCell subclass to allow swipeable buttons with transitions
 
 end
 

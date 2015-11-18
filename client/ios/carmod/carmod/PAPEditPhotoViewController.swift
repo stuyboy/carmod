@@ -1,13 +1,22 @@
+import MGSwipeTableCell
 import UIKit
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate {
+  private var keyboardHeight: CGFloat = 0.0
+  
   var scrollView: UIScrollView!
   var image: UIImage!
-  var commentTextField: UITextField!
+  var tagField: UITextField!
+  var photoTaggerView: PhotoTaggerView!
+  private var photoImageView: UIImageView!
+  private var photoTaggerViewOrigin: CGPoint!
   var photoFile: PFFile?
   var thumbnailFile: PFFile?
   var fileUploadBackgroundTaskId: UIBackgroundTaskIdentifier!
   var photoPostBackgroundTaskId: UIBackgroundTaskIdentifier!
+  
+  private var tagsTable: UITableView!
+  private var tags: [String] = []
   
   // MARK:- NSObject
   
@@ -29,29 +38,42 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
   }
   
   // MARK:- UIViewController
-  
   override func loadView() {
     self.scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
     self.scrollView.delegate = self
     self.scrollView.backgroundColor = UIColor.blackColor()
+    self.scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
     self.view = self.scrollView
     
-    let photoImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
-    photoImageView.backgroundColor = UIColor.whiteColor()
-    photoImageView.image = self.image
-    photoImageView.contentMode = UIViewContentMode.ScaleAspectFit
+    self.photoImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
+    self.photoImageView.backgroundColor = UIColor.whiteColor()
+    self.photoImageView.image = self.image
+    self.photoImageView.contentMode = UIViewContentMode.ScaleAspectFit
+    self.scrollView.addSubview(self.photoImageView)
     
-    self.scrollView.addSubview(photoImageView)
+    let footerRect: CGRect = PhotoTaggerView.rectForView()
+    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: photoImageView.frame.maxY, width: footerRect.width, height: footerRect.height))
+    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
+    self.tagField = self.photoTaggerView.tagField
+    self.tagField!.delegate = self
+    self.scrollView.addSubview(self.photoTaggerView)
     
-    var footerRect: CGRect = PAPPhotoDetailsFooterView.rectForView()
-    footerRect.origin.y = photoImageView.frame.origin.y + photoImageView.frame.size.height
+    self.tagsTable = UITableView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: 0.0))
+    self.tagsTable.registerClass(TagTableViewCell.classForCoder(), forCellReuseIdentifier: "TagTableViewCell")
+    self.tagsTable.clipsToBounds = true
+    self.tagsTable.backgroundColor = UIColor.whiteColor()
+    self.tagsTable.separatorColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.tagsTable.rowHeight = TAG_ROW_HEIGHT
+    self.tagsTable.delegate = self
+    self.tagsTable.dataSource = self
+    self.tagsTable.bounces = false
+    if (self.tagsTable.respondsToSelector("separatorInset")) {
+      self.tagsTable.separatorInset = UIEdgeInsetsZero
+    }
+    self.tagsTable.hidden = self.tags.count == 0
+    self.scrollView.addSubview(self.tagsTable)
     
-    let footerView = PAPPhotoDetailsFooterView(frame: footerRect)
-    self.commentTextField = footerView.commentField
-    self.commentTextField!.delegate = self
-    self.scrollView!.addSubview(footerView)
-    
-    self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y + photoImageView.frame.size.height + footerView.frame.size.height)
+    self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
   }
   
   override func viewDidLoad() {
@@ -61,7 +83,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("doneButtonAction:"))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishPhoto:"))
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
@@ -77,15 +99,25 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
   
   // MARK:- UITextFieldDelegate
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    self.doneButtonAction(textField)
+    if textField.text != "" {
+      self.tags.append(textField.text!)
+      self.tagsTable.reloadData()
+      self.tagField.text = ""
+    }
+    
     textField.resignFirstResponder()
+    
     return true
   }
   
   // MARK:- UIScrollViewDelegate
-  
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    self.commentTextField.resignFirstResponder()
+    self.tagField.resignFirstResponder()
+  }
+  
+  // MARK:- Callbacks
+  func onTapPhoto(sender: UIButton) {
+    self.tagField.resignFirstResponder()
   }
   
   // MARK:- ()
@@ -124,31 +156,30 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
     return true
   }
   
-  func keyboardWillShow(note: NSNotification) {
-    let keyboardFrameEnd: CGRect = (note.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
-    var scrollViewContentSize: CGSize = self.scrollView.bounds.size
-    scrollViewContentSize.height += keyboardFrameEnd.size.height
-    self.scrollView.contentSize = scrollViewContentSize
-    
-    var scrollViewContentOffset: CGPoint = self.scrollView.contentOffset
-    // Align the bottom edge of the photo with the keyboard
-    scrollViewContentOffset.y = scrollViewContentOffset.y + keyboardFrameEnd.size.height*3.0 - UIScreen.mainScreen().bounds.size.height
-    
-    self.scrollView.setContentOffset(scrollViewContentOffset, animated: true)
+  func keyboardWillShow(sender: NSNotification) {
+    if let userInfo = sender.userInfo {
+      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
+        self.keyboardHeight = keyboardHeight
+      }
+      
+      // Set the tagger field to be just above the keyboard
+      self.photoTaggerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-self.photoTaggerView.frame.height-(self.navigationController?.navigationBar.frame.height)!-STATUS_BAR_HEIGHT
+    }
   }
   
-  func keyboardWillHide(note: NSNotification) {
-    let keyboardFrameEnd: CGRect = (note.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-    var scrollViewContentSize: CGSize = self.scrollView.bounds.size
-    scrollViewContentSize.height -= keyboardFrameEnd.size.height
-    UIView.animateWithDuration(0.200, animations: {
-      self.scrollView.contentSize = scrollViewContentSize
-    })
+  func keyboardWillHide(sender: NSNotification) {
+    if let userInfo = sender.userInfo {
+      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
+        self.keyboardHeight = keyboardHeight
+      }
+      
+      self.photoTaggerView.frame.origin.y = self.photoTaggerViewOrigin.y
+    }
   }
   
-  func doneButtonAction(sender: AnyObject) {
+  func publishPhoto(sender: AnyObject) {
     var userInfo: [String: String]?
-    let trimmedComment: String = self.commentTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    let trimmedComment: String = self.tagField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     if (trimmedComment.length != 0) {
       userInfo = [kPAPEditPhotoViewControllerUserInfoCommentKey: trimmedComment]
     }
@@ -224,5 +255,76 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UIScrol
   
   func cancelButtonAction(sender: AnyObject) {
     self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  // MARK: - UITableViewDataSource
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let count = self.tags.count
+    self.tagsTable.hidden = count == 0
+    self.tagsTable.frame = CGRect(x: self.tagsTable.frame.origin.x, y: self.tagsTable.frame.origin.y, width: self.tagsTable.frame.width, height: TAG_ROW_HEIGHT*CGFloat(count))
+    self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+    
+    return count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("TagTableViewCell") as! TagTableViewCell
+    cell.selectionStyle = UITableViewCellSelectionStyle.None
+    cell.tagLabel.text = self.tags[indexPath.row]
+    cell.swipeBackgroundColor = UIColor.whiteColor()
+    cell.rightButtons = self.rightButtons() as [AnyObject]
+    cell.delegate = self
+    
+    let expansionSettings = MGSwipeExpansionSettings()
+    expansionSettings.fillOnTrigger = true
+    expansionSettings.threshold = 1.1
+    expansionSettings.buttonIndex = NSInteger(0)
+    cell.rightExpansion = expansionSettings
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+  }
+  
+  // MARK: - MGSwipeTableCellDelegate
+  func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+    
+    if direction == MGSwipeDirection.RightToLeft {
+      let tagCell: TagTableViewCell = cell as! TagTableViewCell
+      switch index {
+      case 0: // delete
+        self.removeTag(tagCell.tagLabel.text!)
+        self.tagsTable.reloadData()
+        return true
+      default:
+        return false
+      }
+    }
+    
+    return false
+  }
+  
+  // MARK: - Private methods
+  private func removeTag(name: String) {
+    for var i = 0; i < self.tags.count; i++ {
+      let tagName = self.tags[i]
+      
+      if tagName == name {
+        self.tags.removeAtIndex(i)
+        return
+      }
+    }
+  }
+  
+  private func rightButtons() -> NSArray {
+    let rightUtilityButtons: NSMutableArray = NSMutableArray()
+    
+    let deleteButton: MGSwipeButton = MGSwipeButton(title: "", icon: changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.whiteColor()), backgroundColor: UIColor.fromRGB(COLOR_RED), insets: UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0))
+    
+    rightUtilityButtons.addObject(deleteButton)
+    
+    return rightUtilityButtons
   }
 }

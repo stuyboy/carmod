@@ -68,7 +68,7 @@ class PAPPhotoHeaderView: PFTableViewCell {
       self.commentButton!.setTitle("", forState: UIControlState.Normal)
       self.commentButton!.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
       self.commentButton!.titleEdgeInsets = UIEdgeInsetsMake(-6.0, 0.0, 0.0, 0.0)
-      self.commentButton!.titleLabel!.font = UIFont.systemFontOfSize(12.0)
+      self.commentButton!.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
       self.commentButton!.titleLabel!.minimumScaleFactor = 0.8
       self.commentButton!.titleLabel!.adjustsFontSizeToFitWidth = true
       self.commentButton!.setBackgroundImage(UIImage(named: "IconComment.png"), forState: UIControlState.Normal)
@@ -85,7 +85,7 @@ class PAPPhotoHeaderView: PFTableViewCell {
       self.likeButton!.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
       self.likeButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
       self.likeButton!.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
-      self.likeButton!.titleLabel!.font = UIFont.systemFontOfSize(12.0)
+      self.likeButton!.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
       self.likeButton!.titleLabel!.minimumScaleFactor = 0.8
       self.likeButton!.titleLabel!.adjustsFontSizeToFitWidth = true
       self.likeButton!.adjustsImageWhenHighlighted = false
@@ -100,7 +100,7 @@ class PAPPhotoHeaderView: PFTableViewCell {
       self.userButton = UIButton(type: UIButtonType.Custom)
       containerView!.addSubview(self.userButton!)
       self.userButton!.backgroundColor = UIColor.clearColor()
-      self.userButton!.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
+      self.userButton!.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
       self.userButton!.setTitleColor(UIColor.fromRGB(COLOR_NEAR_BLACK), forState: UIControlState.Normal)
       self.userButton!.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
       self.userButton!.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail

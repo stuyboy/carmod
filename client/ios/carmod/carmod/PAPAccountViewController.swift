@@ -102,7 +102,7 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
     photoCountLabel.textColor = UIColor.whiteColor()
     photoCountLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
     photoCountLabel.shadowOffset = CGSizeMake(0.0, -1.0)
-    photoCountLabel.font = UIFont.boldSystemFontOfSize(14.0)
+    photoCountLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.headerView!.addSubview(photoCountLabel)
     
     let FOLLOWERS_WIDTH: CGFloat = 52.0
@@ -120,7 +120,7 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
     followerCountLabel.textColor = UIColor.whiteColor()
     followerCountLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
     followerCountLabel.shadowOffset = CGSizeMake(0.0, -1.0)
-    followerCountLabel.font = UIFont.boldSystemFontOfSize(12.0)
+    followerCountLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
     self.headerView!.addSubview(followerCountLabel)
     
     let followingCountLabel = UILabel(frame: CGRectMake(profilePictureImageView.frame.maxX, 110.0, LABEL_WIDTH, 16.0))
@@ -129,7 +129,7 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
     followingCountLabel.textColor = UIColor.whiteColor()
     followingCountLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
     followingCountLabel.shadowOffset = CGSizeMake(0.0, -1.0)
-    followingCountLabel.font = UIFont.boldSystemFontOfSize(12.0)
+    followingCountLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
     self.headerView!.addSubview(followingCountLabel)
     
     let userDisplayNameLabel = UILabel(frame: CGRectMake(0, profilePictureImageView.frame.maxY+OFFSET_LARGE, self.headerView!.bounds.size.width, 22.0))
@@ -139,7 +139,7 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
     userDisplayNameLabel.shadowColor = UIColor(white: 0.0, alpha: 0.300)
     userDisplayNameLabel.shadowOffset = CGSizeMake(0.0, -1.0)
     userDisplayNameLabel.text = self.user!.objectForKey("displayName") as? String
-    userDisplayNameLabel.font = UIFont.boldSystemFontOfSize(18.0)
+    userDisplayNameLabel.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
     self.headerView!.addSubview(userDisplayNameLabel)
     
     photoCountLabel.text = "0 photos"

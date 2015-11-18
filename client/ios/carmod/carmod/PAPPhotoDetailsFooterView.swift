@@ -29,7 +29,7 @@ class PAPPhotoDetailsFooterView: UIView {
     mainView.addSubview(commentBox)
     
     self.commentField = UITextField(frame: CGRectMake(68.0, 8.0, BOX_WIDTH, BOX_HEIGHT))
-    self.commentField.font = UIFont.systemFontOfSize(14.0)
+    self.commentField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.commentField.placeholder = "Add a comment"
     self.commentField.returnKeyType = UIReturnKeyType.Send
     self.commentField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)

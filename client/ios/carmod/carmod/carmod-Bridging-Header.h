@@ -15,3 +15,5 @@
 #import <Bolts/Bolts.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <FormatterKit/TTTTimeIntervalFormatter.h>
+#import "MGSwipeTableCell/MGSwipeTableCell.h"
+#import "MGSwipeTableCell/MGSwipeButton.h"
