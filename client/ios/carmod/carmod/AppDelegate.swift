@@ -247,20 +247,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   func setupAppearance() {
     UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     
-    UINavigationBar.appearance().tintColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0)
-    UINavigationBar.appearance().barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-    
+    UINavigationBar.appearance().tintColor = UIColor.fromRGB(COLOR_ORANGE)
+    UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+    UINavigationBar.appearance().translucent = false
+    UINavigationBar.appearance().alpha = 1.0
     UINavigationBar.appearance().titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor() ]
     
     if #available(iOS 9.0, *) {
-        UIButton.appearanceWhenContainedInInstancesOfClasses([UINavigationBar.self]).setTitleColor(UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
+      UIButton.appearanceWhenContainedInInstancesOfClasses([UINavigationBar.self]).setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
     } else {
-        // Fallback on earlier versions
+      // Fallback on earlier versions
     }
     
-    UIBarButtonItem.appearance().setTitleTextAttributes([ NSForegroundColorAttributeName: UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0) ], forState: UIControlState.Normal)
+    UIBarButtonItem.appearance().setTitleTextAttributes([ NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_ORANGE) ], forState: UIControlState.Normal)
     
-    UISearchBar.appearance().tintColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0)
+    UISearchBar.appearance().tintColor = UIColor.fromRGB(COLOR_ORANGE)
   }
   
   func monitorReachability() {

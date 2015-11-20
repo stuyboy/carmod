@@ -10,6 +10,7 @@ import MGSwipeTableCell
 import UIKit
 
 class TagTableViewCell: MGSwipeTableCell {
+  var tagImage: UIImageView = UIImageView()
   var tagLabel: UILabel = UILabel()
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -24,8 +25,11 @@ class TagTableViewCell: MGSwipeTableCell {
       self.preservesSuperviewLayoutMargins = false
     }
     
-    self.tagLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-    self.tagLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+//    self.tagImage.image = UIImage(named: "ic_part_other")
+    self.swipeContentView.addSubview(self.tagImage)
+      
+    self.tagLabel.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+    self.tagLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
     self.tagLabel.numberOfLines = 0
     self.tagLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
     self.swipeContentView.addSubview(self.tagLabel)
@@ -34,7 +38,11 @@ class TagTableViewCell: MGSwipeTableCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    self.tagLabel.frame = CGRect(x: OFFSET_SMALL, y: 0.0, width: self.bounds.width, height: self.bounds.height)
+    let X_OFFSET: CGFloat = 25.0
+    let IMAGE_SIZE: CGFloat = self.bounds.height-13.0
+    self.tagImage.frame = CGRect(x: X_OFFSET, y: self.bounds.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE)
+    
+    self.tagLabel.frame = CGRect(x: self.tagImage.frame.maxX+OFFSET_STANDARD, y: 0.0, width: self.bounds.width-IMAGE_SIZE-X_OFFSET-OFFSET_STANDARD, height: self.bounds.height)
   }
   
   // MARK: - Callbacks

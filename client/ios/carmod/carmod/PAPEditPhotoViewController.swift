@@ -1,34 +1,41 @@
 import MGSwipeTableCell
 import UIKit
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate, PhotoTaggerViewDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
   private var keyboardHeight: CGFloat = 0.0
+  private var scrollView: UIScrollView!
   
-  var scrollView: UIScrollView!
-  var image: UIImage!
-  var tagField: UITextField!
-  var photoTaggerView: PhotoTaggerView!
+  private var tagField: UITextField!
+  private var partTypeButton: UIButton!
+  private var addPartButton: UIButton!
+  private var photoTaggerView: PhotoTaggerView!
   private var photoImageView: UIImageView!
   private var photoTaggerViewOrigin: CGPoint!
-  var photoFile: PFFile?
-  var thumbnailFile: PFFile?
-  var fileUploadBackgroundTaskId: UIBackgroundTaskIdentifier!
-  var photoPostBackgroundTaskId: UIBackgroundTaskIdentifier!
   
   private var tagsTable: UITableView!
-  private var tags: [String] = []
+  private var tags: [PartObject] = []
   
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
   private var selectedPart: String!
   private var pickerData: [String] = [
+    "Accessories",
     "Audio",
     "Brakes",
+    "Exhaust",
+    "Exterior",
     "Lighting",
     "Rims",
+    "Suspension",
     "Tires",
     "Other",
   ]
+  
+  var image: UIImage!
+  var photoFile: PFFile?
+  var thumbnailFile: PFFile?
+  var fileUploadBackgroundTaskId: UIBackgroundTaskIdentifier!
+  var photoPostBackgroundTaskId: UIBackgroundTaskIdentifier!
   
   // MARK:- NSObject
   
@@ -49,13 +56,47 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK:- UIViewController
-  override func loadView() {
-    self.scrollView = UIScrollView(frame: UIScreen.mainScreen().bounds)
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.navigationItem.hidesBackButton = true
+    
+    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishPhoto:"))
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    
+    self.shouldUploadImage(self.image)
+    
+    self.initBody()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+    print("Memory warning on Edit")
+  }
+  
+  // MARK:- Initializers
+  private func initBody() {
+    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
+    self.photoTaggerView.backgroundColor = UIColor.blackColor()
+    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
+    self.partTypeButton = self.photoTaggerView.partTypeButton
+    self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
+    self.addPartButton = self.photoTaggerView.addButton
+    self.addPartButton.addTarget(self, action: "onTapAddPart:", forControlEvents: .TouchUpInside)
+    self.tagField = self.photoTaggerView.tagField
+    self.tagField!.delegate = self
+    self.view.addSubview(self.photoTaggerView)
+    
+    self.scrollView = UIScrollView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-self.photoTaggerView.frame.maxY))
     self.scrollView.delegate = self
     self.scrollView.backgroundColor = UIColor.blackColor()
     self.scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
-    self.view = self.scrollView
+    self.view.addSubview(self.scrollView)
     
     self.photoImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
     self.photoImageView.backgroundColor = UIColor.whiteColor()
@@ -63,15 +104,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoImageView.contentMode = UIViewContentMode.ScaleAspectFit
     self.scrollView.addSubview(self.photoImageView)
     
-    let footerRect: CGRect = PhotoTaggerView.rectForView()
-    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: photoImageView.frame.maxY, width: footerRect.width, height: footerRect.height))
-    self.photoTaggerView.delegate = self
-    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
-    self.tagField = self.photoTaggerView.tagField
-    self.tagField!.delegate = self
-    self.scrollView.addSubview(self.photoTaggerView)
-    
-    self.tagsTable = UITableView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: 0.0))
+    self.tagsTable = UITableView(frame: CGRect(x: 0.0, y: self.photoImageView.frame.maxY, width: self.view.frame.width, height: 0.0))
     self.tagsTable.registerClass(TagTableViewCell.classForCoder(), forCellReuseIdentifier: "TagTableViewCell")
     self.tagsTable.clipsToBounds = true
     self.tagsTable.backgroundColor = UIColor.whiteColor()
@@ -87,12 +120,12 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.scrollView.addSubview(self.tagsTable)
     
     self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
-  
+    
     let PICKER_Y: CGFloat = self.photoImageView.frame.height+self.photoTaggerView.frame.height
     self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
     self.pickerView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.pickerView)
-
+    
     let actionBar = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.pickerView.frame.width, height: 44.0))
     
     self.partPicker = UIPickerView()
@@ -123,35 +156,8 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.pickerView.hidden = true
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.navigationItem.hidesBackButton = true
-    
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishPhoto:"))
-    
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-    
-    self.shouldUploadImage(self.image)
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-    print("Memory warning on Edit")
-  }
-  
-  // MARK:- UITextFieldDelegate
+  // MARK:- UITextFieldDelegate  
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    if textField.text != "" {
-      self.tags.append(textField.text!)
-      self.tagsTable.reloadData()
-      self.tagField.text = ""
-    }
-    
     textField.resignFirstResponder()
     
     return true
@@ -160,11 +166,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   // MARK:- UIScrollViewDelegate
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
     self.tagField.resignFirstResponder()
-  }
-  
-  // MARK:- PhotoTaggerViewDelegate
-  func onSelectPart() {
-    self.pickerView.hidden = false
   }
   
   // MARK:- UIPickerViewDelegate
@@ -190,12 +191,34 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    
     self.selectedPart = self.pickerData[row]
-    print("selected part = \(self.selectedPart)")
   }
   
   // MARK:- Callbacks
+  func onTapPartType(sender: UIButton) {
+    if self.tagField.isFirstResponder() {
+      self.tagField.resignFirstResponder()
+    }
+    self.pickerView.hidden = false
+  }
+  
+  func onTapAddPart(sender: UIButton) {
+    if self.tagField.text != "" {
+      if self.tagField.isFirstResponder() {
+        self.tagField.resignFirstResponder()
+      }
+      
+      let partObject = PartObject()
+      partObject.partName = self.tagField.text!
+      partObject.partType = self.photoTaggerView.partType.rawValue
+      self.tags.append(partObject)
+      self.tagsTable.reloadData()
+      self.tagField.text = ""
+      self.photoTaggerView.reset()
+      self.pickerView.hidden = true
+    }
+  }
+  
   func onTapPhoto(sender: UIButton) {
     self.tagField.resignFirstResponder()
   }
@@ -246,24 +269,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func keyboardWillShow(sender: NSNotification) {
-    if let userInfo = sender.userInfo {
-      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
-        self.keyboardHeight = keyboardHeight
-      }
-      
-      // Set the tagger field to be just above the keyboard
-      self.photoTaggerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-self.photoTaggerView.frame.height-(self.navigationController?.navigationBar.frame.height)!-STATUS_BAR_HEIGHT
-    }
+
   }
   
   func keyboardWillHide(sender: NSNotification) {
-    if let userInfo = sender.userInfo {
-      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
-        self.keyboardHeight = keyboardHeight
-      }
-      
-      self.photoTaggerView.frame.origin.y = self.photoTaggerViewOrigin.y
-    }
+
   }
   
   func publishPhoto(sender: AnyObject) {
@@ -359,7 +369,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TagTableViewCell") as! TagTableViewCell
     cell.selectionStyle = UITableViewCellSelectionStyle.None
-    cell.tagLabel.text = self.tags[indexPath.row]
+    
+    let partObject = self.tags[indexPath.row]
+    
+    cell.tagLabel.text = partObject.partName
+    cell.tagImage.image = changeImageColor(partTypeToImage(PartType(rawValue: partObject.partType)!)!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
     cell.swipeBackgroundColor = UIColor.whiteColor()
     cell.rightButtons = self.rightButtons() as [AnyObject]
     cell.delegate = self
