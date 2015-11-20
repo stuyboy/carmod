@@ -1,7 +1,7 @@
 import MGSwipeTableCell
 import UIKit
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate, PhotoTaggerViewDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
   private var keyboardHeight: CGFloat = 0.0
   
   var scrollView: UIScrollView!
@@ -17,6 +17,18 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   private var tagsTable: UITableView!
   private var tags: [String] = []
+  
+  private var pickerView: UIView!
+  private var partPicker: UIPickerView!
+  private var selectedPart: String!
+  private var pickerData: [String] = [
+    "Audio",
+    "Brakes",
+    "Lighting",
+    "Rims",
+    "Tires",
+    "Other",
+  ]
   
   // MARK:- NSObject
   
@@ -53,6 +65,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     let footerRect: CGRect = PhotoTaggerView.rectForView()
     self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: photoImageView.frame.maxY, width: footerRect.width, height: footerRect.height))
+    self.photoTaggerView.delegate = self
     self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
     self.tagField = self.photoTaggerView.tagField
     self.tagField!.delegate = self
@@ -74,6 +87,40 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.scrollView.addSubview(self.tagsTable)
     
     self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+  
+    let PICKER_Y: CGFloat = self.photoImageView.frame.height+self.photoTaggerView.frame.height
+    self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
+    self.pickerView.backgroundColor = UIColor.whiteColor()
+    self.view.addSubview(self.pickerView)
+
+    let actionBar = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.pickerView.frame.width, height: 44.0))
+    
+    self.partPicker = UIPickerView()
+    self.partPicker.center = CGPoint(x: self.pickerView.frame.width/2, y: (self.pickerView.frame.height-actionBar.frame.height)/2)
+    self.partPicker.showsSelectionIndicator = true
+    self.partPicker.delegate = self
+    self.partPicker.dataSource = self
+    self.pickerView.addSubview(self.partPicker)
+    
+    self.pickerView.addSubview(actionBar)
+    
+    let BUTTON_WIDTH: CGFloat = 60.0
+    let cancelButton = UIButton(frame: CGRect(x: 5.0, y: 0.0, width: BUTTON_WIDTH, height: actionBar.frame.height))
+    cancelButton.setTitle("Cancel", forState: .Normal)
+    cancelButton.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    cancelButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
+    cancelButton.addTarget(self, action: "onCancelPicker:", forControlEvents: .TouchUpInside)
+    self.pickerView.addSubview(cancelButton)
+    
+    let doneButton = UIButton(frame: CGRect(x: self.pickerView.frame.width-5.0-BUTTON_WIDTH, y: 0.0, width: BUTTON_WIDTH, height: actionBar.frame.height))
+    doneButton.setTitle("Done", forState: .Normal)
+    doneButton.titleLabel?.textAlignment = .Right
+    doneButton.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    doneButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
+    doneButton.addTarget(self, action: "onDonePicker:", forControlEvents: .TouchUpInside)
+    self.pickerView.addSubview(doneButton)
+    
+    self.pickerView.hidden = true
   }
   
   override func viewDidLoad() {
@@ -115,9 +162,51 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.tagField.resignFirstResponder()
   }
   
+  // MARK:- PhotoTaggerViewDelegate
+  func onSelectPart() {
+    self.pickerView.hidden = false
+  }
+  
+  // MARK:- UIPickerViewDelegate
+  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    let pickerLabel = UILabel()
+    pickerLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    pickerLabel.text = self.pickerData[row]
+    pickerLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    pickerLabel.textAlignment = NSTextAlignment.Center
+    return pickerLabel
+  }
+  
+  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return self.pickerData[row]
+  }
+  
+  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return self.pickerData.count
+  }
+  
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    
+    self.selectedPart = self.pickerData[row]
+    print("selected part = \(self.selectedPart)")
+  }
+  
   // MARK:- Callbacks
   func onTapPhoto(sender: UIButton) {
     self.tagField.resignFirstResponder()
+  }
+  
+  func onDonePicker(sender: UIButton) {
+    self.photoTaggerView.partType = PartType(rawValue: self.selectedPart) as PartType!
+    self.pickerView.hidden = true
+  }
+  
+  func onCancelPicker(sender: UIButton) {
+    self.pickerView.hidden = true
   }
   
   // MARK:- ()

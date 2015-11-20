@@ -17,6 +17,15 @@
 import Foundation
 import UIKit
 
+enum PartType: String {
+  case Audio = "Audio"
+  case Brakes = "Brakes"
+  case Lighting = "Lighting"
+  case Rims = "Rims"
+  case Tires = "Tires"
+  case Other = "Other"
+}
+
 func changeImageColor(image: UIImage, tintColor: UIColor) -> UIImage {
   let rect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
   let scale: CGFloat = image.scale
