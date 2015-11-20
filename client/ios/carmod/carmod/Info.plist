@@ -2,19 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1179185612096077</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>1179185612096077</string>
-	<key>FacebookDisplayName</key>
-	<string>CarMod</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -28,21 +15,48 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1179185612096077</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>0.1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>92b3269561c64d53c7835a573b253a2cca8ada7d</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
+	<key>FacebookAppID</key>
+	<string>1179185612096077</string>
+	<key>FacebookDisplayName</key>
+	<string>CarMod</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIInterfaceOrientation</key>
+	<string>UIInterfaceOrientationPortrait</string>
+	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIInterfaceOrientation</key>
-	<string>UIInterfaceOrientationPortrait</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UIStatusBarStyle</key>
@@ -51,28 +65,33 @@
 	<dict>
 		<key>UINavigationBar</key>
 		<dict>
+			<key>Style</key>
+			<string>UIBarStyleDefault</string>
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
 				<real>0.117841511964798</real>
-				<key>Red</key>
-				<real>0.2008436918258667</real>
 				<key>Green</key>
 				<real>0.1536859273910522</real>
+				<key>Red</key>
+				<real>0.2008436918258667</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
-			<key>Style</key>
-			<string>UIBarStyleDefault</string>
 		</dict>
 	</dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIViewEdgeAntialiasing</key>
-	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Arimo-Bold.ttf</string>
+		<string>Arimo-Regular.ttf</string>
+	</array>
+	<key>UIViewEdgeAntialiasing</key>
+	<false/>
 </dict>
 </plist>

@@ -94,13 +94,13 @@ class PAPBaseTextCell: PFTableViewCell {
             self.nameButton!.setTitleColor(UIColor(red: 34.0/255.0, green: 34.0/255.0, blue: 34.0/255.0, alpha: 1.0), forState: UIControlState.Normal)
             self.nameButton!.setTitleColor(UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0), forState: UIControlState.Highlighted)
         }
-        self.nameButton!.titleLabel!.font = UIFont.boldSystemFontOfSize(13)
+        self.nameButton!.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
         self.nameButton!.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         self.nameButton!.addTarget(self, action: Selector("didTapUserButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
         mainView!.addSubview(self.nameButton!)
         
         self.contentLabel = UILabel()
-        self.contentLabel!.font = UIFont.systemFontOfSize(13.0)
+        self.contentLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
         if reuseIdentifier == "ActivityCell" {
             self.contentLabel!.textColor = UIColor.whiteColor()
         } else {
@@ -112,7 +112,7 @@ class PAPBaseTextCell: PFTableViewCell {
         mainView!.addSubview(self.contentLabel!)
         
         self.timeLabel = UILabel()
-        self.timeLabel!.font = UIFont.systemFontOfSize(11)
+        self.timeLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
         self.timeLabel!.textColor = UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         self.timeLabel!.backgroundColor = UIColor.clearColor()
         mainView!.addSubview(self.timeLabel!)
@@ -149,21 +149,21 @@ class PAPBaseTextCell: PFTableViewCell {
         // Layout the name button
         let nameSize: CGSize = self.nameButton!.titleLabel!.text!.boundingRectWithSize(CGSizeMake(nameMaxWidth, CGFloat.max),
                                                         options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin], // word wrap?
-                                                     attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(13.0)],
+                                                     attributes: [NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)!],
                                                         context: nil).size
         self.nameButton!.frame = CGRectMake(nameX, nameY + 6.0, nameSize.width, nameSize.height)
         
         // Layout the content
         let contentSize: CGSize = self.contentLabel!.text!.boundingRectWithSize(CGSizeMake(CGFloat(horizontalTextSpace), CGFloat.max),
                                                         options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-                                                     attributes: [NSFontAttributeName: UIFont.systemFontOfSize(13.0)],
+                                                     attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)!],
                                                         context: nil).size
         self.contentLabel!.frame = CGRectMake(nameX, vertTextBorderSpacing + 6.0, contentSize.width, contentSize.height)
         
         // Layout the timestamp label
         let timeSize: CGSize = self.timeLabel!.text!.boundingRectWithSize(CGSizeMake(CGFloat(horizontalTextSpace), CGFloat.max),
                                                         options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
-                                                     attributes: [NSFontAttributeName: UIFont.systemFontOfSize(11.0)],
+                                                     attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_XSMALL)!],
                                                         context: nil).size
         self.timeLabel!.frame = CGRectMake(timeX, contentLabel!.frame.origin.y + contentLabel!.frame.size.height + vertElemSpacing, timeSize.width, timeSize.height)
         
@@ -194,7 +194,7 @@ class PAPBaseTextCell: PFTableViewCell {
 // FIXME: Why nameSize is used before as the argument at the same time????        let nameSize: CGSize = name.boundingRectWithSize(nameSize,
         let nameSize: CGSize = name.boundingRectWithSize(CGSizeMake(nameMaxWidth, CGFloat.max),
                                                         options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
-                                                     attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(13.0)],
+                                                     attributes: [NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)!],
                                                         context: nil).size
 
         let paddedString: String = PAPBaseTextCell.padString(content, withFont: UIFont.systemFontOfSize(13), toWidth: nameSize.width)
@@ -202,7 +202,7 @@ class PAPBaseTextCell: PFTableViewCell {
        
         let contentSize: CGSize = paddedString.boundingRectWithSize(CGSizeMake(horizontalTextSpace, CGFloat.max),
                                                         options: NSStringDrawingOptions.UsesLineFragmentOrigin, // word wrap?
-                                                     attributes: [NSFontAttributeName: UIFont.systemFontOfSize(13.0)],
+                                                     attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)!],
                                                         context: nil).size
 
         let singleLineHeight: CGFloat = "test".boundingRectWithSize(CGSizeMake(CGFloat.max, CGFloat.max),

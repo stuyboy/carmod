@@ -11,7 +11,7 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let backgroundImageView = UIImageView(image: UIImage(named: "bg-login"))
+    let backgroundImageView = UIImageView(image: UIImage(named: "bg_login"))
     backgroundImageView.frame = self.view.frame
     self.view.addSubview(backgroundImageView)
     
