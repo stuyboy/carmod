@@ -14,6 +14,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   private var tagsTable: UITableView!
   private var tags: [PartObject] = []
+  private var searchResultsTable: UITableView!
   
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
@@ -59,6 +60,10 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    PartManager.sharedInstance.eventManager.listenTo(EVENT_SEARCH_RESULTS_COMPLETE) { () -> () in
+      self.refreshSearchResults(PartManager.sharedInstance.searchResults.count)
+    }
+    
     self.navigationItem.hidesBackButton = true
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
@@ -70,28 +75,14 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.shouldUploadImage(self.image)
     
+    self.initTagger()
     self.initBody()
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-    print("Memory warning on Edit")
+    self.initPicker()
+    self.initResultsTable()
   }
   
   // MARK:- Initializers
   private func initBody() {
-    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
-    self.photoTaggerView.backgroundColor = UIColor.blackColor()
-    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
-    self.partTypeButton = self.photoTaggerView.partTypeButton
-    self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
-    self.addPartButton = self.photoTaggerView.addButton
-    self.addPartButton.addTarget(self, action: "onTapAddPart:", forControlEvents: .TouchUpInside)
-    self.tagField = self.photoTaggerView.tagField
-    self.tagField!.delegate = self
-    self.view.addSubview(self.photoTaggerView)
-    
     self.scrollView = UIScrollView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-self.photoTaggerView.frame.maxY))
     self.scrollView.delegate = self
     self.scrollView.backgroundColor = UIColor.blackColor()
@@ -120,7 +111,26 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.scrollView.addSubview(self.tagsTable)
     
     self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+  }
+  
+  private func initTagger() {
+    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
+    self.photoTaggerView.backgroundColor = UIColor.blackColor()
+    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
+    self.view.addSubview(self.photoTaggerView)
     
+    self.tagField = self.photoTaggerView.tagField
+    self.tagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
+    self.tagField!.delegate = self
+    
+    self.partTypeButton = self.photoTaggerView.partTypeButton
+    self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
+    
+    self.addPartButton = self.photoTaggerView.addButton
+    self.addPartButton.addTarget(self, action: "onTapAddPart:", forControlEvents: .TouchUpInside)
+  }
+  
+  private func initPicker() {
     let PICKER_Y: CGFloat = self.photoImageView.frame.height+self.photoTaggerView.frame.height
     self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
     self.pickerView.backgroundColor = UIColor.whiteColor()
@@ -156,6 +166,26 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.pickerView.hidden = true
   }
   
+  private func initResultsTable() {
+    let SEARCH_RESULTS_TABLE_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
+    self.searchResultsTable = UITableView(frame: CGRect(x: self.view.frame.width/2-SEARCH_RESULTS_TABLE_WIDTH/2, y: self.photoTaggerView.frame.maxY, width: SEARCH_RESULTS_TABLE_WIDTH, height: 0.0))
+    self.searchResultsTable.registerClass(SearchResultsTableViewCell.classForCoder(), forCellReuseIdentifier: "SearchResultsTableViewCell")
+    self.searchResultsTable.layer.borderColor = UIColor.fromRGB(COLOR_LIGHT_GRAY).CGColor
+    self.searchResultsTable.layer.borderWidth = 1.0
+    self.searchResultsTable.clipsToBounds = true
+    self.searchResultsTable.backgroundColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.searchResultsTable.separatorColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.searchResultsTable.rowHeight = SEARCH_RESULTS_ROW_HEIGHT
+    self.searchResultsTable.delegate = self
+    self.searchResultsTable.dataSource = self
+    self.searchResultsTable.bounces = false
+    self.searchResultsTable.alpha = 0.0
+    if (self.searchResultsTable.respondsToSelector("separatorInset")) {
+      self.searchResultsTable.separatorInset = UIEdgeInsetsZero
+    }
+    self.view.addSubview(self.searchResultsTable)
+  }
+  
   // MARK:- UITextFieldDelegate  
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     textField.resignFirstResponder()
@@ -165,7 +195,9 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK:- UIScrollViewDelegate
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    self.tagField.resignFirstResponder()
+    if scrollView != self.searchResultsTable {
+      self.tagField.resignFirstResponder()
+    }
   }
   
   // MARK:- UIPickerViewDelegate
@@ -192,44 +224,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     self.selectedPart = self.pickerData[row]
-  }
-  
-  // MARK:- Callbacks
-  func onTapPartType(sender: UIButton) {
-    if self.tagField.isFirstResponder() {
-      self.tagField.resignFirstResponder()
-    }
-    self.pickerView.hidden = false
-  }
-  
-  func onTapAddPart(sender: UIButton) {
-    if self.tagField.text != "" {
-      if self.tagField.isFirstResponder() {
-        self.tagField.resignFirstResponder()
-      }
-      
-      let partObject = PartObject()
-      partObject.partName = self.tagField.text!
-      partObject.partType = self.photoTaggerView.partType.rawValue
-      self.tags.append(partObject)
-      self.tagsTable.reloadData()
-      self.tagField.text = ""
-      self.photoTaggerView.reset()
-      self.pickerView.hidden = true
-    }
-  }
-  
-  func onTapPhoto(sender: UIButton) {
-    self.tagField.resignFirstResponder()
-  }
-  
-  func onDonePicker(sender: UIButton) {
-    self.photoTaggerView.partType = PartType(rawValue: self.selectedPart) as PartType!
-    self.pickerView.hidden = true
-  }
-  
-  func onCancelPicker(sender: UIButton) {
-    self.pickerView.hidden = true
   }
   
   // MARK:- ()
@@ -269,7 +263,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func keyboardWillShow(sender: NSNotification) {
-
+    if let userInfo = sender.userInfo {
+      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
+        self.keyboardHeight = keyboardHeight
+      }
+    }
   }
   
   func keyboardWillHide(sender: NSNotification) {
@@ -358,37 +356,69 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK: - UITableViewDataSource
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let count = self.tags.count
-    self.tagsTable.hidden = count == 0
-    self.tagsTable.frame = CGRect(x: self.tagsTable.frame.origin.x, y: self.tagsTable.frame.origin.y, width: self.tagsTable.frame.width, height: TAG_ROW_HEIGHT*CGFloat(count))
-    self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+    var count = 0
+    
+    if tableView == self.tagsTable {
+      count = self.tags.count
+      self.tagsTable.hidden = count == 0
+      self.tagsTable.frame = CGRect(x: self.tagsTable.frame.origin.x, y: self.tagsTable.frame.origin.y, width: self.tagsTable.frame.width, height: TAG_ROW_HEIGHT*CGFloat(count))
+      self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+      
+    } else if tableView == self.searchResultsTable {
+      count = PartManager.sharedInstance.searchResults.count
+    }
     
     return count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("TagTableViewCell") as! TagTableViewCell
-    cell.selectionStyle = UITableViewCellSelectionStyle.None
+    if tableView == self.tagsTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("TagTableViewCell") as! TagTableViewCell
+      cell.selectionStyle = UITableViewCellSelectionStyle.None
+      
+      let partObject = self.tags[indexPath.row]
+      
+      cell.tagLabel.text = partObject.partNumber
+      cell.tagImage.image = changeImageColor(partTypeToImage(PartType(rawValue: partObject.partType)!)!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
+      cell.swipeBackgroundColor = UIColor.whiteColor()
+      cell.rightButtons = self.rightButtons() as [AnyObject]
+      cell.delegate = self
+      
+      let expansionSettings = MGSwipeExpansionSettings()
+      expansionSettings.fillOnTrigger = true
+      expansionSettings.threshold = 1.1
+      expansionSettings.buttonIndex = NSInteger(0)
+      cell.rightExpansion = expansionSettings
+      
+      return cell
+    } else if tableView == self.searchResultsTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
+      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+      
+      if partObject.partNumber == "EMPTY" {
+        cell.partObject = nil
+      } else {
+        cell.partObject = partObject
+        cell.searchKeywords = self.tagField.text
+      }
+      return cell
+    }
     
-    let partObject = self.tags[indexPath.row]
-    
-    cell.tagLabel.text = partObject.partName
-    cell.tagImage.image = changeImageColor(partTypeToImage(PartType(rawValue: partObject.partType)!)!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
-    cell.swipeBackgroundColor = UIColor.whiteColor()
-    cell.rightButtons = self.rightButtons() as [AnyObject]
-    cell.delegate = self
-    
-    let expansionSettings = MGSwipeExpansionSettings()
-    expansionSettings.fillOnTrigger = true
-    expansionSettings.threshold = 1.1
-    expansionSettings.buttonIndex = NSInteger(0)
-    cell.rightExpansion = expansionSettings
-    
-    return cell
+    return UITableViewCell()
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+    if tableView == self.searchResultsTable {
+      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+      
+      if partObject.partNumber != "EMPTY" {
+        self.tagField.text = "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
+        self.photoTaggerView.partType = PartType(rawValue: partObject.partType)!
+        
+        self.searchResultsTable.alpha = 0.0
+        self.tagField.resignFirstResponder()
+      }
+    }
   }
   
   // MARK: - MGSwipeTableCellDelegate
@@ -409,7 +439,70 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     return false
   }
   
+  // MARK:- Callbacks
+  func onChangeText(sender: UITextField) {
+    if sender.text != "" {
+      PartManager.sharedInstance.searchPart(sender.text!)
+    } else {
+      PartManager.sharedInstance.clearSearchResults()
+      self.searchResultsTable.alpha = 0.0
+    }
+  }
+  
+  func onTapPartType(sender: UIButton) {
+    if self.tagField.isFirstResponder() {
+      self.tagField.resignFirstResponder()
+    }
+    self.pickerView.hidden = false
+  }
+  
+  func onTapAddPart(sender: UIButton) {
+    if self.tagField.text != "" {
+      if self.tagField.isFirstResponder() {
+        self.tagField.resignFirstResponder()
+      }
+      
+      let partObject = PartObject()
+      partObject.partNumber = self.tagField.text!
+      partObject.partType = self.photoTaggerView.partType.rawValue
+      self.tags.append(partObject)
+      self.tagsTable.reloadData()
+      self.tagField.text = ""
+      self.photoTaggerView.reset()
+      self.pickerView.hidden = true
+    }
+  }
+  
+  func onTapPhoto(sender: UIButton) {
+    self.tagField.resignFirstResponder()
+  }
+  
+  func onDonePicker(sender: UIButton) {
+    self.photoTaggerView.partType = PartType(rawValue: self.selectedPart) as PartType!
+    self.pickerView.hidden = true
+  }
+  
+  func onCancelPicker(sender: UIButton) {
+    self.pickerView.hidden = true
+  }
+  
   // MARK: - Private methods
+  func refreshSearchResults(numResults: Int) {
+    if PartManager.sharedInstance.searchResults.count > 0 {
+      let SEARCH_VIEWABLE_AREA: CGFloat = self.view.frame.height-self.photoTaggerView.frame.maxY-self.keyboardHeight-OFFSET_LARGE
+      let SEARCH_HEIGHT: CGFloat = SEARCH_RESULTS_ROW_HEIGHT*CGFloat(numResults)
+      
+      self.searchResultsTable.frame = CGRect(x: self.searchResultsTable.frame.origin.x, y: self.photoTaggerView.frame.maxY, width: self.searchResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
+      
+      UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+        self.searchResultsTable.alpha = 1.0
+      })
+      self.searchResultsTable.reloadData()
+    } else {
+      self.searchResultsTable.alpha = 0.0
+    }
+  }
+  
   private func removeTag(name: String) {
     for var i = 0; i < self.tags.count; i++ {
       let tagName = self.tags[i]
@@ -429,5 +522,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     rightUtilityButtons.addObject(deleteButton)
     
     return rightUtilityButtons
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+    print("Memory warning on Edit")
   }
 }

@@ -17,24 +17,6 @@
 import Foundation
 import UIKit
 
-class PartObject: NSObject {
-  var partName: String!
-  var partType: String!
-}
-
-enum PartType: String {
-  case Accessories = "Accessories"
-  case Audio = "Audio"
-  case Brakes = "Brakes"
-  case Exhaust = "Exhaust"
-  case Exterior = "Exterior"
-  case Lighting = "Lighting"
-  case Rims = "Rims"
-  case Suspension = "Suspension"
-  case Tires = "Tires"
-  case Other = "Other"
-}
-
 func partTypeToImage(partType: PartType) -> UIImage? {
   switch partType {
   case .Audio:
