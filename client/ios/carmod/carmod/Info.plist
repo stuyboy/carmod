@@ -23,7 +23,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1179185612096077</string>
+				<string>fb1180689241945714</string>
 			</array>
 		</dict>
 	</array>
@@ -44,7 +44,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1179185612096077</string>
+	<string>1180689241945714</string>
 	<key>FacebookDisplayName</key>
 	<string>CarMod</string>
 	<key>LSRequiresIPhoneOS</key>

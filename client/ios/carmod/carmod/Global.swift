@@ -17,6 +17,49 @@
 import Foundation
 import UIKit
 
+class PartObject: NSObject {
+  var partName: String!
+  var partType: String!
+}
+
+enum PartType: String {
+  case Accessories = "Accessories"
+  case Audio = "Audio"
+  case Brakes = "Brakes"
+  case Exhaust = "Exhaust"
+  case Exterior = "Exterior"
+  case Lighting = "Lighting"
+  case Rims = "Rims"
+  case Suspension = "Suspension"
+  case Tires = "Tires"
+  case Other = "Other"
+}
+
+func partTypeToImage(partType: PartType) -> UIImage? {
+  switch partType {
+  case .Audio:
+    return UIImage(named: "ic_part_audio")
+  case .Accessories:
+    return UIImage(named: "ic_part_accessories")
+  case .Brakes:
+    return UIImage(named: "ic_part_brakes")
+  case .Exhaust:
+    return UIImage(named: "ic_part_exhaust")
+  case .Exterior:
+    return UIImage(named: "ic_part_exterior")
+  case .Lighting:
+    return UIImage(named: "ic_part_lighting")
+  case .Rims:
+    return UIImage(named: "ic_part_rims")
+  case .Suspension:
+    return UIImage(named: "ic_part_suspension")
+  case .Tires:
+    return  UIImage(named: "ic_part_tires")
+  default:
+    return UIImage(named: "ic_part_other")
+  }
+}
+
 func changeImageColor(image: UIImage, tintColor: UIColor) -> UIImage {
   let rect: CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
   let scale: CGFloat = image.scale
