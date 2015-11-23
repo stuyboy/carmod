@@ -41,6 +41,9 @@ func search(c web.C, w http.ResponseWriter, r *http.Request) {
 		if strings.Contains(ciName, ciTerm) {
 			parts = append(parts, m)
 		}
+		if len(parts) > 25 {
+			break
+		}
 	}
 
 	sr := &SearchResponse{
