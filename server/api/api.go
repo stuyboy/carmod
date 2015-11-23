@@ -14,11 +14,14 @@ import (
 	"carmod/server/api/etl"
 )
 
+const MAX_RESULTS int = 25;
+
 type ModResponse struct {
+	Id			   string
 	Classification string
 	Brand          string
-	Model           string
-	ProductCode     string
+	Model          string
+	ProductCode    string
 	SearchString   string
 }
 
@@ -31,17 +34,21 @@ func hello(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, %s!", c.URLParams["name"])
 }
 
+func createSearchString(s string) string {
+	return strings.Replace(strings.ToLower(s), " ", "", -1)
+}
+
 // search is the primary method to determine matches
 func search(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
 	parts := []ModResponse{}
 
 	for _, m := range nameresponse {
-		ciName, ciTerm := m.SearchString, strings.ToLower(term)
+		ciName, ciTerm := m.SearchString, createSearchString(term)
 		if strings.Contains(ciName, ciTerm) {
 			parts = append(parts, m)
 		}
-		if len(parts) > 25 {
+		if len(parts) > MAX_RESULTS {
 			break
 		}
 	}
@@ -59,10 +66,10 @@ func createMemoryArray(arr *[]ModResponse) []ModResponse {
 	postarr := []ModResponse{}
 	for _, m := range *arr {
 		fullString := m.Brand + m.Model + m.ProductCode
-		m.SearchString = strings.ToLower(fullString)
+		m.SearchString = createSearchString(fullString)
 		postarr = append(postarr, m)
 	}
-	return postarr;
+	return postarr
 }
 
 func createFileArray() []ModResponse {
@@ -71,12 +78,13 @@ func createFileArray() []ModResponse {
 
 	for _, a := range dblarr {
 		c := "Tires"
+		i := a[0]
 		b := a[2]
 		m := a[9]
 		n := a[12]
 
-		nmr := ModResponse{Classification: c, Brand: b, Model: m, ProductCode: n}
-		nmr.SearchString = strings.ToLower(c + b + m + n)
+		nmr := ModResponse{Id: i, Classification: c, Brand: b, Model: m, ProductCode: n}
+		nmr.SearchString = createSearchString(c + b + m + n)
 		postarr = append(postarr, nmr)
 	}
 	return postarr
