@@ -77,8 +77,8 @@ func createTireArray() []ModResponse {
 		"Tires",
 		0,
 		2,
-		7,
-		10)
+		9,
+		12)
 }
 
 func createRimsArray() []ModResponse {
