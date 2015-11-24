@@ -16,6 +16,12 @@ import (
 
 const MAX_RESULTS int = 25;
 
+var fullArray []ModResponse
+var tireArray []ModResponse
+var rimsArray []ModResponse
+var partArray []ModResponse
+
+//When searching for anything, how items are returned
 type ModResponse struct {
 	Id			   string
 	Classification string
@@ -25,6 +31,7 @@ type ModResponse struct {
 	SearchString   string
 }
 
+//The full response.  What search term was, and what was matched.
 type SearchResponse struct {
 	SearchTerm string
 	Mods       []ModResponse
@@ -43,7 +50,9 @@ func search(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
 	parts := []ModResponse{}
 
-	for _, m := range nameresponse {
+	searchArray := fullArray
+
+	for _, m := range searchArray {
 		ciName, ciTerm := m.SearchString, createSearchString(term)
 		if strings.Contains(ciName, ciTerm) {
 			parts = append(parts, m)
@@ -61,27 +70,49 @@ func search(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(jtxt))
 }
 
-// buildSearchStrings builds the searchable string that we use to match
-func createMemoryArray(arr *[]ModResponse) []ModResponse {
-	postarr := []ModResponse{}
-	for _, m := range *arr {
-		fullString := m.Brand + m.Model + m.ProductCode
-		m.SearchString = createSearchString(fullString)
-		postarr = append(postarr, m)
-	}
-	return postarr
+func createTireArray() []ModResponse {
+	return createArrayFromFile(
+		"resources/eBayMotors_US_TiresCatalog_20140418.csv",
+		28,
+		"Tires",
+		0,
+		2,
+		7,
+		10)
 }
 
-func createFileArray() []ModResponse {
+func createRimsArray() []ModResponse {
+	return createArrayFromFile(
+		"resources/eBayMotors_US_RimsCatalog_20110922.csv",
+		15,
+		"Rims",
+		0,
+		2,
+		7,
+		10)
+}
+
+func createPartArray() []ModResponse {
+	return createArrayFromFile(
+		"resources/US_Parts_Catalog20151029.csv",
+		8,
+		"Parts",
+		0,
+		2,
+		4,
+		3)
+}
+
+func createArrayFromFile(filename string, fields int, class string, idIdx int, brandIdx int, modelIdx int, pCodeIdx int) []ModResponse {
 	postarr := []ModResponse{}
-	dblarr := etl.ReadCsvFile()
+	dblarr := etl.ReadCsvFile(filename, fields)
 
 	for _, a := range dblarr {
-		c := "Tires"
-		i := a[0]
-		b := a[2]
-		m := a[9]
-		n := a[12]
+		c := class
+		i := a[idIdx]
+		b := a[brandIdx]
+		m := a[modelIdx]
+		n := a[pCodeIdx]
 
 		nmr := ModResponse{Id: i, Classification: c, Brand: b, Model: m, ProductCode: n}
 		nmr.SearchString = createSearchString(c + b + m + n)
@@ -91,30 +122,13 @@ func createFileArray() []ModResponse {
 }
 
 func main() {
-	//nameresponse = createMemoryArray(&nameresponse)
-	nameresponse = createFileArray()
+	tireArray = createTireArray()
+	rimsArray = createRimsArray()
+	//partArray = createPartArray()
+
+	fullArray = append(tireArray, rimsArray...)
 
 	goji.Get("/hello/:name", hello)
 	goji.Get("/search/:phrase", search)
 	goji.Serve()
 }
-
-var nameresponse = []ModResponse{
-	{Classification: "Tires", Brand: "Bridgestone", Model: "Potenza", ProductCode: "RE050"},
-	{Classification: "Tires", Brand: "Bridgestone", Model: "Turanza", ProductCode: "EL400"},
-	{Classification: "Tires", Brand: "Bridgestone", Model: "Blizzak", ProductCode: "WS60"},
-	{Classification: "Tires", Brand: "Bridgestone", Model: "Ecopia", ProductCode: "EP20"},
-	{Classification: "Tires", Brand: "Goodyear", Model: "Eagle F1", ProductCode: "GS-2"},
-	{Classification: "Tires", Brand: "Goodyear", Model: "Assurance"},
-	{Classification: "Tires", Brand: "Goodyear", Model: "UltraGrip", ProductCode: "GW-3"},
-	{Classification: "Tires", Brand: "Kumho", Model: "Ecsta", ProductCode: "4X"},
-	{Classification: "Tires", Brand: "Kumho", Model: "Solus", ProductCode: "KR21"},
-	{Classification: "Tires", Brand: "Pirelli", Model: "P Zero"},
-	{Classification: "Tires", Brand: "Pirelli", Model: "P Zero Nero"},
-	{Classification: "Tires", Brand: "Pirelli", Model: "P Zero Rosso"},
-	{Classification: "Tires", Brand: "Pirelli", Model: "Cinturanto P7"},
-	{Classification: "Tires", Brand: "Pirelli", Model: "Sottozero"},
-	{Classification: "Tires", Brand: "Continental", Model: "ContiSportContact"},
-	{Classification: "Tires", Brand: "Continental", Model: "ExtremeContact DWS"},
-	{Classification: "Tires", Brand: "Continental", Model: "ContiPremiumContact"},
-	{Classification: "Tires", Brand: "Continental", Model: "ProContact"}}

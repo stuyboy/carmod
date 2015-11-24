@@ -6,8 +6,8 @@ import (
 	"os"
 )
 
-func ReadCsvFile() [][]string {
-	file, err := os.Open("resources/eBayMotors_US_TiresCatalog_20140418.csv")
+func ReadCsvFile(filename string, fieldsPerRecord int) [][]string {
+	file, err := os.Open(filename)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return nil
@@ -18,7 +18,7 @@ func ReadCsvFile() [][]string {
 	reader := csv.NewReader(file)
 	reader.Comma = ','
 	reader.LazyQuotes = true
-	reader.FieldsPerRecord = 28
+	reader.FieldsPerRecord = fieldsPerRecord
 
 	records, err := reader.ReadAll()
 
