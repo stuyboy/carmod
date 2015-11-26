@@ -380,14 +380,16 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
-    let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
     
-    if partObject.partNumber == "EMPTY" {
-      cell.partObject = nil
-    } else {
-      cell.partObject = partObject
-      cell.searchKeywords = self.searchTagField.text
+    if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
+      if partObject.partNumber == "EMPTY" {
+        cell.partObject = nil
+      } else {
+        cell.partObject = partObject
+        cell.searchKeywords = self.searchTagField.text
+      }
     }
+    
     return cell
   }
   

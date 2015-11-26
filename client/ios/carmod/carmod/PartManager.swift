@@ -49,7 +49,8 @@ class PartManager: NSObject {
 //    print("PartManager::searchPart = \(query)")
     self.clearSearchResults()
     
-    let SEARCH_URL = "http://kursor.co:8000/search/\(query)"
+    let SEARCH_URL = "http://kursor.co:8000/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
+    print("The SEARCH URL = \(SEARCH_URL)")
     let request = NSURLRequest(URL: NSURL(string: SEARCH_URL)!)
     _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
   }
