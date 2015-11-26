@@ -1,20 +1,40 @@
-import MGSwipeTableCell
 import UIKit
+import QuartzCore
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, MGSwipeTableCellDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
-  private var keyboardHeight: CGFloat = 0.0
-  private var scrollView: UIScrollView!
+class TagObject: NSObject {
+  var id: Int!
+  var partObject: PartObject!
+  var tagView: TagView!
+  var removeButton: UIButton!
+}
+
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+  let TAG_WIDTH: CGFloat = 145.0
+  let FIELD_HEIGHT: CGFloat = 30.0
+  let ARROW_SIZE: CGFloat = 20.0
   
-  private var tagField: UITextField!
+  private var keyboardHeight: CGFloat = 0.0
+  private var searchTagField: UITextField!
   private var partTypeButton: UIButton!
-  private var addPartButton: UIButton!
+  private var cancelButton: UIButton!
   private var photoTaggerView: PhotoTaggerView!
-  private var photoImageView: UIImageView!
+  private var photoImage: UIImageView!
   private var photoTaggerViewOrigin: CGPoint!
   
-  private var tagsTable: UITableView!
-  private var tags: [PartObject] = []
+  private var tagHelp: UILabel!
+  private var tags: [TagObject] = [] {
+    didSet {
+      if tags.count > 0 {
+        self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
+      } else {
+        self.tagHelp.text = "Tap photo to tag parts."
+      }
+    }
+  }
   private var searchResultsTable: UITableView!
+
+  private var currentTagView: TagView!
+  private var tagID: Int = 0
   
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
@@ -66,7 +86,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.navigationItem.hidesBackButton = true
     
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishPhoto:"))
     
@@ -75,63 +95,63 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.shouldUploadImage(self.image)
     
-    self.initTagger()
     self.initBody()
+    self.initTagger()
     self.initPicker()
     self.initResultsTable()
   }
   
   // MARK:- Initializers
   private func initBody() {
-    self.scrollView = UIScrollView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-self.photoTaggerView.frame.maxY))
-    self.scrollView.delegate = self
-    self.scrollView.backgroundColor = UIColor.blackColor()
-    self.scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
-    self.view.addSubview(self.scrollView)
+    self.photoImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
+    self.photoImage.backgroundColor = UIColor.whiteColor()
+    self.photoImage.image = self.image
+    self.photoImage.contentMode = UIViewContentMode.ScaleAspectFit
+    self.photoImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
+    self.photoImage.userInteractionEnabled = true
+    self.view.addSubview(self.photoImage)
+  
+    self.currentTagView = TagView(frame: CGRect(x: 0.0, y: 0.0, width: TAG_WIDTH, height: FIELD_HEIGHT+ARROW_SIZE), arrowSize: ARROW_SIZE, fieldHeight: FIELD_HEIGHT)
+    self.currentTagView.alpha = 0.0
+    self.currentTagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
     
-    self.photoImageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
-    self.photoImageView.backgroundColor = UIColor.whiteColor()
-    self.photoImageView.image = self.image
-    self.photoImageView.contentMode = UIViewContentMode.ScaleAspectFit
-    self.scrollView.addSubview(self.photoImageView)
+    let removeButton = self.currentTagView.removeButton
+    removeButton.tag = -1
+    removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+    self.view.addSubview(self.currentTagView)
     
-    self.tagsTable = UITableView(frame: CGRect(x: 0.0, y: self.photoImageView.frame.maxY, width: self.view.frame.width, height: 0.0))
-    self.tagsTable.registerClass(TagTableViewCell.classForCoder(), forCellReuseIdentifier: "TagTableViewCell")
-    self.tagsTable.clipsToBounds = true
-    self.tagsTable.backgroundColor = UIColor.whiteColor()
-    self.tagsTable.separatorColor = UIColor.fromRGB(COLOR_ORANGE)
-    self.tagsTable.rowHeight = TAG_ROW_HEIGHT
-    self.tagsTable.delegate = self
-    self.tagsTable.dataSource = self
-    self.tagsTable.bounces = false
-    if (self.tagsTable.respondsToSelector("separatorInset")) {
-      self.tagsTable.separatorInset = UIEdgeInsetsZero
-    }
-    self.tagsTable.hidden = self.tags.count == 0
-    self.scrollView.addSubview(self.tagsTable)
-    
-    self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
+    let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
+    let LABEL_HEIGHT: CGFloat = self.view.frame.height-self.photoImage.frame.maxY-(self.navigationController?.navigationBar.frame.height)!-STATUS_BAR_HEIGHT-OFFSET_XLARGE*2
+    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.photoImage.frame.maxY+OFFSET_XLARGE, width: LABEL_WIDTH, height: LABEL_HEIGHT))
+    self.tagHelp.textColor = UIColor.whiteColor()
+    self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.tagHelp.textAlignment = .Center
+    self.tagHelp.lineBreakMode = .ByWordWrapping
+    self.tagHelp.numberOfLines = 0
+    self.tagHelp.text = "Tap photo to tag parts."
+    self.view.addSubview(self.tagHelp)
   }
   
   private func initTagger() {
     self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
     self.photoTaggerView.backgroundColor = UIColor.blackColor()
     self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
-    self.view.addSubview(self.photoTaggerView)
+    self.photoTaggerView.alpha = 0.0
+    self.navigationController?.navigationBar.addSubview(self.photoTaggerView)
     
-    self.tagField = self.photoTaggerView.tagField
-    self.tagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
-    self.tagField!.delegate = self
+    self.searchTagField = self.photoTaggerView.tagField
+    self.searchTagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
+    self.searchTagField!.delegate = self
     
     self.partTypeButton = self.photoTaggerView.partTypeButton
     self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
     
-    self.addPartButton = self.photoTaggerView.addButton
-    self.addPartButton.addTarget(self, action: "onTapAddPart:", forControlEvents: .TouchUpInside)
+    self.cancelButton = self.photoTaggerView.cancelButton
+    self.cancelButton.addTarget(self, action: "onTapCancel:", forControlEvents: .TouchUpInside)
   }
   
   private func initPicker() {
-    let PICKER_Y: CGFloat = self.photoImageView.frame.height+self.photoTaggerView.frame.height
+    let PICKER_Y: CGFloat = self.photoImage.frame.height+self.photoTaggerView.frame.height
     self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
     self.pickerView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.pickerView)
@@ -167,13 +187,12 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   private func initResultsTable() {
-    let SEARCH_RESULTS_TABLE_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
-    self.searchResultsTable = UITableView(frame: CGRect(x: self.view.frame.width/2-SEARCH_RESULTS_TABLE_WIDTH/2, y: self.photoTaggerView.frame.maxY, width: SEARCH_RESULTS_TABLE_WIDTH, height: 0.0))
+    self.searchResultsTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 0.0))
     self.searchResultsTable.registerClass(SearchResultsTableViewCell.classForCoder(), forCellReuseIdentifier: "SearchResultsTableViewCell")
     self.searchResultsTable.layer.borderColor = UIColor.fromRGB(COLOR_LIGHT_GRAY).CGColor
     self.searchResultsTable.layer.borderWidth = 1.0
     self.searchResultsTable.clipsToBounds = true
-    self.searchResultsTable.backgroundColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.searchResultsTable.backgroundColor = UIColor.blackColor()
     self.searchResultsTable.separatorColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
     self.searchResultsTable.rowHeight = SEARCH_RESULTS_ROW_HEIGHT
     self.searchResultsTable.delegate = self
@@ -196,7 +215,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   // MARK:- UIScrollViewDelegate
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
     if scrollView != self.searchResultsTable {
-      self.tagField.resignFirstResponder()
+      self.searchTagField.resignFirstResponder()
     }
   }
   
@@ -276,7 +295,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func publishPhoto(sender: AnyObject) {
     var userInfo: [String: String]?
-    let trimmedComment: String = self.tagField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    let trimmedComment: String = self.searchTagField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
     if (trimmedComment.length != 0) {
       userInfo = [kPAPEditPhotoViewControllerUserInfoCommentKey: trimmedComment]
     }
@@ -356,90 +375,90 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK: - UITableViewDataSource
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    var count = 0
-    
-    if tableView == self.tagsTable {
-      count = self.tags.count
-      self.tagsTable.hidden = count == 0
-      self.tagsTable.frame = CGRect(x: self.tagsTable.frame.origin.x, y: self.tagsTable.frame.origin.y, width: self.tagsTable.frame.width, height: TAG_ROW_HEIGHT*CGFloat(count))
-      self.scrollView!.contentSize = CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y+photoImageView.frame.size.height+self.photoTaggerView.frame.size.height+self.tagsTable.frame.height)
-      
-    } else if tableView == self.searchResultsTable {
-      count = PartManager.sharedInstance.searchResults.count
-    }
-    
-    return count
+    return PartManager.sharedInstance.searchResults.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    if tableView == self.tagsTable {
-      let cell = tableView.dequeueReusableCellWithIdentifier("TagTableViewCell") as! TagTableViewCell
-      cell.selectionStyle = UITableViewCellSelectionStyle.None
-      
-      let partObject = self.tags[indexPath.row]
-      
-      cell.tagLabel.text = partObject.partNumber
-      cell.tagImage.image = changeImageColor(partTypeToImage(PartType(rawValue: partObject.partType)!)!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
-      cell.swipeBackgroundColor = UIColor.whiteColor()
-      cell.rightButtons = self.rightButtons() as [AnyObject]
-      cell.delegate = self
-      
-      let expansionSettings = MGSwipeExpansionSettings()
-      expansionSettings.fillOnTrigger = true
-      expansionSettings.threshold = 1.1
-      expansionSettings.buttonIndex = NSInteger(0)
-      cell.rightExpansion = expansionSettings
-      
-      return cell
-    } else if tableView == self.searchResultsTable {
-      let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
-      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
-      
-      if partObject.partNumber == "EMPTY" {
-        cell.partObject = nil
-      } else {
-        cell.partObject = partObject
-        cell.searchKeywords = self.tagField.text
-      }
-      return cell
-    }
+    let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
+    let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
     
-    return UITableViewCell()
+    if partObject.partNumber == "EMPTY" {
+      cell.partObject = nil
+    } else {
+      cell.partObject = partObject
+      cell.searchKeywords = self.searchTagField.text
+    }
+    return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if tableView == self.searchResultsTable {
-      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+    let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+    
+    if partObject.partNumber != "EMPTY" {
+      let tagObject = TagObject()
+      tagObject.id = tagID++
+      print("SETTING TAG ID to be \(tagObject.id)")
       
-      if partObject.partNumber != "EMPTY" {
-        self.tagField.text = "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
-        self.photoTaggerView.partType = PartType(rawValue: partObject.partType)!
-        
-        self.searchResultsTable.alpha = 0.0
-        self.tagField.resignFirstResponder()
-      }
+      let tagView = TagView(frame: self.currentTagView.frame, arrowSize: ARROW_SIZE, fieldHeight: FIELD_HEIGHT)
+      tagView.tagLabel.text = "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
+      tagView.toggleRemoveVisibility(true)
+      tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
+      tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+      
+      tagObject.removeButton = tagView.removeButton
+      tagObject.removeButton.tag = tagObject.id
+      tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+      
+      self.view.addSubview(tagView)
+      
+      tagObject.partObject = partObject
+      tagObject.tagView = tagView
+      
+      self.tags.append(tagObject)
+      
+      self.resetView()
     }
-  }
-  
-  // MARK: - MGSwipeTableCellDelegate
-  func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-    
-    if direction == MGSwipeDirection.RightToLeft {
-      let tagCell: TagTableViewCell = cell as! TagTableViewCell
-      switch index {
-      case 0: // delete
-        self.removeTag(tagCell.tagLabel.text!)
-        self.tagsTable.reloadData()
-        return true
-      default:
-        return false
-      }
-    }
-    
-    return false
   }
   
   // MARK:- Callbacks
+  func onDragTag(sender: UIPanGestureRecognizer) {
+//    let location = sender.locationInView(self.view)
+//    let velocity = sender.velocityInView(self.view)
+    let translation = sender.translationInView(self.view)
+    
+    if sender.state == UIGestureRecognizerState.Began {
+    } else if sender.state == UIGestureRecognizerState.Changed {
+      sender.view!.center.x = sender.view!.center.x+translation.x
+      sender.view!.center.y = sender.view!.center.y+translation.y
+      
+      sender.setTranslation(CGPointZero, inView: self.view)
+    } else if sender.state == UIGestureRecognizerState.Ended {
+
+    }
+  }
+  
+  func onTapTagView(sender: UITapGestureRecognizer) {
+    let tappedTagView: TagView = sender.view as! TagView
+    tappedTagView.toggleRemoveVisibility(false)
+  }
+  
+  func onRemoveTag(sender: UIButton) {
+    if sender.tag == -1 {
+      self.resetView()
+    } else {
+      for var i = 0; i < self.tags.count; i++ {
+        let tagObject = self.tags[i]
+        print("TAG ID at \(i) is \(tagObject.id) and sender tag = \(sender.tag)")
+        if tagObject.id == sender.tag {
+          self.tags.removeAtIndex(i)
+          tagObject.tagView.alpha = 0.0
+          
+          break
+        }
+      }
+    }
+  }
+  
   func onChangeText(sender: UITextField) {
     if sender.text != "" {
       PartManager.sharedInstance.searchPart(sender.text!)
@@ -450,31 +469,31 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func onTapPartType(sender: UIButton) {
-    if self.tagField.isFirstResponder() {
-      self.tagField.resignFirstResponder()
+    if self.searchTagField.isFirstResponder() {
+      self.searchTagField.resignFirstResponder()
     }
     self.pickerView.hidden = false
   }
   
-  func onTapAddPart(sender: UIButton) {
-    if self.tagField.text != "" {
-      if self.tagField.isFirstResponder() {
-        self.tagField.resignFirstResponder()
-      }
-      
-      let partObject = PartObject()
-      partObject.partNumber = self.tagField.text!
-      partObject.partType = self.photoTaggerView.partType.rawValue
-      self.tags.append(partObject)
-      self.tagsTable.reloadData()
-      self.tagField.text = ""
-      self.photoTaggerView.reset()
-      self.pickerView.hidden = true
-    }
+  func onTapCancel(sender: UIButton) {
+    self.resetView()
   }
   
-  func onTapPhoto(sender: UIButton) {
-    self.tagField.resignFirstResponder()
+  func onTapPhoto(sender: UITapGestureRecognizer) {
+    let point = sender.locationInView(self.view)
+    self.currentTagView.frame.origin.x = point.x-TAG_WIDTH/2
+    self.currentTagView.frame.origin.y = point.y
+    
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.currentTagView.alpha = 0.8
+      self.photoTaggerView.alpha = 1.0
+    }
+    
+    for tagObject in self.tags {
+      tagObject.tagView.toggleRemoveVisibility(true)
+    }
+    
+    self.searchTagField.becomeFirstResponder()
   }
   
   func onDonePicker(sender: UIButton) {
@@ -487,41 +506,32 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   // MARK: - Private methods
+  func resetView() {
+    if self.searchTagField.isFirstResponder() {
+      self.searchTagField.resignFirstResponder()
+    }
+    self.currentTagView.alpha = 0.0
+    self.searchTagField.text = ""
+    self.searchResultsTable.alpha = 0.0
+    self.photoTaggerView.reset()
+    self.photoTaggerView.alpha = 0.0
+    self.pickerView.hidden = true
+  }
+  
   func refreshSearchResults(numResults: Int) {
     if PartManager.sharedInstance.searchResults.count > 0 {
-      let SEARCH_VIEWABLE_AREA: CGFloat = self.view.frame.height-self.photoTaggerView.frame.maxY-self.keyboardHeight-OFFSET_LARGE
+      let SEARCH_VIEWABLE_AREA: CGFloat = self.view.frame.height-self.keyboardHeight
       let SEARCH_HEIGHT: CGFloat = SEARCH_RESULTS_ROW_HEIGHT*CGFloat(numResults)
       
-      self.searchResultsTable.frame = CGRect(x: self.searchResultsTable.frame.origin.x, y: self.photoTaggerView.frame.maxY, width: self.searchResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
+      self.searchResultsTable.frame = CGRect(x: 0.0, y: 0.0, width: self.searchResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
       
       UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-        self.searchResultsTable.alpha = 1.0
+        self.searchResultsTable.alpha = 0.8
       })
       self.searchResultsTable.reloadData()
     } else {
       self.searchResultsTable.alpha = 0.0
     }
-  }
-  
-  private func removeTag(name: String) {
-    for var i = 0; i < self.tags.count; i++ {
-      let tagName = self.tags[i]
-      
-      if tagName == name {
-        self.tags.removeAtIndex(i)
-        return
-      }
-    }
-  }
-  
-  private func rightButtons() -> NSArray {
-    let rightUtilityButtons: NSMutableArray = NSMutableArray()
-    
-    let deleteButton: MGSwipeButton = MGSwipeButton(title: "", icon: changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.whiteColor()), backgroundColor: UIColor.fromRGB(COLOR_RED), insets: UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0))
-    
-    rightUtilityButtons.addObject(deleteButton)
-    
-    return rightUtilityButtons
   }
   
   override func didReceiveMemoryWarning() {

@@ -46,7 +46,7 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
         texturedBackgroundView.backgroundColor = UIColor.blackColor()
         self.tableView.backgroundView = texturedBackgroundView
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
         
         // Add Settings button
         self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))

@@ -189,12 +189,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     let activityFeedNavigationController: UINavigationController = UINavigationController(rootViewController: self.activityViewController!)
     
     let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: UIImage(named: "IconHome.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconHomeSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
-    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)!], forState: UIControlState.Selected)
-    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)!], forState: UIControlState.Normal)
+    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
     let activityFeedTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Activity", comment: "Activity"), image: UIImage(named: "IconTimeline.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconTimelineSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
-    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(13)], forState: UIControlState.Selected)
-    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0), NSFontAttributeName: UIFont.boldSystemFontOfSize(13)], forState: UIControlState.Normal)
+    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
     homeNavigationController.tabBarItem = homeTabBarItem
     activityFeedNavigationController.tabBarItem = activityFeedTabBarItem

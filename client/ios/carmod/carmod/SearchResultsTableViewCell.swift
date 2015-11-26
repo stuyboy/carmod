@@ -44,7 +44,7 @@ class SearchResultsTableViewCell: UITableViewCell {
         self.toggleEmpty(false)
         self.partLabel.text = "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
         self.partTypeLabel.text = partObject.partType
-        self.partImage.image = partTypeToImage(PartType(rawValue: partObject.partType)!)
+        self.partImage.image = changeImageColor(partTypeToImage(PartType(rawValue: partObject.partType)!)!, tintColor: UIColor.whiteColor())
       } else {
         self.toggleEmpty(true)
       }
@@ -54,7 +54,7 @@ class SearchResultsTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    self.backgroundColor = UIColor.whiteColor()
+    self.backgroundColor = UIColor.blackColor()
     
     if self.respondsToSelector("layoutMargins") {
       self.layoutMargins = UIEdgeInsetsZero
@@ -65,17 +65,17 @@ class SearchResultsTableViewCell: UITableViewCell {
     
     self.addSubview(self.partImage)
     
-    self.partLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.partLabel.textColor = UIColor.whiteColor()
     self.partLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.addSubview(self.partLabel)
     
     self.partTypeLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_XSMALL)
-    self.partTypeLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.partTypeLabel.textColor = UIColor.whiteColor()
     self.partTypeLabel.textAlignment = .Right
     self.addSubview(self.partTypeLabel)
     
     self.emptyLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
-    self.emptyLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.emptyLabel.textColor = UIColor.whiteColor()
     self.emptyLabel.text = "NO RESULTS FOUND"
     self.emptyLabel.hidden = true
     self.addSubview(self.emptyLabel)
@@ -86,13 +86,13 @@ class SearchResultsTableViewCell: UITableViewCell {
     
     let IMAGE_SIZE: CGFloat = SEARCH_RESULTS_ROW_HEIGHT-25.0
     let SUBLABEL_WIDTH: CGFloat = 50.0
-    let LABEL_WIDTH: CGFloat = self.bounds.width-SUBLABEL_WIDTH-IMAGE_SIZE-OFFSET_SMALL*3
+    let LABEL_WIDTH: CGFloat = self.bounds.width-SUBLABEL_WIDTH-IMAGE_SIZE-OFFSET_STANDARD*3
     
-    self.partImage.frame = CGRect(x: OFFSET_SMALL, y: self.bounds.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE)
+    self.partImage.frame = CGRect(x: OFFSET_STANDARD, y: self.bounds.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE)
     self.partLabel.frame = CGRect(x: IMAGE_SIZE+OFFSET_XLARGE, y: 0.0, width: LABEL_WIDTH, height: SEARCH_RESULTS_ROW_HEIGHT)
-    self.partTypeLabel.frame = CGRect(x: self.bounds.width-OFFSET_SMALL-SUBLABEL_WIDTH, y: 0.0, width: SUBLABEL_WIDTH, height: SEARCH_RESULTS_ROW_HEIGHT)
+    self.partTypeLabel.frame = CGRect(x: self.bounds.width-OFFSET_STANDARD-SUBLABEL_WIDTH, y: 0.0, width: SUBLABEL_WIDTH, height: SEARCH_RESULTS_ROW_HEIGHT)
     
-    self.emptyLabel.frame = CGRect(x: OFFSET_SMALL, y: 0.0, width: self.bounds.width, height: SEARCH_RESULTS_ROW_HEIGHT)
+    self.emptyLabel.frame = CGRect(x: OFFSET_STANDARD, y: 0.0, width: self.bounds.width, height: SEARCH_RESULTS_ROW_HEIGHT)
   }
   
   // MARK: - Callbacks

@@ -15,6 +15,7 @@
 		40220E641C0123A0001CF280 /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E611C0123A0001CF280 /* Oxygen-Bold.ttf */; };
 		40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E621C0123A0001CF280 /* Oxygen-Light.ttf */; };
 		40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */; };
+		403AD7EB1C067B300058999B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AD7EA1C067B300058999B /* TagView.swift */; };
 		40678E091BFA9A860071BCB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E071BFA9A850071BCB8 /* Constants.swift */; };
 		40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E081BFA9A850071BCB8 /* Global.swift */; };
 		40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */; };
@@ -79,6 +80,7 @@
 		40220E611C0123A0001CF280 /* Oxygen-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Bold.ttf"; sourceTree = "<group>"; };
 		40220E621C0123A0001CF280 /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
+		403AD7EA1C067B300058999B /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		40678E071BFA9A850071BCB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40678E081BFA9A850071BCB8 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				40678E411BFA9C270071BCB8 /* PAPImageView.swift */,
 				40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */,
 				40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */,
+				403AD7EA1C067B300058999B /* TagView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */,
 				40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */,
 				40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */,
+				403AD7EB1C067B300058999B /* TagView.swift in Sources */,
 				40220E601C00310A001CF280 /* EventManager.swift in Sources */,
 				40678E3E1BFA9BFF0071BCB8 /* PAPActivityCell.swift in Sources */,
 				40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */,

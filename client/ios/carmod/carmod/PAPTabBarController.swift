@@ -7,6 +7,7 @@ import MobileCoreServices
 
 class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   var navController: UINavigationController?
+  private var photoImage: UIImage!
   
   // MARK:- UIViewController
 
@@ -53,10 +54,12 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     self.dismissViewControllerAnimated(false, completion: nil)
     
-    let image: UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
+    let image = info[UIImagePickerControllerEditedImage] as! UIImage
     
     let viewController: PAPEditPhotoViewController = PAPEditPhotoViewController(image: image)
     viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+//    let viewController: EBPhotoPagesController = EBPhotoPagesController(dataSource: self, delegate: self, photoPagesFactory: self.photoPagesFactory)
+//    viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
     
     self.navController!.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
     self.navController!.pushViewController(viewController, animated: false)
@@ -166,4 +169,5 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
   func handleGesture(gestureRecognizer: UIGestureRecognizer) {
     self.shouldPresentPhotoCaptureController()
   }
+  
 }

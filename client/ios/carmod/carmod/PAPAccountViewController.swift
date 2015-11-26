@@ -26,7 +26,7 @@ class PAPAccountViewController: PAPPhotoTimelineViewController {
       PFUser.currentUser()!.fetchIfNeeded()
     }
     
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     
     self.headerView = UIView(frame: CGRectMake(0.0, 0.0, self.tableView.bounds.size.width, 222.0))
     self.headerView!.backgroundColor = UIColor.clearColor() // should be clear, this will be the container for our avatar, photo count, follower count, following count, and so on
