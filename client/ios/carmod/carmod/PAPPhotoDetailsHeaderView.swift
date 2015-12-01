@@ -291,14 +291,13 @@ class PAPPhotoDetailsHeaderView: UIView {
     likeButton!.backgroundColor = UIColor.clearColor()
     likeButton!.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
     likeButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
-    likeButton!.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+    likeButton!.titleEdgeInsets = UIEdgeInsets(top: 1.5, left: 0.0, bottom: -1.5, right: 0.0)
     likeButton!.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
-    likeButton!.titleLabel!.minimumScaleFactor = 0.8
     likeButton!.titleLabel!.adjustsFontSizeToFitWidth = true
     likeButton!.adjustsImageWhenDisabled = false
     likeButton!.adjustsImageWhenHighlighted = false
-    likeButton!.setBackgroundImage(UIImage(named: "ButtonLike.png"), forState: UIControlState.Normal)
-    likeButton!.setBackgroundImage(UIImage(named: "ButtonLikeSelected.png"), forState: UIControlState.Selected)
+    likeButton!.setBackgroundImage(changeImageColor(UIImage(named: "ic_star")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)), forState: UIControlState.Normal)
+    likeButton!.setBackgroundImage(changeImageColor(UIImage(named: "ic_star_fill")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)), forState: UIControlState.Selected)
     likeButton!.addTarget(self, action: Selector("didTapLikePhotoButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
     likeBarView!.addSubview(likeButton!)
     

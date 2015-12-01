@@ -29,7 +29,7 @@ class TagTableViewCell: MGSwipeTableCell {
     self.swipeContentView.addSubview(self.tagImage)
       
     self.tagLabel.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
-    self.tagLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
+    self.tagLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
     self.tagLabel.numberOfLines = 0
     self.tagLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
     self.swipeContentView.addSubview(self.tagLabel)

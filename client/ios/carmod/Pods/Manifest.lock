@@ -7,6 +7,7 @@ PODS:
   - Bolts/Tasks (1.2.0)
   - Crashlytics (3.4.0):
     - Fabric (~> 1.6.0)
+  - EBPhotoPages (0.9.1)
   - Fabric (1.6.0):
     - Fabric/Base (= 1.6.0)
   - Fabric/Base (1.6.0)
@@ -51,6 +52,7 @@ PODS:
 DEPENDENCIES:
   - Bolts (from `https://github.com/kwkhaw/Bolts-iOS.git`)
   - Crashlytics
+  - EBPhotoPages
   - Fabric
   - FormatterKit (~> 1.8.0)
   - MBProgressHUD (~> 0.9.1)
@@ -80,6 +82,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Bolts: c4173988ebd9d67397a18f7142d1414884d2ac9b
   Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
+  EBPhotoPages: 57ad7f10c6fc92b734954e00cd98e8eea6feae82
   Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4

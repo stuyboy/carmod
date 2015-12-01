@@ -11,7 +11,7 @@ class PAPHomeViewController: PAPPhotoTimelineViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     
     self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))
     

@@ -48,7 +48,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
     
     super.viewDidLoad()
     
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app-logo"))
+    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     
     // Set table view properties
     let texturedBackgroundView = UIView(frame: self.view.bounds)

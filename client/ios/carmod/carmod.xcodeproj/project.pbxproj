@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		27D8A4232B999A07EF0DE4E8 /* Pods_carmod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */; };
+		40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E591BFFECAD001CF280 /* PartManager.swift */; };
+		40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */; };
+		40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */; };
+		40220E601C00310A001CF280 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5F1C00310A001CF280 /* EventManager.swift */; };
+		40220E641C0123A0001CF280 /* Oxygen-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E611C0123A0001CF280 /* Oxygen-Bold.ttf */; };
+		40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E621C0123A0001CF280 /* Oxygen-Light.ttf */; };
+		40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */; };
+		403AD7EB1C067B300058999B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AD7EA1C067B300058999B /* TagView.swift */; };
 		40678E091BFA9A860071BCB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E071BFA9A850071BCB8 /* Constants.swift */; };
 		40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E081BFA9A850071BCB8 /* Global.swift */; };
 		40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */; };
@@ -43,8 +51,6 @@
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
-		40B0CEDD1BFC3F16001D3033 /* Arimo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */; };
-		40B0CEDE1BFC3F16001D3033 /* Arimo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,14 @@
 /* Begin PBXFileReference section */
 		15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.release.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.release.xcconfig"; sourceTree = "<group>"; };
 		2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carmod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40220E591BFFECAD001CF280 /* PartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartManager.swift; sourceTree = "<group>"; };
+		40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
+		40220E5F1C00310A001CF280 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		40220E611C0123A0001CF280 /* Oxygen-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Bold.ttf"; sourceTree = "<group>"; };
+		40220E621C0123A0001CF280 /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
+		40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
+		403AD7EA1C067B300058999B /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		40678E071BFA9A850071BCB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40678E081BFA9A850071BCB8 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -109,8 +123,6 @@
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
-		40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Regular.ttf"; sourceTree = "<group>"; };
-		40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Bold.ttf"; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.debug.xcconfig"; sourceTree = "<group>"; };
 		A4E53314AABF5BB21948A9D2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +155,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40220E581BFFEC83001CF280 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				40220E5F1C00310A001CF280 /* EventManager.swift */,
+				40220E591BFFECAD001CF280 /* PartManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		40678DFC1BFA99140071BCB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +187,7 @@
 				40678E411BFA9C270071BCB8 /* PAPImageView.swift */,
 				40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */,
 				40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */,
+				403AD7EA1C067B300058999B /* TagView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -191,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				40678E2B1BFA9B7E0071BCB8 /* String+Common.swift */,
+				40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */,
 				40678E291BFA9B770071BCB8 /* UIExtensions.swift */,
 			);
 			name = Extensions;
@@ -290,6 +313,7 @@
 				40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */,
 				40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */,
 				40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */,
+				40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -331,6 +355,7 @@
 			children = (
 				40678DFC1BFA99140071BCB8 /* Controllers */,
 				40678DFD1BFA99190071BCB8 /* Views */,
+				40220E581BFFEC83001CF280 /* Managers */,
 				40678DFE1BFA99270071BCB8 /* Supporting Files */,
 			);
 			path = carmod;
@@ -357,8 +382,9 @@
 		40B0CED01BFBE167001D3033 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				40B0CEDB1BFC3F16001D3033 /* Arimo-Regular.ttf */,
-				40B0CEDC1BFC3F16001D3033 /* Arimo-Bold.ttf */,
+				40220E611C0123A0001CF280 /* Oxygen-Bold.ttf */,
+				40220E621C0123A0001CF280 /* Oxygen-Light.ttf */,
+				40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -492,9 +518,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40B0CEDD1BFC3F16001D3033 /* Arimo-Regular.ttf in Resources */,
-				40B0CEDE1BFC3F16001D3033 /* Arimo-Bold.ttf in Resources */,
 				40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */,
+				40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */,
+				40220E641C0123A0001CF280 /* Oxygen-Bold.ttf in Resources */,
+				40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +611,7 @@
 				40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */,
 				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
 				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
+				40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */,
 				40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */,
 				40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */,
 				40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */,
@@ -597,7 +625,10 @@
 				40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */,
 				40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */,
 				40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */,
+				403AD7EB1C067B300058999B /* TagView.swift in Sources */,
+				40220E601C00310A001CF280 /* EventManager.swift in Sources */,
 				40678E3E1BFA9BFF0071BCB8 /* PAPActivityCell.swift in Sources */,
+				40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */,
 				40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */,
 				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
 				40678E091BFA9A860071BCB8 /* Constants.swift in Sources */,
@@ -610,6 +641,7 @@
 				40678E1F1BFA9B280071BCB8 /* PAPTabBarController.swift in Sources */,
 				40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */,
 				40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */,
+				40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */,
 				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,
 				40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */,
 			);

@@ -84,14 +84,14 @@ class PAPPhotoHeaderView: PFTableViewCell {
       self.likeButton!.setTitle("", forState: UIControlState.Normal)
       self.likeButton!.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
       self.likeButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
-      self.likeButton!.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+      self.likeButton?.contentVerticalAlignment = .Fill
+      self.likeButton?.contentEdgeInsets = UIEdgeInsets(top: 1.5, left: 0.0, bottom: -1.5, right: 0.0)
       self.likeButton!.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
-      self.likeButton!.titleLabel!.minimumScaleFactor = 0.8
       self.likeButton!.titleLabel!.adjustsFontSizeToFitWidth = true
       self.likeButton!.adjustsImageWhenHighlighted = false
       self.likeButton!.adjustsImageWhenDisabled = false
-      self.likeButton!.setBackgroundImage(UIImage(named: "ButtonLike.png"), forState: UIControlState.Normal)
-      self.likeButton!.setBackgroundImage(UIImage(named: "ButtonLikeSelected.png"), forState: UIControlState.Selected)
+      self.likeButton!.setBackgroundImage(changeImageColor(UIImage(named: "ic_star")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)), forState: UIControlState.Normal)
+      self.likeButton!.setBackgroundImage(changeImageColor(UIImage(named: "ic_star_fill")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)), forState: UIControlState.Selected)
       self.likeButton!.selected = false
     }
     
