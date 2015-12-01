@@ -494,6 +494,17 @@ div.photo-thumb img {
   height: 144px;
 }
 
+/* line 405, ../sass/screen.scss */
+p.annotation {
+  background-color: black;
+  box-shadow: 2px 2px 1px #888888;
+  color: white;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 15px;
+}
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */

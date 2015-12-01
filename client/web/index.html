@@ -106,6 +106,10 @@
       </div>
     </script>
 
+    <script type="text/template" id="annotation-template">
+        <p class="annotation"><%= description %> (<%= x %>,<%= y %>)</p>
+    </script>
+
     <!-- Template used by single photo landing page -->
     <script type="text/template" id="big-photo-template">
       <div id="photo-container">
@@ -115,7 +119,9 @@
           </div>
           <h1><%= display_name %></h1>
         </div>
-        <img src='<%= photo_image_url %>' class="photo"/>
+        <div id="bigPhoto">
+           <img src='<%= photo_image_url %>' class="photo"/>
+        </div>
       </div>
     </script>
 

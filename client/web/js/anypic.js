@@ -27,7 +27,21 @@ $(function() {
       return this.get("user").get("displayName");
     }
   });
-  
+
+  // Annotations
+  // -----------
+
+  var Annotation = Parse.Object.extend("Annotation", {
+    x: function() {
+      return this.coordinates[0];
+    },
+    y: function() {
+      return this.coordinates[1];
+    },
+    description: function() {
+      return this.brand;
+    }
+  });
 
   // Photo Collection
   // ----------------
@@ -35,6 +49,10 @@ $(function() {
   var PhotoList = Parse.Collection.extend({
     model: Photo
   });
+
+  var AnnotationList = Parse.Collection.extend({
+    model: Annotation
+  })
 
 
   // The Application  
@@ -54,7 +72,7 @@ $(function() {
       return this;
     }
   });
-   
+
   // Latest Photos View
   var LatestPhotosView = Parse.View.extend({
     // Cache the template function for a single item.
@@ -195,6 +213,45 @@ $(function() {
     }
   });
 
+  var AnnotationView = Parse.View.extend({
+    template: _.template($("#annotation-template").html()),
+    render: function(annotation) {
+      //Why is this necessary? Can't work with object!?!
+      var wtf = JSON.parse(JSON.stringify(annotation));
+      $(this.el).html(this.template({
+        "description": wtf.brand + ' ' + wtf.model,
+        "x": wtf.coordinates[0],
+        "y": wtf.coordinates[1]
+      }));
+      var photoPos = $("#bigPhoto").position();
+      var tPos = wtf.coordinates[1] + photoPos.top;
+      var lPos = wtf.coordinates[0] + photoPos.left;
+      $(this.el).css({top: tPos + "px", left: lPos + "px", position:'absolute'});
+      return this;
+    },
+  })
+
+  var AnnotationListView = Parse.View.extend({
+    query: function(photo) {
+        var aList = new AnnotationList();
+
+        aList.query = new Parse.Query(Annotation);
+        aList.query.include("photo");
+        aList.query.equalTo('photo', photo);
+        aList.query.find({
+          success: function(obj) {
+            for (var i = 0; i < obj.length; i++) {
+              var single = new AnnotationView();
+              $("#bigPhoto").append(single.render(obj[i]).el);
+            }
+          },
+          error: function(obj, err) {
+            alert("error" + obj + err);
+          }
+        });
+      }
+  });
+
   // Homepage View
   var HomePageView = Parse.View.extend({
 
@@ -227,6 +284,7 @@ $(function() {
       this.homePageView = new HomePageView();
       this.latestPhotosView = new LatestPhotosView();
       this.landingPageView = new PhotoLandingPageView();
+      this.annotationListView = new AnnotationListView();
       this.render();
     },
   
@@ -296,6 +354,8 @@ $(function() {
       query.get(object_id, {
         success: function(photo) {
           App.landingPageView.showPhoto(photo);
+          //App.landingPageView.showAnnotation(photo);
+          App.annotationListView.query(photo);
         },
         error: function(object, error) {
           console.error(error);
