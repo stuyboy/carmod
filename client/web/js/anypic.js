@@ -69,15 +69,15 @@ $(function() {
       // Create our collection of Photos
       this.photos = new PhotoList();
 
-      var parseEmployeeQuery = new Parse.Query(Parse.User);
-      parseEmployeeQuery.containedIn("facebookId", [ "400680", "403902", "702499", "1225726", "3622585", "4806789", "6409809", "121800083", "500011038", "558159381", "721873341", "723748661", "865225242", "10156316172380249" ]);
+      //var parseEmployeeQuery = new Parse.Query(Parse.User);
+      //parseEmployeeQuery.containedIn("facebookId", [ "10156316172380249", "10153053539171862", "10156264602435298" ]);
 
-      // Setup the query for the collection to look for the 8 most recent photos
+      // Setup the query for the collection to look for the 10 most recent photos
       this.photos.query = new Parse.Query(Photo);
-      this.photos.query.include("user");
-      this.photos.query.matchesQuery("user", parseEmployeeQuery);
+      //this.photos.query.include("user");
+      //this.photos.query.matchesQuery("user", parseEmployeeQuery);
 
-      this.photos.query.limit(8);
+      this.photos.query.limit(10);
       this.photos.query.descending("createdAt");
   
       this.photos.bind('add', this.addOne);
@@ -180,8 +180,8 @@ $(function() {
       $('head meta[property*="og:"]').remove();
       $('head').append(this.metaDataLandingPageTemplate({
         "photo_image_url": this.model.photoImageURL(),
-        "photo_caption": "Shared a photo on Anypic",
-        "page_url": "http://www.anypic.org/" + this.model.photoURL(),
+        "photo_caption": "Shared a photo on CarMod",
+        "page_url": "http://www.carmod.xyz/" + this.model.photoURL(),
       }));
 
       $(this.el).html(this.template({
