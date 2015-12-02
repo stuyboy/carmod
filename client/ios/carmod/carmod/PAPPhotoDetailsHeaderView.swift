@@ -212,6 +212,23 @@ class PAPPhotoDetailsHeaderView: UIView {
     
     self.addSubview(self.photoImageView!)
     
+    if let attributes = PAPCache.sharedCache.attributesForPhoto(self.photo!) {
+      if let annotations: [PFObject] = attributes[kPhotoAttributesAnnotationsKey] as? [PFObject] {
+        for annotation in annotations {
+          let brand = annotation.objectForKey(kAnnotationBrandKey) as! String
+          let model = annotation.objectForKey(kAnnotationModelKey) as! String
+          let partNumber = annotation.objectForKey(kAnnotationPartNumberKey) as! String
+          let coordinates = annotation.objectForKey(kAnnotationCoordinatesKey) as! [CGFloat]
+          
+          let tagView = TagView(frame: CGRect(x: coordinates[0], y: coordinates[1], width: TAG_WIDTH, height: TAG_FIELD_HEIGHT+TAG_ARROW_SIZE), arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+          tagView.alpha = 0.8
+          tagView.tagLabel.text = "\(brand) \(model) \(partNumber)"
+          tagView.toggleRemoveVisibility(true)
+          self.photoImageView!.addSubview(tagView)
+        }
+      }
+    }
+    
     /*
     Create top of header view with name and avatar
     */
