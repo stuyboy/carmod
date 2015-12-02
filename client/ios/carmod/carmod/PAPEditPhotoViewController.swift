@@ -103,7 +103,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     let removeButton = self.currentTagView.removeButton
     removeButton.tag = -1
     removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
-    self.view.addSubview(self.currentTagView)
+    self.photoImage.addSubview(self.currentTagView)
     
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
     let LABEL_HEIGHT: CGFloat = self.view.frame.height-self.photoImage.frame.maxY-(self.navigationController?.navigationBar.frame.height)!-STATUS_BAR_HEIGHT-OFFSET_XLARGE*2
@@ -322,7 +322,9 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
             annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
             annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
             annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-            annotation.addUniqueObjectsFromArray([tag.tagView.frame.origin.x, tag.tagView.frame.origin.y], forKey: kAnnotationCoordinatesKey)
+            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
+            let coordinates = [tag.tagView.frame.origin.x, tag.tagView.frame.origin.y]
+            annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
             let ACL = PFACL(user: PFUser.currentUser()!)
             ACL.setPublicReadAccess(true)
@@ -413,7 +415,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       tagObject.removeButton.tag = tagObject.id
       tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
       
-      self.view.addSubview(tagView)
+      self.photoImage.addSubview(tagView)
       
       tagObject.partObject = partObject
       tagObject.tagView = tagView
@@ -426,9 +428,10 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK:- Callbacks
   func onDragTag(sender: UIPanGestureRecognizer) {
-//    let location = sender.locationInView(self.view)
+    let location = sender.locationInView(self.view)
 //    let velocity = sender.velocityInView(self.view)
     let translation = sender.translationInView(self.view)
+    print(location)
     
     if sender.state == UIGestureRecognizerState.Began {
     } else if sender.state == UIGestureRecognizerState.Changed {
