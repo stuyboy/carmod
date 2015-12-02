@@ -116,4 +116,29 @@ let NSERROR_NO_INTERNET = NSError(domain: APP_DOMAIN, code: ERROR_NO_INTERNET, u
 
 let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
 
+// TAG size constants
+let TAG_WIDTH: CGFloat = 145.0
+let TAG_FIELD_HEIGHT: CGFloat = 30.0
+let TAG_ARROW_SIZE: CGFloat = 20.0
+
+// JSON Part Field keys
+let kPartJSONModsArrayKey       = "Mods"
+let kPartJSONIDKey              = "Id"
+let kPartJSONClassificationKey  = "Classification"
+let kPartJSONBrandKey           = "Brand"
+let kPartJSONModelKey           = "Model"
+let kPartJSONProductCodeKey     = "ProductCode"
+let kPartJSONSearchStringKey    = "SearchString"
+let kPartJSONEmptyKey           = "Empty"
+
+// Annotation Field keys
+let kAnnotationClassKey         = "Annotation"
+let kAnnotationCoordinatesKey   = "coordinates"
+let kAnnotationBrandKey         = "brand"
+let kAnnotationModelKey         = "model"
+let kAnnotationPartNumberKey    = "productCode"
+let kAnnotationPartIDKey        = "partId"
+let kAnnotationPhotoKey         = "photo"
+
+
 

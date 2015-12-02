@@ -9,9 +9,6 @@ class TagObject: NSObject {
 }
 
 class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-  let TAG_WIDTH: CGFloat = 145.0
-  let FIELD_HEIGHT: CGFloat = 30.0
-  let ARROW_SIZE: CGFloat = 20.0
   
   private var keyboardHeight: CGFloat = 0.0
   private var searchTagField: UITextField!
@@ -39,18 +36,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
   private var selectedPart: String!
-  private var pickerData: [String] = [
-    "Accessories",
-    "Audio",
-    "Brakes",
-    "Exhaust",
-    "Exterior",
-    "Lighting",
-    "Rims",
-    "Suspension",
-    "Tires",
-    "Other",
-  ]
   
   var image: UIImage!
   var photoFile: PFFile?
@@ -111,7 +96,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoImage.userInteractionEnabled = true
     self.view.addSubview(self.photoImage)
   
-    self.currentTagView = TagView(frame: CGRect(x: 0.0, y: 0.0, width: TAG_WIDTH, height: FIELD_HEIGHT+ARROW_SIZE), arrowSize: ARROW_SIZE, fieldHeight: FIELD_HEIGHT)
+    self.currentTagView = TagView(frame: CGRect(x: 0.0, y: 0.0, width: TAG_WIDTH, height: TAG_FIELD_HEIGHT+TAG_ARROW_SIZE), arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
     self.currentTagView.alpha = 0.0
     self.currentTagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
     
@@ -227,22 +212,22 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
     let pickerLabel = UILabel()
     pickerLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-    pickerLabel.text = self.pickerData[row]
+    pickerLabel.text = PartManager.sharedInstance.PART_CATEGORIES[row]
     pickerLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     pickerLabel.textAlignment = NSTextAlignment.Center
     return pickerLabel
   }
   
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return self.pickerData[row]
+    return PartManager.sharedInstance.PART_CATEGORIES[row]
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return self.pickerData.count
+    return PartManager.sharedInstance.PART_CATEGORIES.count
   }
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    self.selectedPart = self.pickerData[row]
+    self.selectedPart = PartManager.sharedInstance.PART_CATEGORIES[row]
   }
   
   // MARK:- ()
@@ -294,12 +279,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func publishPhoto(sender: AnyObject) {
-    var userInfo: [String: String]?
-    let trimmedComment: String = self.searchTagField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-    if (trimmedComment.length != 0) {
-      userInfo = [kPAPEditPhotoViewControllerUserInfoCommentKey: trimmedComment]
-    }
-    
     if self.photoFile == nil || self.thumbnailFile == nil {
       let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
       let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
@@ -331,29 +310,52 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       if succeeded {
         print("Photo uploaded")
         
-        PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false)
-        
         // userInfo might contain any caption which might have been posted by the uploader
-        if let userInfo = userInfo {
-          let commentText = userInfo[kPAPEditPhotoViewControllerUserInfoCommentKey]
-          
-          if commentText != nil && commentText!.length != 0 {
-            // create and save photo caption
-            let comment = PFObject(className: kPAPActivityClassKey)
-            comment.setObject(kPAPActivityTypeComment, forKey: kPAPActivityTypeKey)
-            comment.setObject(photo, forKey:kPAPActivityPhotoKey)
-            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
-            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityToUserKey)
-            comment.setObject(commentText!, forKey: kPAPActivityContentKey)
-            
+        var annotations: [PFObject] = []
+        
+        if self.tags.count > 0 {
+          for tag in self.tags {
+            let annotation = PFObject(className: kAnnotationClassKey)
+            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+            annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
+            annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
+            annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
+            annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
+            annotation.setObject(photo, forKey: kAnnotationPhotoKey)
+            annotation.addUniqueObjectsFromArray([tag.tagView.frame.origin.x, tag.tagView.frame.origin.y], forKey: kAnnotationCoordinatesKey)
+        
             let ACL = PFACL(user: PFUser.currentUser()!)
             ACL.setPublicReadAccess(true)
-            comment.ACL = ACL
+            annotation.ACL = ACL
             
-            comment.saveEventually()
-            PAPCache.sharedCache.incrementCommentCountForPhoto(photo)
+            annotations.append(annotation)
+            var err: NSError?
+            annotation.save(&err)
           }
         }
+        
+        PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
+        
+//        if let userInfo = userInfo {
+//          let commentText = userInfo[kPAPEditPhotoViewControllerUserInfoCommentKey]
+//          
+//          if commentText != nil && commentText!.length != 0 {
+//            // create and save photo caption
+//            let comment = PFObject(className: kPAPActivityClassKey)
+//            comment.setObject(kPAPActivityTypeComment, forKey: kPAPActivityTypeKey)
+//            comment.setObject(photo, forKey:kPAPActivityPhotoKey)
+//            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
+//            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityToUserKey)
+//            comment.setObject(commentText!, forKey: kPAPActivityContentKey)
+//            
+//            let ACL = PFACL(user: PFUser.currentUser()!)
+//            ACL.setPublicReadAccess(true)
+//            comment.ACL = ACL
+//            
+//            comment.saveEventually()
+//            PAPCache.sharedCache.incrementCommentCountForPhoto(photo)
+//          }
+//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName(PAPTabBarControllerDidFinishEditingPhotoNotification, object: photo)
       } else {
@@ -382,7 +384,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
     
     if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
-      if partObject.partNumber == "EMPTY" {
+      if partObject.partNumber == kPartJSONEmptyKey {
         cell.partObject = nil
       } else {
         cell.partObject = partObject
@@ -396,13 +398,13 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
     
-    if partObject.partNumber != "EMPTY" {
+    if partObject.partNumber != kPartJSONEmptyKey {
       let tagObject = TagObject()
       tagObject.id = tagID++
-      print("SETTING TAG ID to be \(tagObject.id)")
       
-      let tagView = TagView(frame: self.currentTagView.frame, arrowSize: ARROW_SIZE, fieldHeight: FIELD_HEIGHT)
-      tagView.tagLabel.text = "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
+      let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+      tagView.alpha = 0.8
+      tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
       tagView.toggleRemoveVisibility(true)
       tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
       tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))

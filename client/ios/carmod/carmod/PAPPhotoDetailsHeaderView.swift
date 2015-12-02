@@ -27,10 +27,10 @@ private let timeLabelMaxWidth: CGFloat = nameLabelMaxWidth
 
 private let mainImageX: CGFloat = baseHorizontalOffset
 private let mainImageY: CGFloat = nameHeaderHeight
-private let mainImageHeight: CGFloat = 320.0
+private var mainImageHeight: CGFloat = 320.0
 
 private let likeBarX: CGFloat = baseHorizontalOffset
-private let likeBarY: CGFloat = nameHeaderHeight + mainImageHeight
+private var likeBarY: CGFloat = nameHeaderHeight + mainImageHeight
 private let likeBarHeight: CGFloat = 43.0
 
 private let likeButtonX: CGFloat = 9.0
@@ -74,6 +74,9 @@ class PAPPhotoDetailsHeaderView: UIView {
     if timeFormatter == nil {
       timeFormatter = TTTTimeIntervalFormatter()
     }
+    
+    mainImageHeight = self.frame.width
+    likeBarY = nameHeaderHeight + mainImageHeight
     
     self.photo = aPhoto
     self.photographer = self.photo!.objectForKey(kPAPPhotoUserKey) as? PFUser
