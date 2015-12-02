@@ -224,8 +224,8 @@ $(function() {
         "y": wtf.coordinates[1]
       }));
       var photoPos = $("#bigPhoto").position();
-      var tPos = wtf.coordinates[1] + photoPos.top;
-      var lPos = wtf.coordinates[0] + photoPos.left;
+      var tPos = 2 * wtf.coordinates[1] + photoPos.top;
+      var lPos = 2.5 * wtf.coordinates[0] + photoPos.left;
       $(this.el).css({top: tPos + "px", left: lPos + "px", position:'absolute'});
       return this;
     },
