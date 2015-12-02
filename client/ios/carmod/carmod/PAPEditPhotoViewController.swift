@@ -390,8 +390,9 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         cell.partObject = nil
       } else {
         cell.partObject = partObject
-        cell.searchKeywords = self.searchTagField.text
       }
+      
+      cell.searchKeywords = self.searchTagField.text
     }
     
     return cell
@@ -400,30 +401,34 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
     
-    if partObject.partNumber != kPartJSONEmptyKey {
-      let tagObject = TagObject()
-      tagObject.id = tagID++
-      
-      let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
-      tagView.alpha = 0.8
-      tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
-      tagView.toggleRemoveVisibility(true)
-      tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
-      tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
-      
-      tagObject.removeButton = tagView.removeButton
-      tagObject.removeButton.tag = tagObject.id
-      tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
-      
-      self.photoImage.addSubview(tagView)
-      
-      tagObject.partObject = partObject
-      tagObject.tagView = tagView
-      
-      self.tags.append(tagObject)
-      
-      self.resetView()
+    if partObject.partNumber == kPartJSONEmptyKey {
+      partObject.partNumber = self.searchTagField.text
+      partObject.brand = ""
+      partObject.model = ""
     }
+    
+    let tagObject = TagObject()
+    tagObject.id = tagID++
+    
+    let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+    tagView.alpha = 0.8
+    tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
+    tagView.toggleRemoveVisibility(true)
+    tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
+    tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+    
+    tagObject.removeButton = tagView.removeButton
+    tagObject.removeButton.tag = tagObject.id
+    tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+    
+    self.photoImage.addSubview(tagView)
+    
+    tagObject.partObject = partObject
+    tagObject.tagView = tagView
+    
+    self.tags.append(tagObject)
+    
+    self.resetView()
   }
   
   // MARK:- Callbacks
