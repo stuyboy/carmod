@@ -1,5 +1,5 @@
-$slide_width: 246px;
-$slide_height: 354px;
+$slide_width: 250px;
+$slide_height: 444px;
 
 img.screenshot {
   width: $slide_width;
@@ -13,7 +13,7 @@ img.screenshot {
 #slides {
   display: none;
   position:absolute;
-  top:$frame_top + 115px;
+  top:$frame_top + 150px;
   left:$frame_left + $slide_base;
   z-index:100;
   /*

@@ -2,7 +2,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 5, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,45 +24,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -131,12 +131,12 @@ p {
   background: #f1e1c6 url("/images/leather_bg.jpg");
   background-repeat: repeat-x;
   background-position: center top;
-  -moz-background-size: 1400px 626px;
-  -o-background-size: 1400px 626px;
-  -webkit-background-size: 1400px 626px;
-  background-size: 1400px 626px;
+  -moz-background-size: 1400px 647px;
+  -o-background-size: 1400px 647px;
+  -webkit-background-size: 1400px 647px;
+  background-size: 1400px 647px;
   width: 100%;
-  height: 626px;
+  height: 647px;
 }
 
 /* line 141, ../sass/screen.scss */
@@ -151,13 +151,13 @@ p {
 /* line 148, ../sass/screen.scss */
 #left img.frame {
   position: absolute;
-  top: 101px;
+  top: 0px;
   left: -120px;
 }
 /* line 153, ../sass/screen.scss */
 #left img.reflection {
   position: absolute;
-  top: 101px;
+  top: 0px;
   left: -120px;
   z-index: 102;
 }
@@ -168,7 +168,7 @@ p {
   float: right;
   width: 45%;
   text-align: left;
-  padding-top: 12em;
+  padding-top: 5em;
 }
 /* line 168, ../sass/screen.scss */
 #right img {
@@ -492,6 +492,17 @@ div.photo-thumb img {
   margin-top: 1px;
   width: 144px;
   height: 144px;
+}
+
+/* line 405, ../sass/screen.scss */
+p.annotation {
+  background-color: black;
+  box-shadow: 2px 2px 1px #888888;
+  color: white;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 15px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -985,8 +996,8 @@ div.photo-thumb img {
 }
 /* line 4, ../sass/slides.scss */
 img.screenshot {
-  width: 246px;
-  height: 354px;
+  width: 250px;
+  height: 444px;
 }
 
 /*
@@ -996,8 +1007,8 @@ img.screenshot {
 #slides {
   display: none;
   position: absolute;
-  top: 216px;
-  left: 36px;
+  top: 150px;
+  left: 34px;
   z-index: 100;
   /*
     Next/prev buttons
@@ -1026,7 +1037,7 @@ img.screenshot {
 */
 /* line 43, ../sass/slides.scss */
 .slides_container {
-  width: 246px;
+  width: 250px;
   overflow: hidden;
   position: relative;
   display: none;
@@ -1040,8 +1051,8 @@ img.screenshot {
 }
 /* line 56, ../sass/slides.scss */
 .slides_container a {
-  width: 246px;
-  height: 354px;
+  width: 250px;
+  height: 444px;
   display: block;
 }
 /* line 60, ../sass/slides.scss */

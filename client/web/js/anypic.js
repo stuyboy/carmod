@@ -27,7 +27,21 @@ $(function() {
       return this.get("user").get("displayName");
     }
   });
-  
+
+  // Annotations
+  // -----------
+
+  var Annotation = Parse.Object.extend("Annotation", {
+    x: function() {
+      return this.coordinates[0];
+    },
+    y: function() {
+      return this.coordinates[1];
+    },
+    description: function() {
+      return this.brand;
+    }
+  });
 
   // Photo Collection
   // ----------------
@@ -35,6 +49,10 @@ $(function() {
   var PhotoList = Parse.Collection.extend({
     model: Photo
   });
+
+  var AnnotationList = Parse.Collection.extend({
+    model: Annotation
+  })
 
 
   // The Application  
@@ -54,7 +72,7 @@ $(function() {
       return this;
     }
   });
-   
+
   // Latest Photos View
   var LatestPhotosView = Parse.View.extend({
     // Cache the template function for a single item.
@@ -69,15 +87,15 @@ $(function() {
       // Create our collection of Photos
       this.photos = new PhotoList();
 
-      var parseEmployeeQuery = new Parse.Query(Parse.User);
-      parseEmployeeQuery.containedIn("facebookId", [ "400680", "403902", "702499", "1225726", "3622585", "4806789", "6409809", "121800083", "500011038", "558159381", "721873341", "723748661", "865225242", "10156316172380249" ]);
+      //var parseEmployeeQuery = new Parse.Query(Parse.User);
+      //parseEmployeeQuery.containedIn("facebookId", [ "10156316172380249", "10153053539171862", "10156264602435298" ]);
 
-      // Setup the query for the collection to look for the 8 most recent photos
+      // Setup the query for the collection to look for the 10 most recent photos
       this.photos.query = new Parse.Query(Photo);
-      this.photos.query.include("user");
-      this.photos.query.matchesQuery("user", parseEmployeeQuery);
+      //this.photos.query.include("user");
+      //this.photos.query.matchesQuery("user", parseEmployeeQuery);
 
-      this.photos.query.limit(8);
+      this.photos.query.limit(10);
       this.photos.query.descending("createdAt");
   
       this.photos.bind('add', this.addOne);
@@ -180,8 +198,8 @@ $(function() {
       $('head meta[property*="og:"]').remove();
       $('head').append(this.metaDataLandingPageTemplate({
         "photo_image_url": this.model.photoImageURL(),
-        "photo_caption": "Shared a photo on Anypic",
-        "page_url": "http://www.anypic.org/" + this.model.photoURL(),
+        "photo_caption": "Shared a photo on CarMod",
+        "page_url": "http://www.carmod.xyz/" + this.model.photoURL(),
       }));
 
       $(this.el).html(this.template({
@@ -193,6 +211,45 @@ $(function() {
 
       return this;
     }
+  });
+
+  var AnnotationView = Parse.View.extend({
+    template: _.template($("#annotation-template").html()),
+    render: function(annotation) {
+      //Why is this necessary? Can't work with object!?!
+      var wtf = JSON.parse(JSON.stringify(annotation));
+      $(this.el).html(this.template({
+        "description": wtf.brand + ' ' + wtf.model,
+        "x": wtf.coordinates[0],
+        "y": wtf.coordinates[1]
+      }));
+      var photoPos = $("#bigPhoto").position();
+      var tPos = wtf.coordinates[1] + photoPos.top;
+      var lPos = wtf.coordinates[0] + photoPos.left;
+      $(this.el).css({top: tPos + "px", left: lPos + "px", position:'absolute'});
+      return this;
+    },
+  })
+
+  var AnnotationListView = Parse.View.extend({
+    query: function(photo) {
+        var aList = new AnnotationList();
+
+        aList.query = new Parse.Query(Annotation);
+        aList.query.include("photo");
+        aList.query.equalTo('photo', photo);
+        aList.query.find({
+          success: function(obj) {
+            for (var i = 0; i < obj.length; i++) {
+              var single = new AnnotationView();
+              $("#bigPhoto").append(single.render(obj[i]).el);
+            }
+          },
+          error: function(obj, err) {
+            alert("error" + obj + err);
+          }
+        });
+      }
   });
 
   // Homepage View
@@ -227,6 +284,7 @@ $(function() {
       this.homePageView = new HomePageView();
       this.latestPhotosView = new LatestPhotosView();
       this.landingPageView = new PhotoLandingPageView();
+      this.annotationListView = new AnnotationListView();
       this.render();
     },
   
@@ -296,6 +354,8 @@ $(function() {
       query.get(object_id, {
         success: function(photo) {
           App.landingPageView.showPhoto(photo);
+          //App.landingPageView.showAnnotation(photo);
+          App.annotationListView.query(photo);
         },
         error: function(object, error) {
           console.error(error);

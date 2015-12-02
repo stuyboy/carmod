@@ -8,12 +8,12 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Anypic</title>
-    <meta name="description" content="Anypic">
+    <title>CarMod</title>
+    <meta name="description" content="CarMod">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Anypic is the easiest way to share photos with your friends. Get the app and share your fun photos with the world." />
+    <meta name="description" content="CarMod is the easiest way to share photos with your friends. Get the app and share your fun photos with the world." />
     <meta name="keywords" content="backend, mobile, development, server, code, photo sharing, photos" />
     <meta property="fb:app_id" content="231265150320768" /> 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -50,27 +50,29 @@
               
               <div id="slides">
                 <div class="slides_container">
-                  <img src='/images/anypic_screen0.jpg' class="screenshot" alt="Login with Facebook"/> 
-                  <img src='/images/anypic_screen1.jpg' class="screenshot" alt="Photo Timeline"/>
-                  <img src='/images/anypic_screen2.jpg' class="screenshot" alt="User Profile"/>
-                  <img src='/images/anypic_screen3.jpg' class="screenshot" alt="Activity Timeline"/>
+                  <img src='/images/cms0.png' class="screenshot" alt="Login with Facebook"/>
+                  <img src='/images/cms1.png' class="screenshot" alt="Document your car"/>
+                  <img src='/images/cms2.png' class="screenshot" alt="Easily tag parts"/>
+                  <img src='/images/cms3.png' class="screenshot" alt="Note the parts on the photo"/>
+                  <img src='/images/cms4.png' class="screenshot" alt="Activity Timeline"/>
+                  <img src='/images/cms5.png' class="screenshot" alt="Share with friends"/>
                 </div>
               </div>
 
-              <img src="images/iPhoneHand.png" class="frame replace-2x"/>
+              <img src="images/iPhone5Hand.png" class="frame replace-2x"/>
               <img src="images/Reflection.png" class="reflection replace-2x"/>              
             </div>
 
             <!-- right -->
             <div id="right">
-              <img src="images/icon.png"/>
-              <img src="images/logo.png" class="logo"/>
-              <h1>Share your pictures, share your story.</h1>
-              <h2>Share your pics with your friends.</h2>
-              <p>Anypic is the easiest way to share photos with your friends. Get the app and share your fun photos with the world.</p>
+              <img src="images/appicon-80x80.png"/>
+              <img src="images/app-logo@2x.png" class="logo"/>
+              <h1>Share your mods, help others.</h1>
+              <h2>Document your fixes and changes.</h2>
+              <p>Carmod is the easiest way to share your modifications and fixes with friends and forums.  Annotate your pics with part numbers, video, instructions!</p>
 
               <div class="downloadbutton">
-                <a href="http://itunes.apple.com/us/app/anypic/id539741538?ls=1&mt=8">Get the free app</a> <img src="images/right_arrow.png"/>
+                <a href="https://itunes.apple.com/us/app/veggie-base-pick-best-fruits/id1038615746?mt=8">Until we're ready</a> <img src="images/right_arrow.png"/>
               </div>
             </div>
           </div>
@@ -81,13 +83,14 @@
           <div id="latest">
           </div>
           <div class="credits">
-            <h1>Anypic is fully powered by <a href="https://parse.com">Parse</a>.</h1>
-            <h2>You can get the source code and create your own Anypic with this <a href="https://parse.com/tutorials/anypic">tutorial</a>.</h2>
+            <h1>CarMod in early development, please be patient.</h1>
+            <h2>Launching in early 2016.</h2>
           </div>
           <div id="copyright">
-            Copyright Parse 2012 - All rights reserved.
+            Copyright 2015 by Thad, Joe, Chris.
           </div>
         </div>
+
       </div>
       <!-- end / -->
     </script>
@@ -103,6 +106,10 @@
       </div>
     </script>
 
+    <script type="text/template" id="annotation-template">
+        <p class="annotation"><%= description %> (<%= x %>,<%= y %>)</p>
+    </script>
+
     <!-- Template used by single photo landing page -->
     <script type="text/template" id="big-photo-template">
       <div id="photo-container">
@@ -112,7 +119,9 @@
           </div>
           <h1><%= display_name %></h1>
         </div>
-        <img src='<%= photo_image_url %>' class="photo"/>
+        <div id="bigPhoto">
+           <img src='<%= photo_image_url %>' class="photo"/>
+        </div>
       </div>
     </script>
 
@@ -120,7 +129,7 @@
     <script type="text/template" id="landing-page-template">
       <div id="landingpage" style="">
         <header>
-          <a href="/"><img class="logo" src="/images/mini_logo.png"/></a>          
+          <a href="/"><img class="logo" src="/images/app-logo@2x.png"/></a>
           <a href="http://itunes.apple.com/us/app/anypic/id539741538?ls=1&mt=8"><img class="appstore" src="/images/app_store.png"/></a>
         </header>
 
@@ -129,11 +138,11 @@
 
         <div class="footer">
           <div class="credits">
-            <h1>Anypic is fully powered by <a href="https://parse.com">Parse</a>.</h1>
-            <h2>You can get the source code and create your own Anypic with this <a href="https://parse.com/tutorials/anypic">tutorial</a>.</h2>
+            <h1>CarMod in early development, please be patient.</h1>
+            <h2>Launching in early 2016.</h2>
           </div>
           <div id="copyright">
-            Copyright Parse 2012 - All rights reserved.
+            Copyright 2015 by Thad, Joe, Chris.
           </div>
         </div>
       </div>
@@ -147,16 +156,16 @@
     <!-- Template used by homepage meta data -->
     <script type="text/template" id="meta-homepage-template">
       <meta property="og:type" content="website" /> 
-      <meta property="og:title" content="Anypic" /> 
-      <meta property="og:image" content="https://www.anypic.org/images/icon.png" />
-      <meta property="og:description" content="Anypic is the easiest way to share photos with your friends. Get the app and share your fun photos with the world." /> 
-      <meta property="og:url" content="https://www.anypic.org">
+      <meta property="og:title" content="CarMod" />
+      <meta property="og:image" content="https://www.carmod.xyz/images/appicon-80x80.png" />
+      <meta property="og:description" content="CarMod is the easiest way to share photos with your friends. Get the app and share your fun photos with the world." />
+      <meta property="og:url" content="https://www.carmod.xyz">
     </script>
 
         <!-- Template used by homepage meta data -->
     <script type="text/template" id="meta-landingpage-template">
       <meta property="og:type" content="parseanypic:photo" /> 
-      <meta property="og:title" content="Photo on Anypic" /> 
+      <meta property="og:title" content="Photo on CarMod" />
       <meta property="og:image" content="<%= photo_image_url %>" />
       <meta property="og:description" content="<%= photo_caption %>" /> 
       <meta property="og:url" content="<%= page_url %>">
