@@ -79,6 +79,22 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
     }
   }
   
+  override func objectsDidLoad(error: NSError?) {
+    if error == nil {
+      if let photos = self.objects {
+        for photo in photos {
+          let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo as! PFObject, cachePolicy: PFCachePolicy.NetworkOnly)
+          if let annotations = query.findObjects() {
+            if annotations.count > 0 {
+              PAPCache.sharedCache.setTagsForPhoto(photo as! PFObject, annotations: annotations as! [PFObject])
+            }
+          }
+        }
+      }
+    }
+    
+  }
+  
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
     return UIStatusBarStyle.LightContent
   }
@@ -233,6 +249,12 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
       
       if object != nil {
         cell!.imageView!.file = object!.objectForKey(kPAPPhotoPictureKey) as? PFFile
+        
+        if let attributes = PAPCache.sharedCache.attributesForPhoto(object!) {
+          if let annotations = attributes[kPhotoAttributesAnnotationsKey] {
+            cell!.annotations = annotations as! [PFObject]
+          }
+        }
         
         // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
         if cell!.imageView!.file!.isDataAvailable {
@@ -393,8 +415,8 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
               
               var likers = [PFUser]()
               var commenters = [PFUser]()
-              
               var isLikedByCurrentUser = false
+              let annotations = [PFObject]()
               
               for activity in objects as! [PFObject] {
                 if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
@@ -410,7 +432,7 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
                 }
               }
               
-              PAPCache.sharedCache.setAttributesForPhoto(object!, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
+              PAPCache.sharedCache.setAttributesForPhoto(object!, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser, annotations: annotations)
               
               if headerView!.tag != index {
                 return

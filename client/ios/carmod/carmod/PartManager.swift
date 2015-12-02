@@ -9,6 +9,7 @@
 import UIKit
 
 class PartObject: NSObject {
+  var id: String!
   var brand: String!
   var model: String!
   var partNumber: String!
@@ -16,22 +17,34 @@ class PartObject: NSObject {
 }
 
 enum PartType: String {
-  case Accessories = "Accessories"
-  case Audio = "Audio"
-  case Brakes = "Brakes"
-  case Exhaust = "Exhaust"
-  case Exterior = "Exterior"
-  case Lighting = "Lighting"
-  case Rims = "Rims"
-  case Suspension = "Suspension"
-  case Tires = "Tires"
-  case Other = "Other"
+  case Accessories  = "Accessories"
+  case Audio        = "Audio"
+  case Brakes       = "Brakes"
+  case Exhaust      = "Exhaust"
+  case Exterior     = "Exterior"
+  case Lighting     = "Lighting"
+  case Rims         = "Rims"
+  case Suspension   = "Suspension"
+  case Tires        = "Tires"
+  case Other        = "Other"
 }
 
 class PartManager: NSObject {
   var bytes: NSMutableData?
   var searchResults: [PartObject] = []
   var eventManager: EventManager!
+  let PART_CATEGORIES: [String] = [
+    "Accessories",
+    "Audio",
+    "Brakes",
+    "Exhaust",
+    "Exterior",
+    "Lighting",
+    "Rims",
+    "Suspension",
+    "Tires",
+    "Other",
+  ]
   
   class var sharedInstance: PartManager {
     struct Static {
@@ -45,12 +58,16 @@ class PartManager: NSObject {
     self.eventManager = EventManager()
   }
   
+  func generateDisplayName(partObject: PartObject) -> String {
+    return "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
+  }
+  
   func searchPart(query: String) {
 //    print("PartManager::searchPart = \(query)")
     self.clearSearchResults()
     
     let SEARCH_URL = "http://kursor.co:8000/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
-    print("The SEARCH URL = \(SEARCH_URL)")
+//    print("The SEARCH URL = \(SEARCH_URL)")
     let request = NSURLRequest(URL: NSURL(string: SEARCH_URL)!)
     _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
   }
@@ -70,20 +87,23 @@ class PartManager: NSObject {
     // we serialize our bytes back to the original JSON structure
     let json = JSON(data: self.bytes!)
     
-    if let mods = json["Mods"].array {
+    if let mods = json[kPartJSONModsArrayKey].array {
       for mod in mods {
         let partObject = PartObject()
         
-        if let classification = mod["Classification"].string {
+        if let id = mod[kPartJSONIDKey].string {
+          partObject.id = id
+        }
+        if let classification = mod[kPartJSONClassificationKey].string {
           partObject.partType = classification
         }
-        if let brand = mod["Brand"].string {
+        if let brand = mod[kPartJSONBrandKey].string {
           partObject.brand = brand
         }
-        if let model = mod["Model"].string {
+        if let model = mod[kPartJSONModelKey].string {
           partObject.model = model
         }
-        if let productCode = mod["ProductCode"].string {
+        if let productCode = mod[kPartJSONProductCodeKey].string {
           partObject.partNumber = productCode
         }
         
@@ -92,7 +112,7 @@ class PartManager: NSObject {
       
       if self.searchResults.count == 0 {
         let emptyPartObject = PartObject()
-        emptyPartObject.partNumber = "EMPTY"
+        emptyPartObject.partNumber = kPartJSONEmptyKey
         self.searchResults.append(emptyPartObject)
       }
       

@@ -34,6 +34,17 @@ class SearchResultsTableViewCell: UITableViewCell {
         }
         
         self.partLabel.attributedText = newText
+      } else {
+        let preText = "Add '"
+        let newText = NSMutableAttributedString(string: preText+searchKeywords+"'")
+        let selectedRange: NSRange = NSMakeRange(preText.characters.count, searchKeywords.characters.count)
+        
+        newText.beginEditing()
+        newText.addAttribute(NSFontAttributeName, value: UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)!, range: selectedRange)
+        newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.fromRGB(COLOR_ORANGE), range: selectedRange)
+        newText.endEditing()
+        
+        self.emptyLabel.attributedText = newText
       }
     }
   }
@@ -74,9 +85,9 @@ class SearchResultsTableViewCell: UITableViewCell {
     self.partTypeLabel.textAlignment = .Right
     self.addSubview(self.partTypeLabel)
     
-    self.emptyLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.emptyLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.emptyLabel.textColor = UIColor.whiteColor()
-    self.emptyLabel.text = "NO RESULTS FOUND"
+    self.emptyLabel.text = ""
     self.emptyLabel.hidden = true
     self.addSubview(self.emptyLabel)
   }

@@ -7,6 +7,7 @@ let kPAPCellInsetWidth: CGFloat = 0.0
 class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDelegate, PAPPhotoDetailsHeaderViewDelegate, PAPBaseTextCellDelegate {
   private(set) var photo: PFObject?
   private var likersQueryInProgress: Bool
+  private var tagsQueryInProgress: Bool = false
   
   private var commentTextField: UITextField?
   private var headerView: PAPPhotoDetailsHeaderView?
@@ -84,6 +85,8 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
     if !hasCachedLikers {
       self.loadLikers()
     }
+    
+    self.loadTags()
   }
   
   
@@ -139,6 +142,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
     
     self.headerView!.reloadLikeBar()
     self.loadLikers()
+    self.loadTags()
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
@@ -345,6 +349,27 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
     self.tableView.setContentOffset(CGPointMake(0.0, self.tableView.contentSize.height-kbSize.height), animated: true)
   }
   
+  func loadTags() {
+    if self.tagsQueryInProgress {
+      return
+    }
+    
+    self.tagsQueryInProgress = true
+    let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo!, cachePolicy: PFCachePolicy.NetworkOnly)
+    query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+      self.tagsQueryInProgress = false
+      if error != nil {
+        return
+      }
+      
+      if let annotations = objects {
+        if annotations.count > 0 {
+          PAPCache.sharedCache.setTagsForPhoto(self.photo!, annotations: annotations as! [PFObject])
+        }
+      }
+    }
+  }
+  
   func loadLikers() {
     if self.likersQueryInProgress {
       return
@@ -361,8 +386,8 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
       
       var likers = [PFUser]()
       var commenters = [PFUser]()
-      
       var isLikedByCurrentUser = false
+      let annotations = [PFObject]()
       
       for activity in objects! {
         if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
@@ -378,7 +403,7 @@ class PAPPhotoDetailsViewController : PFQueryTableViewController, UITextFieldDel
         }
       }
       
-      PAPCache.sharedCache.setAttributesForPhoto(self.photo!, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
+      PAPCache.sharedCache.setAttributesForPhoto(self.photo!, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser, annotations: annotations)
       self.headerView!.reloadLikeBar()
     }
   }
