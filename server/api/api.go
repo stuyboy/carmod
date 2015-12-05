@@ -45,6 +45,14 @@ func createSearchString(s string) string {
 	return strings.Replace(strings.ToLower(s), " ", "", -1)
 }
 
+// search for cars
+func autoSearch(c web.C, w http.ResponseWriter, r *http.Request) {
+	term := c.URLParams["phrase"]
+	cars := etl.FindAuto(term)
+	jtxt, _ := json.Marshal(cars)
+	fmt.Fprintf(w, string(jtxt))
+}
+
 // search is the primary method to determine matches
 func search(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
@@ -130,5 +138,6 @@ func main() {
 
 	goji.Get("/hello/:name", hello)
 	goji.Get("/search/:phrase", search)
+	goji.Get("/auto/:phrase", autoSearch)
 	goji.Serve()
 }
