@@ -23,7 +23,7 @@ type AutoResponse struct {
 }
 
 func init() {
-	ndb, err := sql.Open("mysql", "root:root@/carmod")
+	ndb, err := sql.Open("mysql", "petrolhead:carmod@/carmod")
 
 	if err != nil {
 		panic(err.Error())
