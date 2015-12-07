@@ -19,6 +19,8 @@
 		40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E621C0123A0001CF280 /* Oxygen-Light.ttf */; };
 		40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */; };
 		403AD7EB1C067B300058999B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AD7EA1C067B300058999B /* TagView.swift */; };
+		405973301C1639C600600615 /* CarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059732F1C1639C600600615 /* CarTableViewCell.swift */; };
+		405973321C163A6000600615 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973311C163A6000600615 /* CarManager.swift */; };
 		40678E091BFA9A860071BCB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E071BFA9A850071BCB8 /* Constants.swift */; };
 		40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E081BFA9A850071BCB8 /* Global.swift */; };
 		40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */; };
@@ -87,6 +89,8 @@
 		40220E621C0123A0001CF280 /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
 		403AD7EA1C067B300058999B /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		4059732F1C1639C600600615 /* CarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTableViewCell.swift; sourceTree = "<group>"; };
+		405973311C163A6000600615 /* CarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
 		40678E071BFA9A850071BCB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40678E081BFA9A850071BCB8 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				40220E5F1C00310A001CF280 /* EventManager.swift */,
+				405973311C163A6000600615 /* CarManager.swift */,
 				40220E591BFFECAD001CF280 /* PartManager.swift */,
 			);
 			name = Managers;
@@ -331,6 +336,7 @@
 				40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */,
 				40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */,
 				40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */,
+				4059732F1C1639C600600615 /* CarTableViewCell.swift */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -629,6 +635,7 @@
 				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
 				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
 				40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */,
+				405973301C1639C600600615 /* CarTableViewCell.swift in Sources */,
 				40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */,
 				40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */,
 				40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */,
@@ -663,6 +670,7 @@
 				400818421C1105A9004F7497 /* GarageViewController.swift in Sources */,
 				400818461C123960004F7497 /* AddCarView.swift in Sources */,
 				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,
+				405973321C163A6000600615 /* CarManager.swift in Sources */,
 				40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

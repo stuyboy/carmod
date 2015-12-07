@@ -131,7 +131,6 @@ class PAPUtility {
   // MARK Facebook
   
   class func processFacebookProfilePictureData(newProfilePictureData: NSData) {
-    print("Processing profile picture of size: \(newProfilePictureData.length)")
     if newProfilePictureData.length == 0 {
       return
     }
@@ -163,7 +162,6 @@ class PAPUtility {
         }
       }
     }
-    print("Processed profile picture")
   }
   
   class func userHasValidFacebookData(user: PFUser) -> Bool {
