@@ -1,6 +1,0 @@
-framework module EBPhotoPages {
-  umbrella header "EBPhotoPages-umbrella.h"
-
-  export *
-  module * { export * }
-}

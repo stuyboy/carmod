@@ -140,5 +140,13 @@ let kAnnotationPartNumberKey    = "productCode"
 let kAnnotationPartIDKey        = "partId"
 let kAnnotationPhotoKey         = "photo"
 
+// Entity Field keys
+let kEntityClassKey             = "Entity"
+let kEntityYearKey              = "year"
+let kEntityMakeKey              = "make"
+let kEntityModelKey             = "model"
+let kEntityUserKey              = "user"
+
+
 
 

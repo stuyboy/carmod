@@ -171,12 +171,12 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		self.labelText = nil;
 		self.detailsLabelText = nil;
 		self.opacity = 0.8f;
-		self.color = nil;
+		self.color = [UIColor whiteColor];
 		self.labelFont = [UIFont boldSystemFontOfSize:kLabelFontSize];
-		self.labelColor = [UIColor whiteColor];
+		self.labelColor = [UIColor blackColor];
 		self.detailsLabelFont = [UIFont boldSystemFontOfSize:kDetailsLabelFontSize];
-		self.detailsLabelColor = [UIColor whiteColor];
-		self.activityIndicatorColor = [UIColor whiteColor];
+		self.detailsLabelColor = [UIColor blackColor];
+		self.activityIndicatorColor = [UIColor blackColor];
 		self.xOffset = 0.0f;
 		self.yOffset = 0.0f;
 		self.dimBackground = NO;
@@ -884,7 +884,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Lifecycle
 
 - (id)init {
-	return [self initWithFrame:CGRectMake(.0f, .0f, 120.0f, 20.0f)];
+	return [self initWithFrame:CGRectMake(1.0f, 1.0f, 120.0f, 20.0f)];
 }
 
 - (id)initWithFrame:(CGRect)frame {

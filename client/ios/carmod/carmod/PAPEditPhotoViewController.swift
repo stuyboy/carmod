@@ -9,7 +9,6 @@ class TagObject: NSObject {
 }
 
 class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-  
   private var keyboardHeight: CGFloat = 0.0
   private var searchTagField: UITextField!
   private var partTypeButton: UIButton!
