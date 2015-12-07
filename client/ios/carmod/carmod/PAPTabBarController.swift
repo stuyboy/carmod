@@ -15,8 +15,8 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     super.viewDidLoad()
     
     // iOS 7 style
-    self.tabBar.tintColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 50.0/255.0, alpha: 1.0)
-    self.tabBar.barTintColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+    self.tabBar.tintColor = UIColor.whiteColor()
+    self.tabBar.barTintColor = UIColor.blackColor()
     
     self.navController = UINavigationController()
   }
@@ -58,8 +58,6 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     
     let viewController: PAPEditPhotoViewController = PAPEditPhotoViewController(image: image)
     viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-//    let viewController: EBPhotoPagesController = EBPhotoPagesController(dataSource: self, delegate: self, photoPagesFactory: self.photoPagesFactory)
-//    viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
     
     self.navController!.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
     self.navController!.pushViewController(viewController, animated: false)

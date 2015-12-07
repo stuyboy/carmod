@@ -53,13 +53,10 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   // MARK:- UIViewController
   
   override func viewDidLoad() {
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-    
     super.viewDidLoad()
     
-    let texturedBackgroundView = UIView(frame: self.view.bounds)
-    texturedBackgroundView.backgroundColor = UIColor.blackColor()
-    self.tableView.backgroundView = texturedBackgroundView
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    self.tableView.backgroundColor = UIColor.blackColor()
     
     let defaultNotificationCenter = NSNotificationCenter.defaultCenter()
     defaultNotificationCenter.addObserver(self, selector: Selector("userDidPublishPhoto:"), name: PAPTabBarControllerDidFinishEditingPhotoNotification, object: nil)
@@ -92,7 +89,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
         }
       }
     }
-    
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -101,7 +97,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   
   // MARK:- UITableViewDataSource
-  
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
@@ -112,7 +107,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   
   // MARK:- UITableViewDelegate
-  
   override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     return nil
   }
@@ -152,7 +146,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   
   // MARK:- PFQueryTableViewController
-  
   override func queryForTable() -> PFQuery {
     if (PFUser.currentUser() == nil) {
       let query = PFQuery(className: self.parseClassName!)
@@ -281,7 +274,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   
   // MARK:- PAPPhotoTimelineViewController
-  
   func dequeueReusableSectionHeaderView() -> PAPPhotoHeaderView? {
     for sectionHeaderView: PAPPhotoHeaderView in self.reusableSectionHeaderViews {
       if sectionHeaderView.superview == nil {
@@ -295,7 +287,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   
   // MARK:- PAPPhotoHeaderViewDelegate
-  
   func photoHeaderView(photoHeaderView: PAPPhotoHeaderView, didTapUserButton button: UIButton, user: PFUser) {
     let accountViewController: PAPAccountViewController = PAPAccountViewController(user: user)
     print("Presenting account view controller with user: \(user)")
@@ -499,7 +490,6 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
     self.shouldReloadOnAppear = true
   }
   
-  
   func didTapOnPhotoAction(sender: UIButton) {
     let photo: PFObject? = self.objects![sender.tag] as? PFObject
     if photo != nil {
@@ -524,5 +514,10 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   
   func indexForObjectAtIndexPath(indexPath: NSIndexPath) -> Int {
     return indexPath.row / 2
+  }
+  
+  func refreshFeed() {
+    self.tableView.beginUpdates()
+    self.tableView.endUpdates()
   }
 }

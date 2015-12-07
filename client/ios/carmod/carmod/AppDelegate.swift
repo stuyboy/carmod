@@ -12,7 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   var window: UIWindow?
   var networkStatus: Reachability.NetworkStatus?
   var homeViewController: PAPHomeViewController?
-  var activityViewController: PAPActivityFeedViewController?
+//  var activityViewController: PAPActivityFeedViewController?
+  var garageViewController: GarageViewController?
   var welcomeViewController: PAPWelcomeViewController?
   
   var tabBarController: PAPTabBarController?
@@ -113,15 +114,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     
     if PFUser.currentUser() != nil {
       // FIXME: Looks so lengthy, any better way?
-      if self.tabBarController!.viewControllers!.count > PAPTabBarControllerViewControllerIndex.ActivityTabBarItemIndex.rawValue {
-        let tabBarItem: UITabBarItem = self.tabBarController!.viewControllers![PAPTabBarControllerViewControllerIndex.ActivityTabBarItemIndex.rawValue].tabBarItem
-        
-        if let currentBadgeValue: String = tabBarItem.badgeValue where currentBadgeValue.length > 0 {
-          tabBarItem.badgeValue = String(Int(currentBadgeValue)! + 1)
-        } else {
-          tabBarItem.badgeValue = "1"
-        }
-      }
+//      if self.tabBarController!.viewControllers!.count > PAPTabBarControllerViewControllerIndex.ActivityTabBarItemIndex.rawValue {
+//        let tabBarItem: UITabBarItem = self.tabBarController!.viewControllers![PAPTabBarControllerViewControllerIndex.ActivityTabBarItemIndex.rawValue].tabBarItem
+//        
+//        if let currentBadgeValue: String = tabBarItem.badgeValue where currentBadgeValue.length > 0 {
+//          tabBarItem.badgeValue = String(Int(currentBadgeValue)! + 1)
+//        } else {
+//          tabBarItem.badgeValue = "1"
+//        }
+//      }
     }
   }
   
@@ -182,25 +183,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     self.tabBarController = PAPTabBarController()
     self.homeViewController = PAPHomeViewController(style: UITableViewStyle.Plain)
     self.homeViewController!.firstLaunch = firstLaunch
-    self.activityViewController = PAPActivityFeedViewController(style: UITableViewStyle.Plain)
+//    self.activityViewController = PAPActivityFeedViewController(style: UITableViewStyle.Plain)
+    self.garageViewController = GarageViewController()
     
     let homeNavigationController: UINavigationController = UINavigationController(rootViewController: self.homeViewController!)
     let emptyNavigationController: UINavigationController = UINavigationController()
-    let activityFeedNavigationController: UINavigationController = UINavigationController(rootViewController: self.activityViewController!)
+//    let activityFeedNavigationController: UINavigationController = UINavigationController(rootViewController: self.activityViewController!)
+    let garageNavigationController: UINavigationController = UINavigationController(rootViewController: self.garageViewController!)
     
     let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: UIImage(named: "IconHome.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconHomeSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
     homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
     homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
-    let activityFeedTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Activity", comment: "Activity"), image: UIImage(named: "IconTimeline.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconTimelineSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
-    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
-    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
+    let garageImage = changeImageColor(UIImage(named: "ic_garage")!, tintColor: UIColor.whiteColor())
+    let garageImageSelected = changeImageColor(UIImage(named: "ic_garage")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+    let garageTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Garage", comment: "Garage"), image: garageImage, selectedImage: garageImageSelected)
+    garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+    garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
+    
+//    let activityFeedTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Activity", comment: "Activity"), image: UIImage(named: "IconTimeline.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconTimelineSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+//    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+//    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
     homeNavigationController.tabBarItem = homeTabBarItem
-    activityFeedNavigationController.tabBarItem = activityFeedTabBarItem
+    garageNavigationController.tabBarItem = garageTabBarItem
+//    activityFeedNavigationController.tabBarItem = profileTabBarItem
     
     tabBarController!.delegate = self
-    tabBarController!.viewControllers = [homeNavigationController, emptyNavigationController, activityFeedNavigationController]
+    tabBarController!.viewControllers = [homeNavigationController, emptyNavigationController, garageNavigationController]
     
     navController!.setViewControllers([welcomeViewController!, tabBarController!], animated: false)
     
@@ -217,7 +227,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     
     // clear NSUserDefaults
     NSUserDefaults.standardUserDefaults().removeObjectForKey(kPAPUserDefaultsCacheFacebookFriendsKey)
-    NSUserDefaults.standardUserDefaults().removeObjectForKey(kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey)
+//    NSUserDefaults.standardUserDefaults().removeObjectForKey(kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey)
     NSUserDefaults.standardUserDefaults().synchronize()
     
     // Unsubscribe from push notifications by removing the user association from the current installation.
@@ -237,8 +247,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     
     presentLoginViewController()
     
-    self.homeViewController = nil;
-    self.activityViewController = nil;
+    self.homeViewController = nil
+//    self.activityViewController = nil;
+    self.garageViewController = nil
   }
   
   // MARK: - ()

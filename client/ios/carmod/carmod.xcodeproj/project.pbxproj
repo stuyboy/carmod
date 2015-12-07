@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		27D8A4232B999A07EF0DE4E8 /* Pods_carmod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */; };
+		400818421C1105A9004F7497 /* GarageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818411C1105A9004F7497 /* GarageViewController.swift */; };
+		400818441C121A7F004F7497 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818431C121A7F004F7497 /* CustomTextField.swift */; };
+		400818461C123960004F7497 /* AddCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818451C123960004F7497 /* AddCarView.swift */; };
 		40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E591BFFECAD001CF280 /* PartManager.swift */; };
 		40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */; };
 		40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */; };
@@ -73,6 +76,9 @@
 /* Begin PBXFileReference section */
 		15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.release.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.release.xcconfig"; sourceTree = "<group>"; };
 		2BDAD9436BE74D462DBFE073 /* Pods_carmod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_carmod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		400818411C1105A9004F7497 /* GarageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageViewController.swift; sourceTree = "<group>"; };
+		400818431C121A7F004F7497 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		400818451C123960004F7497 /* AddCarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarView.swift; sourceTree = "<group>"; };
 		40220E591BFFECAD001CF280 /* PartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartManager.swift; sourceTree = "<group>"; };
 		40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,6 +161,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		400818401C110584004F7497 /* Garage */ = {
+			isa = PBXGroup;
+			children = (
+				400818411C1105A9004F7497 /* GarageViewController.swift */,
+			);
+			name = Garage;
+			sourceTree = "<group>";
+		};
 		40220E581BFFEC83001CF280 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +187,7 @@
 				40678E021BFA99880071BCB8 /* Take Photo */,
 				40678E041BFA99990071BCB8 /* Activity */,
 				40678E051BFA99BB0071BCB8 /* Details */,
+				400818401C110584004F7497 /* Garage */,
 				40678E061BFA99BF0071BCB8 /* Settings */,
 			);
 			name = Controllers;
@@ -184,6 +199,7 @@
 				40678E2D1BFA9B900071BCB8 /* TimelineViews */,
 				40678E2E1BFA9BA10071BCB8 /* PhotoDetailsViews */,
 				40678E2F1BFA9BAB0071BCB8 /* UITableViewCells */,
+				400818451C123960004F7497 /* AddCarView.swift */,
 				40678E411BFA9C270071BCB8 /* PAPImageView.swift */,
 				40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */,
 				40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */,
@@ -215,6 +231,7 @@
 				40678E2B1BFA9B7E0071BCB8 /* String+Common.swift */,
 				40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */,
 				40678E291BFA9B770071BCB8 /* UIExtensions.swift */,
+				400818431C121A7F004F7497 /* CustomTextField.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -633,6 +650,7 @@
 				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
 				40678E091BFA9A860071BCB8 /* Constants.swift in Sources */,
 				40678E451BFA9C270071BCB8 /* PAPProfileImageView.swift in Sources */,
+				400818441C121A7F004F7497 /* CustomTextField.swift in Sources */,
 				40678E141BFA9AD10071BCB8 /* PAPAccountViewController.swift in Sources */,
 				40678E341BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift in Sources */,
 				40678E381BFA9BE80071BCB8 /* PAPLoadMoreCell.swift in Sources */,
@@ -642,6 +660,8 @@
 				40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */,
 				40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */,
 				40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */,
+				400818421C1105A9004F7497 /* GarageViewController.swift in Sources */,
+				400818461C123960004F7497 /* AddCarView.swift in Sources */,
 				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,
 				40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */,
 			);

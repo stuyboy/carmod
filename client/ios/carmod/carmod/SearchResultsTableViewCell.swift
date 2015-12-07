@@ -35,7 +35,7 @@ class SearchResultsTableViewCell: UITableViewCell {
         
         self.partLabel.attributedText = newText
       } else {
-        let preText = "Add '"
+        let preText = "No matches found. Add '"
         let newText = NSMutableAttributedString(string: preText+searchKeywords+"'")
         let selectedRange: NSRange = NSMakeRange(preText.characters.count, searchKeywords.characters.count)
         
