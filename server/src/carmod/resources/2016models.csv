@@ -1,0 +1,3773 @@
+Model Year,Represented Test Veh Make,Represented Test Veh Model,Vehicle Type,Rated Horsepower,# of Cylinders and Rotors,Drive System Code
+2016,Aston Martin,DB9,Car,510,12,R
+2016,Aston Martin,DB9,Car,510,12,R
+2016,Aston Martin,Rapide S,Car,552,12,R
+2016,Aston Martin,Rapide S,Car,552,12,R
+2016,Aston Martin,V12 Vantage S,Car,565,12,R
+2016,Aston Martin,V12 Vantage S,Car,565,12,R
+2016,Aston Martin,V8 VANTAGE,Car,420,8,R
+2016,Aston Martin,V8 VANTAGE,Car,420,8,R
+2016,Aston Martin,V8 VANTAGE S,Car,430,8,R
+2016,Aston Martin,V8 VANTAGE S,Car,430,8,R
+2016,Aston Martin,Vanquish,Car,568,12,R
+2016,Aston Martin,Vanquish,Car,568,12,R
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A4,Car,211,4,F
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,A8,Car,240,,A
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Both,272,6,F
+2016,AUDI,Q5,Truck,211,4,A
+2016,AUDI,Q5,Truck,211,4,A
+2016,AUDI,Q5,Both,211,4,A
+2016,AUDI,Q5,Both,211,4,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5,Both,240,6,A
+2016,AUDI,Q5 Hybrid,Truck,211,4,A
+2016,AUDI,Q5 Hybrid,Truck,211,4,A
+2016,AUDI,Q5 Hybrid,Truck,211,4,A
+2016,AUDI,Q5 Hybrid,Truck,211,4,A
+2016,AUDI,Q5 Hybrid,Truck,211,4,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,RS7,Car,560,8,A
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,AUDI,S5,Both,333,6,F
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,520,8,A
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BENTLEY,Continental GT,Car,616,12,F
+2016,BRG,Bluecar,GBRGV00.0L8X,Car,67,Y
+2016,BRG,Bluecar,GBRGV00.0L8X,Car,67,Y
+2016,BMW,228i,Both,181,4,R
+2016,BMW,228i,Both,181,4,R
+2016,BMW,228i,Both,181,4,R
+2016,BMW,228i,Both,181,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive,Car,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,228i xDrive Convertible,Both,240,4,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Car,181,,R
+2016,BMW,320i,Car,181,,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Both,181,4,R
+2016,BMW,320i,Both,180,4,R
+2016,BMW,320i,Both,180,4,R
+2016,BMW,320i,Both,180,4,R
+2016,BMW,320i,Both,180,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,320i xDrive,Both,181,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d,Car,183,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328d xDrive Sports Wagon,Car,181,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,240,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i,Car,241,4,R
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive,Car,240,4,A
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Gran Turismo,Car,240,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,328i xDrive Sports Wagon,Both,181,4,R
+2016,BMW,335i xDrive Gran Turismo,Both,300,6,R
+2016,BMW,335i xDrive Gran Turismo,Both,300,6,R
+2016,BMW,335i xDrive Gran Turismo,Both,300,6,R
+2016,BMW,335i xDrive Gran Turismo,Both,300,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,340i xDrive,Car,320,6,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Convertible xDrive,Car,240,4,R
+2016,BMW,428i Coupe,Both,181,4,R
+2016,BMW,428i Coupe,Both,181,4,R
+2016,BMW,428i Coupe,Both,181,4,R
+2016,BMW,428i Coupe,Both,181,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Coupe,Both,241,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,4,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i Gran Coupe,Car,240,,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,428i xDrive Gran Coupe,Car,240,4,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Convertible,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Convertible,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,435i xDrive Gran Coupe,Both,300,6,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i,Car,241,4,R
+2016,BMW,528i xDrive,Car,241,4,A
+2016,BMW,528i xDrive,Car,241,4,A
+2016,BMW,528i xDrive,Car,241,4,A
+2016,BMW,528i xDrive,Car,241,4,A
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535d xDrive,Car,255,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i Gran Turismo,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive,Car,300,6,R
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,535i xDrive Gran Turismo,Car,300,6,A
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive,Car,443,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,550i xDrive Gran Turismo,Car,448,8,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Convertible,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,A
+2016,BMW,640i xDrive Coupe,Car,300,6,A
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,640i xDrive Coupe,Car,300,6,R
+2016,BMW,650i Convertible,Car,448,8,R
+2016,BMW,650i Convertible,Car,448,8,R
+2016,BMW,650i Convertible,Car,448,8,R
+2016,BMW,650i Convertible,Car,448,8,R
+2016,BMW,650i Coupe,Car,448,8,R
+2016,BMW,650i Coupe,Car,448,8,R
+2016,BMW,650i Coupe,Car,448,8,R
+2016,BMW,650i Coupe,Car,448,8,R
+2016,BMW,650i Coupe,Car,448,8,R
+2016,BMW,650i xDrive Convertible,Car,448,8,R
+2016,BMW,650i xDrive Convertible,Car,448,8,R
+2016,BMW,650i xDrive Convertible,Car,448,8,R
+2016,BMW,650i xDrive Convertible,Car,448,8,R
+2016,BMW,650i xDrive Coupe,Car,448,8,R
+2016,BMW,650i xDrive Coupe,Car,448,8,R
+2016,BMW,650i xDrive Coupe,Car,448,8,R
+2016,BMW,650i xDrive Coupe,Car,448,8,R
+2016,BMW,740i,Car,320,6,R
+2016,BMW,740i,Car,320,6,R
+2016,BMW,740i,Car,320,6,R
+2016,BMW,750i xDrive,Car,443,8,R
+2016,BMW,750i xDrive,Car,443,8,R
+2016,BMW,750i xDrive,Car,443,8,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i,Both,300,6,R
+2016,BMW,M235i Convertible,Both,300,6,R
+2016,BMW,M235i Convertible,Both,300,6,R
+2016,BMW,M235i Convertible,Both,300,6,R
+2016,BMW,M235i Convertible,Both,300,6,R
+2016,BMW,M235i Convertible,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M235i xDrive,Both,300,6,R
+2016,BMW,M3,Car,425,6,R
+2016,BMW,M3,Car,425,6,R
+2016,BMW,M3,Car,425,6,R
+2016,BMW,M3,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Convertible,Car,425,6,R
+2016,BMW,M4 Coupe,Car,425,6,R
+2016,BMW,M4 Coupe,Car,425,6,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M5,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,M6 Convertible,Car,553,8,R
+2016,BMW,X1 xDrive28i,Car,228,4,F
+2016,BMW,X1 xDrive28i,Car,228,4,F
+2016,BMW,X1 xDrive28i,Car,228,4,F
+2016,BMW,X1 xDrive28i,Car,228,4,F
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive 28d,Truck,181,4,R
+2016,BMW,X3 xDrive28i,Both,241,4,A
+2016,BMW,X3 xDrive28i,Both,241,4,A
+2016,BMW,X3 xDrive28i,Both,241,4,A
+2016,BMW,X3 xDrive28i,Both,241,4,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X3 xDrive35i,Both,300,6,A
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive 28i,Car,240,,R
+2016,BMW,X4 xDrive35i,Both,300,6,A
+2016,BMW,X4 xDrive35i,Both,300,6,A
+2016,BMW,X4 xDrive35i,Both,300,6,A
+2016,BMW,X4 xDrive35i,Both,300,6,A
+2016,BMW,X5 M,Truck,567,8,A
+2016,BMW,X5 M,Truck,567,8,A
+2016,BMW,X5 M,Truck,567,8,A
+2016,BMW,X5 sDrive35i,Truck,300,6,R
+2016,BMW,X5 sDrive35i,Truck,300,6,R
+2016,BMW,X5 sDrive35i,Truck,300,6,R
+2016,BMW,X5 xDrive35i,Truck,300,6,R
+2016,BMW,X5 xDrive35i,Truck,300,6,R
+2016,BMW,X5 xDrive35i,Truck,300,6,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive40e,Truck,240,4,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X5 xDrive50i,Truck,443,8,R
+2016,BMW,X6 sDrive35i,Truck,300,6,R
+2016,BMW,X6 sDrive35i,Truck,300,6,R
+2016,BMW,X6 sDrive35i,Truck,300,6,R
+2016,BMW,X6 xDrive 50i,Truck,443,8,R
+2016,BMW,X6 xDrive 50i,Truck,443,8,R
+2016,BMW,X6 xDrive 50i,Truck,443,8,R
+2016,BMW,X6 xDrive35i,Truck,300,6,R
+2016,BMW,X6 xDrive35i,Truck,300,6,R
+2016,BMW,X6 xDrive35i,Truck,300,6,R
+2016,BMW,X6 xDrive50i,Truck,443,8,R
+2016,BMW,X6 xDrive50i,Truck,443,8,R
+2016,BMW,X6 xDrive50i,Truck,443,8,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive28i,Car,241,4,R
+2016,BMW,Z4 sDrive35is,Car,335,6,R
+2016,BMW,Z4 sDrive35is,Car,335,6,R
+2016,BMW,Z4 sDrive35is,Car,335,6,R
+2016,BMW,Z4 sDrive35is,Car,335,6,R
+2016,Mini,John Cooper Works All4 Countryman,Car,214,4,F
+2016,Mini,John Cooper Works All4 Countryman,Car,214,4,F
+2016,Mini,John Cooper Works All4 Countryman,Car,214,4,4
+2016,Mini,John Cooper Works All4 Countryman,Car,214,4,4
+2016,Mini,Mini Cooper Countryman,Car,122,4,4
+2016,Mini,Mini Cooper Countryman,Car,122,4,4
+2016,Mini,Mini Cooper Countryman,Car,122,4,F
+2016,Mini,Mini Cooper Countryman,Car,122,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 2 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,MINI COOPER HARDTOP 4 DOOR,Car,134,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (3-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S (5-doors),Car,189,4,F
+2016,Mini,Mini Cooper S Clubman,Car,189,4,F
+2016,Mini,Mini Cooper S Clubman,Car,189,4,F
+2016,Mini,Mini Cooper S Clubman,Car,189,4,F
+2016,Mini,Mini Cooper S Clubman,Car,189,4,F
+2016,Mini,Mini Cooper S Countryman,Car,180,4,F
+2016,Mini,Mini Cooper S Countryman,Car,180,4,F
+2016,Mini,Mini Cooper S Countryman,Car,180,4,F
+2016,Mini,Mini Cooper S Countryman,Car,180,4,F
+2016,Mini,Mini Cooper S Countryman All4,Car,180,4,4
+2016,Mini,Mini Cooper S Countryman All4,Car,180,4,4
+2016,Mini,Mini Cooper S Countryman All4,Car,180,4,4
+2016,Mini,Mini Cooper S Countryman All4,Car,180,4,4
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Mini,MINI John Cooper Works Hardtop,Car,228,4,F
+2016,Fiat,Alfa 4c,Car,237,4,R
+2016,Fiat,Alfa 4c,Car,237,4,R
+2016,Fiat,Alfa 4c,Car,237,4,R
+2016,Fiat,Alfa 4c,Car,237,4,R
+2016,Fiat,Alfa 4c,Car,237,4,R
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,184,4,F
+2016,Chrysler,200,Both,295,6,F
+2016,Chrysler,200,Both,295,6,F
+2016,Chrysler,200,Both,295,6,F
+2016,Chrysler,200,Both,295,6,F
+2016,Chrysler,200,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,200 AWD,Both,295,6,F
+2016,Chrysler,300,Car,292,6,R
+2016,Chrysler,300,Car,292,6,R
+2016,Chrysler,300 Awd,Car,359,8,A
+2016,Chrysler,300 Awd,Car,359,8,A
+2016,Chrysler,300 Awd,Car,359,8,A
+2016,Chrysler,300 Awd,Car,359,8,A
+2016,Chrysler,300 AWD,Car,292,6,4
+2016,Chrysler,300 AWD,Car,292,6,4
+2016,Chrysler,Town & Country,Both,283,6,F
+2016,Chrysler,Town & Country,Both,283,6,F
+2016,Chrysler,Town & Country,Both,283,6,F
+2016,Chrysler,Town & Country,Both,283,6,F
+2016,Chrysler,Town & Country,Both,283,6,F
+2016,Dodge,Avenger,Both,283,6,F
+2016,Dodge,Avenger,Both,283,6,F
+2016,Dodge,Avenger,Both,283,6,F
+2016,Dodge,Avenger,Both,283,6,F
+2016,Dodge,Challenger,Car,470,8,R
+2016,Dodge,Challenger,Car,470,8,R
+2016,Dodge,Challenger,Car,470,8,R
+2016,Dodge,Challenger,Car,470,8,R
+2016,Dodge,Challenger,Car,372,8,R
+2016,Dodge,Challenger,Car,372,8,R
+2016,Dodge,Challenger,Car,372,8,R
+2016,Dodge,Challenger,Car,370,8,R
+2016,Dodge,Challenger,Car,370,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Challenger SRT8,Car,707,8,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,292,6,R
+2016,Dodge,Charger,Car,359,8,R
+2016,Dodge,Charger,Car,359,8,R
+2016,Dodge,Charger AWD,Car,292,6,A
+2016,Dodge,Charger AWD,Car,292,6,A
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,4,F
+2016,Dodge,Dart,Car,158,,F
+2016,Dodge,Dart,Car,158,,F
+2016,Dodge,Dart,Car,158,,F
+2016,Dodge,Dart,Car,158,,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Car,160,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Car,184,4,F
+2016,Dodge,Dart,Car,184,4,F
+2016,Dodge,Dart,Car,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Dart,Both,184,4,F
+2016,Dodge,Journey,Both,283,6,F
+2016,Dodge,Journey,Both,283,6,F
+2016,Dodge,JOURNEY 2WD,Car,173,,F
+2016,Dodge,JOURNEY 2WD,Car,173,,F
+2016,Dodge,Ram,Truck,345,,R
+2016,Dodge,Ram,Truck,345,,R
+2016,Dodge,RAM 1500 PICKUP 2WD,Truck,345,,R
+2016,Dodge,RAM 1500 PICKUP 2WD,Truck,345,,R
+2016,Dodge,RAM PICKUP,Truck,345,8,R
+2016,Dodge,RAM PICKUP,Truck,345,8,R
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500,Car,100,4,F
+2016,Fiat,500 Abarth,Car,160,4,F
+2016,Fiat,500 Abarth,Car,160,4,F
+2016,Fiat,500 Abarth,Both,160,4,F
+2016,Fiat,500 Abarth,Both,160,4,F
+2016,Fiat,500L,Car,160,4,F
+2016,Fiat,500L,Car,160,4,F
+2016,Fiat,500L,Car,160,4,F
+2016,Fiat,500L,Car,160,4,F
+2016,Fiat,500L,Both,160,4,F
+2016,Fiat,500L,Both,160,4,F
+2016,Fiat,500X,Both,160,4,F
+2016,Fiat,500X,Both,160,4,F
+2016,Fiat,500X,Both,160,4,F
+2016,Fiat,500X,Both,160,4,F
+2016,Fiat,500X AWD,Both,180,4,F
+2016,Fiat,500X AWD,Both,180,4,F
+2016,Fiat,500X AWD,Both,180,4,F
+2016,Fiat,500X AWD,Both,180,4,F
+2016,Jeep,Cherokee,Truck,184,4,A
+2016,Jeep,Cherokee,Truck,184,4,A
+2016,Jeep,Cherokee,Truck,184,4,A
+2016,Jeep,Cherokee,Truck,184,4,A
+2016,Jeep,Cherokee,Both,184,4,F
+2016,Jeep,Cherokee,Both,184,4,F
+2016,Jeep,Cherokee 4X4,Truck,184,4,F
+2016,Jeep,Cherokee 4X4,Truck,184,4,F
+2016,Jeep,Cherokee 4X4,Truck,184,4,F
+2016,Jeep,Cherokee 4X4,Both,184,4,A
+2016,Jeep,Cherokee 4X4,Both,184,4,A
+2016,Jeep,Cherokee 4X4,Both,184,4,A
+2016,Jeep,Cherokee 4X4,Both,184,4,A
+2016,Jeep,Cherokee 4X4,Both,271,6,F
+2016,Jeep,Cherokee 4X4,Both,271,6,F
+2016,Jeep,Cherokee 4X4,Both,271,6,F
+2016,Jeep,Cherokee 4X4,Both,271,6,F
+2016,Jeep,Cherokee 4x4 Active Drive II,Both,271,6,F
+2016,Jeep,Cherokee 4x4 Active Drive II,Both,271,6,F
+2016,Jeep,Cherokee 4x4 Active Drive II,Both,271,6,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee FWD,Both,271,6,F
+2016,Jeep,Cherokee FWD,Both,271,6,F
+2016,Jeep,Cherokee FWD,Both,271,6,F
+2016,Jeep,Cherokee FWD,Both,271,6,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee FWD,Both,184,4,F
+2016,Jeep,Cherokee Trailhawk 4X4,Both,271,6,4
+2016,Jeep,Cherokee Trailhawk 4X4,Both,271,6,4
+2016,Jeep,Cherokee Trailhawk 4X4,Both,271,6,4
+2016,Jeep,Cherokee Trailhawk 4X4,Both,271,6,4
+2016,Jeep,Compass 2WD,Both,158,4,F
+2016,Jeep,Compass 2WD,Both,158,4,F
+2016,Jeep,COMPASS 4WD,Both,165,,4
+2016,Jeep,COMPASS 4WD,Both,165,,4
+2016,Jeep,COMPASS 4WD,Both,165,,4
+2016,Jeep,COMPASS 4WD,Both,165,,4
+2016,Jeep,Compass 4X4,Truck,172,4,F
+2016,Jeep,Compass 4X4,Truck,172,4,F
+2016,Jeep,Compass FWD,Both,172,4,F
+2016,Jeep,Compass FWD,Both,172,4,F
+2016,Jeep,Patriot 2WD,Truck,158,4,F
+2016,Jeep,Patriot 2WD,Truck,158,4,F
+2016,Jeep,Patriot 2WD,Truck,158,4,F
+2016,Jeep,Patriot 2WD,Truck,158,4,F
+2016,Jeep,Patriot 4wd,Truck,172,4,F
+2016,Jeep,Patriot 4wd,Truck,172,4,F
+2016,Jeep,Renegade 4x2,Both,160,4,F
+2016,Jeep,Renegade 4x2,Both,160,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x2,Both,180,4,F
+2016,Jeep,Renegade 4x4,Both,160,4,F
+2016,Jeep,Renegade 4x4,Both,160,4,F
+2016,Jeep,Renegade 4x4,Both,160,4,F
+2016,Jeep,Renegade 4x4,Both,160,4,F
+2016,Jeep,Renegade 4x4,Both,180,4,F
+2016,Jeep,Renegade 4x4,Both,180,4,F
+2016,Jeep,Renegade 4x4,Both,180,4,F
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,Jeep,Wrangler 4WD,Car,290,4,4
+2016,Jeep,Wrangler 4WD,Car,290,4,4
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,Jeep,Wrangler 4WD,Truck,290,6,4
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,290,6,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 2WD,Truck,390,8,R
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 4X4,Truck,240,6,4
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,1500 EcoDiesel29 4x2,Truck,230,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,5500 4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,6000#  4X2,Truck,240,6,R
+2016,RAM,Promaster City,Both,184,4,F
+2016,RAM,Promaster City,Both,184,4,F
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,SRT,Viper,Car,645,10,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,488 GTB,Car,661,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,California T,Car,553,8,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,F12 Berlinetta,Car,725,12,R
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ferrari,FF,Car,652,12,P
+2016,Ford,C-Max (PHEV),Car,141,4,F
+2016,Ford,C-Max (PHEV),Car,141,4,F
+2016,Ford,C-Max (PHEV),Car,141,4,F
+2016,Ford,C-Max (PHEV),Car,141,4,F
+2016,Ford,C-Max HEV FWD,Car,141,4,F
+2016,Ford,C-Max HEV FWD,Car,141,4,F
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape AWD,Truck,170,4,A
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,Escape FWD,Truck,237,4,F
+2016,Ford,ESCAPE FWD,Truck,168,4,F
+2016,Ford,ESCAPE FWD,Truck,168,4,F
+2016,Ford,ESCAPE FWD,Truck,168,4,F
+2016,Ford,ESCAPE FWD,Truck,168,4,F
+2016,Ford,Expedition,Truck,365,6,R
+2016,Ford,Expedition,Truck,365,6,R
+2016,Ford,Expedition 4x2,Truck,365,6,R
+2016,Ford,Expedition 4x2,Truck,365,6,R
+2016,Ford,Expedition 4x4,Truck,365,6,R
+2016,Ford,Expedition 4x4,Truck,365,6,R
+2016,Ford,Expedition 4x4,Truck,365,6,R
+2016,Ford,Expedition 4x4,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x2,Truck,365,6,R
+2016,Ford,Expedition EL 4x4,Truck,365,6,R
+2016,Ford,Expedition EL 4x4,Truck,365,6,R
+2016,Ford,Expedition EL 4x4,Truck,365,6,R
+2016,Ford,Expedition EL 4x4,Truck,365,6,R
+2016,Ford,Explorer AWD,Truck,275,4,A
+2016,Ford,Explorer AWD,Truck,275,4,A
+2016,Ford,Explorer AWD,Truck,275,4,F
+2016,Ford,Explorer AWD,Truck,275,4,F
+2016,Ford,Explorer FWD,Truck,275,4,F
+2016,Ford,Explorer FWD,Truck,275,4,F
+2016,Ford,Explorer FWD,Truck,275,4,F
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,"Explorer Police FFV,GFMXT03.73DM,Truck,290,Y
+2016,Ford,F-150 4X2,Truck,325,6,R
+2016,Ford,F-150 4X2,Truck,325,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X2,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 FFV 4X4,Truck,282,6,R
+2016,Ford,F-150 Super Cab Max,Truck,325,6,R
+2016,Ford,F-150 Super Cab Max,Truck,325,6,R
+2016,Ford,F-150 Super Cab Max,Truck,325,6,R
+2016,Ford,F-150 Super Cab Max,Truck,325,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2,Truck,365,6,R
+2016,Ford,F150 4X2 Super Cab,Truck,325,6,R
+2016,Ford,F150 4X2 Super Cab,Truck,325,6,R
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4,Truck,365,6,P
+2016,Ford,F150 4X4 Super Crew,Truck,325,6,P
+2016,Ford,F150 4X4 Super Crew,Truck,325,6,P
+2016,Ford,F150 4X4 Super Crew,Truck,325,6,P
+2016,Ford,F150 4X4 Super Crew,Truck,325,6,P
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X2,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,F150 FFV 4X4,Truck,385,8,R
+2016,Ford,FIESTA,Car,120,4,F
+2016,Ford,FIESTA,Car,120,4,F
+2016,Ford,FIESTA,Car,120,4,F
+2016,Ford,FIESTA,Car,120,4,F
+2016,Ford,FIESTA SFE,Car,120,3,F
+2016,Ford,FIESTA SFE,Car,120,3,F
+2016,Ford,FIESTA SFE,Car,120,3,F
+2016,Ford,Fiesta ST,Car,175,4,F
+2016,Ford,Fiesta ST,Car,175,4,F
+2016,Ford,FLEX,Car,355,6,A
+2016,Ford,FLEX,Car,355,6,A
+2016,Ford,FLEX,Car,355,6,A
+2016,Ford,FLEX,Car,355,6,A
+2016,Ford,FLEX,Car,355,6,A
+2016,Ford,FLEX,Car,355,6,A
+2016,FORD,FLEX,Car,355,6,A
+2016,FORD,FLEX,Car,355,6,A
+2016,FORD,FLEX,Car,355,6,A
+2016,FORD,FLEX,Car,355,6,A
+2016,Ford,FOCUS,Car,144,,F
+2016,Ford,FOCUS,Car,144,,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,FOCUS,Car,160,4,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,Focus,Car,123,3,F
+2016,Ford,FOCUS FFV,Car,160,4,F
+2016,Ford,FOCUS FFV,Car,160,4,F
+2016,Ford,FOCUS ST,Car,247,4,F
+2016,Ford,FOCUS ST,Car,247,4,F
+2016,Ford,Fusion (HEV),Car,141,4,F
+2016,Ford,Fusion (HEV),Car,141,4,F
+2016,Ford,Fusion AWD,Car,237,4,F
+2016,Ford,Fusion AWD,Car,237,4,F
+2016,Ford,Fusion AWD,Car,237,4,F
+2016,Ford,Fusion AWD,Car,237,4,F
+2016,Ford,Fusion FWD,Car,175,4,F
+2016,Ford,Fusion FWD,Car,175,4,F
+2016,Ford,Fusion FWD,Car,175,4,F
+2016,Ford,Fusion FWD,Car,175,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,Fusion FWD,Car,169,4,F
+2016,Ford,MKZ (HEV),Car,141,4,F
+2016,Ford,MKZ (HEV),Car,141,4,F
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,310,4,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,420,8,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,300,6,R
+2016,Ford,Mustang,Car,526,8,R
+2016,Ford,Mustang,Car,526,8,R
+2016,Ford,Mustang,Car,526,8,R
+2016,Ford,Mustang,Car,526,8,R
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,Police Interceptor Utility,Truck,304,6,F
+2016,Ford,T150 Transit Wagon MDPV,Truck,365,6,R
+2016,Ford,T150 Transit Wagon MDPV,Truck,365,6,R
+2016,Ford,T250 Transit Van MDPV,Truck,365,6,R
+2016,Ford,T250 Transit Van MDPV,Truck,365,6,R
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,Transit Connect,Truck,170,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT VAN FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT WAGON LWB FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT WAGON LWB FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT WAGON LWB FFV,Truck,169,4,F
+2016,Ford,TRANSIT CONNECT WAGON LWB FFV,Truck,169,4,F
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Ford,TRANSIT T150 WAGON FFV,Truck,275,6,R
+2016,Lincoln,MKC,Truck,275,4,A
+2016,Lincoln,MKC,Truck,275,4,A
+2016,Lincoln,MKC,Truck,275,4,A
+2016,Lincoln,MKC,Truck,275,4,A
+2016,Lincoln,MKC,Truck,240,4,A
+2016,Lincoln,MKC,Truck,240,4,A
+2016,Lincoln,MKX AWD,Truck,325,6,F
+2016,Lincoln,MKX AWD,Truck,325,6,F
+2016,Lincoln,MKX AWD,Truck,325,6,F
+2016,Lincoln,MKX AWD,Truck,325,6,F
+2016,Lincoln,MKX AWD,Truck,303,6,A
+2016,Lincoln,MKX AWD,Truck,303,6,A
+2016,Lincoln,MKX AWD,Truck,303,6,A
+2016,Lincoln,MKX AWD,Truck,303,6,A
+2016,Lincoln,MKX FWD,Truck,325,6,F
+2016,Lincoln,MKX FWD,Truck,325,6,F
+2016,Lincoln,MKX FWD,Truck,303,6,F
+2016,Lincoln,MKX FWD,Truck,303,6,F
+2016,Lincoln,MKZ AWD,Car,305,6,A
+2016,Lincoln,MKZ AWD,Car,305,6,A
+2016,Lincoln,MKZ AWD,Car,305,6,A
+2016,Lincoln,MKZ AWD,Car,305,6,A
+2016,Lincoln,Navigator L 4x2,Truck,380,6,R
+2016,Lincoln,Navigator L 4x2,Truck,380,6,R
+2016,Lincoln,Navigator L 4x4,Truck,380,6,R
+2016,Lincoln,Navigator L 4x4,Truck,380,6,R
+2016,Lincoln,Navigator L 4x4,Truck,380,6,R
+2016,Lincoln,Navigator L 4x4,Truck,380,6,R
+2016,BUICK,ENCLAVE AWD,Truck,288,,R
+2016,BUICK,ENCLAVE AWD,Truck,288,,R
+2016,BUICK,ENCLAVE AWD,Truck,288,,R
+2016,BUICK,ENCLAVE AWD,Truck,288,,R
+2016,BUICK,LACROSSE,Car,182,4,F
+2016,BUICK,LACROSSE,Car,182,4,F
+2016,BUICK,LACROSSE,Car,182,4,F
+2016,BUICK,LACROSSE,Car,182,4,F
+2016,BUICK,LACROSSE AWD,Both,303,6,F
+2016,BUICK,LACROSSE AWD,Both,303,6,F
+2016,BUICK,REGAL,Both,182,4,F
+2016,BUICK,REGAL,Both,182,4,F
+2016,BUICK,REGAL AWD,Car,260,4,F
+2016,BUICK,REGAL AWD,Car,260,4,F
+2016,BUICK,VERANO,Car,250,4,F
+2016,BUICK,VERANO,Car,250,4,F
+2016,BUICK,VERANO,Both,180,4,F
+2016,BUICK,VERANO,Both,180,4,F
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,272,4,R
+2016,CADILLAC,ATS,Car,202,4,R
+2016,CADILLAC,ATS,Car,202,4,R
+2016,CADILLAC,ATS AWD,Car,272,4,R
+2016,CADILLAC,ATS AWD,Car,272,4,R
+2016,CADILLAC,ATS-V,Car,455,6,R
+2016,CADILLAC,ATS-V,Car,455,6,R
+2016,CADILLAC,CTS SEDAN,Car,272,4,R
+2016,CADILLAC,CTS SEDAN,Car,272,4,R
+2016,CADILLAC,CTS SEDAN,Car,272,4,R
+2016,CADILLAC,CTS SEDAN,Car,420,6,R
+2016,CADILLAC,CTS SEDAN,Car,420,6,R
+2016,CADILLAC,CTS SEDAN AWD,Both,335,6,R
+2016,CADILLAC,CTS SEDAN AWD,Both,335,6,R
+2016,CADILLAC,CTS SEDAN AWD,Both,335,6,R
+2016,CADILLAC,CTS SEDAN AWD,Both,335,6,R
+2016,CADILLAC,CTS-V,Car,650,8,R
+2016,CADILLAC,CTS-V,Car,650,8,R
+2016,CADILLAC,CTS-V,Car,640,8,R
+2016,CADILLAC,CTS-V,Car,640,8,R
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ELR,Car,84,4,F
+2016,CADILLAC,ESCALADE 2WD,Truck,425,8,R
+2016,CADILLAC,ESCALADE 2WD,Truck,425,8,R
+2016,CADILLAC,ESCALADE 2WD,Truck,425,8,R
+2016,CADILLAC,ESCALADE 2WD,Truck,425,8,R
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX 2WD,Both,280,6,F
+2016,CADILLAC,SRX AWD,Both,280,6,F
+2016,CADILLAC,SRX AWD,Both,280,6,F
+2016,CADILLAC,SRX AWD,Both,280,6,F
+2016,CADILLAC,SRX AWD,Both,280,6,F
+2016,CADILLAC,SRX AWD,Both,308,6,F
+2016,CADILLAC,SRX AWD,Both,308,6,F
+2016,CADILLAC,XTS AWD,Car,410,6,F
+2016,CADILLAC,XTS AWD,Car,410,6,F
+2016,CADILLAC,XTS AWD,Car,410,6,F
+2016,CADILLAC,XTS AWD,Car,410,6,F
+2016,CADILLAC,XTS AWD,Both,303,6,F
+2016,CADILLAC,XTS AWD,Both,303,6,F
+2016,CHEVROLET,1LH26,Both,182,4,F
+2016,CHEVROLET,1LH26,Both,182,4,F
+2016,CHEVROLET,1LH26,Both,182,4,F
+2016,CHEVROLET,1LH26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,1LK26,Both,182,4,F
+2016,CHEVROLET,C15 SILVERADO 2WD,Truck,345,8,R
+2016,CHEVROLET,C15 SILVERADO 2WD,Truck,345,8,R
+2016,CHEVROLET,C15 SILVERADO 2WD,Truck,425,8,R
+2016,CHEVROLET,C15 SILVERADO 2WD,Truck,425,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,C1500 SUBURBAN 2WD,Truck,345,8,R
+2016,CHEVROLET,CAMARO,Both,335,6,R
+2016,CHEVROLET,CAMARO,Both,335,6,R
+2016,CHEVROLET,CAMARO,Both,335,6,R
+2016,CHEVROLET,CAMARO,Both,335,6,R
+2016,CHEVROLET,CAPRICE PPV,Both,280,6,R
+2016,CHEVROLET,CAPRICE PPV,Both,280,6,R
+2016,CHEVROLET,CAPRICE PPV,Both,280,6,R
+2016,CHEVROLET,CAPRICE PPV,Both,280,6,R
+2016,CHEVROLET,COLORADO 2WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 2WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 2WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 2WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 2WD,Truck,300,6,R
+2016,CHEVROLET,COLORADO 2WD,Truck,300,6,R
+2016,CHEVROLET,COLORADO 4WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 4WD,Truck,194,4,R
+2016,CHEVROLET,COLORADO 4WD,Truck,300,6,R
+2016,CHEVROLET,COLORADO 4WD,Truck,300,6,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,450,8,R
+2016,CHEVROLET,CORVETTE,Car,455,8,R
+2016,CHEVROLET,CORVETTE,Car,455,8,R
+2016,CHEVROLET,CORVETTE,Car,455,8,R
+2016,CHEVROLET,CORVETTE,Car,650,8,R
+2016,CHEVROLET,CORVETTE,Car,650,8,R
+2016,CHEVROLET,CORVETTE,Car,650,8,R
+2016,CHEVROLET,CORVETTE,Car,650,8,R
+2016,CHEVROLET,CORVETTE,Car,650,8,R
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE,Car,140,4,F
+2016,CHEVROLET,CRUZE,Car,140,4,F
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE,Car,138,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,CRUZE ECO,Car,140,4,F
+2016,CHEVROLET,EQUINOX AWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX AWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX AWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX AWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX AWD,Both,308,6,F
+2016,CHEVROLET,EQUINOX AWD,Both,308,6,F
+2016,CHEVROLET,EQUINOX AWD,Both,308,6,F
+2016,CHEVROLET,EQUINOX AWD,Both,308,6,F
+2016,CHEVROLET,EQUINOX FWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX FWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX FWD,Both,182,4,F
+2016,CHEVROLET,EQUINOX FWD,Both,182,4,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Both,280,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,IMPALA,Both,305,6,F
+2016,CHEVROLET,IMPALA,Both,305,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,IMPALA,Car,305,6,F
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,285,6,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K15 SILVERADO 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 SUBURBAN 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,K1500 TAHOE 4WD,Truck,345,8,R
+2016,CHEVROLET,MALIBU,Car,250,4,F
+2016,CHEVROLET,MALIBU,Car,250,4,F
+2016,CHEVROLET,MALIBU LIMITED,Car,196,4,F
+2016,CHEVROLET,MALIBU LIMITED,Car,196,4,F
+2016,CHEVROLET,MALIBU LIMITED,Car,196,4,F
+2016,CHEVROLET,MALIBU LIMITED,Car,196,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC,Car,140,4,F
+2016,CHEVROLET,SONIC,Car,140,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC,Car,138,4,F
+2016,CHEVROLET,SONIC 5,Car,138,4,F
+2016,CHEVROLET,SONIC 5,Car,138,4,F
+2016,CHEVROLET,SONIC RS,Car,138,4,F
+2016,CHEVROLET,SONIC RS,Car,138,4,F
+2016,CHEVROLET,SPARK EV,Car,139,,F
+2016,CHEVROLET,SPARK EV,Car,139,,F
+2016,CHEVROLET,TRAX,Car,138,4,F
+2016,CHEVROLET,TRAX,Car,138,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,CHEVROLET,VOLT,Car,100,4,F
+2016,GMC,CANYON CAB CHASSIS 2WD,Truck,305,6,R
+2016,GMC,CANYON CAB CHASSIS 2WD,Truck,305,6,R
+2016,GMC,CANYON CAB CHASSIS 2WD,Truck,305,6,R
+2016,GMC,CANYON CAB CHASSIS 2WD,Truck,305,6,R
+2016,GMC,CANYON CAB CHASSIS 2WD,Truck,305,6,R
+2016,GMC,K1500 YUKON XL 4WD,Truck,425,8,R
+2016,GMC,K1500 YUKON XL 4WD,Truck,425,8,R
+2016,ACURA,ILX,Car,202,4,F
+2016,ACURA,ILX,Car,202,4,F
+2016,ACURA,MDX 2WD,Car,290,6,F
+2016,ACURA,MDX 2WD,Car,290,6,F
+2016,ACURA,MDX 2WD,Car,290,6,F
+2016,ACURA,MDX 2WD,Car,290,6,F
+2016,ACURA,MDX 4WD,Car,290,6,F
+2016,ACURA,MDX 4WD,Car,290,6,F
+2016,ACURA,MDX 4WD,Car,290,6,F
+2016,ACURA,MDX 4WD,Car,290,6,F
+2016,ACURA,RDX 2WD,Truck,279,6,F
+2016,ACURA,RDX 2WD,Truck,279,6,F
+2016,ACURA,RDX 4WD,Truck,279,6,F
+2016,ACURA,RDX 4WD,Truck,279,6,F
+2016,ACURA,RLX HYBRID,Car,310,6,A
+2016,ACURA,RLX HYBRID,Car,310,6,A
+2016,ACURA,RLX HYBRID,Car,310,6,A
+2016,ACURA,RLX HYBRID,Car,310,6,A
+2016,ACURA,TLX,Both,206,4,F
+2016,ACURA,TLX,Both,206,4,F
+2016,ACURA,TLX,Both,206,4,F
+2016,ACURA,TLX,Both,206,4,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,F
+2016,ACURA,TLX,Car,290,6,4
+2016,ACURA,TLX,Car,290,6,4
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,185,4,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD,Car,278,6,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,ACCORD L4,Car,185,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CIVIC 4DR SEDAN 2.0L,Car,153,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 2WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,CR-V 4WD,Both,185,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT EX,Car,128,4,F
+2016,HONDA,FIT LX,Car,128,4,F
+2016,HONDA,FIT LX,Car,128,4,F
+2016,HONDA,FIT LX,Car,130,4,F
+2016,HONDA,FIT LX,Car,130,4,F
+2016,HONDA,FIT LX,Car,130,4,F
+2016,HONDA,FIT LX,Car,130,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 2WD,Car,138,4,F
+2016,HONDA,HR-V 4WD,Car,138,4,F
+2016,HONDA,HR-V 4WD,Car,138,4,F
+2016,HONDA,HR-V 4WD,Car,138,4,F
+2016,HONDA,HR-V 4WD,Car,138,4,F
+2016,HONDA,ODYSSEY TOURING/TOURING-TE,Truck,248,6,F
+2016,HONDA,ODYSSEY TOURING/TOURING-TE,Truck,248,6,F
+2016,HONDA,PILOT 2WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 2WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 6AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,PILOT 4WD 9AT,Car,280,6,F
+2016,HONDA,RLX,Car,310,6,F
+2016,HONDA,RLX,Car,310,6,F
+2016,HYUNDAI,Azera,Car,293,6,F
+2016,HYUNDAI,Azera,Car,293,6,F
+2016,HYUNDAI,Azera Limited,Car,293,6,F
+2016,HYUNDAI,Azera Limited,Car,293,6,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra Limited,Car,145,4,F
+2016,Hyundai,Elantra Limited,Car,145,4,F
+2016,Hyundai,Elantra Limited,Car,145,4,F
+2016,Hyundai,Elantra Limited,Car,145,4,F
+2016,Hyundai,Equus,Car,429,8,R
+2016,Hyundai,Equus,Car,429,8,R
+2016,HYUNDAI,Genesis,Car,311,6,A
+2016,HYUNDAI,Genesis,Car,311,6,A
+2016,HYUNDAI,Genesis,Car,311,6,R
+2016,HYUNDAI,Genesis,Car,311,6,R
+2016,HYUNDAI,Genesis,Car,420,8,R
+2016,HYUNDAI,Genesis,Car,420,8,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,HYUNDAI,Genesis Coupe,Car,348,6,R
+2016,Hyundai,Santa Fe,Car,290,6,4
+2016,Hyundai,Santa Fe,Car,290,6,4
+2016,Hyundai,Santa Fe,Car,290,6,4
+2016,Hyundai,Santa Fe,Car,290,6,4
+2016,Hyundai,Santa Fe,Car,290,6,4
+2016,Hyundai,Santa Fe,Car,290,6,F
+2016,Hyundai,Santa Fe,Car,290,6,F
+2016,Hyundai,Santa Fe,Car,290,6,F
+2016,Hyundai,Santa Fe,Car,290,6,F
+2016,Hyundai,Santa Fe Sport,Car,265,4,F
+2016,Hyundai,Santa Fe Sport,Car,265,4,F
+2016,Hyundai,Santa Fe Sport,Car,265,4,4
+2016,Hyundai,Santa Fe Sport,Car,265,4,4
+2016,Hyundai,Santa Fe Sport,Car,265,4,4
+2016,Hyundai,Santa Fe Sport,Car,265,4,4
+2016,Hyundai,Santa Fe Sport,Car,187,4,F
+2016,Hyundai,Santa Fe Sport,Car,187,4,F
+2016,Hyundai,Santa Fe Sport,Car,190,4,4
+2016,Hyundai,Santa Fe Sport,Car,190,4,4
+2016,Hyundai,Santa Fe Sport ULTIMATE,Car,265,4,F
+2016,Hyundai,Santa Fe Sport ULTIMATE,Car,265,4,F
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,F
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,F
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,F
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,A
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,A
+2016,Hyundai,Santa Fe Ultimate,Car,290,6,A
+2016,HYUNDAI,Sonata,Car,245,4,F
+2016,HYUNDAI,Sonata,Car,245,4,F
+2016,HYUNDAI,Sonata,Car,245,4,F
+2016,HYUNDAI,Sonata,Car,245,4,F
+2016,HYUNDAI,Sonata,Car,178,4,F
+2016,HYUNDAI,Sonata,Car,178,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,Sonata,Car,185,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA PLUG-IN HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA PLUG-IN HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA PLUG-IN HYBRID,Car,154,4,F
+2016,HYUNDAI,SONATA PLUG-IN HYBRID,Car,154,4,F
+2016,HYUNDAI,Tucson,Car,164,4,A
+2016,HYUNDAI,Tucson,Car,164,4,A
+2016,HYUNDAI,Tucson,Car,164,4,F
+2016,HYUNDAI,Tucson,Car,164,4,F
+2016,Hyundai,Tucson,Car,175,4,F
+2016,Hyundai,Tucson,Car,175,4,F
+2016,Hyundai,Tucson,Car,175,4,F
+2016,Hyundai,Tucson,Car,175,4,F
+2016,Hyundai,Tucson,Car,175,4,A
+2016,Hyundai,Tucson,Car,175,4,A
+2016,Hyundai,Tucson,Car,175,4,A
+2016,Hyundai,Tucson,Car,175,4,A
+2016,Hyundai,Tucson Fuel Cell,Car,134,,F
+2016,Hyundai,Tucson Fuel Cell,Car,134,,F
+2016,KIA,Optima,Car,245,4,F
+2016,KIA,Optima,Car,245,4,F
+2016,KIA,Optima,Car,245,4,F
+2016,KIA,Optima,Car,245,4,F
+2016,KIA,Optima,Car,185,4,F
+2016,KIA,Optima,Car,185,4,F
+2016,KIA,Optima,Car,185,4,F
+2016,KIA,Optima,Car,185,4,F
+2016,KIA,Optima,Car,178,4,F
+2016,KIA,Optima,Car,178,4,F
+2016,KIA,Optima Fe,Car,185,4,F
+2016,KIA,Optima Fe,Car,185,4,F
+2016,KIA,Optima FE,Car,185,4,F
+2016,KIA,Optima FE,Car,185,4,F
+2016,KIA,OPTIMA HYBRID,Car,159,4,F
+2016,KIA,OPTIMA HYBRID,Car,159,4,F
+2016,KIA,OPTIMA HYBRID EX,Car,159,4,F
+2016,KIA,OPTIMA HYBRID EX,Car,159,4,F
+2016,Jaguar,F-Type,Car,495,8,A
+2016,Jaguar,F-Type,Car,495,8,A
+2016,Jaguar,F-Type AWD,Car,380,6,4
+2016,Jaguar,F-Type AWD,Car,380,6,4
+2016,Jaguar,F-Type AWD,Car,550,8,4
+2016,Jaguar,F-Type AWD,Car,550,8,4
+2016,Jaguar,F-Type Manual,Car,340,6,4
+2016,Jaguar,F-Type Manual,Car,340,6,4
+2016,Jaguar,F-Type Manual,Car,340,6,4
+2016,Jaguar,F-Type Manual,Car,340,6,4
+2016,Jaguar,F-Type S,Car,380,6,R
+2016,Jaguar,F-Type S,Car,380,6,R
+2016,Jaguar,F-Type S,Car,380,6,R
+2016,Jaguar,F-Type S,Car,380,6,R
+2016,Jaguar,XF,Car,340,6,4
+2016,Jaguar,XF,Car,340,6,4
+2016,Jaguar,XF AWD,Car,340,6,4
+2016,Jaguar,XF AWD,Car,340,6,4
+2016,Jaguar,XJ,Car,340,6,A
+2016,Jaguar,XJ,Car,340,6,A
+2016,Jaguar,XJ,Car,340,6,R
+2016,Jaguar,XJ,Car,340,6,R
+2016,Jaguar,XJ AWD LWB,Car,340,6,A
+2016,Jaguar,XJ AWD LWB,Car,340,6,A
+2016,Jaguar,XJ Supercharged,Car,470,8,4
+2016,Jaguar,XJ Supercharged,Car,470,8,4
+2016,Jaguar,XJL,Car,340,6,R
+2016,Jaguar,XJL,Car,340,6,R
+2016,Land Rover,Discovery Sport,Truck,240,4,F
+2016,Land Rover,Discovery Sport,Truck,240,4,F
+2016,Land Rover,LR4,Car,306,,4
+2016,Land Rover,LR4,Car,306,,4
+2016,Land Rover,Range Rover 3.0 PZEV,Truck,340,6,4
+2016,Land Rover,Range Rover 3.0 PZEV,Truck,340,6,4
+2016,Land Rover,Range Rover Evoque,Truck,240,4,F
+2016,Land Rover,Range Rover Evoque,Truck,240,4,F
+2016,Land Rover,Range Rover Sport,Car,510,,4
+2016,Land Rover,Range Rover Sport,Car,510,,4
+2016,Land Rover,Range Rover Sport,Car,510,,4
+2016,Land Rover,Range Rover Sport,Car,510,,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,Land Rover,Range Rover Sport,Truck,258,6,4
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,HYUNDAI,Accent,Car,138,4,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra,Car,173,4,F
+2016,Hyundai,Elantra,Car,166,4,F
+2016,Hyundai,Elantra,Car,166,4,F
+2016,Hyundai,Elantra,Car,166,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,Hyundai,Elantra,Car,145,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Elantra GT,Car,173,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,132,4,F
+2016,HYUNDAI,Veloster,Car,201,4,F
+2016,HYUNDAI,Veloster,Car,201,4,F
+2016,HYUNDAI,Veloster,Car,201,4,F
+2016,HYUNDAI,Veloster,Car,201,4,F
+2016,Kia,Cadenza,Car,293,6,F
+2016,Kia,Cadenza,Car,293,6,F
+2016,Kia,Cadenza,Car,293,6,F
+2016,Kia,Cadenza,Car,293,6,F
+2016,Kia,Cadenza,Car,293,6,F
+2016,KIA,Forte,Car,173,4,F
+2016,KIA,Forte,Car,173,4,F
+2016,KIA,Forte,Car,173,4,F
+2016,KIA,Forte,Car,166,4,F
+2016,KIA,Forte,Car,166,4,F
+2016,KIA,Forte,Car,166,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,Kia,Forte,Car,145,4,F
+2016,Kia,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte,Car,145,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte 5,Car,173,4,F
+2016,KIA,Forte Koup,Car,201,4,F
+2016,KIA,Forte Koup,Car,201,4,F
+2016,KIA,Forte Koup,Car,201,4,F
+2016,KIA,Forte Koup,Car,201,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte Koup,Car,173,4,F
+2016,KIA,Forte5,Car,201,4,F
+2016,KIA,Forte5,Car,201,4,F
+2016,KIA,Forte5,Car,201,4,F
+2016,KIA,Forte5,Car,201,4,F
+2016,KIA,K900,Car,420,8,R
+2016,KIA,K900,Car,420,8,R
+2016,KIA,K900,Car,420,8,R
+2016,KIA,K900,Car,420,8,R
+2016,KIA,K900 EX,Car,311,6,R
+2016,KIA,K900 EX,Car,311,6,R
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio,Car,138,4,F
+2016,KIA,Rio ECO,Car,138,4,F
+2016,KIA,Rio ECO,Car,138,4,F
+2016,KIA,Rio ECO,Car,138,4,F
+2016,KIA,Rio ECO,Car,138,4,F
+2016,Kia,Sedona,Truck,276,6,F
+2016,Kia,Sedona,Truck,276,6,F
+2016,Kia,Sedona SX,Truck,276,6,F
+2016,Kia,Sedona SX,Truck,276,6,F
+2016,Kia,Sedona SXL,Truck,276,6,F
+2016,Kia,Sedona SXL,Truck,276,6,F
+2016,Kia,Sorento,Car,240,4,A
+2016,Kia,Sorento,Car,240,4,A
+2016,Kia,Sorento,Car,240,4,A
+2016,Kia,Sorento,Car,240,4,A
+2016,Kia,Sorento,Car,240,4,F
+2016,Kia,Sorento,Car,240,4,F
+2016,Kia,Sorento,Car,240,4,F
+2016,Kia,Sorento,Car,240,4,F
+2016,Kia,Sorento,Car,185,4,A
+2016,Kia,Sorento,Car,185,4,A
+2016,Kia,Sorento,Car,185,4,F
+2016,Kia,Sorento,Car,185,4,F
+2016,Kia,Sorento,Car,185,4,F
+2016,Kia,Sorento,Car,290,6,A
+2016,Kia,Sorento,Car,290,6,A
+2016,Kia,Sorento,Car,290,6,A
+2016,Kia,Sorento,Car,290,6,A
+2016,Kia,Sorento,Car,290,6,F
+2016,Kia,Sorento,Car,290,6,F
+2016,Kia,Sorento,Car,290,6,F
+2016,Kia,Sorento,Car,290,6,F
+2016,KIA,Soul,Car,130,4,F
+2016,KIA,Soul,Car,130,4,F
+2016,KIA,Soul,Car,130,4,F
+2016,KIA,Soul,Car,130,4,F
+2016,KIA,Soul,Car,164,4,F
+2016,KIA,Soul,Car,164,4,F
+2016,KIA,Soul,Car,164,4,F
+2016,KIA,Soul,Car,164,4,F
+2016,KIA,Soul ECO dynamics,Car,164,4,F
+2016,KIA,Soul ECO dynamics,Car,164,4,F
+2016,Kia,Soul electric,Car,109,,F
+2016,Kia,Soul electric,Car,109,,F
+2016,Kia,Soul electric,Car,109,,F
+2016,Kia,Soul electric,Car,109,,F
+2016,Kia,Sportage,Truck,180,4,4
+2016,Kia,Sportage,Truck,180,4,4
+2016,Kia,Sportage,Truck,180,4,4
+2016,Kia,Sportage,Truck,180,4,4
+2016,Kia,Sportage,Truck,182,4,4
+2016,Kia,Sportage,Truck,182,4,4
+2016,Kia,Sportage,Truck,182,4,4
+2016,Kia,Sportage,Truck,182,4,4
+2016,Kia,Sportage,Truck,182,4,F
+2016,Kia,Sportage,Truck,182,4,F
+2016,Kia,Sportage,Truck,182,4,F
+2016,Kia,Sportage,Truck,182,4,F
+2016,Kia,Sportage,Truck,260,4,A
+2016,Kia,Sportage,Truck,260,4,A
+2016,Kia,Sportage,Truck,260,4,F
+2016,Kia,Sportage,Truck,260,4,F
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,LAMBORGHINI,AVENTADOR,Car,700,12,R
+2016,MASERATI,Ghibli S Q4 V6 AWD,Car,405,6,A
+2016,MASERATI,Ghibli S Q4 V6 AWD,Car,405,6,A
+2016,MASERATI,Ghibli S RWD,Car,405,6,R
+2016,MASERATI,Ghibli S RWD,Car,405,6,R
+2016,MASERATI,GHIBLI V6 RWD,Car,345,6,R
+2016,MASERATI,GHIBLI V6 RWD,Car,345,6,R
+2016,MASERATI,GRANTURISMO CONVERTIBLE,Car,444,8,R
+2016,MASERATI,GRANTURISMO CONVERTIBLE,Car,444,8,R
+2016,MASERATI,GRANTURISMO CONVERTIBLE,Car,444,8,R
+2016,MASERATI,GRANTURISMO CONVERTIBLE,Car,444,8,R
+2016,MASERATI,GRANTURISMO SPORT,Car,454,8,R
+2016,MASERATI,GRANTURISMO SPORT,Car,454,8,R
+2016,MASERATI,GRANTURISMO SPORT,Car,454,8,R
+2016,MASERATI,GRANTURISMO SPORT,Car,454,8,R
+2016,MASERATI,QUATTROPORTE GTS,Car,523,8,R
+2016,MASERATI,QUATTROPORTE GTS,Car,523,8,R
+2016,MASERATI,QUATTROPORTE S V6 RWD,Car,405,6,R
+2016,MASERATI,QUATTROPORTE S V6 RWD,Car,405,6,R
+2016,MASERATI,QUATTROPORTE SQ4 V6,Car,405,6,R
+2016,MASERATI,QUATTROPORTE SQ4 V6,Car,405,6,R
+2016,MAZDA,CX-3,Car,146,4,F
+2016,MAZDA,CX-3,Car,146,4,F
+2016,MAZDA,CX-3,Car,146,4,F
+2016,MAZDA,CX-3,Car,146,4,F
+2016,Mazda,CX-5,Truck,155,4,F
+2016,Mazda,CX-5,Truck,155,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,Mazda,CX-5,Truck,184,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA2,Car,106,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,155,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA3,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,183,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MAZDA6,Car,184,4,F
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,MAZDA,MX-5,Car,155,4,R
+2016,McLaren,570S Coupe,Car,562,8,R
+2016,McLaren,570S Coupe,Car,562,8,R
+2016,McLaren,570S Coupe,Car,562,8,R
+2016,McLaren,570S Coupe,Car,562,8,R
+2016,McLaren,570S Coupe,Car,562,8,R
+2016,McLaren,MP4-12C Coupe,Car,641,8,R
+2016,McLaren,MP4-12C Coupe,Car,641,8,R
+2016,McLaren,MP4-12C Coupe,Car,641,8,R
+2016,McLaren,MP4-12C Coupe,Car,641,8,R
+2016,McLaren,MP4-12C Coupe,Car,641,8,R
+2016,Mercedes-Benz,AMG C 63,Car,469,8,R
+2016,Mercedes-Benz,AMG C 63,Car,469,8,R
+2016,Mercedes-Benz,AMG G65,Both,621,12,R
+2016,Mercedes-Benz,AMG G65,Both,621,12,R
+2016,Mercedes-Benz,AMG G65,Both,621,12,R
+2016,Mercedes-Benz,AMG G65,Both,621,12,R
+2016,Mercedes-Benz,AMG G65,Both,621,12,R
+2016,Mercedes-Benz,AMG GLE 63 S (coupe),Truck,577,8,R
+2016,Mercedes-Benz,AMG GLE 63 S (coupe),Truck,577,8,R
+2016,Mercedes-Benz,AMG GLE 63 S (coupe),Truck,577,8,R
+2016,Mercedes-Benz,AMG GLE 63 S (coupe),Truck,577,8,R
+2016,Mercedes-Benz,AMG GLE 63 S (coupe),Truck,577,8,R
+2016,Mercedes-Benz,AMG GT S,Car,503,8,R
+2016,Mercedes-Benz,AMG GT S,Car,503,8,R
+2016,Mercedes-Benz,B-class electric drive,Car,177,,R
+2016,Mercedes-Benz,B-class electric drive,Car,177,,R
+2016,Mercedes-Benz,C 300,Car,241,4,R
+2016,Mercedes-Benz,C 300,Car,241,4,R
+2016,Mercedes-Benz,C 300 4MATIC,Car,241,4,R
+2016,Mercedes-Benz,C 300 4MATIC,Car,241,4,R
+2016,Mercedes-Benz,C 450 AMG,Car,362,6,R
+2016,Mercedes-Benz,C 450 AMG,Car,362,6,R
+2016,Mercedes-Benz,CLA 250,Car,208,4,F
+2016,Mercedes-Benz,CLA 250,Car,208,4,F
+2016,Mercedes-Benz,CLA 250 4MATIC,Both,208,4,R
+2016,Mercedes-Benz,CLA 250 4MATIC,Both,208,4,R
+2016,Mercedes-Benz,CLA 250 4MATIC,Both,208,4,R
+2016,Mercedes-Benz,CLA 250 4MATIC,Both,208,4,R
+2016,Mercedes-Benz,CLA 45 AMG 4MATIC,Car,355,4,R
+2016,Mercedes-Benz,CLA 45 AMG 4MATIC,Car,355,4,R
+2016,Mercedes-Benz,CLS 400,Car,329,6,R
+2016,Mercedes-Benz,CLS 400,Car,329,6,R
+2016,Mercedes-Benz,CLS 400 4MATIC,Car,329,6,R
+2016,Mercedes-Benz,CLS 400 4MATIC,Car,329,6,R
+2016,Mercedes-Benz,CLS 400 4MATIC,Car,329,6,R
+2016,Mercedes-Benz,CLS 550,Car,402,8,R
+2016,Mercedes-Benz,CLS 550,Car,402,8,R
+2016,Mercedes-Benz,CLS 550 4MATIC,Car,402,8,R
+2016,Mercedes-Benz,CLS 550 4MATIC,Car,402,8,R
+2016,Mercedes-Benz,CLS 63 AMG 4MATIC,Car,550,8,R
+2016,Mercedes-Benz,CLS 63 AMG 4MATIC,Car,550,8,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 250 BLUETEC 4MATIC,Both,190,4,R
+2016,Mercedes-Benz,E 350,Car,302,6,R
+2016,Mercedes-Benz,E 350,Car,302,6,R
+2016,Mercedes-Benz,E 350,Car,302,6,R
+2016,Mercedes-Benz,E 350,Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC,Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC,Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC,Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC,Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC (Station Wagon),Car,302,6,R
+2016,Mercedes-Benz,E 350 4MATIC (Station Wagon),Car,302,6,R
+2016,Mercedes-Benz,E 400,Car,329,6,R
+2016,Mercedes-Benz,E 400,Car,329,6,R
+2016,Mercedes-Benz,E 400 (convertible),Car,329,6,R
+2016,Mercedes-Benz,E 400 (convertible),Car,329,6,R
+2016,Mercedes-Benz,E 400 (coupe),Car,329,6,R
+2016,Mercedes-Benz,E 400 (coupe),Car,329,6,R
+2016,Mercedes-Benz,E 400 4MATIC,Car,329,6,R
+2016,Mercedes-Benz,E 400 4MATIC,Car,329,6,R
+2016,Mercedes-Benz,E 400 4MATIC (coupe),Car,329,6,R
+2016,Mercedes-Benz,E 400 4MATIC (coupe),Car,329,6,R
+2016,Mercedes-Benz,E 550 (convertible),Car,402,8,R
+2016,Mercedes-Benz,E 550 (convertible),Car,402,8,R
+2016,Mercedes-Benz,E 550 (coupe),Car,402,8,R
+2016,Mercedes-Benz,E 550 (coupe),Car,402,8,R
+2016,Mercedes-Benz,E 550 4MATIC,Car,402,8,R
+2016,Mercedes-Benz,E 550 4MATIC,Car,402,8,R
+2016,Mercedes-Benz,E 63 AMG 4MATIC,Car,550,8,R
+2016,Mercedes-Benz,E 63 AMG 4MATIC,Car,550,8,R
+2016,Mercedes-Benz,E 63 AMG S 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,E 63 AMG S 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,E 63 AMG S 4MATIC (station wagon),Car,577,8,R
+2016,Mercedes-Benz,E 63 AMG S 4MATIC (station wagon),Car,577,8,R
+2016,Mercedes-Benz,G 550,Truck,416,8,R
+2016,Mercedes-Benz,G 550,Truck,416,8,R
+2016,Mercedes-Benz,G 550,Truck,416,8,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 350 BLUETEC 4MATIC,Truck,240,6,R
+2016,Mercedes-Benz,GL 450 4MATIC,Truck,362,6,R
+2016,Mercedes-Benz,GL 450 4MATIC,Truck,362,6,R
+2016,Mercedes-Benz,GL 550 4MATIC,Truck,429,8,R
+2016,Mercedes-Benz,GL 550 4MATIC,Truck,429,8,R
+2016,Mercedes-Benz,GL 550 4MATIC,Truck,429,8,R
+2016,Mercedes-Benz,GL 550 4MATIC,Truck,429,8,R
+2016,Mercedes-Benz,GL 550 4MATIC,Truck,429,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,536,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,536,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,536,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,536,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,536,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,GL 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,GLA 250,Both,208,4,F
+2016,Mercedes-Benz,GLA 250,Both,208,4,F
+2016,Mercedes-Benz,GLA 250 4MATIC,Both,208,4,F
+2016,Mercedes-Benz,GLA 250 4MATIC,Both,208,4,F
+2016,Mercedes-Benz,GLA 250 4MATIC,Both,208,4,F
+2016,Mercedes-Benz,GLA 250 4MATIC,Both,208,4,F
+2016,Mercedes-Benz,GLA 45 AMG 4MATIC,Car,355,4,F
+2016,Mercedes-Benz,GLA 45 AMG 4MATIC,Car,355,4,F
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 300 d 4MATIC,Truck,200,4,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 350 D 4MATIC,Truck,250,6,R
+2016,Mercedes-Benz,GLE 450 AMG (coupe),Truck,362,6,A
+2016,Mercedes-Benz,GLE 450 AMG (coupe),Truck,362,6,A
+2016,Mercedes-Benz,Maybach S 600,Both,523,12,R
+2016,Mercedes-Benz,Maybach S 600,Both,523,12,R
+2016,Mercedes-Benz,Metris (Cargo Van),Truck,208,4,R
+2016,Mercedes-Benz,Metris (Cargo Van),Truck,208,4,R
+2016,Mercedes-Benz,Metris (Cargo Van),Truck,208,4,R
+2016,Mercedes-Benz,Metris (Passenger Van),Truck,208,4,R
+2016,Mercedes-Benz,Metris (Passenger Van),Truck,208,4,R
+2016,Mercedes-Benz,Metris (Passenger Van),Truck,208,4,R
+2016,Mercedes-Benz,ML 350,Both,302,6,R
+2016,Mercedes-Benz,ML 350,Both,302,6,R
+2016,Mercedes-Benz,ML 350 4MATIC,Both,302,6,R
+2016,Mercedes-Benz,ML 350 4MATIC,Both,302,6,R
+2016,Mercedes-Benz,ML 350 4MATIC,Both,302,6,R
+2016,Mercedes-Benz,ML 350 4MATIC,Both,302,6,R
+2016,Mercedes-Benz,ML 400 4MATIC,Truck,329,6,R
+2016,Mercedes-Benz,ML 400 4MATIC,Truck,329,6,R
+2016,Mercedes-Benz,ML 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,ML 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,ML 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,ML 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,ML 63 AMG,Truck,518,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC,Car,449,8,R
+2016,Mercedes-Benz,S 550 4MATIC (coupe),Car,429,8,R
+2016,Mercedes-Benz,S 550 4MATIC (coupe),Car,429,8,R
+2016,Mercedes-Benz,S 600,Both,523,12,R
+2016,Mercedes-Benz,S 600,Both,523,12,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC,Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC (coupe),Car,577,8,R
+2016,Mercedes-Benz,S 63 AMG 4MATIC (coupe),Car,577,8,R
+2016,Mercedes-Benz,S 65 AMG,Car,621,12,R
+2016,Mercedes-Benz,S 65 AMG,Car,621,12,R
+2016,Mercedes-Benz,S 65 AMG (coupe),Car,621,12,R
+2016,Mercedes-Benz,S 65 AMG (coupe),Car,621,12,R
+2016,Mercedes-Benz,SL 400,Car,329,6,R
+2016,Mercedes-Benz,SL 400,Car,329,6,R
+2016,Mercedes-Benz,SL 550,Car,449,8,R
+2016,Mercedes-Benz,SL 550,Car,449,8,R
+2016,Mercedes-Benz,SL 63 AMG,Car,536,8,R
+2016,Mercedes-Benz,SL 63 AMG,Car,536,8,R
+2016,Mercedes-Benz,SL 63 AMG,Car,536,8,R
+2016,Mercedes-Benz,SL 63 AMG,Car,536,8,R
+2016,Mercedes-Benz,SL 63 AMG,Car,536,8,R
+2016,Mercedes-Benz,SL 65 AMG,Car,621,12,R
+2016,Mercedes-Benz,SL 65 AMG,Car,621,12,R
+2016,Mercedes-Benz,SLK 300,Car,241,4,R
+2016,Mercedes-Benz,SLK 300,Car,241,4,R
+2016,Mercedes-Benz,SLK 350,Car,302,6,R
+2016,Mercedes-Benz,SLK 350,Car,302,6,R
+2016,Mercedes-Benz,SLK 55 AMG,Car,416,8,R
+2016,Mercedes-Benz,SLK 55 AMG,Car,416,8,R
+2016,Mercedes-Benz,SLK 55 AMG,Car,416,8,R
+2016,Mercedes-Benz,SLK 55 AMG,Car,416,8,R
+2016,Mercedes-Benz,SLK 55 AMG,Car,416,8,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,Smart Fortwo (Coupe),Car,89,3,R
+2016,Mercedes-Benz,smart fortwo electric drive (convertible),Car,74,,R
+2016,Mercedes-Benz,smart fortwo electric drive (convertible),Car,74,,R
+2016,MITSUBISHI,i-MiEV,Car,66,,R
+2016,MITSUBISHI,i-MiEV,Car,66,,R
+2016,MITSUBISHI,OUTLANDER 2WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 2WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 2WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 2WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,166,4,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,224,6,F
+2016,MITSUBISHI,OUTLANDER 4WD,Truck,224,6,F
+2016,INFINITI,INFINITI QX50 AWD Journey,Car,325,6,R
+2016,INFINITI,INFINITI QX50 AWD Journey,Car,325,6,R
+2016,INFINITI,INFINITI QX50 AWD Journey,Car,325,6,R
+2016,INFINITI,INFINITI QX50 AWD Journey,Car,325,6,R
+2016,INFINITI,INFINITI QX70 AWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX70 AWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX70 AWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX70 AWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX70 RWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX70 RWD,Truck,325,6,R
+2016,INFINITI,INFINITI QX80 2WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 2WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 2WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 2WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 4WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 4WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 4WD,Truck,400,8,R
+2016,INFINITI,INFINITI QX80 4WD,Truck,400,8,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN 370Z Touring,Car,332,6,R
+2016,NISSAN,NISSAN FRONTIER 2WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 2WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 2WD S 4-Cyl 5AT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD S 4-Cyl 5AT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD S 4-Cyl 5MT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD S 4-Cyl 5MT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD SV 4-Cyl 5AT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD SV 4-Cyl 5AT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD SV 4-Cyl 5MT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 2WD SV 4-Cyl 5MT,Truck,152,4,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD C/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C PRO-4X,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN FRONTIER 4WD K/C SV,Truck,261,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN GT-R,Car,530,6,R
+2016,NISSAN,NISSAN JUKE AWD SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE AWD SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE AWD SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE AWD SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE NISMO RS,Car,215,4,F
+2016,NISSAN,NISSAN JUKE NISMO RS,Car,215,4,F
+2016,NISSAN,NISSAN JUKE SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SL,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SV,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SV,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SV,Car,188,4,F
+2016,NISSAN,NISSAN JUKE SV,Car,188,4,F
+2016,NISSAN,NISSAN LEAF S,Car,107,,F
+2016,NISSAN,NISSAN LEAF S,Car,107,,F
+2016,NISSAN,NISSAN LEAF SL,Car,107,,F
+2016,NISSAN,NISSAN LEAF SL,Car,107,,F
+2016,NISSAN,NISSAN LEAF SL,Car,107,,F
+2016,NISSAN,NISSAN LEAF SL,Car,107,,F
+2016,NISSAN,NISSAN LEAF SV,Car,107,,F
+2016,NISSAN,NISSAN LEAF SV,Car,107,,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN MAXIMA SR,Car,300,6,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN ROGUE AWD SL,Truck,170,4,F
+2016,NISSAN,NISSAN VERSA NOTE S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA NOTE S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA NOTE SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA NOTE SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA NOTE SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA NOTE SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA S,Car,109,4,F
+2016,NISSAN,NISSAN VERSA SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA SV,Car,109,4,F
+2016,NISSAN,NISSAN VERSA SV,Car,109,4,F
+2016,Pagani Automobili,PT4,Car,730,12,R
+2016,Pagani Automobili,PT4,Car,730,12,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4 Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera 4S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera Cabriolet,Car,350,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Cabriolet,Car,400,6,R
+2016,Porsche,911 Carrera S Kit,Car,430,6,R
+2016,Porsche,911 Carrera S Kit,Car,430,6,R
+2016,Porsche,911 Carrera S Kit,Car,430,6,R
+2016,Porsche,911 Carrera S Kit,Car,430,6,R
+2016,Porsche,911 Carrera S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 Carrera S Kit Cabriolet,Car,430,6,R
+2016,Porsche,911 GT3,Car,475,6,R
+2016,Porsche,911 GT3,Car,475,6,R
+2016,Porsche,911 GT3RS,Car,500,6,R
+2016,Porsche,911 GT3RS,Car,500,6,R
+2016,Porsche,911 Targa 4,Car,350,6,R
+2016,Porsche,911 Targa 4,Car,350,6,R
+2016,Porsche,911 Targa 4,Car,350,6,R
+2016,Porsche,911 Targa 4,Car,350,6,R
+2016,Porsche,911 Targa 4S,Car,400,6,R
+2016,Porsche,911 Targa 4S,Car,400,6,R
+2016,Porsche,911 Targa 4S,Car,400,6,R
+2016,Porsche,911 Targa 4S,Car,400,6,R
+2016,Porsche,911 Turbo S Cabriolet,Car,560,6,R
+2016,Porsche,911 Turbo S Cabriolet,Car,560,6,R
+2016,Porsche,911 Turbo S Cabriolet,Car,560,6,R
+2016,Porsche,911 Turbo S Cabriolet,Car,560,6,R
+2016,Porsche,Boxster,Car,265,6,R
+2016,Porsche,Boxster,Car,265,6,R
+2016,Porsche,Boxster,Car,265,6,R
+2016,Porsche,Boxster,Car,265,6,R
+2016,Porsche,Boxster S,Car,315,6,R
+2016,Porsche,Boxster S,Car,315,6,R
+2016,Porsche,Boxster S,Car,315,6,R
+2016,Porsche,Boxster S,Car,315,6,R
+2016,Porsche,Boxster Spyder,Car,375,6,R
+2016,Porsche,Boxster Spyder,Car,375,6,R
+2016,Porsche,Cayenne,Both,300,6,A
+2016,Porsche,Cayenne,Both,300,6,A
+2016,Porsche,Cayenne GTS,Truck,440,6,A
+2016,Porsche,Cayenne GTS,Truck,440,6,A
+2016,Porsche,Cayenne S,Truck,420,6,A
+2016,Porsche,Cayenne S,Truck,420,6,A
+2016,Porsche,Cayenne S e-Hybrid,Both,416,6,R
+2016,Porsche,Cayenne S e-Hybrid,Both,416,6,R
+2016,Porsche,Cayenne S e-Hybrid,Both,416,6,R
+2016,Porsche,Cayenne S e-Hybrid,Both,416,6,R
+2016,Porsche,Cayenne Turbo,Truck,520,8,R
+2016,Porsche,Cayenne Turbo,Truck,520,8,R
+2016,Porsche,Cayman GT4,Car,385,6,R
+2016,Porsche,Cayman GT4,Car,385,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Cayman GTS,Car,340,6,R
+2016,Porsche,Macan S,Truck,340,6,R
+2016,Porsche,Macan S,Truck,340,6,R
+2016,Porsche,Macan Turbo,Truck,400,6,R
+2016,Porsche,Macan Turbo,Truck,400,6,R
+2016,Porsche,Panamera,Car,310,6,R
+2016,Porsche,Panamera,Car,310,6,R
+2016,Porsche,Panamera,Car,310,6,R
+2016,Porsche,Panamera,Car,310,6,R
+2016,Porsche,Panamera 4,Car,310,6,R
+2016,Porsche,Panamera 4,Car,310,6,R
+2016,Porsche,Panamera 4,Car,310,6,R
+2016,Porsche,Panamera 4,Car,310,6,R
+2016,Porsche,Panamera 4S,Car,420,6,R
+2016,Porsche,Panamera 4S,Car,420,6,R
+2016,Porsche,Panamera 4S,Car,420,6,R
+2016,Porsche,Panamera 4S,Car,420,6,R
+2016,Porsche,Panamera 4S Executive,Car,420,6,R
+2016,Porsche,Panamera 4S Executive,Car,420,6,R
+2016,Porsche,Panamera 4S Executive,Car,420,6,R
+2016,Porsche,Panamera 4S Executive,Car,420,6,R
+2016,Porsche,Panamera GTS,Car,440,8,R
+2016,Porsche,Panamera GTS,Car,440,8,R
+2016,Porsche,Panamera GTS,Car,440,8,R
+2016,Porsche,Panamera GTS,Car,440,8,R
+2016,Porsche,Panamera S E-Hybrid,Car,416,6,R
+2016,Porsche,Panamera S E-Hybrid,Car,416,6,R
+2016,Porsche,Panamera S E-Hybrid,Car,416,6,R
+2016,Porsche,Panamera S E-Hybrid,Car,416,6,R
+2016,Porsche,Panamera Turbo,Car,520,8,R
+2016,Porsche,Panamera Turbo,Car,520,8,R
+2016,Porsche,Panamera Turbo,Car,520,8,R
+2016,Porsche,Panamera Turbo,Car,520,8,R
+2016,Porsche,Panamera Turbo Executive,Car,520,8,R
+2016,Porsche,Panamera Turbo Executive,Car,520,8,R
+2016,Porsche,Panamera Turbo Executive,Car,520,8,R
+2016,Porsche,Panamera Turbo Executive,Car,520,8,R
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Quantum Impala,Impala dual fuel,Car,262,6,F
+2016,Rolls Royce,Ghost EWB,Car,563,12,R
+2016,Rolls Royce,Ghost EWB,Car,563,12,R
+2016,Rolls Royce,Ghost EWB,Car,563,12,R
+2016,Rolls Royce,Ghost EWB,Car,563,12,R
+2016,Rolls Royce,Ghost EWB,Car,563,12,R
+2016,Rolls Royce,Phantom,Car,453,12,R
+2016,Rolls Royce,Phantom,Car,453,12,R
+2016,Rolls Royce,Phantom EWB,Car,453,12,R
+2016,Rolls Royce,Phantom EWB,Car,453,12,R
+2016,Rolls Royce,Phantom EWB,Car,453,12,R
+2016,Rolls Royce,Phantom EWB,Car,453,12,R
+2016,Rolls Royce,Phantom EWB,Car,453,12,R
+2016,Rolls Royce,Wraith,Car,624,12,R
+2016,Rolls Royce,Wraith,Car,624,12,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,Roush,Stage 3 Mustang,Car,565,8,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,BRZ,Car,200,4,R
+2016,SUBARU,FORESTER,Both,250,4,F
+2016,SUBARU,FORESTER,Both,250,4,F
+2016,SUBARU,FORESTER,Both,170,4,F
+2016,SUBARU,FORESTER,Both,170,4,F
+2016,SUBARU,FORESTER,Both,170,4,F
+2016,SUBARU,FORESTER,Both,170,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA,Both,148,4,F
+2016,SUBARU,IMPREZA SPORT,Both,148,4,F
+2016,SUBARU,IMPREZA SPORT,Both,148,4,F
+2016,SUBARU,IMPREZA SPORT,Both,148,4,F
+2016,SUBARU,IMPREZA SPORT,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,IMPREZA WAGON,Both,148,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,175,4,F
+2016,SUBARU,LEGACY,Both,256,6,F
+2016,SUBARU,LEGACY,Both,256,6,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,175,4,F
+2016,SUBARU,OUTBACK,Both,256,6,F
+2016,SUBARU,OUTBACK,Both,256,6,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX,Both,268,4,F
+2016,SUBARU,WRX STI,Both,305,4,F
+2016,SUBARU,WRX STI,Both,305,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,SUBARU,XV Crosstrek,Both,148,4,F
+2016,Tesla Model X,90D,Car,417,,4
+2016,Tesla Model X,90D,Car,417,,4
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,CT 200h,Car,98,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 300h,Car,154,4,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,ES 350,Car,268,6,F
+2016,LEXUS,GX 460,Truck,301,8,R
+2016,LEXUS,GX 460,Truck,301,8,R
+2016,LEXUS,IS 200t,Car,241,4,R
+2016,LEXUS,IS 200t,Car,241,4,R
+2016,LEXUS,IS 200t,Car,241,4,R
+2016,LEXUS,IS 200t,Car,241,4,R
+2016,LEXUS,IS 350,Car,306,6,R
+2016,LEXUS,IS 350,Car,306,6,R
+2016,LEXUS,IS 350,Car,306,6,R
+2016,LEXUS,IS 350,Car,306,6,R
+2016,LEXUS,IS 350,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,IS 350 AWD,Car,306,6,R
+2016,LEXUS,LS 460 AWD,Car,380,,A
+2016,LEXUS,LS 460 AWD,Car,380,,A
+2016,LEXUS,LS 460 L,Car,380,,R
+2016,LEXUS,LS 460 L,Car,380,,R
+2016,LEXUS,LS 460 L AWD,Car,380,,A
+2016,LEXUS,LS 460 L AWD,Car,380,,A
+2016,LEXUS,LS 600h L,Car,389,,A
+2016,LEXUS,LS 600h L,Car,389,,A
+2016,LEXUS,LS 600h L,Car,389,,A
+2016,LEXUS,LS 600h L,Car,389,,A
+2016,LEXUS,LS 600h L,Car,389,,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LS 600h L,Car,389,8,A
+2016,LEXUS,LX 570,Truck,383,8,R
+2016,LEXUS,LX 570,Truck,383,8,R
+2016,LEXUS,LX 570,Truck,383,8,R
+2016,LEXUS,LX 570,Truck,383,8,R
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 200t AWD F SPORT,Truck,235,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,LEXUS,NX 300h AWD,Truck,112,4,F
+2016,SCION,iM,Car,137,4,F
+2016,SCION,iM,Car,137,4,F
+2016,SCION,iM,Car,137,4,F
+2016,SCION,iM,Car,137,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,SCION,tC,Car,179,4,F
+2016,TOYOTA,4RUNNER 2WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 2WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 2WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 2WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 4WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 4WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 4WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 4WD,Truck,270,6,R
+2016,TOYOTA,4RUNNER 4WD,Truck,270,6,R
+2016,TOYOTA,CAMRY,Car,178,4,F
+2016,TOYOTA,CAMRY,Car,178,4,F
+2016,TOYOTA,CAMRY,Car,268,6,F
+2016,TOYOTA,CAMRY,Car,268,6,F
+2016,TOYOTA,Camry Hybrid LE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid LE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid LE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid LE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,Camry Hybrid XLE,Car,154,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA,Car,132,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,COROLLA LE ECO,Car,140,4,F
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,LAND CRUISER WAGON 4WD,Truck,381,8,R
+2016,TOYOTA,MIRAI,Car,1,,F
+2016,TOYOTA,MIRAI,Car,1,,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,PRIUS v,Car,98,4,F
+2016,TOYOTA,RAV4,Truck,176,4,F
+2016,TOYOTA,RAV4,Truck,176,4,F
+2016,TOYOTA,RAV4,Truck,176,4,F
+2016,TOYOTA,RAV4,Truck,176,4,F
+2016,TOYOTA,RAV4 AWD,Truck,176,4,F
+2016,TOYOTA,RAV4 AWD,Truck,176,4,F
+2016,TOYOTA,RAV4 Limited AWD,Truck,176,4,F
+2016,TOYOTA,RAV4 Limited AWD,Truck,176,4,F
+2016,TOYOTA,RAV4 Limited AWD,Truck,176,4,F
+2016,TOYOTA,RAV4 Limited AWD,Truck,176,4,F
+2016,TOYOTA,SEQUOIA 2WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 2WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,SEQUOIA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TACOMA 2WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 2WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 2WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 2WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 2WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD,Truck,159,4,R
+2016,TOYOTA,TACOMA 4WD D-CAB V6 MT OFF-ROAD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD D-CAB V6 MT OFF-ROAD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD D-CAB V6 MT OFF-ROAD,Truck,278,6,R
+2016,TOYOTA,TACOMA 4WD D-CAB V6 MT OFF-ROAD,Truck,278,6,R
+2016,TOYOTA,TUNDRA 2WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 2WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 2WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,310,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,TUNDRA 4WD FFV,Truck,381,8,R
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,TOYOTA,YARIS,Car,106,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,VOLKSWAGEN,Beetle,Car,208,4,F
+2016,Volkswagen,CC,Car,200,4,F
+2016,Volkswagen,CC,Car,200,4,F
+2016,Volkswagen,CC,Car,200,4,F
+2016,Volkswagen,CC,Car,200,4,F
+2016,Volkswagen,CC,Car,200,4,F
+2016,Volkswagen,Eos,Car,200,4,F
+2016,Volkswagen,Eos,Car,200,4,F
+2016,Volkswagen,Eos,Car,200,4,F
+2016,Volkswagen,Eos,Car,200,4,F
+2016,Volkswagen,Eos,Car,200,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta Hybrid,Car,150,4,F
+2016,VOLKSWAGEN,Jetta Hybrid,Car,150,4,F
+2016,VOLKSWAGEN,Jetta Hybrid,Car,150,4,F
+2016,VOLKSWAGEN,Jetta Hybrid,Car,150,4,F
+2016,VOLKSWAGEN,Jetta Hybrid,Car,150,4,F
+2016,VOLKSWAGEN,Passat,Car,280,6,F
+2016,VOLKSWAGEN,Passat,Car,280,6,F
+2016,VOLKSWAGEN,Passat,Car,280,6,F
+2016,VOLKSWAGEN,Passat,Car,280,6,F
+2016,VOLKSWAGEN,Passat,Car,280,6,F
+2016,Volkswagen,Passat,Car,200,4,F
+2016,Volkswagen,Passat,Car,200,4,F
+2016,Volkswagen,Passat,Car,200,4,F
+2016,Volkswagen,Passat,Car,200,4,F
+2016,Volkswagen,Passat,Car,200,4,F
+2016,VOLKSWAGEN,Passat,Car,200,4,F
+2016,VOLKSWAGEN,Passat,Car,200,4,F
+2016,VOLKSWAGEN,Passat,Car,200,4,F
+2016,VOLKSWAGEN,Passat,Car,200,4,F
+2016,VOLKSWAGEN,Passat,Car,200,4,F
+2016,VOLKSWAGEN,PASSAT CC 4MOTION,Car,280,,F
+2016,VOLKSWAGEN,PASSAT CC 4MOTION,Car,280,,F
+2016,VOLKSWAGEN,PASSAT CC 4MOTION,Car,280,,F
+2016,VOLKSWAGEN,PASSAT CC 4MOTION,Car,280,,F
+2016,VOLKSWAGEN,PASSAT CC 4MOTION,Car,280,,F
+2016,VOLKSWAGEN,Passat wagon,Both,200,4,F
+2016,VOLKSWAGEN,Passat wagon,Both,200,4,F
+2016,VOLKSWAGEN,Passat wagon,Both,200,4,F
+2016,VOLKSWAGEN,Passat wagon,Both,200,4,F
+2016,VOLKSWAGEN,Passat wagon,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Tiguan,Both,200,4,F
+2016,VOLKSWAGEN,Touareg,Truck,280,6,F
+2016,VOLKSWAGEN,Touareg,Truck,280,6,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,170,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A3,Car,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4,Both,220,4,F
+2016,AUDI,A4 Allroad,Both,220,4,F
+2016,AUDI,A4 Allroad,Both,220,4,F
+2016,AUDI,A4 Allroad,Both,220,4,F
+2016,AUDI,A4 Allroad,Both,220,4,F
+2016,AUDI,A6,Car,333,6,F
+2016,AUDI,A6,Car,333,6,F
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A7,Both,240,6,A
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,333,6,F
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8,Car,435,8,A
+2016,AUDI,A8L,Car,500,12,F
+2016,AUDI,A8L,Car,500,12,F
+2016,AUDI,A8L,Car,500,12,F
+2016,AUDI,A8L,Car,500,12,F
+2016,AUDI,A8L,Car,500,12,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi A6,Car,252,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Audi TT,Car,220,4,F
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,Q3,Car,200,4,A
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S3,Car,292,4,F
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,S6,Car,450,8,A
+2016,AUDI,SQ5,Both,354,6,F
+2016,AUDI,SQ5,Both,354,6,F
+2016,AUDI,SQ5,Both,354,6,F
+2016,AUDI,SQ5,Both,354,6,F
+2016,AUDI,SQ5,Both,354,6,F
+2016,AUDI,TTS,Car,292,4,F
+2016,AUDI,TTS,Car,292,4,F
+2016,AUDI,TTS,Car,292,4,F
+2016,AUDI,TTS,Car,292,4,F
+2016,AUDI,TTS,Car,292,4,F
+2016,BENTLEY,Mulsanne Speed,Car,530,8,R
+2016,BENTLEY,Mulsanne Speed,Car,530,8,R
+2016,BENTLEY,Mulsanne Speed,Car,530,8,R
+2016,BENTLEY,Mulsanne Speed,Car,530,8,R
+2016,LAMBORGHINI,Huracan,Car,610,10,A
+2016,LAMBORGHINI,Huracan,Car,610,10,A
+2016,LAMBORGHINI,Huracan,Car,610,10,A
+2016,LAMBORGHINI,Huracan,Car,610,10,A
+2016,LAMBORGHINI,Huracan,Car,610,10,A
+2016,Volkswagen,Beetle,Car,170,4,F
+2016,Volkswagen,Beetle,Car,170,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,Beetle,Car,210,4,F
+2016,Volkswagen,Beetle,Car,170,4,F
+2016,Volkswagen,Beetle,Car,170,4,F
+2016,Volkswagen,Beetle,Car,210,4,F
+2016,Volkswagen,Beetle,Car,210,4,F
+2016,VOLKSWAGEN,e-Golf,Car,115,,A
+2016,VOLKSWAGEN,e-Golf,Car,115,,A
+2016,VOLKSWAGEN,e-Golf,Car,115,,A
+2016,VOLKSWAGEN,e-Golf,Car,115,,A
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf,Car,170,4,F
+2016,VOLKSWAGEN,Golf R,Car,292,4,F
+2016,VOLKSWAGEN,Golf R,Car,292,4,F
+2016,VOLKSWAGEN,Golf R,Car,292,4,F
+2016,VOLKSWAGEN,Golf R,Car,292,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,GTI,Car,211,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,210,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,170,4,F
+2016,VOLKSWAGEN,Jetta,Car,150,4,F
+2016,VOLKSWAGEN,Jetta,Car,150,4,F
+2016,VOLKSWAGEN,Jetta,Car,150,4,F
+2016,VOLKSWAGEN,Jetta,Car,150,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,Volkswagen,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Passat,Car,170,4,F
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,VOLKSWAGEN,Touareg,Truck,240,6,A
+2016,Volvo,S60 T5 AWD,Car,250,5,F
+2016,Volvo,S60 T5 AWD,Car,250,5,F
+2016,Volvo,S60 T5 FWD,Car,240,4,F
+2016,Volvo,S60 T5 FWD,Car,240,4,F
+2016,Volvo,S60 T6 AWD,Both,300,6,F
+2016,Volvo,S60 T6 AWD,Both,300,6,F
+2016,Volvo,S60 T6 AWD,Both,300,6,F
+2016,Volvo,S60 T6 AWD,Both,300,6,F
+2016,Volvo,S60 T6 AWD,Both,300,6,F
+2016,Volvo,S60 T6 FWD,Car,302,4,F
+2016,Volvo,S60 T6 FWD,Car,302,4,F
+2016,Volvo,S60 T6 FWD,Car,302,4,F
+2016,Volvo,S60 T6 FWD,Car,302,4,F
+2016,Volvo,V60 CC T5 AWD,Both,250,5,F
+2016,Volvo,V60 CC T5 AWD,Both,250,5,F
+2016,Volvo,V60 CC T5 AWD,Both,250,5,F
+2016,Volvo,V60 CC T5 AWD,Both,250,5,F
+2016,Volvo,V60 CC T5 AWD,Both,250,5,F
+2016,Volvo,XC60 T5 AWD,Both,250,5,F
+2016,Volvo,XC60 T5 AWD,Both,250,5,F
+2016,Volvo,XC60 T5 FWD,Car,240,4,F
+2016,Volvo,XC60 T5 FWD,Car,240,4,F
+2016,Volvo,XC60 T6 AWD,Both,300,6,F
+2016,Volvo,XC60 T6 AWD,Both,300,6,F
+2016,Volvo,XC60 T6 AWD,Both,300,6,F
+2016,Volvo,XC60 T6 AWD,Both,300,6,F
+2016,Volvo,XC60 T6 AWD,Both,300,6,F
+2016,Volvo,XC60 T6 FWD,Car,302,4,F
+2016,Volvo,XC60 T6 FWD,Car,302,4,F
+2016,Volvo,XC60 T6 FWD,Car,302,4,F
+2016,Volvo,XC60 T6 FWD,Car,302,4,F
+2016,Volvo,XC70 T5 AWD,Both,250,5,F
+2016,Volvo,XC70 T5 AWD,Both,250,5,F
+2016,Volvo,XC70 T5 FWD,Car,240,4,F
+2016,Volvo,XC70 T5 FWD,Car,240,4,F
+2016,Volvo,XC90 T5 AWD,Truck,250,4,F
+2016,Volvo,XC90 T5 AWD,Truck,250,4,F
+2016,Volvo,XC90 T5 AWD,Truck,250,4,F
+2016,Volvo,XC90 T5 FWD,Truck,250,4,F
+2016,Volvo,XC90 T5 FWD,Truck,250,4,F
+2016,Volvo,XC90 T5 FWD,Truck,250,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
+2016,Volvo,XC90 T6 AWD,Truck,316,4,F
