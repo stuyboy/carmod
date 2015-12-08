@@ -9,13 +9,6 @@
 import MBProgressHUD
 import ParseUI
 
-class CarObject: NSObject {
-  var objectID: String!
-  var year: Int!
-  var make: String!
-  var model: String!
-}
-
 class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate {
   let ADD_CAR_TEXT = "Add a car to your garage"
   private var addCarView: AddCarView!

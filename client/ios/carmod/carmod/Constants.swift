@@ -115,6 +115,7 @@ let ERROR_NO_INTERNET = 105
 let NSERROR_NO_INTERNET = NSError(domain: APP_DOMAIN, code: ERROR_NO_INTERNET, userInfo: [NSLocalizedDescriptionKey: "The Internet connection appears to be offline."])
 
 let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
+let EVENT_CAR_RESULTS_COMPLETE: String = "Event::CarResultsComplete"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0
@@ -130,6 +131,17 @@ let kPartJSONModelKey           = "Model"
 let kPartJSONProductCodeKey     = "ProductCode"
 let kPartJSONSearchStringKey    = "SearchString"
 let kPartJSONEmptyKey           = "Empty"
+
+// JSON Car Field keys
+let kCarJSONIDKey               = "Id"
+let kCarJSONYearKey             = "Year"
+let kCarJSONMakeKey             = "Make"
+let kCarJSONModelKey            = "Model"
+let kCarJSONTypeKey             = "Type"
+let kCarJSONHorsepowerKey       = "Horsepower"
+let kCarJSONCylindersKey        = "Cylinders"
+let kCarJSONDriveKey            = "Drive"
+let kCarJSONEmptyKey           = "Empty"
 
 // Annotation Field keys
 let kAnnotationClassKey         = "Annotation"

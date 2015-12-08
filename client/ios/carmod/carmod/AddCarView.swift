@@ -13,20 +13,30 @@ protocol AddCarDelegate: class {
 }
 
 class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+  let VIEW_HEIGHT: CGFloat = 160.0
+  
   weak var delegate: AddCarDelegate?
   
+  private var keyboardHeight: CGFloat = 0.0
   private var blurView: UIVisualEffectView!
   private var backgroundView: UIView!
   private var yearField: CustomTextField!
   private var makeModelField: CustomTextField!
-//  private var makeField: CustomTextField!
-//  private var modelField: CustomTextField!
   private var addButton: UIButton!
+  private var carResultsTable: UITableView!
+  private var selectedCarObject: CarObject!
   var closeButton: UIButton!
   var cancelButton: UIButton!
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    
+    CarManager.sharedInstance.eventManager.listenTo(EVENT_CAR_RESULTS_COMPLETE) { () -> () in
+      self.refreshSearchResults(CarManager.sharedInstance.searchResults.count)
+    }
     
     let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
     self.blurView = UIVisualEffectView(effect: blurEffect)
@@ -34,7 +44,6 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     self.blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
     self.addSubview(self.blurView)
     
-    let VIEW_HEIGHT: CGFloat = 160.0
     self.backgroundView = UIView(frame: CGRect(x: OFFSET_SMALL, y: self.frame.height/2-VIEW_HEIGHT, width: self.frame.width-OFFSET_SMALL*2, height: VIEW_HEIGHT))
     self.backgroundView.backgroundColor = UIColor.whiteColor()
     self.backgroundView.clipsToBounds = true
@@ -42,6 +51,12 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     self.addSubview(self.backgroundView)
     
     self.initLabels()
+    self.initLookupTable()
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -81,7 +96,7 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     self.yearField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
     self.yearField.keyboardType = .NumberPad
     self.yearField.delegate = self
-    self.yearField.addTarget(self, action: "onChangeText", forControlEvents: UIControlEvents.EditingChanged)
+    self.yearField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
     self.backgroundView.addSubview(self.yearField)
     
     let FIELD_WIDTH: CGFloat = self.backgroundView.frame.width-YEAR_WIDTH-OFFSET_SMALL*3
@@ -96,38 +111,8 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     self.makeModelField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
     self.makeModelField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
     self.makeModelField.delegate = self
-    self.makeModelField.addTarget(self, action: "onChangeText", forControlEvents: UIControlEvents.EditingChanged)
+    self.makeModelField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
     self.backgroundView.addSubview(self.makeModelField)
-    
-//    let FIELD_WIDTH: CGFloat = (self.frame.width-YEAR_WIDTH-OFFSET_SMALL*4)/2
-//    
-//    self.makeField = CustomTextField(frame: CGRect(x: self.yearField.frame.maxX+OFFSET_SMALL, y: yPos, width: FIELD_WIDTH, height: LABEL_HEIGHT))
-//    self.makeField.placeholder = "Make"
-//    self.makeField.layer.borderColor = UIColor.fromRGB(COLOR_DARK_GRAY).CGColor
-//    self.makeField.layer.borderWidth = 1.0
-//    self.makeField.layer.cornerRadius = 2.0
-//    self.makeField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
-//    self.makeField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-//    self.makeField.autocorrectionType = .No
-//    self.makeField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
-//    self.makeField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
-//    self.makeField.delegate = self
-//    self.makeField.addTarget(self, action: "onChangeText", forControlEvents: UIControlEvents.EditingChanged)
-//    self.addSubview(self.makeField)
-//    
-//    self.modelField = CustomTextField(frame: CGRect(x: self.makeField.frame.maxX+OFFSET_SMALL, y: yPos, width: FIELD_WIDTH, height: LABEL_HEIGHT))
-//    self.modelField.placeholder = "Model"
-//    self.modelField.layer.borderColor = UIColor.fromRGB(COLOR_DARK_GRAY).CGColor
-//    self.modelField.layer.borderWidth = 1.0
-//    self.modelField.layer.cornerRadius = 2.0
-//    self.modelField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
-//    self.modelField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-//    self.modelField.autocorrectionType = .No
-//    self.modelField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
-//    self.modelField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
-//    self.modelField.delegate = self
-//    self.modelField.addTarget(self, action: "onChangeText", forControlEvents: UIControlEvents.EditingChanged)
-//    self.addSubview(self.modelField)
     
     let BUTTON_WIDTH: CGFloat = (self.backgroundView.frame.width-OFFSET_SMALL*3)/2
     
@@ -154,6 +139,64 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     self.backgroundView.addSubview(self.addButton)
   }
   
+  private func initLookupTable() {
+    self.selectedCarObject = CarObject()
+    
+    self.carResultsTable = UITableView(frame: CGRect(x: self.makeModelField.frame.origin.x, y: self.makeModelField.frame.maxY, width: self.makeModelField.frame.width, height: 0.0))
+    self.carResultsTable.registerClass(CarTableViewCell.classForCoder(), forCellReuseIdentifier: "CarTableViewCell")
+    self.carResultsTable.layer.borderColor = UIColor.fromRGB(COLOR_LIGHT_GRAY).CGColor
+    self.carResultsTable.layer.borderWidth = 1.0
+    self.carResultsTable.clipsToBounds = true
+    self.carResultsTable.backgroundColor = UIColor.whiteColor()
+    self.carResultsTable.separatorColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.carResultsTable.rowHeight = SEARCH_RESULTS_ROW_HEIGHT
+    self.carResultsTable.delegate = self
+    self.carResultsTable.dataSource = self
+    self.carResultsTable.bounces = false
+    self.carResultsTable.alpha = 0.0
+    if (self.carResultsTable.respondsToSelector("separatorInset")) {
+      self.carResultsTable.separatorInset = UIEdgeInsetsZero
+    }
+    self.addSubview(self.carResultsTable)
+  }
+  
+  // MARK: - UITableViewDataSource
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    print("CarManager.sharedInstance.searchResults.count = \(CarManager.sharedInstance.searchResults.count)")
+    return CarManager.sharedInstance.searchResults.count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("CarTableViewCell") as! CarTableViewCell
+
+    if let carObject = CarManager.sharedInstance.searchResults[safe: indexPath.row] {
+      if carObject.id == kCarJSONEmptyKey {
+        cell.carObject = nil
+      } else {
+        cell.carObject = carObject
+      }
+      
+      cell.searchKeywords = self.makeModelField.text!
+    }
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let carObject = CarManager.sharedInstance.searchResults[indexPath.row]
+    
+    if carObject.id == kCarJSONEmptyKey {
+      carObject.id = ""
+      carObject.make = self.makeModelField.text!
+      carObject.model = ""
+    }
+    
+    self.selectedCarObject = carObject
+    self.makeModelField.text = "\(carObject.make) \(carObject.model)"
+    
+    self.resetView()
+  }
+  
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     if textField == self.yearField {
       let inverseSet = NSCharacterSet(charactersInString:"0123456789").invertedSet
@@ -172,6 +215,7 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     return true
   }
   
+  // MARK:- Callbacks
   func onAddToGarage(sender: UIButton) {
     if sender.enabled {
       self.closeKeyboard()
@@ -182,8 +226,8 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
       let year = Int(self.yearField.text!)
       car.setObject(year!, forKey: kEntityYearKey)
       
-//      car.setObject(self.makeField.text!, forKey: kEntityMakeKey)
-//      car.setObject(self.modelField.text!, forKey: kEntityModelKey)
+      car.setObject(self.selectedCarObject.make, forKey: kEntityMakeKey)
+      car.setObject(self.selectedCarObject.model, forKey: kEntityModelKey)
       
       MBProgressHUD.showHUDAddedTo(self, animated: true)
       
@@ -201,7 +245,16 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     }
   }
   
-  func onChangeText() {
+  func onChangeText(sender: UITextField) {
+    if sender == self.makeModelField {
+      if sender.text != "" {
+        CarManager.sharedInstance.searchCar(self.makeModelField.text!)
+      } else {
+        CarManager.sharedInstance.clearSearchResults()
+        self.carResultsTable.alpha = 0.0
+      }
+    }
+    
     if self.yearField.text != "" && self.makeModelField.text != "" {
       self.addButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
       self.addButton.enabled = true
@@ -210,7 +263,8 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
       self.addButton.enabled = false
     }
   }
-
+  
+  // MARK:- Keyboard methods
   func closeKeyboard() {
     if self.yearField.isFirstResponder() {
       self.yearField.resignFirstResponder()
@@ -218,5 +272,49 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     if self.makeModelField.isFirstResponder() {
       self.makeModelField.resignFirstResponder()
     }
+  }
+  
+  func keyboardWillShow(sender: NSNotification) {
+    if let userInfo = sender.userInfo {
+      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
+        self.keyboardHeight = keyboardHeight
+        
+        UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+          self.backgroundView.frame.origin.y = OFFSET_STANDARD
+        })
+      }
+    }
+  }
+  
+  func keyboardWillHide(sender: NSNotification) {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+      self.backgroundView.frame.origin.y = self.frame.height/2-self.VIEW_HEIGHT
+    })
+  }
+  
+  // MARK:- Public methods
+  func refreshSearchResults(numResults: Int) {
+    if CarManager.sharedInstance.searchResults.count > 0 {
+      let FIELD_POS: CGPoint = self.backgroundView.convertPoint(self.makeModelField.frame.origin, toView: self)
+      let SEARCH_VIEWABLE_AREA: CGFloat = self.frame.height-self.keyboardHeight-FIELD_POS.y-self.makeModelField.frame.height-STATUS_BAR_HEIGHT-TOPNAV_BAR_SIZE
+      let SEARCH_HEIGHT: CGFloat = SEARCH_RESULTS_ROW_HEIGHT*CGFloat(numResults)
+      
+      self.carResultsTable.frame = CGRect(x: FIELD_POS.x, y: FIELD_POS.y+self.makeModelField.frame.height, width: self.carResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
+      
+      UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+        self.carResultsTable.alpha = 1.0
+      })
+      self.carResultsTable.reloadData()
+    } else {
+      self.carResultsTable.alpha = 0.0
+    }
+  }
+  
+  // MARK:- Private methods
+  private func resetView() {
+    if self.makeModelField.isFirstResponder() {
+      self.makeModelField.resignFirstResponder()
+    }
+    self.carResultsTable.alpha = 0.0
   }
 }
