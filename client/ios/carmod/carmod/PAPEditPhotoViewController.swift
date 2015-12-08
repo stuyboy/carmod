@@ -282,7 +282,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
       let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
       alertController.addAction(alertAction)
-      presentViewController(alertController, animated: true, completion: nil)
+      self.presentViewController(alertController, animated: true, completion: nil)
       return
     }
     

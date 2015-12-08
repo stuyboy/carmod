@@ -154,6 +154,7 @@ let kAnnotationPhotoKey         = "photo"
 
 // Entity Field keys
 let kEntityClassKey             = "Entity"
+let kEntityObjectIDKey          = "objectId"
 let kEntityYearKey              = "year"
 let kEntityMakeKey              = "make"
 let kEntityModelKey             = "model"

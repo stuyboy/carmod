@@ -193,8 +193,7 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
     
     self.selectedCarObject = carObject
     self.makeModelField.text = "\(carObject.make) \(carObject.model)"
-    
-    self.resetView()
+    self.hideResults()
   }
   
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -218,14 +217,16 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
   // MARK:- Callbacks
   func onAddToGarage(sender: UIButton) {
     if sender.enabled {
-      self.closeKeyboard()
+      self.resetView()
       
       // create a car object
       let car = PFObject(className: kEntityClassKey)
       car.setObject(PFUser.currentUser()!, forKey: kEntityUserKey)
-      let year = Int(self.yearField.text!)
-      car.setObject(year!, forKey: kEntityYearKey)
-      
+      if let year: Int = Int(self.yearField.text!) {
+        car.setObject(year, forKey: kEntityYearKey)
+      } else {
+        car.setObject(self.selectedCarObject.year, forKey: kEntityYearKey)
+      }
       car.setObject(self.selectedCarObject.make, forKey: kEntityMakeKey)
       car.setObject(self.selectedCarObject.model, forKey: kEntityModelKey)
       
@@ -311,10 +312,14 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
   }
   
   // MARK:- Private methods
-  private func resetView() {
-    if self.makeModelField.isFirstResponder() {
-      self.makeModelField.resignFirstResponder()
-    }
+  private func hideResults() {
+    self.closeKeyboard()
     self.carResultsTable.alpha = 0.0
+  }
+  
+  private func resetView() {
+    self.hideResults()
+    self.makeModelField.text = ""
+    self.yearField.text = ""
   }
 }

@@ -196,7 +196,6 @@ class PAPWelcomeViewController: UIViewController, PAPLogInViewControllerDelegate
           // Fetch FB Friends + me
           self._expectedFacebookResponseCount++
           connection.addRequest(FBRequest.requestForMyFriends(), completionHandler: { (connection, result, error) in
-            print("processing Facebook friends")
             if error != nil {
               // just clear the FB friend cache
               PAPCache.sharedCache.clear()

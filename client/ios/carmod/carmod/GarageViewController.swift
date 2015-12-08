@@ -89,7 +89,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
 
         let carObject = self.cars[self.carIndex]
         let query = PFQuery(className: kEntityClassKey)
-        query.whereKey("objectID", equalTo: carObject.objectID)
+        query.whereKey(kEntityObjectIDKey, equalTo: carObject.objectID)
         query.findObjectsInBackgroundWithBlock {
           (objects: [AnyObject]?, error: NSError?) -> Void in
           for object in objects! {
@@ -141,6 +141,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
       if let cars = objects {
         for car in cars as! [PFObject] {
           let carObject = CarObject()
+          carObject.objectID = car.objectId
           carObject.year = car.objectForKey(kEntityYearKey) as! Int
           carObject.make = car.objectForKey(kEntityMakeKey) as! String
           carObject.model = car.objectForKey(kEntityModelKey) as! String
