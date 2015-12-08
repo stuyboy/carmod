@@ -19,12 +19,12 @@ const MAX_RESULTS int = 25;
 
 //When searching for anything, how items are returned
 type Part struct {
-	Id			   string
-	Classification string
-	Brand          string
-	Model          string
-	ProductCode    string
-	SearchString   string
+	Id			   string `json:"id"`
+	Classification string `json:"classification"`
+	Brand          string `json:"brand"`
+	Model          string `json:"model"`
+	ProductCode    string `json:"productCode"`
+	SearchString   string `json:"searchString"`
 }
 
 func (c Part) Name() string {
