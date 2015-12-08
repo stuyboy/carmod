@@ -87,23 +87,23 @@ class PartManager: NSObject {
     // we serialize our bytes back to the original JSON structure
     let json = JSON(data: self.bytes!)
     
-    if let mods = json[kPartJSONModsArrayKey].array {
-      for mod in mods {
+    if let results = json[kJSONArrayKey].array {
+      for result in results {
         let partObject = PartObject()
         
-        if let id = mod[kPartJSONIDKey].string {
+        if let id = result[kPartJSONIDKey].string {
           partObject.id = id
         }
-        if let classification = mod[kPartJSONClassificationKey].string {
+        if let classification = result[kPartJSONClassificationKey].string {
           partObject.partType = classification
         }
-        if let brand = mod[kPartJSONBrandKey].string {
+        if let brand = result[kPartJSONBrandKey].string {
           partObject.brand = brand
         }
-        if let model = mod[kPartJSONModelKey].string {
+        if let model = result[kPartJSONModelKey].string {
           partObject.model = model
         }
-        if let productCode = mod[kPartJSONProductCodeKey].string {
+        if let productCode = result[kPartJSONProductCodeKey].string {
           partObject.partNumber = productCode
         }
         
