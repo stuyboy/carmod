@@ -66,6 +66,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
 
   override func prepareForReuse() {
     super.prepareForReuse()
+    self.photos = []
   }
   
   required init?(coder aDecoder: NSCoder) {

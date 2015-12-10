@@ -38,6 +38,7 @@ class PhotoTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
+    self.photo = nil
   }
   
   func loadPhoto() {

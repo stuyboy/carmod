@@ -190,7 +190,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
 //    let activityFeedNavigationController: UINavigationController = UINavigationController(rootViewController: self.activityViewController!)
     let garageNavigationController: UINavigationController = UINavigationController(rootViewController: self.garageViewController!)
     
-    let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: UIImage(named: "IconHome.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconHomeSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+    let homeImage = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.whiteColor())
+    let homeImageSelected = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+    
+    let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: homeImage, selectedImage: homeImageSelected)
     homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
     homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
@@ -261,7 +264,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     UINavigationBar.appearance().barTintColor = UIColor.blackColor()
     UINavigationBar.appearance().translucent = false
     UINavigationBar.appearance().alpha = 1.0
-    UINavigationBar.appearance().titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor() ]
+    UINavigationBar.appearance().titleTextAttributes = [ NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)! ]
     
     if #available(iOS 9.0, *) {
       UIButton.appearanceWhenContainedInInstancesOfClasses([UINavigationBar.self]).setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
