@@ -1,0 +1,14 @@
+hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+updated: 2015-12-10T12:08:24.509686349-08:00
+imports:
+- name: github.com/diffbot/diffbot-go-client
+  version: d9dcac5b2a819c69c87300f144f022b25125e451
+- name: github.com/go-sql-driver/mysql
+  version: d512f204a577a4ab037a1816604c48c9c13210be
+- name: github.com/goji/param
+  version: da86c81e3e3c23b1948bc7a003d381250a032aa7
+- name: github.com/zenazn/goji
+  version: bf843a174a08e846246b8945f8a9a853d84a256a
+  subpackages:
+  - web
+devImports: []
