@@ -14,6 +14,7 @@ import (
 
 	"database/sql"
 	"log"
+	"strconv"
 )
 
 //Pointer to database
@@ -53,24 +54,27 @@ func partSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(jtxt))
 }
 
+// given a product url, pull out the part and save it into the database?
 func extractPart(c web.C, w http.ResponseWriter, r *http.Request) {
-	//url := c.URLParams["url"]
-
 	url := r.URL.Query().Get("url")
-	log.Println("Trying to parse " + url)
+	toSave, _ := strconv.ParseBool(r.URL.Query().Get("save"))
 
-	product := data.ExtractProduct(url)
-	//product := data.ExtractProduct("https://deutscheautoparts.com/make-model-year/audi/a4/b7-2005-2008/8e0-121-403.html")
-	//product := data.ExtractProduct(`http://www.uspmotorsports.com/Engine/Software/Eurodyne-MK7-GTI-Reflash-with-Flash-Tool.html?gdftrk=gdfV210471_a_7c4200_a_7c11544_a_7cSKU4641&gclid=Cj0KEQiAnJqzBRCW0rGWnKnckOIBEiQA6qDBarUDXx6D-wqivYuGs9TsBwSbIqtyM_ZO5oMvpSUb2EcaAtPU8P8HAQ`)
-	//product := data.ExtractProduct(`http://blog.diffbot.com/diffbots-new-product-api-teaches-robots-to-shop-online/`)
+	if url != "" {
+		product := data.ExtractProduct(url)
+		if product != nil {
+			part := data.ProductToPart(product)
 
-	log.Println("I think I am here")
+			if toSave && part != nil {
+				model.SavePart(db, part)
+			}
 
-	//fmt.Fprintf(w, "hello world.")
-	jtxt, _ := json.Marshal(product)
-	fmt.Fprintf(w, string(jtxt))
-	//fmt.Println(product.String())
-	//log.Println(product)
+			jtxt, _ := json.Marshal(part)
+			fmt.Fprintf(w, string(jtxt))
+			return
+		}
+	}
+
+	log.Println("No url found for extraction.")
 }
 
 func main() {

@@ -8,6 +8,7 @@ import (
 	_ "net/url"
 	"log"
 	"github.com/diffbot/diffbot-go-client"
+	"carmod/api/model"
 )
 
 const DIFFBOT_TOKEN = "6a83c3f1b7f51319ad85a2ac80670270"
@@ -27,4 +28,12 @@ func ExtractProduct(urlE string) *diffbot.Product {
 	}
 
 	return product
+}
+
+func ProductToPart(dP *diffbot.Product) *model.Part {
+	productZero := dP.Products[0]
+
+	newPart := model.Part{Id:productZero.Sku, Classification:"Part", Brand:productZero.Brand, Model:productZero.Title, ProductCode:productZero.ProductId}
+
+	return &newPart
 }
