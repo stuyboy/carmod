@@ -11,8 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   
   var window: UIWindow?
   var networkStatus: Reachability.NetworkStatus?
-  var homeViewController: PAPHomeViewController?
-//  var activityViewController: PAPActivityFeedViewController?
+  var homeViewController: StoryViewController?
   var garageViewController: GarageViewController?
   var welcomeViewController: PAPWelcomeViewController?
   
@@ -181,8 +180,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   
   func presentTabBarController() {
     self.tabBarController = PAPTabBarController()
-    self.homeViewController = PAPHomeViewController(style: UITableViewStyle.Plain)
-    self.homeViewController!.firstLaunch = firstLaunch
+    self.homeViewController = StoryViewController()
+//    self.homeViewController!.firstLaunch = firstLaunch
 //    self.activityViewController = PAPActivityFeedViewController(style: UITableViewStyle.Plain)
     self.garageViewController = GarageViewController()
     
@@ -276,23 +275,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   }
   
   func monitorReachability() {
-    guard let reachability = Reachability(hostname: "api.parse.com") else {
-      return
-    }
-    
-    reachability.whenReachable = { (reach: Reachability) in
-      self.networkStatus = reach.currentReachabilityStatus
-      if self.isParseReachable() && PFUser.currentUser() != nil && self.homeViewController!.objects!.count == 0 {
-        // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
-        // In this case, they'd see the empty timeline placeholder and have no way of refreshing the timeline unless they followed someone.
-        self.homeViewController!.loadObjects()
-      }
-    }
-    reachability.whenUnreachable = { (reach: Reachability) in
-      self.networkStatus = reach.currentReachabilityStatus
-    }
-    
-    reachability.startNotifier()
+//    guard let reachability = Reachability(hostname: "api.parse.com") else {
+//      return
+//    }
+//    
+//    reachability.whenReachable = { (reach: Reachability) in
+//      self.networkStatus = reach.currentReachabilityStatus
+//      if self.isParseReachable() && PFUser.currentUser() != nil && self.homeViewController!.objects!.count == 0 {
+//        // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
+//        // In this case, they'd see the empty timeline placeholder and have no way of refreshing the timeline unless they followed someone.
+//        self.homeViewController!.loadObjects()
+//      }
+//    }
+//    reachability.whenUnreachable = { (reach: Reachability) in
+//      self.networkStatus = reach.currentReachabilityStatus
+//    }
+//    
+//    reachability.startNotifier()
   }
   
   func handlePush(launchOptions: [NSObject: AnyObject]?) {
@@ -331,7 +330,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   func autoFollowTimerFired(aTimer: NSTimer) {
     MBProgressHUD.hideHUDForView(navController!.presentedViewController!.view, animated: true)
     MBProgressHUD.hideHUDForView(homeViewController!.view, animated: true)
-    self.homeViewController!.loadObjects()
+//    self.homeViewController!.loadObjects()
   }
   
   func shouldProceedToMainInterface(user: PFUser)-> Bool{
@@ -363,34 +362,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   }
   
   func shouldNavigateToPhoto(var targetPhoto: PFObject) {
-    for photo: PFObject in homeViewController!.objects as! [PFObject] {
-      if photo.objectId == targetPhoto.objectId {
-        targetPhoto = photo
-        break
-      }
-    }
-    
-    // if we have a local copy of this photo, this won't result in a network fetch
-    targetPhoto.fetchIfNeededInBackgroundWithBlock() { (object, error) in
-      if (error == nil) {
-        let homeNavigationController = self.tabBarController!.viewControllers![PAPTabBarControllerViewControllerIndex.HomeTabBarItemIndex.rawValue] as? UINavigationController
-        self.tabBarController!.selectedViewController = homeNavigationController
-        
-        let detailViewController = PAPPhotoDetailsViewController(photo: object!)
-        homeNavigationController!.pushViewController(detailViewController, animated: true)
-      }
-    }
+//    for photo: PFObject in homeViewController!.objects as! [PFObject] {
+//      if photo.objectId == targetPhoto.objectId {
+//        targetPhoto = photo
+//        break
+//      }
+//    }
+//    
+//    // if we have a local copy of this photo, this won't result in a network fetch
+//    targetPhoto.fetchIfNeededInBackgroundWithBlock() { (object, error) in
+//      if (error == nil) {
+//        let homeNavigationController = self.tabBarController!.viewControllers![PAPTabBarControllerViewControllerIndex.HomeTabBarItemIndex.rawValue] as? UINavigationController
+//        self.tabBarController!.selectedViewController = homeNavigationController
+//        
+//        let detailViewController = PAPPhotoDetailsViewController(photo: object!)
+//        homeNavigationController!.pushViewController(detailViewController, animated: true)
+//      }
+//    }
   }
   
   func autoFollowUsers() {
-    firstLaunch = true
-    PFCloud.callFunctionInBackground("autoFollowUsers", withParameters: nil, block: { (_, error) in
-      if error != nil {
-        print("Error auto following users: \(error)")
-      }
-      MBProgressHUD.hideHUDForView(self.navController!.presentedViewController!.view, animated:false)
-      self.homeViewController!.loadObjects()
-    })
+//    firstLaunch = true
+//    PFCloud.callFunctionInBackground("autoFollowUsers", withParameters: nil, block: { (_, error) in
+//      if error != nil {
+//        print("Error auto following users: \(error)")
+//      }
+//      MBProgressHUD.hideHUDForView(self.navController!.presentedViewController!.view, animated:false)
+//      self.homeViewController!.loadObjects()
+//    })
   }
 }
 

@@ -144,6 +144,18 @@ let kCarJSONCylindersKey        = "cylinders"
 let kCarJSONDriveKey            = "drive"
 let kCarJSONEmptyKey            = "Empty"
 
+// Story Field keys
+let kStoryClassKey              = "Story"
+let kStoryPhotosKey             = "Photos"
+let kStoryAuthorKey             = "author"
+let kStoryTitleKey              = "title"
+
+// Photo Field keys
+let kPhotoClassKey              = "Photo"
+let kPhotoImageKey              = "image"
+let kPhotoThumbnailKey          = "thumbnail"
+let kPhotoUserKey               = "user"
+
 // Annotation Field keys
 let kAnnotationClassKey         = "Annotation"
 let kAnnotationCoordinatesKey   = "coordinates"

@@ -287,13 +287,12 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     }
     
     // both files have finished uploading
-    
-    // create a photo object
+  
+    // Create the photo
     let photo = PFObject(className: kPAPPhotoClassKey)
     photo.setObject(PFUser.currentUser()!, forKey: kPAPPhotoUserKey)
     photo.setObject(self.photoFile!, forKey: kPAPPhotoPictureKey)
     photo.setObject(self.thumbnailFile!, forKey: kPAPPhotoThumbnailKey)
-    
     // photos are public, but may only be modified by the user who uploaded them
     let photoACL = PFACL(user: PFUser.currentUser()!)
     photoACL.setPublicReadAccess(true)
@@ -307,7 +306,16 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     // save
     photo.saveInBackgroundWithBlock { (succeeded, error) in
       if succeeded {
-        print("Photo uploaded")
+        
+        // Create a story with a photo
+        let story = PFObject(className: kStoryClassKey)
+        story.setObject(PFUser.currentUser()!, forKey: kStoryAuthorKey)
+        story.setObject("Test story title", forKey: kStoryTitleKey)
+        let relation = story.relationForKey(kStoryPhotosKey)
+        relation.addObject(photo)
+        var err1: NSError?
+        story.save(&err1)
+        print("saving story with error = \(err1)")
         
         // userInfo might contain any caption which might have been posted by the uploader
         var annotations: [PFObject] = []
@@ -315,13 +323,13 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         if self.tags.count > 0 {
           for tag in self.tags {
             let annotation = PFObject(className: kAnnotationClassKey)
-            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+//            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
             annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
             annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
             annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
             annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
             annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
+//            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
             let coordinates = [tag.tagView.frame.origin.x, tag.tagView.frame.origin.y]
             annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
@@ -336,27 +344,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         }
         
         PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
-        
-//        if let userInfo = userInfo {
-//          let commentText = userInfo[kPAPEditPhotoViewControllerUserInfoCommentKey]
-//          
-//          if commentText != nil && commentText!.length != 0 {
-//            // create and save photo caption
-//            let comment = PFObject(className: kPAPActivityClassKey)
-//            comment.setObject(kPAPActivityTypeComment, forKey: kPAPActivityTypeKey)
-//            comment.setObject(photo, forKey:kPAPActivityPhotoKey)
-//            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
-//            comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityToUserKey)
-//            comment.setObject(commentText!, forKey: kPAPActivityContentKey)
-//            
-//            let ACL = PFACL(user: PFUser.currentUser()!)
-//            ACL.setPublicReadAccess(true)
-//            comment.ACL = ACL
-//            
-//            comment.saveEventually()
-//            PAPCache.sharedCache.incrementCommentCountForPhoto(photo)
-//          }
-//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName(PAPTabBarControllerDidFinishEditingPhotoNotification, object: photo)
       } else {

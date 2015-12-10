@@ -31,6 +31,35 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - MBProgressHUD (0.9.1)
   - MGSwipeTableCell (1.5.3)
+  - MRProgress (0.8.2):
+    - MRProgress/ActivityIndicator (= 0.8.2)
+    - MRProgress/Blur (= 0.8.2)
+    - MRProgress/Circular (= 0.8.2)
+    - MRProgress/Icons (= 0.8.2)
+    - MRProgress/NavigationBarProgress (= 0.8.2)
+    - MRProgress/Overlay (= 0.8.2)
+  - MRProgress/ActivityIndicator (0.8.2):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.8.2):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.8.2):
+    - MRProgress/Helper
+    - MRProgress/ProgressBaseClass
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.8.2)
+  - MRProgress/Icons (0.8.2)
+  - MRProgress/NavigationBarProgress (0.8.2):
+    - MRProgress/ProgressBaseClass
+  - MRProgress/Overlay (0.8.2):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/ProgressBaseClass (0.8.2)
+  - MRProgress/Stopable (0.8.2):
+    - MRProgress/Helper
+  - ODRefreshControl (1.2)
   - Parse (1.7.5.3):
     - Bolts/Tasks (>= 1.2.0)
   - ParseCrashReporting (1.7.5.3):
@@ -53,6 +82,8 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8.0)
   - MBProgressHUD (~> 0.9.1)
   - MGSwipeTableCell
+  - MRProgress
+  - ODRefreshControl
   - Parse (~> 1.7.5)
   - ParseCrashReporting (~> 1.7.5)
   - ParseFacebookUtils (~> 1.7.5)
@@ -83,6 +114,8 @@ SPEC CHECKSUMS:
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MGSwipeTableCell: 5ae3b9a15efda26b201adc8676b24040febe6ff6
+  MRProgress: f4cfe862082418e8f542f077772283f425d6c699
+  ODRefreshControl: 907e6149d72dde488d5917ccfabee5bd8d711a20
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   ParseCrashReporting: 36d2e2770d7502d943b81c013acd5193946ced46
   ParseFacebookUtils: 008a24dc35884519ed6a6750648beb5149f1fad9

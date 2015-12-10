@@ -18,6 +18,8 @@ target 'carmod' do
   pod 'UIImage+AF+Additions', :git => 'https://github.com/melvitax/UIImageAFAdditions.git'
   pod 'Synchronized', '~> 2.0.0'
   pod 'MGSwipeTableCell'    # UITableViewCell subclass to allow swipeable buttons with transitions]
+  pod 'ODRefreshControl'    # Customizable refresh control to replace UIRefreshControl
+  pod 'MRProgress'
 end
 
 # Disable bitcode for now.

@@ -17,6 +17,8 @@
 import Foundation
 import UIKit
 
+var gPhotoSize: CGFloat = 320.0
+
 func partTypeToImage(partType: PartType) -> UIImage? {
   switch partType {
   case .Audio:
