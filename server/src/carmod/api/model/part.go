@@ -5,6 +5,8 @@ import (
 
 	"carmod/api/util"
 	"flag"
+	"database/sql"
+	"log"
 )
 
 var fullArray []Part
@@ -57,6 +59,22 @@ func SearchParts(term string) []SearchResult {
 	}
 
 	return parts
+}
+
+//Save a custom part into the database
+func SavePart(db *sql.DB, newPart *Part) sql.Result {
+	result, err := db.Exec(
+		"INSERT into parts (classification, brand, model, productCode) values (?, ?, ?, ?)",
+		newPart.Classification,
+		newPart.Brand,
+		newPart.Model,
+		newPart.ProductCode)
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return result
 }
 
 func createTireArray(dir string) []Part {
