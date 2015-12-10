@@ -64,21 +64,23 @@ class CarManager: NSObject {
   func connectionDidFinishLoading(connection: NSURLConnection!) {
     // we serialize our bytes back to the original JSON structure
     let json = JSON(data: self.bytes!)
-    if let cars = json.array {
-      for car in cars {
+    
+    if let results = json[kJSONArrayKey].array {
+      for result in results {
         let carObject = CarObject()
-        if let id = car[kCarJSONIDKey].string {
+        
+        if let id = result[kCarJSONIDKey].string {
           carObject.id = id
         } else {
           carObject.id = "0"
         }
-        if let year = car[kCarJSONYearKey].int {
+        if let year = result[kCarJSONYearKey].int {
           carObject.year = year
         }
-        if let make = car[kCarJSONMakeKey].string {
+        if let make = result[kCarJSONMakeKey].string {
           carObject.make = make
         }
-        if let model = car[kCarJSONModelKey].string {
+        if let model = result[kCarJSONModelKey].string {
           carObject.model = model
         }
         

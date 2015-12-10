@@ -122,26 +122,27 @@ let TAG_WIDTH: CGFloat = 145.0
 let TAG_FIELD_HEIGHT: CGFloat = 30.0
 let TAG_ARROW_SIZE: CGFloat = 20.0
 
+let kJSONArrayKey               = "results"
+
 // JSON Part Field keys
-let kPartJSONModsArrayKey       = "Mods"
-let kPartJSONIDKey              = "Id"
-let kPartJSONClassificationKey  = "Classification"
-let kPartJSONBrandKey           = "Brand"
-let kPartJSONModelKey           = "Model"
-let kPartJSONProductCodeKey     = "ProductCode"
-let kPartJSONSearchStringKey    = "SearchString"
+let kPartJSONIDKey              = "id"
+let kPartJSONClassificationKey  = "classification"
+let kPartJSONBrandKey           = "brand"
+let kPartJSONModelKey           = "model"
+let kPartJSONProductCodeKey     = "productCode"
+let kPartJSONSearchStringKey    = "searchString"
 let kPartJSONEmptyKey           = "Empty"
 
 // JSON Car Field keys
-let kCarJSONIDKey               = "Id"
-let kCarJSONYearKey             = "Year"
-let kCarJSONMakeKey             = "Make"
-let kCarJSONModelKey            = "Model"
-let kCarJSONTypeKey             = "Type"
-let kCarJSONHorsepowerKey       = "Horsepower"
-let kCarJSONCylindersKey        = "Cylinders"
-let kCarJSONDriveKey            = "Drive"
-let kCarJSONEmptyKey           = "Empty"
+let kCarJSONIDKey               = "id"
+let kCarJSONYearKey             = "year"
+let kCarJSONMakeKey             = "make"
+let kCarJSONModelKey            = "model"
+let kCarJSONTypeKey             = "type"
+let kCarJSONHorsepowerKey       = "horsepower"
+let kCarJSONCylindersKey        = "cylinders"
+let kCarJSONDriveKey            = "drive"
+let kCarJSONEmptyKey            = "Empty"
 
 // Annotation Field keys
 let kAnnotationClassKey         = "Annotation"
@@ -154,6 +155,7 @@ let kAnnotationPhotoKey         = "photo"
 
 // Entity Field keys
 let kEntityClassKey             = "Entity"
+let kEntityObjectIDKey          = "objectId"
 let kEntityYearKey              = "year"
 let kEntityMakeKey              = "make"
 let kEntityModelKey             = "model"
