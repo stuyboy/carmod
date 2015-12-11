@@ -542,6 +542,7 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
           button.frame = CGRectMake(0, buttonAreaPositionY, innerContentWidth, buttonHeight)
           buttonAreaPositionY += buttonHeight + buttonMargin
         } else {
+          print("setting the cancelbuttontag")
           cancelButtonTag = button.tag
         }
       }
@@ -626,11 +627,6 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
   
   // Handle ContainerView tap gesture
   func handleContainerViewTapGesture(sender: AnyObject) {
-    // cancel action
-    let action = actions[cancelButtonTag] as! DOAlertAction
-    if (action.handler != nil) {
-      action.handler(action)
-    }
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   

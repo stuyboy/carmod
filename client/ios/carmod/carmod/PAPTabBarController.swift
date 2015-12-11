@@ -86,8 +86,8 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     
     if cameraDeviceAvailable && photoLibraryAvailable {
       self.alertController = DOAlertController(title: nil, message: nil, preferredStyle: DOAlertControllerStyle.ActionSheet)
-      self.alertController.overlayColor = UIColor(red: 235/255, green: 245/255, blue: 255/255, alpha: 0.7)
-      self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+      self.alertController.overlayColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.7)
+      self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
       self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
       self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
       self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
@@ -97,7 +97,7 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
       let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
-      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: { _ in self.shouldCloseAlertController() })
       
       self.alertController.addAction(takePhotoAction)
       self.alertController.addAction(choosePhotoAction)
@@ -108,6 +108,10 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
       // if we don't have at least two options, we automatically show whichever is available (camera or roll)
       self.shouldPresentPhotoCaptureController()
     }
+  }
+  
+  func shouldCloseAlertController() {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func shouldStartCameraController() -> Bool {
