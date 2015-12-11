@@ -105,6 +105,11 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     findFriendsButton.layer.cornerRadius = 4.0
     findFriendsButton.addTarget(self, action: "onFindFriends:", forControlEvents: .TouchUpInside)
     self.emptyView.addSubview(findFriendsButton)
+    
+    let IMAGE_SIZE: CGFloat = 70.0
+    let sketchArrowImage = UIImageView(image: changeImageColor(UIImage(named: "ic_arrow_sketch")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)))
+    sketchArrowImage.frame = CGRect(x: self.emptyView.frame.width/2-IMAGE_SIZE, y: self.emptyView.frame.height-IMAGE_SIZE-50.0, width: IMAGE_SIZE, height: IMAGE_SIZE)
+    self.emptyView.addSubview(sketchArrowImage)
   }
   
   // MARK:- UITableViewDelegate

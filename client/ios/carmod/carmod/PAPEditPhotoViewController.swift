@@ -1,5 +1,6 @@
 import UIKit
 import QuartzCore
+import MobileCoreServices
 
 class TagObject: NSObject {
   var id: Int!
@@ -8,7 +9,8 @@ class TagObject: NSObject {
   var removeButton: UIButton!
 }
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, PhotoPickerDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  private var alertController: DOAlertController!
   private var keyboardHeight: CGFloat = 0.0
   private var titleField: CustomTextField!
   private var searchTagField: UITextField!
@@ -17,8 +19,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var photoTaggerView: PhotoTaggerView!
   private var photoImage: UIImageView!
   private var photoTaggerViewOrigin: CGPoint!
-  private var photoPicker: PhotoPicker!
-  private var blurView: UIVisualEffectView!
 
   private var tagHelp: UILabel!
   private var tags: [TagObject] = [] {
@@ -88,7 +88,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.initTagger()
     self.initPartPicker()
     self.initResultsTable()
-    self.initPhotoPicker()
   }
   
   // MARK:- Initializers
@@ -144,7 +143,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.addPhotoButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.addPhotoButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
     self.addPhotoButton.layer.cornerRadius = 4.0
-    self.addPhotoButton.addTarget(self, action: "onAddPhoto:", forControlEvents: .TouchUpInside)
+    self.addPhotoButton.addTarget(self, action: "photoCaptureButtonAction:", forControlEvents: .TouchUpInside)
     self.view.addSubview(self.addPhotoButton)
   }
   
@@ -164,20 +163,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.cancelButton = self.photoTaggerView.cancelButton
     self.cancelButton.addTarget(self, action: "onTapCancel:", forControlEvents: .TouchUpInside)
-  }
-  
-  private func initPhotoPicker() {
-    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-    self.blurView = UIVisualEffectView(effect: blurEffect)
-    self.blurView.frame = self.view.frame
-    self.blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-    self.blurView.alpha = 0.0
-    self.view.addSubview(self.blurView)
-    
-    self.photoPicker = PhotoPicker(frame: CGRect(x: 0.0, y: OFFSCREEN_START_POS, width: self.view.frame.width, height: PICKER_HEIGHT))
-    self.photoPicker.backgroundColor = UIColor.whiteColor()
-    self.photoPicker.delegate = self
-    self.view.addSubview(self.photoPicker)
   }
   
   private func initPartPicker() {
@@ -273,22 +258,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     self.selectedPart = PartManager.sharedInstance.PART_CATEGORIES[row]
-  }
-  
-  // MARK:- PhotoPickerDelegate
-  func takePhoto() {
-    
-  }
-  
-  func choosePhoto() {
-    
-  }
-  
-  func dismissPicker() {
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-      self.blurView.alpha = 0.0
-      self.photoPicker.frame.origin.y = OFFSCREEN_START_POS
-    })
   }
   
   func shouldUploadImage(anImage: UIImage) -> Bool {
@@ -478,13 +447,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   // MARK:- Callbacks
-  func onAddPhoto(sender: UIButton) {
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-      self.blurView.alpha = 1.0
-      self.photoPicker.frame.origin.y = self.view.frame.height-PICKER_HEIGHT
-    })
-  }
-  
   func onDragTag(sender: UIPanGestureRecognizer) {
     let translation = sender.translationInView(self.view)
     
@@ -565,6 +527,111 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func onCancelPicker(sender: UIButton) {
     self.pickerView.hidden = true
+  }
+  
+  func photoCaptureButtonAction(sender: AnyObject) {
+    let cameraDeviceAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+    
+    if cameraDeviceAvailable && photoLibraryAvailable {
+      self.alertController = DOAlertController(title: nil, message: nil, preferredStyle: DOAlertControllerStyle.ActionSheet)
+      self.alertController.overlayColor = UIColor(red: 235/255, green: 245/255, blue: 255/255, alpha: 0.7)
+      self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+      self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+      self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+      self.alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
+      
+      let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
+      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
+      
+      self.alertController.addAction(takePhotoAction)
+      self.alertController.addAction(choosePhotoAction)
+      self.alertController.addAction(cancelAction)
+      
+      self.presentViewController(self.alertController, animated: true, completion: nil)
+    } else {
+      // if we don't have at least two options, we automatically show whichever is available (camera or roll)
+      self.shouldPresentPhotoCaptureController()
+    }
+  }
+  
+  func shouldPresentPhotoCaptureController() -> Bool {
+    var presentedPhotoCaptureController: Bool = self.shouldStartCameraController()
+    
+    if !presentedPhotoCaptureController {
+      presentedPhotoCaptureController = self.shouldStartPhotoLibraryPickerController()
+    }
+    
+    return presentedPhotoCaptureController
+  }
+  
+  func shouldStartCameraController() -> Bool {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == false {
+      return false
+    }
+    
+    let cameraUI = UIImagePickerController()
+    
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera)!.contains(kUTTypeImage as String) {
+        
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        cameraUI.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) {
+          cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Rear
+        } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front) {
+          cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Front
+        }
+    } else {
+      return false
+    }
+    
+    cameraUI.allowsEditing = true
+    cameraUI.showsCameraControls = true
+    cameraUI.delegate = self
+    
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
+    
+    return true
+  }
+  
+  func shouldStartPhotoLibraryPickerController() -> Bool {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false
+      && UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) == false {
+        return false
+    }
+    
+    let cameraUI = UIImagePickerController()
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)!.contains(kUTTypeImage as String) {
+        
+        cameraUI.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        
+    } else if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.SavedPhotosAlbum)!.contains(kUTTypeImage as String) {
+        cameraUI.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        
+    } else {
+      return false
+    }
+    
+    cameraUI.allowsEditing = true
+    cameraUI.delegate = self
+    
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
+    
+    return true
   }
   
   // MARK: - Private methods

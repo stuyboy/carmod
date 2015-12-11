@@ -24,7 +24,7 @@
 		405973341C17D1EF00600615 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973331C17D1EF00600615 /* StoryViewController.swift */; };
 		405973361C17F78F00600615 /* StoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973351C17F78F00600615 /* StoryTableViewCell.swift */; };
 		405973381C17F83900600615 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973371C17F83900600615 /* PhotoTableViewCell.swift */; };
-		4059733A1C1A571700600615 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973391C1A571700600615 /* PhotoPicker.swift */; };
+		405973551C1B403000600615 /* DOAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973541C1B403000600615 /* DOAlertController.swift */; };
 		40678E091BFA9A860071BCB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E071BFA9A850071BCB8 /* Constants.swift */; };
 		40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E081BFA9A850071BCB8 /* Global.swift */; };
 		40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */; };
@@ -98,7 +98,7 @@
 		405973331C17D1EF00600615 /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		405973351C17F78F00600615 /* StoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
 		405973371C17F83900600615 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
-		405973391C1A571700600615 /* PhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		405973541C1B403000600615 /* DOAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DOAlertController.swift; sourceTree = "<group>"; };
 		40678E071BFA9A850071BCB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		40678E081BFA9A850071BCB8 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		40678E0B1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -191,9 +191,18 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		405973511C1B400600600615 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				405973541C1B403000600615 /* DOAlertController.swift */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
 		40678DFC1BFA99140071BCB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				405973511C1B400600600615 /* Alert */,
 				40678E011BFA99810071BCB8 /* Login */,
 				40678E031BFA998F0071BCB8 /* Home */,
 				40678E1D1BFA9B1C0071BCB8 /* Navigation */,
@@ -216,7 +225,6 @@
 				40678E411BFA9C270071BCB8 /* PAPImageView.swift */,
 				40678E421BFA9C270071BCB8 /* PAPProfileImageView.swift */,
 				40678E431BFA9C270071BCB8 /* PAPSettingsButtonItem.swift */,
-				405973391C1A571700600615 /* PhotoPicker.swift */,
 				403AD7EA1C067B300058999B /* TagView.swift */,
 			);
 			name = Views;
@@ -644,7 +652,7 @@
 			files = (
 				40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */,
 				40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */,
-				4059733A1C1A571700600615 /* PhotoPicker.swift in Sources */,
+				405973551C1B403000600615 /* DOAlertController.swift in Sources */,
 				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
 				405973361C17F78F00600615 /* StoryTableViewCell.swift in Sources */,
 				405973341C17D1EF00600615 /* StoryViewController.swift in Sources */,

@@ -2,11 +2,12 @@ import UIKit
 import MobileCoreServices
 
 @objc protocol PAPTabBarControllerDelegate {
-    func tabBarController(tabBarController: UITabBarController, cameraButtonTouchUpInsideAction button: UIButton)
+  func tabBarController(tabBarController: UITabBarController, cameraButtonTouchUpInsideAction button: UIButton)
 }
 
 class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   var navController: UINavigationController?
+  private var alertController: DOAlertController!
   private var photoImage: UIImage!
   
   // MARK:- UIViewController
@@ -84,17 +85,25 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
     
     if cameraDeviceAvailable && photoLibraryAvailable {
-      let actionController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+      self.alertController = DOAlertController(title: nil, message: nil, preferredStyle: DOAlertControllerStyle.ActionSheet)
+      self.alertController.overlayColor = UIColor(red: 235/255, green: 245/255, blue: 255/255, alpha: 0.7)
+      self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+      self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+      self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+      self.alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
       
-      let takePhotoAction = UIAlertAction(title: NSLocalizedString("Take Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
-      let choosePhotoAction = UIAlertAction(title: NSLocalizedString("Choose Photo", comment: ""), style: UIAlertActionStyle.Default, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
-      let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+      let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
+      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
       
-      actionController.addAction(takePhotoAction)
-      actionController.addAction(choosePhotoAction)
-      actionController.addAction(cancelAction)
+      self.alertController.addAction(takePhotoAction)
+      self.alertController.addAction(choosePhotoAction)
+      self.alertController.addAction(cancelAction)
       
-      self.presentViewController(actionController, animated: true, completion: nil)
+      self.presentViewController(self.alertController, animated: true, completion: nil)
     } else {
       // if we don't have at least two options, we automatically show whichever is available (camera or roll)
       self.shouldPresentPhotoCaptureController()
@@ -102,7 +111,6 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
   }
   
   func shouldStartCameraController() -> Bool {
-    
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == false {
       return false
     }
@@ -128,11 +136,12 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     cameraUI.showsCameraControls = true
     cameraUI.delegate = self
     
-    self.presentViewController(cameraUI, animated: true, completion: nil)
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
     
     return true
   }
-  
   
   func shouldStartPhotoLibraryPickerController() -> Bool {
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false
@@ -159,7 +168,9 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     cameraUI.allowsEditing = true
     cameraUI.delegate = self
     
-    self.presentViewController(cameraUI, animated: true, completion: nil)
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
     
     return true
   }

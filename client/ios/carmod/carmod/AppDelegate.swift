@@ -181,13 +181,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
   func presentTabBarController() {
     self.tabBarController = PAPTabBarController()
     self.homeViewController = StoryViewController()
-//    self.homeViewController!.firstLaunch = firstLaunch
-//    self.activityViewController = PAPActivityFeedViewController(style: UITableViewStyle.Plain)
     self.garageViewController = GarageViewController()
     
     let homeNavigationController: UINavigationController = UINavigationController(rootViewController: self.homeViewController!)
     let emptyNavigationController: UINavigationController = UINavigationController()
-//    let activityFeedNavigationController: UINavigationController = UINavigationController(rootViewController: self.activityViewController!)
     let garageNavigationController: UINavigationController = UINavigationController(rootViewController: self.garageViewController!)
     
     let homeImage = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.whiteColor())
@@ -203,13 +200,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
     garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
-//    let activityFeedTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Activity", comment: "Activity"), image: UIImage(named: "IconTimeline.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "IconTimelineSelected.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
-//    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
-//    activityFeedTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
-    
     homeNavigationController.tabBarItem = homeTabBarItem
     garageNavigationController.tabBarItem = garageTabBarItem
-//    activityFeedNavigationController.tabBarItem = profileTabBarItem
     
     tabBarController!.delegate = self
     tabBarController!.viewControllers = [homeNavigationController, emptyNavigationController, garageNavigationController]
@@ -250,7 +242,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     presentLoginViewController()
     
     self.homeViewController = nil
-//    self.activityViewController = nil;
     self.garageViewController = nil
   }
   
