@@ -80,8 +80,13 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.emptyView.hidden = true
     self.view.addSubview(self.emptyView)
     
+    let IMAGE_RATIO: CGFloat = 1358.0/1000.0
+    let introImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.emptyView.frame.width, height: self.emptyView.frame.width/IMAGE_RATIO))
+    introImage.image = UIImage(named: "img_intro")
+    self.emptyView.addSubview(introImage)
+    
     let TEXT_WIDTH: CGFloat = self.emptyView.frame.width-OFFSET_LARGE*2
-    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: 0.0, width: TEXT_WIDTH, height: 20.0))
+    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: introImage.frame.maxY+OFFSET_LARGE*2, width: TEXT_WIDTH, height: 20.0))
     emptyText.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     emptyText.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     emptyText.textAlignment = .Center
@@ -89,7 +94,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     emptyText.lineBreakMode = .ByWordWrapping
     emptyText.text = "No stories to show. Try adding your first story or find people to follow."
     let requiredHeight = emptyText.requiredHeight()
-    emptyText.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: self.emptyView.frame.height/2-requiredHeight/2, width: TEXT_WIDTH, height: requiredHeight)
+    emptyText.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: emptyText.frame.origin.y, width: TEXT_WIDTH, height: requiredHeight)
     self.emptyView.addSubview(emptyText)
     
     let findFriendsButton = UIButton(frame: CGRect(x: self.emptyView.frame.width/2-STANDARD_BUTTON_WIDTH/2, y: emptyText.frame.maxY+OFFSET_LARGE, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))

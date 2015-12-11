@@ -8,15 +8,18 @@ class TagObject: NSObject {
   var removeButton: UIButton!
 }
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, PhotoPickerDelegate {
   private var keyboardHeight: CGFloat = 0.0
+  private var titleField: CustomTextField!
   private var searchTagField: UITextField!
   private var partTypeButton: UIButton!
   private var cancelButton: UIButton!
   private var photoTaggerView: PhotoTaggerView!
   private var photoImage: UIImageView!
   private var photoTaggerViewOrigin: CGPoint!
-  
+  private var photoPicker: PhotoPicker!
+  private var blurView: UIVisualEffectView!
+
   private var tagHelp: UILabel!
   private var tags: [TagObject] = [] {
     didSet {
@@ -27,6 +30,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       }
     }
   }
+  private var addPhotoButton: UIButton!
   private var searchResultsTable: UITableView!
 
   private var currentTagView: TagView!
@@ -79,13 +83,32 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.shouldUploadImage(self.image)
     
+    self.initTitle()
     self.initBody()
     self.initTagger()
-    self.initPicker()
+    self.initPartPicker()
     self.initResultsTable()
+    self.initPhotoPicker()
   }
   
   // MARK:- Initializers
+  private func initTitle() {
+//    let LABEL_HEIGHT: CGFloat = 30.0
+//    
+//    self.titleField = CustomTextField(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.view.frame.width, height: LABEL_HEIGHT))
+//    self.titleField.placeholder = "Story Title (e.g. Grillcraft How-To-Installation-Guide)"
+//    self.titleField.layer.borderColor = UIColor.fromRGB(COLOR_DARK_GRAY).CGColor
+//    self.titleField.layer.borderWidth = 1.0
+//    self.titleField.layer.cornerRadius = 2.0
+//    self.titleField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+//    self.titleField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+//    self.titleField.autocorrectionType = .No
+//    self.titleField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+//    self.titleField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
+//    self.titleField.keyboardType = .NumberPad
+//    self.view.addSubview(self.titleField)
+  }
+  
   private func initBody() {
     self.photoImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
     self.photoImage.backgroundColor = UIColor.whiteColor()
@@ -105,7 +128,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoImage.addSubview(self.currentTagView)
     
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
-    let LABEL_HEIGHT: CGFloat = self.view.frame.height-self.photoImage.frame.maxY-(self.navigationController?.navigationBar.frame.height)!-STATUS_BAR_HEIGHT-OFFSET_XLARGE*2
+    let LABEL_HEIGHT: CGFloat = 70.0
     self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.photoImage.frame.maxY+OFFSET_XLARGE, width: LABEL_WIDTH, height: LABEL_HEIGHT))
     self.tagHelp.textColor = UIColor.whiteColor()
     self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
@@ -114,6 +137,15 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.tagHelp.numberOfLines = 0
     self.tagHelp.text = "Tap photo to tag parts."
     self.view.addSubview(self.tagHelp)
+    
+    self.addPhotoButton = UIButton(frame: CGRect(x: self.view.frame.width/2-STANDARD_BUTTON_WIDTH/2, y: self.view.frame.height-STANDARD_BUTTON_HEIGHT-OFFSET_XLARGE-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
+    self.addPhotoButton.setTitle("ADD ANOTHER PHOTO", forState: .Normal)
+    self.addPhotoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    self.addPhotoButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    self.addPhotoButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.addPhotoButton.layer.cornerRadius = 4.0
+    self.addPhotoButton.addTarget(self, action: "onAddPhoto:", forControlEvents: .TouchUpInside)
+    self.view.addSubview(self.addPhotoButton)
   }
   
   private func initTagger() {
@@ -134,7 +166,21 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.cancelButton.addTarget(self, action: "onTapCancel:", forControlEvents: .TouchUpInside)
   }
   
-  private func initPicker() {
+  private func initPhotoPicker() {
+    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    self.blurView = UIVisualEffectView(effect: blurEffect)
+    self.blurView.frame = self.view.frame
+    self.blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+    self.blurView.alpha = 0.0
+    self.view.addSubview(self.blurView)
+    
+    self.photoPicker = PhotoPicker(frame: CGRect(x: 0.0, y: OFFSCREEN_START_POS, width: self.view.frame.width, height: PICKER_HEIGHT))
+    self.photoPicker.backgroundColor = UIColor.whiteColor()
+    self.photoPicker.delegate = self
+    self.view.addSubview(self.photoPicker)
+  }
+  
+  private func initPartPicker() {
     let PICKER_Y: CGFloat = self.photoImage.frame.height+self.photoTaggerView.frame.height
     self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
     self.pickerView.backgroundColor = UIColor.whiteColor()
@@ -229,7 +275,21 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.selectedPart = PartManager.sharedInstance.PART_CATEGORIES[row]
   }
   
-  // MARK:- ()
+  // MARK:- PhotoPickerDelegate
+  func takePhoto() {
+    
+  }
+  
+  func choosePhoto() {
+    
+  }
+  
+  func dismissPicker() {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+      self.blurView.alpha = 0.0
+      self.photoPicker.frame.origin.y = OFFSCREEN_START_POS
+    })
+  }
   
   func shouldUploadImage(anImage: UIImage) -> Bool {
     let resizedImage: UIImage = anImage.resizedImageWithContentMode(UIViewContentMode.ScaleAspectFit, bounds: CGSizeMake(560.0, 560.0), interpolationQuality: CGInterpolationQuality.High)
@@ -418,11 +478,15 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   // MARK:- Callbacks
+  func onAddPhoto(sender: UIButton) {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+      self.blurView.alpha = 1.0
+      self.photoPicker.frame.origin.y = self.view.frame.height-PICKER_HEIGHT
+    })
+  }
+  
   func onDragTag(sender: UIPanGestureRecognizer) {
-    let location = sender.locationInView(self.view)
-//    let velocity = sender.velocityInView(self.view)
     let translation = sender.translationInView(self.view)
-    print(location)
     
     if sender.state == UIGestureRecognizerState.Began {
     } else if sender.state == UIGestureRecognizerState.Changed {
@@ -446,7 +510,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     } else {
       for var i = 0; i < self.tags.count; i++ {
         let tagObject = self.tags[i]
-        print("TAG ID at \(i) is \(tagObject.id) and sender tag = \(sender.tag)")
+//        print("TAG ID at \(i) is \(tagObject.id) and sender tag = \(sender.tag)")
         if tagObject.id == sender.tag {
           self.tags.removeAtIndex(i)
           tagObject.tagView.alpha = 0.0

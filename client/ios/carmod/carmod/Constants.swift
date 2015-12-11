@@ -122,6 +122,8 @@ let TAG_WIDTH: CGFloat = 145.0
 let TAG_FIELD_HEIGHT: CGFloat = 30.0
 let TAG_ARROW_SIZE: CGFloat = 20.0
 
+let PICKER_HEIGHT: CGFloat = 197.0
+
 let kJSONArrayKey               = "results"
 
 // JSON Part Field keys
