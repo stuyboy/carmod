@@ -1,6 +1,7 @@
 import UIKit
 import QuartzCore
 import MobileCoreServices
+import ParseUI
 
 class TagObject: NSObject {
   var id: Int!
@@ -9,7 +10,7 @@ class TagObject: NSObject {
   var removeButton: UIButton!
 }
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
   private var alertController: DOAlertController!
   private var keyboardHeight: CGFloat = 0.0
   private var titleField: CustomTextField!
@@ -17,30 +18,28 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var partTypeButton: UIButton!
   private var cancelButton: UIButton!
   private var photoTaggerView: PhotoTaggerView!
-  private var photoImage: UIImageView!
+  
+  private var photoTable: UITableView!
+  var photos: [UIImage] = [] {
+    didSet {
+      self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
+      self.photoTable.reloadData()
+    }
+  }
   private var photoTaggerViewOrigin: CGPoint!
 
   private var tagHelp: UILabel!
-  private var tags: [TagObject] = [] {
-    didSet {
-      if tags.count > 0 {
-        self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
-      } else {
-        self.tagHelp.text = "Tap photo to tag parts."
-      }
-    }
-  }
+
   private var addPhotoButton: UIButton!
   private var searchResultsTable: UITableView!
-
-  private var currentTagView: TagView!
-  private var tagID: Int = 0
   
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
   private var selectedPart: String!
   
-  var image: UIImage!
+  private var currentIndex: Int = 0
+  private var currentCell: PhotoTableViewCell!
+  
   var photoFile: PFFile?
   var thumbnailFile: PFFile?
   var fileUploadBackgroundTaskId: UIBackgroundTaskIdentifier!
@@ -56,7 +55,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   init(image aImage: UIImage) {
     super.init(nibName: nil, bundle: nil)
     
-    self.image = aImage
+    self.photos.append(aImage)
     self.fileUploadBackgroundTaskId = UIBackgroundTaskInvalid
     self.photoPostBackgroundTaskId = UIBackgroundTaskInvalid
   }
@@ -81,7 +80,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     
-    self.shouldUploadImage(self.image)
+    self.shouldUploadImage(self.photos[0])
     
     self.initTitle()
     self.initBody()
@@ -109,26 +108,25 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   private func initBody() {
-    self.photoImage = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.width))
-    self.photoImage.backgroundColor = UIColor.whiteColor()
-    self.photoImage.image = self.image
-    self.photoImage.contentMode = UIViewContentMode.ScaleAspectFit
-    self.photoImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
-    self.photoImage.userInteractionEnabled = true
-    self.view.addSubview(self.photoImage)
-  
-    self.currentTagView = TagView(frame: CGRect(x: 0.0, y: 0.0, width: TAG_WIDTH, height: TAG_FIELD_HEIGHT+TAG_ARROW_SIZE), arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
-    self.currentTagView.alpha = 0.0
-    self.currentTagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
-    
-    let removeButton = self.currentTagView.removeButton
-    removeButton.tag = -1
-    removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
-    self.photoImage.addSubview(self.currentTagView)
+    self.photoTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: gPhotoSize))
+    self.photoTable.registerClass(PhotoTableViewCell.classForCoder(), forCellReuseIdentifier: "PhotoTableViewCell")
+    self.photoTable.clipsToBounds = true
+    self.photoTable.backgroundColor = UIColor.blackColor()
+    self.photoTable.separatorColor = UIColor.blackColor()
+    self.photoTable.rowHeight = gPhotoSize
+    self.photoTable.delegate = self
+    self.photoTable.dataSource = self
+    self.photoTable.bounces = false
+    self.photoTable.pagingEnabled = true
+    if self.photoTable.respondsToSelector("separatorInset") {
+      self.photoTable.separatorInset = UIEdgeInsetsZero
+    }
+    self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
+    self.view.addSubview(self.photoTable)
     
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
     let LABEL_HEIGHT: CGFloat = 70.0
-    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.photoImage.frame.maxY+OFFSET_XLARGE, width: LABEL_WIDTH, height: LABEL_HEIGHT))
+    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: gPhotoSize+OFFSET_XLARGE, width: LABEL_WIDTH, height: LABEL_HEIGHT))
     self.tagHelp.textColor = UIColor.whiteColor()
     self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     self.tagHelp.textAlignment = .Center
@@ -137,7 +135,8 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.tagHelp.text = "Tap photo to tag parts."
     self.view.addSubview(self.tagHelp)
     
-    self.addPhotoButton = UIButton(frame: CGRect(x: self.view.frame.width/2-STANDARD_BUTTON_WIDTH/2, y: self.view.frame.height-STANDARD_BUTTON_HEIGHT-OFFSET_XLARGE-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
+    let BUTTON_WIDTH: CGFloat = self.view.frame.width-OFFSET_SMALL*2
+    self.addPhotoButton = UIButton(frame: CGRect(x: self.view.frame.width/2-BUTTON_WIDTH/2, y: self.view.frame.height-STANDARD_BUTTON_HEIGHT-OFFSET_XLARGE-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!, width: BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
     self.addPhotoButton.setTitle("ADD ANOTHER PHOTO", forState: .Normal)
     self.addPhotoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     self.addPhotoButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
@@ -162,11 +161,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
     
     self.cancelButton = self.photoTaggerView.cancelButton
-    self.cancelButton.addTarget(self, action: "onTapCancel:", forControlEvents: .TouchUpInside)
+    self.cancelButton.addTarget(self, action: "stopTagging", forControlEvents: .TouchUpInside)
   }
   
   private func initPartPicker() {
-    let PICKER_Y: CGFloat = self.photoImage.frame.height+self.photoTaggerView.frame.height
+    let PICKER_Y: CGFloat = gPhotoSize+self.photoTaggerView.frame.height
     self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
     self.pickerView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.pickerView)
@@ -234,6 +233,12 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     }
   }
   
+  func scrollViewDidScroll(scrollView: UIScrollView) {
+    if scrollView == self.photoTable {
+      self.stopTagging()
+    }
+  }
+  
   // MARK:- UIPickerViewDelegate
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
@@ -276,7 +281,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       UIApplication.sharedApplication().endBackgroundTask(self.fileUploadBackgroundTaskId)
     }
     
-    print("Requested background expiration task with id \(self.fileUploadBackgroundTaskId) for Anypic photo upload")
     self.photoFile!.saveInBackgroundWithBlock { (succeeded, error) in
       if (succeeded) {
         print("Photo uploaded successfully")
@@ -349,28 +353,28 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         // userInfo might contain any caption which might have been posted by the uploader
         var annotations: [PFObject] = []
         
-        if self.tags.count > 0 {
-          for tag in self.tags {
-            let annotation = PFObject(className: kAnnotationClassKey)
-//            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
-            annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
-            annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
-            annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
-            annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
-            annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-//            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
-            let coordinates = [tag.tagView.frame.origin.x, tag.tagView.frame.origin.y]
-            annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
-        
-            let ACL = PFACL(user: PFUser.currentUser()!)
-            ACL.setPublicReadAccess(true)
-            annotation.ACL = ACL
-            
-            annotations.append(annotation)
-            var err: NSError?
-            annotation.save(&err)
-          }
-        }
+//        if self.tags.count > 0 {
+//          for tag in self.tags {
+//            let annotation = PFObject(className: kAnnotationClassKey)
+////            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+//            annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
+//            annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
+//            annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
+//            annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
+//            annotation.setObject(photo, forKey: kAnnotationPhotoKey)
+////            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
+//            let coordinates = [tag.tagView.frame.origin.x, tag.tagView.frame.origin.y]
+//            annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
+//        
+//            let ACL = PFACL(user: PFUser.currentUser()!)
+//            ACL.setPublicReadAccess(true)
+//            annotation.ACL = ACL
+//            
+//            annotations.append(annotation)
+//            var err: NSError?
+//            annotation.save(&err)
+//          }
+//        }
         
         PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
         
@@ -394,95 +398,88 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK: - UITableViewDataSource
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return PartManager.sharedInstance.searchResults.count
+    var count = 0
+    
+    if tableView == self.photoTable {
+      count = self.photos.count
+    } else if tableView == self.searchResultsTable {
+      count = PartManager.sharedInstance.searchResults.count
+    }
+    
+    return count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
-    
-    if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
-      if partObject.partNumber == kPartJSONEmptyKey {
-        cell.partObject = nil
-      } else {
-        cell.partObject = partObject
+    if tableView == self.photoTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
+      
+      if let image = self.photos[safe: indexPath.row] {
+        cell.photo.image = image
+        cell.delegate = self
+        
+        self.currentCell = cell
+      }
+  
+      return cell
+    } else if tableView == self.searchResultsTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
+      
+      if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
+        if partObject.partNumber == kPartJSONEmptyKey {
+          cell.partObject = nil
+        } else {
+          cell.partObject = partObject
+        }
+        
+        cell.searchKeywords = self.searchTagField.text
       }
       
-      cell.searchKeywords = self.searchTagField.text
+      return cell
     }
     
-    return cell
+    return UITableViewCell()
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
-    
-    if partObject.partNumber == kPartJSONEmptyKey {
-      partObject.partNumber = self.searchTagField.text
-      partObject.brand = ""
-      partObject.model = ""
+    if tableView == self.photoTable {
+      
+    } else if tableView == self.searchResultsTable {
+      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+      
+      if partObject.partNumber == kPartJSONEmptyKey {
+        partObject.partNumber = self.searchTagField.text
+        partObject.brand = ""
+        partObject.model = ""
+      }
+      
+      self.currentCell.addTag(partObject)
+      
+      self.resetView()
+    }
+  }
+  
+  // MARK:- PhotoTableViewCellDelegate
+  func changedTags(tagCount: Int) {
+    if tagCount > 0 {
+      self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
+    } else {
+      self.tagHelp.text = "Tap photo to tag parts."
+    }
+  }
+  
+  func tappedPhoto() {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.photoTaggerView.alpha = 1.0
     }
     
-    let tagObject = TagObject()
-    tagObject.id = tagID++
-    
-    let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
-    tagView.alpha = 0.8
-    tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
-    tagView.toggleRemoveVisibility(true)
-    tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
-    tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
-    
-    tagObject.removeButton = tagView.removeButton
-    tagObject.removeButton.tag = tagObject.id
-    tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
-    
-    self.photoImage.addSubview(tagView)
-    
-    tagObject.partObject = partObject
-    tagObject.tagView = tagView
-    
-    self.tags.append(tagObject)
-    
+    self.searchTagField.becomeFirstResponder()
+  }
+  
+  func removedTag() {
     self.resetView()
   }
   
   // MARK:- Callbacks
-  func onDragTag(sender: UIPanGestureRecognizer) {
-    let translation = sender.translationInView(self.view)
-    
-    if sender.state == UIGestureRecognizerState.Began {
-    } else if sender.state == UIGestureRecognizerState.Changed {
-      sender.view!.center.x = sender.view!.center.x+translation.x
-      sender.view!.center.y = sender.view!.center.y+translation.y
-      
-      sender.setTranslation(CGPointZero, inView: self.view)
-    } else if sender.state == UIGestureRecognizerState.Ended {
-
-    }
-  }
-  
-  func onTapTagView(sender: UITapGestureRecognizer) {
-    let tappedTagView: TagView = sender.view as! TagView
-    tappedTagView.toggleRemoveVisibility(false)
-  }
-  
-  func onRemoveTag(sender: UIButton) {
-    if sender.tag == -1 {
-      self.resetView()
-    } else {
-      for var i = 0; i < self.tags.count; i++ {
-        let tagObject = self.tags[i]
-//        print("TAG ID at \(i) is \(tagObject.id) and sender tag = \(sender.tag)")
-        if tagObject.id == sender.tag {
-          self.tags.removeAtIndex(i)
-          tagObject.tagView.alpha = 0.0
-          
-          break
-        }
-      }
-    }
-  }
-  
   func onChangeText(sender: UITextField) {
     if sender.text != "" {
       PartManager.sharedInstance.searchPart(sender.text!)
@@ -499,25 +496,9 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.pickerView.hidden = false
   }
   
-  func onTapCancel(sender: UIButton) {
+  func stopTagging() {
     self.resetView()
-  }
-  
-  func onTapPhoto(sender: UITapGestureRecognizer) {
-    let point = sender.locationInView(self.view)
-    self.currentTagView.frame.origin.x = point.x-TAG_WIDTH/2
-    self.currentTagView.frame.origin.y = point.y
-    
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
-      self.currentTagView.alpha = 0.8
-      self.photoTaggerView.alpha = 1.0
-    }
-    
-    for tagObject in self.tags {
-      tagObject.tagView.toggleRemoveVisibility(true)
-    }
-    
-    self.searchTagField.becomeFirstResponder()
+    PartManager.sharedInstance.eventManager.trigger(EVENT_PICKER_CANCELLED)
   }
   
   func onDonePicker(sender: UIButton) {
@@ -638,12 +619,33 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     return true
   }
   
+  // MARK:- UIImagePickerDelegate
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    self.dismissViewControllerAnimated(false, completion: nil)
+    
+    let image = info[UIImagePickerControllerEditedImage] as! UIImage
+    self.photos.append(image)
+    self.currentIndex = self.photos.count
+    self.reloadPhotos()
+  }
+  
   // MARK: - Private methods
+  private func reloadPhotos() {
+    self.photoTable.reloadData()
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.photoTable.setContentOffset(CGPoint(x: 0.0, y: gPhotoSize*CGFloat(self.photos.count-1)), animated: true)
+    }
+  }
+  
   func resetView() {
     if self.searchTagField.isFirstResponder() {
       self.searchTagField.resignFirstResponder()
     }
-    self.currentTagView.alpha = 0.0
+    
     self.searchTagField.text = ""
     self.searchResultsTable.alpha = 0.0
     self.photoTaggerView.reset()

@@ -542,7 +542,6 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
           button.frame = CGRectMake(0, buttonAreaPositionY, innerContentWidth, buttonHeight)
           buttonAreaPositionY += buttonHeight + buttonMargin
         } else {
-          print("setting the cancelbuttontag")
           cancelButtonTag = button.tag
         }
       }

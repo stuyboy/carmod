@@ -9,12 +9,35 @@
 import ParseUI
 import MRProgress
 
+protocol PhotoTableViewCellDelegate: class {
+  func changedTags(tagCount: Int)
+  func tappedPhoto()
+  func removedTag()
+}
+
 class PhotoTableViewCell: UITableViewCell {
-  var photo: PFImageView!
+  weak var delegate: PhotoTableViewCellDelegate?
+  
+  var isTagsDisplayed: Bool = false
+  var photo: PFImageView = PFImageView()
+  
   private var progressView: MRProgressOverlayView!
+  private var currentTagView: TagView!
+  private var tagID: Int = 0
+  private var tags: [TagObject] = [] {
+    didSet {
+      if let delegate = self.delegate {
+        delegate.changedTags(self.tags.count)
+      }
+    }
+  }
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    PartManager.sharedInstance.eventManager.listenTo(EVENT_PICKER_CANCELLED) { () -> () in
+      self.currentTagView.alpha = 0.0
+    }
     
     self.backgroundColor = UIColor.blackColor()
     
@@ -25,8 +48,19 @@ class PhotoTableViewCell: UITableViewCell {
       self.preservesSuperviewLayoutMargins = false
     }
     
-    self.photo = PFImageView()
+    self.photo.contentMode = UIViewContentMode.ScaleAspectFit
+    self.photo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
+    self.photo.userInteractionEnabled = true
     self.addSubview(self.photo)
+    
+    self.currentTagView = TagView(frame: CGRect(x: 0.0, y: 0.0, width: TAG_WIDTH, height: TAG_FIELD_HEIGHT+TAG_ARROW_SIZE), arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+    self.currentTagView.alpha = 0.0
+    self.currentTagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+    
+    let removeButton = self.currentTagView.removeButton
+    removeButton.tag = -1
+    removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+    self.photo.addSubview(self.currentTagView)
   }
   
   override func layoutSubviews() {
@@ -38,7 +72,10 @@ class PhotoTableViewCell: UITableViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    self.photo = nil
+    
+//    self.photo.subviews.forEach({ $0.removeFromSuperview() })
+    self.photo.image = nil
+    self.tags.removeAll()
   }
   
   func loadPhoto() {
@@ -56,6 +93,88 @@ class PhotoTableViewCell: UITableViewCell {
       }) { (percentDone) -> Void in
         self.progressView.setProgress(Float(percentDone/100), animated: true)
     }
+  }
+  
+  func addTag(partObject: PartObject) {
+    self.currentTagView.alpha = 0.0
+    
+    let tagObject = TagObject()
+    tagObject.id = tagID++
+    
+    let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+    tagView.alpha = 0.8
+    tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
+    tagView.toggleRemoveVisibility(true)
+    tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
+    tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+    
+    tagObject.removeButton = tagView.removeButton
+    tagObject.removeButton.tag = tagObject.id
+    tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+    
+    self.photo.addSubview(tagView)
+    
+    tagObject.partObject = partObject
+    tagObject.tagView = tagView
+    
+    self.tags.append(tagObject)
+  }
+  
+  // MARK:- Callbacks
+  func onTapPhoto(sender: UITapGestureRecognizer) {
+    let point = sender.locationInView(self.photo)
+    self.currentTagView.frame.origin.x = point.x-TAG_WIDTH/2
+    self.currentTagView.frame.origin.y = point.y
+    
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.currentTagView.alpha = 0.8
+    }
+    
+    for tagObject in self.tags {
+      tagObject.tagView.toggleRemoveVisibility(true)
+    }
+    
+    if let delegate = self.delegate {
+      delegate.tappedPhoto()
+    }
+  }
+  
+  func onRemoveTag(sender: UIButton) {
+    if sender.tag == -1 {
+      self.currentTagView.alpha = 0.0
+      if let delegate = self.delegate {
+        delegate.removedTag()
+      }
+    } else {
+      for var i = 0; i < self.tags.count; i++ {
+        let tagObject = self.tags[i]
+        if tagObject.id == sender.tag {
+          self.tags.removeAtIndex(i)
+          tagObject.tagView.alpha = 0.0
+          
+          break
+        }
+      }
+    }
+  }
+  
+  func onDragTag(sender: UIPanGestureRecognizer) {
+    let translation = sender.translationInView(self.photo)
+    
+    if sender.state == UIGestureRecognizerState.Began {
+    } else if sender.state == UIGestureRecognizerState.Changed {
+      sender.view!.center.x = sender.view!.center.x+translation.x
+      sender.view!.center.y = sender.view!.center.y+translation.y
+      
+      sender.setTranslation(CGPointZero, inView: self.photo)
+    } else if sender.state == UIGestureRecognizerState.Ended {
+      
+    }
+  }
+  
+  func onTapTagView(sender: UITapGestureRecognizer) {
+    let tappedTagView: TagView = sender.view as! TagView
+    tappedTagView.toggleRemoveVisibility(false)
   }
   
   required init?(coder aDecoder: NSCoder) {

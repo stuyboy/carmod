@@ -116,6 +116,7 @@ let NSERROR_NO_INTERNET = NSError(domain: APP_DOMAIN, code: ERROR_NO_INTERNET, u
 
 let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
 let EVENT_CAR_RESULTS_COMPLETE: String = "Event::CarResultsComplete"
+let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0

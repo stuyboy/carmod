@@ -13,7 +13,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   
   var photos: [PFObject]! {
     didSet {
-      self.photoTable.frame = CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
+      self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
       self.photoTable.reloadData()
     }
   }
@@ -34,10 +34,12 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     self.photoTable.registerClass(PhotoTableViewCell.classForCoder(), forCellReuseIdentifier: "PhotoTableViewCell")
     self.photoTable.clipsToBounds = true
     self.photoTable.backgroundColor = UIColor.blackColor()
+    self.photoTable.separatorColor = UIColor.blackColor()
     self.photoTable.rowHeight = gPhotoSize
     self.photoTable.delegate = self
     self.photoTable.dataSource = self
     self.photoTable.bounces = false
+    self.photoTable.pagingEnabled = true
     if self.photoTable.respondsToSelector("separatorInset") {
       self.photoTable.separatorInset = UIEdgeInsetsZero
     }
