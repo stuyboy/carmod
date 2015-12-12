@@ -9,6 +9,13 @@
 import ParseUI
 import MRProgress
 
+class TagObject: NSObject {
+  var id: Int!
+  var partObject: PartObject!
+  var tagView: TagView!
+  var removeButton: UIButton!
+}
+
 protocol PhotoTableViewCellDelegate: class {
   func changedTags(tagCount: Int)
   func tappedPhoto()
@@ -18,13 +25,12 @@ protocol PhotoTableViewCellDelegate: class {
 class PhotoTableViewCell: UITableViewCell {
   weak var delegate: PhotoTableViewCellDelegate?
   
-  var isTagsDisplayed: Bool = false
-  var photo: PFImageView = PFImageView()
+  var photo: PFImageView!
   
   private var progressView: MRProgressOverlayView!
   private var currentTagView: TagView!
   private var tagID: Int = 0
-  private var tags: [TagObject] = [] {
+  private var tags: [TagObject]! {
     didSet {
       if let delegate = self.delegate {
         delegate.changedTags(self.tags.count)
@@ -48,6 +54,9 @@ class PhotoTableViewCell: UITableViewCell {
       self.preservesSuperviewLayoutMargins = false
     }
     
+    self.tags = []
+    
+    self.photo = PFImageView()
     self.photo.contentMode = UIViewContentMode.ScaleAspectFit
     self.photo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
     self.photo.userInteractionEnabled = true
@@ -65,17 +74,13 @@ class PhotoTableViewCell: UITableViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
+   
     self.photo.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.width, height: self.bounds.height)
     self.photo.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
   }
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    
-//    self.photo.subviews.forEach({ $0.removeFromSuperview() })
-    self.photo.image = nil
-    self.tags.removeAll()
   }
   
   func loadPhoto() {
@@ -96,28 +101,32 @@ class PhotoTableViewCell: UITableViewCell {
   }
   
   func addTag(partObject: PartObject) {
-    self.currentTagView.alpha = 0.0
-    
-    let tagObject = TagObject()
-    tagObject.id = tagID++
-    
-    let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
-    tagView.alpha = 0.8
-    tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
-    tagView.toggleRemoveVisibility(true)
-    tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
-    tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
-    
-    tagObject.removeButton = tagView.removeButton
-    tagObject.removeButton.tag = tagObject.id
-    tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
-    
-    self.photo.addSubview(tagView)
-    
-    tagObject.partObject = partObject
-    tagObject.tagView = tagView
-    
-    self.tags.append(tagObject)
+    print("self.currentTagView.alpha = \(self.currentTagView.alpha)")
+    if self.currentTagView.alpha != 0.0 {
+      print("ADDING!")
+      self.currentTagView.alpha = 0.0
+      
+      let tagObject = TagObject()
+      tagObject.id = tagID++
+      
+      let tagView = TagView(frame: self.currentTagView.frame, arrowSize: TAG_ARROW_SIZE, fieldHeight: TAG_FIELD_HEIGHT)
+      tagView.alpha = 0.8
+      tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(partObject)
+      tagView.toggleRemoveVisibility(true)
+      tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
+      tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+      
+      tagObject.removeButton = tagView.removeButton
+      tagObject.removeButton.tag = tagObject.id
+      tagObject.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
+      
+      self.photo.addSubview(tagView)
+      
+      tagObject.partObject = partObject
+      tagObject.tagView = tagView
+      
+      self.tags.append(tagObject)
+    }
   }
   
   // MARK:- Callbacks
@@ -179,6 +188,17 @@ class PhotoTableViewCell: UITableViewCell {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK:- Debug methods
+  func printTags() {
+    print("Number of tags = \(self.tags.count)")
+    for var i = 0; i < self.tags.count; i++ {
+      let tagObject: TagObject = self.tags[i]
+      let partObject: PartObject = tagObject.partObject
+      
+      print("Part Object Brand = \(partObject.brand), Model = \(partObject.model)")
+    }
   }
 
 }

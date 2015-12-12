@@ -3,13 +3,6 @@ import QuartzCore
 import MobileCoreServices
 import ParseUI
 
-class TagObject: NSObject {
-  var id: Int!
-  var partObject: PartObject!
-  var tagView: TagView!
-  var removeButton: UIButton!
-}
-
 class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
   private var alertController: DOAlertController!
   private var keyboardHeight: CGFloat = 0.0
@@ -36,9 +29,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
   private var selectedPart: String!
-  
-  private var currentIndex: Int = 0
-  private var currentCell: PhotoTableViewCell!
   
   var photoFile: PFFile?
   var thumbnailFile: PFFile?
@@ -411,13 +401,14 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     if tableView == self.photoTable {
+      print("PAPEditPhotoController:cellForRowAtIndexPath -> Index=\(indexPath.row)")
       let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
-      
+
       if let image = self.photos[safe: indexPath.row] {
         cell.photo.image = image
         cell.delegate = self
+        cell.printTags()
         
-        self.currentCell = cell
       }
   
       return cell
@@ -452,8 +443,14 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         partObject.model = ""
       }
       
-      self.currentCell.addTag(partObject)
-      
+//      self.currentCell.addTag(partObject)
+      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+      for indexPath in indexPaths {
+        print("Adding part to indexpath at row = \(indexPath.row)")
+        let photoCell: PhotoTableViewCell = self.photoTable.cellForRowAtIndexPath(indexPath) as! PhotoTableViewCell
+        photoCell.addTag(partObject)
+      }
+
       self.resetView()
     }
   }
@@ -629,7 +626,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     let image = info[UIImagePickerControllerEditedImage] as! UIImage
     self.photos.append(image)
-    self.currentIndex = self.photos.count
     self.reloadPhotos()
   }
   
