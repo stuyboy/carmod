@@ -19,8 +19,11 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       self.photoTable.reloadData()
     }
   }
+  
+  private var tagID: Int = 0
+  private var tags = Array<Array<TagObject>>()
+  
   private var photoTaggerViewOrigin: CGPoint!
-
   private var tagHelp: UILabel!
 
   private var addPhotoButton: UIButton!
@@ -48,6 +51,9 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photos.append(aImage)
     self.fileUploadBackgroundTaskId = UIBackgroundTaskInvalid
     self.photoPostBackgroundTaskId = UIBackgroundTaskInvalid
+    
+    let tagArray: [TagObject] = []
+    self.tags.append(tagArray) // Add empty Tag Array as init
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -108,6 +114,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoTable.dataSource = self
     self.photoTable.bounces = false
     self.photoTable.pagingEnabled = true
+    self.photoTable.allowsSelection = false
     if self.photoTable.respondsToSelector("separatorInset") {
       self.photoTable.separatorInset = UIEdgeInsetsZero
     }
@@ -401,14 +408,12 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     if tableView == self.photoTable {
-      print("PAPEditPhotoController:cellForRowAtIndexPath -> Index=\(indexPath.row)")
       let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
 
       if let image = self.photos[safe: indexPath.row] {
-        cell.photo.image = image
         cell.delegate = self
-        cell.printTags()
-        
+        cell.photo.image = image
+        cell.tags = self.tags[indexPath.row]
       }
   
       return cell
@@ -443,27 +448,13 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
         partObject.model = ""
       }
       
-//      self.currentCell.addTag(partObject)
-      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
-      for indexPath in indexPaths {
-        print("Adding part to indexpath at row = \(indexPath.row)")
-        let photoCell: PhotoTableViewCell = self.photoTable.cellForRowAtIndexPath(indexPath) as! PhotoTableViewCell
-        photoCell.addTag(partObject)
-      }
-
+      self.addTag(partObject)
       self.resetView()
+      self.photoTable.reloadData()
     }
   }
   
-  // MARK:- PhotoTableViewCellDelegate
-  func changedTags(tagCount: Int) {
-    if tagCount > 0 {
-      self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
-    } else {
-      self.tagHelp.text = "Tap photo to tag parts."
-    }
-  }
-  
+  // MARK:- PhotoTableViewCellDelegate  
   func tappedPhoto() {
     UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
       self.photoTaggerView.alpha = 1.0
@@ -472,8 +463,42 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.searchTagField.becomeFirstResponder()
   }
   
-  func removedTag() {
+  func removedTag(tagIndex: Int) {
+    if tagIndex != -1 {
+      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+      for indexPath in indexPaths {
+        self.tags[indexPath.row].removeAtIndex(tagIndex)
+        
+        break
+      }
+    }
     self.resetView()
+  }
+  
+  func changedCoordinates(tagIndex: Int, coordinates: CGPoint) {
+    let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+    for indexPath in indexPaths {
+      let tagArray = self.tags[indexPath.row]
+      let tagObject = tagArray[tagIndex]
+      tagObject.coordinates = coordinates
+      
+      break
+    }
+  }
+  
+  // MARK:- UIImagePickerDelegate
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    self.dismissViewControllerAnimated(false, completion: nil)
+    
+    let image = info[UIImagePickerControllerEditedImage] as! UIImage
+    self.photos.append(image)
+    let tagArray: [TagObject] = []
+    self.tags.append(tagArray) // Add empty Tag Array as init
+    self.reloadPhotos()
   }
   
   // MARK:- Callbacks
@@ -616,19 +641,31 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     return true
   }
   
-  // MARK:- UIImagePickerDelegate
-  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-    self.dismissViewControllerAnimated(true, completion: nil)
-  }
-  
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-    self.dismissViewControllerAnimated(false, completion: nil)
+  // MARK:- Tag methods
+  func addTag(partObject: PartObject) {
+    let tagObject = TagObject()
+    tagObject.partObject = partObject
+    tagObject.id = tagID++
     
-    let image = info[UIImagePickerControllerEditedImage] as! UIImage
-    self.photos.append(image)
-    self.reloadPhotos()
+    let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+    var cell: PhotoTableViewCell = PhotoTableViewCell()
+    for indexPath in indexPaths {
+      // Assume just one cell should be visible
+      cell = self.photoTable.cellForRowAtIndexPath(indexPath) as! PhotoTableViewCell
+      tagObject.coordinates = cell.currentTagView.frame.origin
+      cell.currentTagView.alpha = 0.0
+      self.tags[indexPath.row].append(tagObject)
+      
+      break
+    }
+    
+    if self.tags.count > 0 {
+      self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
+    } else {
+      self.tagHelp.text = "Tap photo to tag parts."
+    }
   }
-  
+    
   // MARK: - Private methods
   private func reloadPhotos() {
     self.photoTable.reloadData()

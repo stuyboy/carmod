@@ -58,6 +58,7 @@
 		40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40722E231BFA98B000D6F10C /* Assets.xcassets */; };
 		40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E311BFA98B100D6F10C /* carmodTests.swift */; };
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
+		40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD61C1CC8ED00B46B44 /* TagManager.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		40722E381BFA98B100D6F10C /* carmodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carmodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40722E3C1BFA98B100D6F10C /* carmodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodUITests.swift; sourceTree = "<group>"; };
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40954BD61C1CC8ED00B46B44 /* TagManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +189,7 @@
 				40220E5F1C00310A001CF280 /* EventManager.swift */,
 				405973311C163A6000600615 /* CarManager.swift */,
 				40220E591BFFECAD001CF280 /* PartManager.swift */,
+				40954BD61C1CC8ED00B46B44 /* TagManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				405973341C17D1EF00600615 /* StoryViewController.swift in Sources */,
 				405973381C17F83900600615 /* PhotoTableViewCell.swift in Sources */,
 				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
+				40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */,
 				40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */,
 				405973301C1639C600600615 /* CarTableViewCell.swift in Sources */,
 				40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */,
