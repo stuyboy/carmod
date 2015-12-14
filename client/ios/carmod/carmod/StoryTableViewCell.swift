@@ -56,7 +56,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     self.addSubview(self.photoTable)
   }
   
-  // MARK:- UITableViewDelegate
+  // MARK:- UITableViewDelegate  
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.photos.count
   }

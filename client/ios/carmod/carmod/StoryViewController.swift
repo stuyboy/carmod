@@ -16,9 +16,19 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   private var stories = Array<Array<PFObject>>()
   private var emptyView: UIView!
   private var isInitialLoad: Bool = true
+  private var activityIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.view.backgroundColor = UIColor.blackColor()
+    
+    let INDICATOR_SIZE: CGFloat = 100.0
+    self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.frame.width/2-INDICATOR_SIZE/2, y: self.view.frame.height/2-INDICATOR_SIZE/2-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!, width: INDICATOR_SIZE, height: INDICATOR_SIZE))
+    self.activityIndicator.hidesWhenStopped = true
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+    self.view.addSubview(self.activityIndicator)
+    self.activityIndicator.startAnimating()
     
     gPhotoSize = self.view.frame.width
     
@@ -66,7 +76,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.storyTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: TABLE_HEIGHT))
     self.storyTable.registerClass(StoryTableViewCell.classForCoder(), forCellReuseIdentifier: "StoryTableViewCell")
     self.storyTable.clipsToBounds = true
-    self.storyTable.backgroundColor = UIColor.blackColor()
+    self.storyTable.backgroundColor = UIColor.clearColor()
     self.storyTable.separatorColor = UIColor.clearColor()
     self.storyTable.rowHeight = gPhotoSize
     self.storyTable.delegate = self
@@ -141,7 +151,37 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
 //    let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
 
   }
+//  
+//  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//    return 1
+//  }
+//  
+//  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//    if indexPath.row % 2 == 0 {
+//      return 44.0
+//    }
+//    
+//    return gPhotoSize
+//  }
+//  
+//  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//    return nil
+//  }
+//  
+//  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//    return 0.0
+//  }
+//  
+//  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//    return 0.0
+//  }
+//  
+//  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//    return nil
+//  }
   
+  
+  // MARK:- Public methods
   func refreshStories() {
     self.storyTable.contentSize = CGSize(width: self.storyTable.frame.width, height: gPhotoSize*CGFloat(self.stories.count))
     self.storyTable.reloadData()
@@ -149,10 +189,6 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     if self.refreshControl.refreshing {
       self.refreshControl.endRefreshing()
     }
-  }
-
-  override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return UIStatusBarStyle.LightContent
   }
   
   // MARK:- Callbacks
@@ -190,5 +226,9 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
 //      let photoDetailsVC = PAPPhotoDetailsViewController(photo: photo!)
 //      self.navigationController!.pushViewController(photoDetailsVC, animated: true)
 //    }
+  }
+  
+  override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    return UIStatusBarStyle.LightContent
   }
 }
