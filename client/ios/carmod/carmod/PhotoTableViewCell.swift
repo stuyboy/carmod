@@ -18,6 +18,11 @@ protocol PhotoTableViewCellDelegate: class {
 class PhotoTableViewCell: UITableViewCell {
   weak var delegate: PhotoTableViewCellDelegate?
   
+  var isInteractionEnabled: Bool = true {
+    didSet {
+      self.contentView.userInteractionEnabled = isInteractionEnabled
+    }
+  }
   var photo: PFImageView!
   var currentTagView: TagView!
   var tags: [TagObject]! {
@@ -27,8 +32,11 @@ class PhotoTableViewCell: UITableViewCell {
         tagView.alpha = 0.8
         tagView.tagLabel.text = PartManager.sharedInstance.generateDisplayName(tags[i].partObject)
         tagView.toggleRemoveVisibility(true)
-        tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
-        tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+        
+        if self.isInteractionEnabled {
+          tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTagView:"))
+          tagView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "onDragTag:"))
+        }
         
         tagView.removeButton.tag = i
         tagView.removeButton.addTarget(self, action: "onRemoveTag:", forControlEvents: .TouchUpInside)
@@ -147,7 +155,7 @@ class PhotoTableViewCell: UITableViewCell {
     } else if sender.state == UIGestureRecognizerState.Changed {
       sender.view!.center.x = sender.view!.center.x+translation.x
       sender.view!.center.y = sender.view!.center.y+translation.y
-      
+      print("Dragging to point = \(sender.view!.frame.origin)")
       sender.setTranslation(CGPointZero, inView: self.contentView)
     } else if sender.state == UIGestureRecognizerState.Ended && tagView.removeButton.tag != -1 {
       if let delegate = self.delegate {

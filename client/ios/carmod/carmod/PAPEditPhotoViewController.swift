@@ -33,8 +33,8 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var partPicker: UIPickerView!
   private var selectedPart: String!
   
-  var photoFile: PFFile?
-  var thumbnailFile: PFFile?
+  var photoFiles: [PFFile] = []
+  var thumbnailFiles: [PFFile] = []
   var fileUploadBackgroundTaskId: UIBackgroundTaskIdentifier!
   var photoPostBackgroundTaskId: UIBackgroundTaskIdentifier!
   
@@ -71,7 +71,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("cancelButtonAction:"))
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishPhoto:"))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: Selector("publishStory:"))
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
@@ -270,18 +270,21 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     guard let imageData: NSData = UIImageJPEGRepresentation(resizedImage, 0.8) else { return false }
     guard let thumbnailImageData: NSData = UIImagePNGRepresentation(thumbnailImage) else { return false }
     
-    self.photoFile = PFFile(data: imageData)
-    self.thumbnailFile = PFFile(data: thumbnailImageData)
+    let photoFile = PFFile(data: imageData)
+    self.photoFiles.append(photoFile)
+    
+    let thumbnailFile = PFFile(data: thumbnailImageData)
+    self.thumbnailFiles.append(thumbnailFile)
     
     // Request a background execution task to allow us to finish uploading the photo even if the app is backgrounded
     self.fileUploadBackgroundTaskId = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
       UIApplication.sharedApplication().endBackgroundTask(self.fileUploadBackgroundTaskId)
     }
     
-    self.photoFile!.saveInBackgroundWithBlock { (succeeded, error) in
+    photoFile.saveInBackgroundWithBlock { (succeeded, error) in
       if (succeeded) {
         print("Photo uploaded successfully")
-        self.thumbnailFile!.saveInBackgroundWithBlock { (succeeded, error) in
+        thumbnailFile.saveInBackgroundWithBlock { (succeeded, error) in
           if (succeeded) {
             print("Thumbnail uploaded successfully")
           }
@@ -307,8 +310,8 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
 
   }
   
-  func publishPhoto(sender: AnyObject) {
-    if self.photoFile == nil || self.thumbnailFile == nil {
+  func publishStory(sender: AnyObject) {
+    if photos.count == 0 {
       let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
       let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
       alertController.addAction(alertAction)
@@ -316,75 +319,66 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       return
     }
     
-    // both files have finished uploading
-  
-    // Create the photo
-    let photo = PFObject(className: kPAPPhotoClassKey)
-    photo.setObject(PFUser.currentUser()!, forKey: kPAPPhotoUserKey)
-    photo.setObject(self.photoFile!, forKey: kPAPPhotoPictureKey)
-    photo.setObject(self.thumbnailFile!, forKey: kPAPPhotoThumbnailKey)
-    // photos are public, but may only be modified by the user who uploaded them
-    let photoACL = PFACL(user: PFUser.currentUser()!)
-    photoACL.setPublicReadAccess(true)
-    photo.ACL = photoACL
+    // Create a story
+    let story = PFObject(className: kStoryClassKey)
+    story.setObject(PFUser.currentUser()!, forKey: kStoryAuthorKey)
+    story.setObject("Test story title", forKey: kStoryTitleKey)
+    let relation = story.relationForKey(kStoryPhotosKey)
     
-    // Request a background execution task to allow us to finish uploading the photo even if the app is backgrounded
-    self.photoPostBackgroundTaskId = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-      UIApplication.sharedApplication().endBackgroundTask(self.photoPostBackgroundTaskId)
-    }
-    
-    // save
-    photo.saveInBackgroundWithBlock { (succeeded, error) in
-      if succeeded {
+    print("Publishing \(self.photos.count) photos with \(self.tags.count) tags and \(self.photoFiles.count) photo files")
+    for var i = 0; i < self.photos.count; i++ {
+      let photo = PFObject(className: kPAPPhotoClassKey)
+      photo.setObject(PFUser.currentUser()!, forKey: kPAPPhotoUserKey)
+      photo.setObject(self.photoFiles[i], forKey: kPAPPhotoPictureKey)
+      photo.setObject(self.thumbnailFiles[i], forKey: kPAPPhotoThumbnailKey)
+      // photos are public, but may only be modified by the user who uploaded them
+      let photoACL = PFACL(user: PFUser.currentUser()!)
+      photoACL.setPublicReadAccess(true)
+      photo.ACL = photoACL
+      
+//      // Request a background execution task to allow us to finish uploading the photo even if the app is backgrounded
+//      self.photoPostBackgroundTaskId = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+//        UIApplication.sharedApplication().endBackgroundTask(self.photoPostBackgroundTaskId)
+//      }
+      
+      // userInfo might contain any caption which might have been posted by the uploader
+      
+      photo.save()
+//      print("Photo failed to save: \(error)")
+//      let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+//      let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+//      alertController.addAction(alertAction)
+//      self.presentViewController(alertController, animated: true, completion: nil)
+      
+      relation.addObject(photo)
+      
+      var annotations: [PFObject] = []
+      
+      let tags = self.tags[i]
+      for tag in tags {
+        let annotation = PFObject(className: kAnnotationClassKey)
+//        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+        annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
+        annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
+        annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
+        annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
+        annotation.setObject(photo, forKey: kAnnotationPhotoKey)
+//        print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
+        let coordinates = [tag.coordinates.x, tag.coordinates.y]
+        annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
-        // Create a story with a photo
-        let story = PFObject(className: kStoryClassKey)
-        story.setObject(PFUser.currentUser()!, forKey: kStoryAuthorKey)
-        story.setObject("Test story title", forKey: kStoryTitleKey)
-        let relation = story.relationForKey(kStoryPhotosKey)
-        relation.addObject(photo)
-        var err1: NSError?
-        story.save(&err1)
-        print("saving story with error = \(err1)")
+        let ACL = PFACL(user: PFUser.currentUser()!)
+        ACL.setPublicReadAccess(true)
+        annotation.ACL = ACL
         
-        // userInfo might contain any caption which might have been posted by the uploader
-        var annotations: [PFObject] = []
-        
-//        if self.tags.count > 0 {
-//          for tag in self.tags {
-//            let annotation = PFObject(className: kAnnotationClassKey)
-////            print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
-//            annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
-//            annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
-//            annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
-//            annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
-//            annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-////            print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
-//            let coordinates = [tag.tagView.frame.origin.x, tag.tagView.frame.origin.y]
-//            annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
-//        
-//            let ACL = PFACL(user: PFUser.currentUser()!)
-//            ACL.setPublicReadAccess(true)
-//            annotation.ACL = ACL
-//            
-//            annotations.append(annotation)
-//            var err: NSError?
-//            annotation.save(&err)
-//          }
-//        }
-        
-        PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
-        
-        NSNotificationCenter.defaultCenter().postNotificationName(PAPTabBarControllerDidFinishEditingPhotoNotification, object: photo)
-      } else {
-        print("Photo failed to save: \(error)")
-        let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-        let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
-        alertController.addAction(alertAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        annotations.append(annotation)
+        annotation.save()
       }
-      UIApplication.sharedApplication().endBackgroundTask(self.photoPostBackgroundTaskId)
+      
+      PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
     }
+    
+    story.save()
     
     self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
   }
@@ -412,6 +406,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
 
       if let image = self.photos[safe: indexPath.row] {
         cell.delegate = self
+        cell.isInteractionEnabled = true
         cell.photo.image = image
         cell.tags = self.tags[indexPath.row]
       }
@@ -498,6 +493,8 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photos.append(image)
     let tagArray: [TagObject] = []
     self.tags.append(tagArray) // Add empty Tag Array as init
+    
+    self.shouldUploadImage(image)
     self.reloadPhotos()
   }
   
@@ -542,10 +539,13 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
       self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
       self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
       self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+      self.alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
       self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+      self.alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       self.alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
       self.alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
+      self.alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
       let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
@@ -645,7 +645,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   func addTag(partObject: PartObject) {
     let tagObject = TagObject()
     tagObject.partObject = partObject
-    tagObject.id = tagID++
     
     let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
     var cell: PhotoTableViewCell = PhotoTableViewCell()

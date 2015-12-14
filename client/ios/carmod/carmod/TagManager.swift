@@ -9,10 +9,8 @@
 import UIKit
 
 class TagObject: NSObject {
-  var id: Int!
   var partObject: PartObject!
   var coordinates: CGPoint!
-  var removeButton: UIButton!
 }
 
 class TagManager: NSObject {

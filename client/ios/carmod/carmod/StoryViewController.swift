@@ -15,6 +15,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   private var refreshControl: ODRefreshControl!
   private var stories = Array<Array<PFObject>>()
   private var emptyView: UIView!
+  private var isInitialLoad: Bool = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,6 +36,8 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
+    self.stories.removeAll()
+    
     // Load stories
     let query = PFQuery(className: kStoryClassKey)
     query.whereKey(kStoryAuthorKey, equalTo: self.user!)
@@ -51,6 +54,8 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.stories.append(photos)
       }
       
+      self.isInitialLoad = false
+      
       self.refreshStories()
     }
   }
@@ -62,6 +67,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.storyTable.registerClass(StoryTableViewCell.classForCoder(), forCellReuseIdentifier: "StoryTableViewCell")
     self.storyTable.clipsToBounds = true
     self.storyTable.backgroundColor = UIColor.blackColor()
+    self.storyTable.separatorColor = UIColor.clearColor()
     self.storyTable.rowHeight = gPhotoSize
     self.storyTable.delegate = self
     self.storyTable.dataSource = self
@@ -116,19 +122,23 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let count = self.stories.count
     
-    self.emptyView.hidden = count > 0
+    if !isInitialLoad {
+      self.emptyView.hidden = count > 0
+    }
     
     return count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
+    cell.selectionStyle = .None
     cell.photos = self.stories[indexPath.row]
-    
+
     return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//    let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
 
   }
   
@@ -172,5 +182,13 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     actionController.addAction(cancelAction)
     
     self.presentViewController(actionController, animated: true, completion: nil)
+  }
+  
+  func didTapOnPhotoAction(sender: UIButton) {
+//    let photo: PFObject? = self.objects![sender.tag] as? PFObject
+//    if photo != nil {
+//      let photoDetailsVC = PAPPhotoDetailsViewController(photo: photo!)
+//      self.navigationController!.pushViewController(photoDetailsVC, animated: true)
+//    }
   }
 }
