@@ -36,7 +36,7 @@ let PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification   = "com.parse
 
 // MARK:- User Info Keys
 let PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey = "liked"
-let kPAPEditPhotoViewControllerUserInfoCommentKey = "comment"
+let kEditPhotoViewControllerUserInfoCommentKey = "comment"
 
 // MARK:- Installation Class
 

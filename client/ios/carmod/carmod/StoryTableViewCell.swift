@@ -74,7 +74,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     self.photoCount = UILabel()
     self.photoCount.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.photoCount.textAlignment = .Center
-    self.photoCount.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
+    self.photoCount.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
     self.photoCount.alpha = 0.8
     self.photoCount.layer.cornerRadius = 8.0
     self.photoCount.clipsToBounds = true
@@ -151,8 +151,14 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   }
   
   // MARK:- Callbacks
-  func onPageControlChange(sender: AnyObject) {
-    
+  func onPageControlChange(sender: UIPageControl) {
+    let indexPath = NSIndexPath(forRow: sender.currentPage, inSection: 0)
+    if indexPath.row > 0 {
+      UIView.animateWithDuration(TRANSITION_TIME_FAST, animations: { () -> Void in
+        self.photoCount.alpha = 0.0
+      })
+    }
+    self.photoTable.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
   }
 
   override func prepareForReuse() {
