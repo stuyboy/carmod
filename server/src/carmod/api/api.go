@@ -41,12 +41,11 @@ func autoSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(jtxt))
 }
 
-// search is the primary method to determine matches
 func partSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
-	parts := model.SearchParts(term)
+	parts := model.SearchParts(db, term)
 
-	sr := &model.SearchResponse{
+	sr := & model.SearchResponse{
 		term,
 		parts}
 

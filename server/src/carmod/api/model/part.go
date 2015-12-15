@@ -3,21 +3,10 @@ package model
 import (
 	"strings"
 
-	"carmod/api/util"
-	"flag"
 	"database/sql"
 	"log"
+	"github.com/go-sql-driver/mysql"
 )
-
-var fullArray []Part
-var tireArray []Part
-var rimsArray []Part
-var partArray []Part
-
-//Pointer to filesystem
-var dir *string
-
-const MAX_RESULTS int = 25;
 
 //When searching for anything, how items are returned
 type Part struct {
@@ -33,32 +22,38 @@ func (c Part) Name() string {
 	return "Part"
 }
 
-func init() {
-	dir = flag.String("resources", "../src/carmod/resources", "Resources Directory")
-	flag.Parse()
+func SearchParts(db *sql.DB, search string) []SearchResult {
+	postArr := []SearchResult{}
 
-	tireArray = createTireArray(*dir)
-	rimsArray = createRimsArray(*dir)
-	//partArray = createPartArray()
+	sqlPhrase := `select id, classification, brand, model, productCode from parts_unique where
+				  match (classification, brand, model) against (? in boolean mode)`
 
-	fullArray = append(tireArray, rimsArray...)
-}
+	individualTerms := strings.Fields(search)
 
-func SearchParts(term string) []SearchResult {
-	parts := []SearchResult{}
-	searchArray := fullArray
-
-	for _, m := range searchArray {
-		ciName, ciTerm := m.SearchString, CreateSearchString(term)
-		if strings.Contains(ciName, ciTerm) {
-			parts = append(parts, m)
-		}
-		if len(parts) > MAX_RESULTS {
-			break
-		}
+	argPhrase := ""
+	for _, term := range individualTerms {
+		argPhrase += "+" + term + " "
 	}
 
-	return parts
+	rows, err := db.Query(sqlPhrase, argPhrase)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id, classification, brand, model, productCode string
+
+		err := rows.Scan(&id, &classification, &brand, &model, &productCode)
+		if (err != nil) {
+			log.Fatal(err)
+		}
+
+		ar := Part{Id: id, Classification: classification, Brand: brand, Model: model, ProductCode: productCode}
+		postArr = append(postArr, ar)
+	}
+	return postArr
 }
 
 //Save a custom part into the database
@@ -71,64 +66,15 @@ func SavePart(db *sql.DB, newPart *Part) sql.Result {
 		newPart.ProductCode)
 
 	if err != nil {
-		log.Fatal(err.Error())
+		if mysqlError, ok := err.(*mysql.MySQLError); ok {
+			if mysqlError.Number == 1062 {
+				log.Println("Part already added: " + err.Error())
+			} else {
+				log.Println(err.Error())
+			}
+		}
 	}
 
 	return result
 }
 
-func createTireArray(dir string) []Part {
-	return createArrayFromFile(
-		dir + "/eBayMotors_US_TiresCatalog_20140418.csv",
-		28,
-		"Tires",
-		0,
-		2,
-		9,
-		12)
-}
-
-func createRimsArray(dir string) []Part {
-	return createArrayFromFile(
-		dir + "/eBayMotors_US_RimsCatalog_20110922.csv",
-		15,
-		"Rims",
-		0,
-		2,
-		7,
-		10)
-}
-
-func createPartArray(dir string) []Part {
-	return createArrayFromFile(
-		dir + "/US_Parts_Catalog20151029.csv",
-		8,
-		"Parts",
-		0,
-		2,
-		4,
-		3)
-}
-
-func createArrayFromFile(filename string, fields int, class string, idIdx int, brandIdx int, modelIdx int, pCodeIdx int) []Part {
-	postarr := []Part{}
-	dblarr := util.ReadCsvFile(filename, fields)
-
-	for _, a := range dblarr {
-		c := class
-		i := a[idIdx]
-		b := a[brandIdx]
-		m := a[modelIdx]
-		n := a[pCodeIdx]
-
-		nmr := Part{Id: i, Classification: c, Brand: b, Model: m, ProductCode: n}
-		nmr.SearchString = CreateSearchString(c + b + m + n)
-		postarr = append(postarr, nmr)
-	}
-	return postarr
-}
-
-
-func CreateSearchString(s string) string {
-	return strings.Replace(strings.ToLower(s), " ", "", -1)
-}
