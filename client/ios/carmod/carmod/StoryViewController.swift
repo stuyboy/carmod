@@ -9,11 +9,14 @@
 import UIKit
 import ODRefreshControl
 
-class StoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class StoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StoryHeaderViewDelegate {
+  let HEADER_HEIGHT: CGFloat = 44.0
+  
   private var user: PFUser!
   private var storyTable: UITableView!
   private var refreshControl: ODRefreshControl!
-  private var stories = Array<Array<PFObject>>()
+  private var stories: [PFObject] = []                // Feed of story objects
+  private var storyPhotos = Array<Array<PFObject>>()  // Array of photos in each story object
   private var emptyView: UIView!
   private var isInitialLoad: Bool = true
   private var activityIndicator: UIActivityIndicatorView!
@@ -46,9 +49,14 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
+    self.loadStories()
+  }
+  
+  // MARK:- Initializers
+  private func loadStories() {
     self.stories.removeAll()
+    self.storyPhotos.removeAll()
     
-    // Load stories
     let query = PFQuery(className: kStoryClassKey)
     query.whereKey(kStoryAuthorKey, equalTo: self.user!)
     query.findObjectsInBackgroundWithBlock {
@@ -58,10 +66,12 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
       }
       
       for object in objects! {
+        self.stories.append(object as! PFObject)
+        
         let relation = object.relationForKey(kStoryPhotosKey)
         let q = relation.query()
         let photos: [PFObject] = q?.findObjects() as! [PFObject]
-        self.stories.append(photos)
+        self.storyPhotos.append(photos)
       }
       
       self.isInitialLoad = false
@@ -69,11 +79,9 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
       self.refreshStories()
     }
   }
-  
-  // MARK:- Initializers
   private func initStoryTable() {
     let TABLE_HEIGHT: CGFloat = self.view.frame.height-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!
-    self.storyTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: TABLE_HEIGHT))
+    self.storyTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: TABLE_HEIGHT), style: UITableViewStyle.Grouped)
     self.storyTable.registerClass(StoryTableViewCell.classForCoder(), forCellReuseIdentifier: "StoryTableViewCell")
     self.storyTable.clipsToBounds = true
     self.storyTable.backgroundColor = UIColor.clearColor()
@@ -130,7 +138,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   
   // MARK:- UITableViewDelegate
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let count = self.stories.count
+    let count = self.storyPhotos.count
     
     if !isInitialLoad {
       self.emptyView.hidden = count > 0
@@ -142,7 +150,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
     cell.selectionStyle = .None
-    cell.photos = self.stories[indexPath.row]
+    cell.photos = self.storyPhotos[indexPath.row]
 
     return cell
   }
@@ -151,39 +159,33 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
 //    let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
 
   }
-//  
-//  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//    return 1
-//  }
-//  
-//  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//    if indexPath.row % 2 == 0 {
-//      return 44.0
-//    }
-//    
-//    return gPhotoSize
-//  }
-//  
-//  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//    return nil
-//  }
-//  
-//  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//    return 0.0
-//  }
-//  
-//  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//    return 0.0
-//  }
-//  
-//  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//    return nil
-//  }
   
+  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if self.stories.count == 0 && isInitialLoad {
+      // Load More section
+      return nil
+    }
+    
+    var headerView: StoryHeaderView? = tableView.dequeueReusableCellWithIdentifier("StoryHeaderView") as? StoryHeaderView
+    if headerView == nil {
+      headerView = StoryHeaderView(frame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, HEADER_HEIGHT))
+      headerView!.delegate = self
+      headerView!.selectionStyle = UITableViewCellSelectionStyle.None
+    }
+    
+    headerView!.story = self.stories[section]
+    headerView!.tag = section
+    
+    return headerView
+  }
+  
+  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return HEADER_HEIGHT
+  }
   
   // MARK:- Public methods
   func refreshStories() {
-    self.storyTable.contentSize = CGSize(width: self.storyTable.frame.width, height: gPhotoSize*CGFloat(self.stories.count))
+    self.storyTable.contentSize = CGSize(width: self.storyTable.frame.width, height: gPhotoSize*CGFloat(self.storyPhotos.count))
     self.storyTable.reloadData()
     
     if self.refreshControl.refreshing {

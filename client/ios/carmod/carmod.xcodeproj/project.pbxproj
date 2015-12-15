@@ -59,6 +59,7 @@
 		40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E311BFA98B100D6F10C /* carmodTests.swift */; };
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
 		40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD61C1CC8ED00B46B44 /* TagManager.swift */; };
+		40954BD91C1F9B0600B46B44 /* StoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -141,6 +142,7 @@
 		40722E3C1BFA98B100D6F10C /* carmodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodUITests.swift; sourceTree = "<group>"; };
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40954BD61C1CC8ED00B46B44 /* TagManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
+		40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryHeaderView.swift; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				40678E301BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift */,
+				40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */,
 			);
 			name = TimelineViews;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				40678E341BFA9BD80071BCB8 /* PAPPhotoDetailsFooterView.swift in Sources */,
 				40678E381BFA9BE80071BCB8 /* PAPLoadMoreCell.swift in Sources */,
 				40678E3F1BFA9BFF0071BCB8 /* PAPBaseTextCell.swift in Sources */,
+				40954BD91C1F9B0600B46B44 /* StoryHeaderView.swift in Sources */,
 				40678E311BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift in Sources */,
 				40678E1F1BFA9B280071BCB8 /* PAPTabBarController.swift in Sources */,
 				40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */,

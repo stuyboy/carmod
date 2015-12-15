@@ -54,7 +54,7 @@ class PhotoTableViewCell: UITableViewCell {
       self.currentTagView.alpha = 0.0
     }
     
-    self.backgroundColor = UIColor.blackColor()
+    self.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     
     self.contentView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 0.5))
     self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
