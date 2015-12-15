@@ -90,7 +90,7 @@ class StoryHeaderView: UITableViewCell {
     self.userButton = UIButton(type: UIButtonType.Custom)
     containerView!.addSubview(self.userButton!)
     self.userButton!.backgroundColor = UIColor.clearColor()
-    self.userButton!.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+    self.userButton!.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
     self.userButton!.setTitleColor(UIColor.fromRGB(COLOR_NEAR_BLACK), forState: UIControlState.Normal)
     self.userButton!.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
     self.userButton!.titleLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
@@ -104,9 +104,10 @@ class StoryHeaderView: UITableViewCell {
     self.timestampLabel!.font = UIFont.systemFontOfSize(11.0)
     self.timestampLabel!.backgroundColor = UIColor.clearColor()
     
-    let LABEL_WIDTH: CGFloat = 200.0
+    let LABEL_WIDTH: CGFloat = 220.0
     self.titleLabel = UILabel(frame: CGRect(x: self.frame.width-LABEL_WIDTH-OFFSET_SMALL, y: 0.0, width: LABEL_WIDTH, height: self.frame.height))
-    self.titleLabel.numberOfLines = 1
+    self.titleLabel.numberOfLines = 2
+    self.titleLabel.lineBreakMode = .ByWordWrapping
     self.titleLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
     self.titleLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.titleLabel.textAlignment = .Right

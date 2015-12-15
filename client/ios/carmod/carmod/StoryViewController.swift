@@ -80,13 +80,12 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
   }
   private func initStoryTable() {
-    let TABLE_HEIGHT: CGFloat = self.view.frame.height-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!
+    let TABLE_HEIGHT: CGFloat = self.view.frame.height-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!-50.0
     self.storyTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: TABLE_HEIGHT), style: UITableViewStyle.Grouped)
     self.storyTable.registerClass(StoryTableViewCell.classForCoder(), forCellReuseIdentifier: "StoryTableViewCell")
     self.storyTable.clipsToBounds = true
     self.storyTable.backgroundColor = UIColor.clearColor()
     self.storyTable.separatorColor = UIColor.clearColor()
-    self.storyTable.rowHeight = gPhotoSize
     self.storyTable.delegate = self
     self.storyTable.dataSource = self
     if self.storyTable.respondsToSelector("separatorInset") {
@@ -138,34 +137,26 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   
   // MARK:- UITableViewDelegate
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let count = self.storyPhotos.count
-    
-    if !isInitialLoad {
-      self.emptyView.hidden = count > 0
-    }
-    
-    return count
+    return 1
+  }
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return self.stories.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
     cell.selectionStyle = .None
-    cell.photos = self.storyPhotos[indexPath.row]
+    cell.photos = self.storyPhotos[indexPath.section]
 
     return cell
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//    let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
 
   }
   
   func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    if self.stories.count == 0 && isInitialLoad {
-      // Load More section
-      return nil
-    }
-    
     var headerView: StoryHeaderView? = tableView.dequeueReusableCellWithIdentifier("StoryHeaderView") as? StoryHeaderView
     if headerView == nil {
       headerView = StoryHeaderView(frame: CGRectMake(0.0, 0.0, self.view.bounds.size.width, HEADER_HEIGHT))
@@ -179,8 +170,20 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     return headerView
   }
   
+  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    return nil
+  }
+  
   func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return HEADER_HEIGHT
+  }
+  
+  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 0.0000000000001
+  }
+  
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return gPhotoSize
   }
   
   // MARK:- Public methods
