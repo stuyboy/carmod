@@ -78,7 +78,7 @@ func extractPart(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	goji.Get("/hello/:name", hello)
-	goji.Get("/dbsearch/:phrase", partSearch)
+	goji.Get("/search/:phrase", partSearch)
 	goji.Get("/auto/:phrase", autoSearch)
 	goji.Get("/extract", extractPart)
 	goji.Serve()
