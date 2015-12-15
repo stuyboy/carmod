@@ -24,26 +24,17 @@ func (c Car) Name() string {
 func SearchCars(db *sql.DB, search string) []SearchResult {
 	postArr := []SearchResult{}
 
-	fullSqlPhrase := ""
+	sqlPhrase := `select make, model, type, drive, id, year, horsepower, cylinders from models where
+				  match (make, model) against (? in boolean mode)`
+
 	individualTerms := strings.Fields(search)
-	var sqlArgs []interface{}
 
+	argPhrase := ""
 	for _, term := range individualTerms {
-		if fullSqlPhrase != "" {
-			fullSqlPhrase += " and "
-		}
-
-		pctWrapSearch := "%" + term + "%"
-		fullSqlPhrase += "(make like ? or model like ?)"
-		sqlArgs = append(sqlArgs, pctWrapSearch)
-		sqlArgs = append(sqlArgs, pctWrapSearch)
+		argPhrase += "+" + term + " "
 	}
 
-	//log.Println(fullSqlPhrase)
-	//log.Println(sqlArgs)
-
-	rows, err := db.Query("select make, model, type, drive, id, year, horsepower, cylinders from models where " + fullSqlPhrase, sqlArgs...)
-	//rows, err := db.Query("select make, model, type, drive, id, year, horsepower, cylinders from models limit 1")
+	rows, err := db.Query(sqlPhrase, argPhrase)
 
 	if err != nil {
 		panic(err.Error())

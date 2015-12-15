@@ -1,7 +1,5 @@
 package: carmod/api
 import:
 - package: github.com/diffbot/diffbot-go-client
-- package: github.com/go-sql-driver/mysql
-- package: github.com/zenazn/goji
   subpackages:
   - web
