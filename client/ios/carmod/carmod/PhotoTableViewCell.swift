@@ -155,7 +155,6 @@ class PhotoTableViewCell: UITableViewCell {
     } else if sender.state == UIGestureRecognizerState.Changed {
       sender.view!.center.x = sender.view!.center.x+translation.x
       sender.view!.center.y = sender.view!.center.y+translation.y
-      print("Dragging to point = \(sender.view!.frame.origin)")
       sender.setTranslation(CGPointZero, inView: self.contentView)
     } else if sender.state == UIGestureRecognizerState.Ended && tagView.removeButton.tag != -1 {
       if let delegate = self.delegate {

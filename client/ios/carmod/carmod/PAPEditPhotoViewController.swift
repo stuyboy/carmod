@@ -325,7 +325,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     story.setObject("Test story title", forKey: kStoryTitleKey)
     let relation = story.relationForKey(kStoryPhotosKey)
     
-    print("Publishing \(self.photos.count) photos with \(self.tags.count) tags and \(self.photoFiles.count) photo files")
+//    print("Publishing \(self.photos.count) photos with \(self.tags.count) tags and \(self.photoFiles.count) photo files")
     for var i = 0; i < self.photos.count; i++ {
       let photo = PFObject(className: kPAPPhotoClassKey)
       photo.setObject(PFUser.currentUser()!, forKey: kPAPPhotoUserKey)

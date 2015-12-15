@@ -10,10 +10,18 @@ import UIKit
 
 class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
   private var photoTable: UITableView!
+  private var pageControl: UIPageControl!
+  private var photoCount: UILabel!
   
   var tags: Array<Array<TagObject>>!
   var photos: [PFObject]! {
     didSet {
+      self.pageControl.hidden = self.photos.count == 1
+      self.photoCount.hidden = self.photos.count == 1
+      
+      self.pageControl.numberOfPages = self.photos.count
+      self.photoCount.text = self.photos.count == 2 ? "+1 more photo" : self.photos.count > 2 ? "+\(self.photos.count-1) more photos" : ""
+      
       self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
     
       self.tags = Array(count:self.photos.count, repeatedValue:[TagObject]())
@@ -54,6 +62,36 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     }
     self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
     self.addSubview(self.photoTable)
+    
+    self.pageControl = UIPageControl()
+    self.pageControl.currentPage = 0
+    self.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
+    self.pageControl.currentPageIndicatorTintColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.pageControl.userInteractionEnabled = true
+    self.pageControl.addTarget(self, action: "onPageControlChange:", forControlEvents: UIControlEvents.ValueChanged)
+    self.addSubview(self.pageControl)
+    
+    self.photoCount = UILabel()
+    self.photoCount.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.photoCount.textAlignment = .Center
+    self.photoCount.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
+    self.photoCount.alpha = 0.8
+    self.photoCount.layer.cornerRadius = 8.0
+    self.photoCount.clipsToBounds = true
+    self.photoCount.backgroundColor = UIColor.whiteColor()
+    self.addSubview(self.photoCount)
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    let CONTROL_WIDTH: CGFloat = 200.0
+    let CONTROL_HEIGHT: CGFloat = 40.0
+    self.pageControl.frame = CGRect(x: self.bounds.width/2-CONTROL_WIDTH/2, y: self.bounds.height-CONTROL_HEIGHT-OFFSET_SMALL, width: CONTROL_WIDTH, height: CONTROL_HEIGHT)
+    
+    let LABEL_WIDTH: CGFloat = 120.0
+    let LABEL_HEIGHT: CGFloat = 30.0
+    self.photoCount.frame = CGRect(x: self.bounds.width/2-LABEL_WIDTH/2, y: self.pageControl.frame.origin.y-LABEL_HEIGHT, width: LABEL_WIDTH, height: LABEL_HEIGHT)
   }
   
   // MARK:- UITableViewDelegate  
@@ -77,7 +115,21 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     
   }
   
-  // 
+  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+    for indexPath in indexPaths {
+      self.pageControl.currentPage = indexPath.row
+      if indexPath.row > 0 {
+        UIView.animateWithDuration(TRANSITION_TIME_FAST, animations: { () -> Void in
+          self.photoCount.alpha = 0.0
+        })
+      }
+
+      break
+    }
+  }
+  
+  //
   func loadTags(photo: PFObject, atIndex: Int) {
     let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
     if let annotations = query.findObjects() {
@@ -96,6 +148,11 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
         self.tags[atIndex].append(tagObject)
       }
     }
+  }
+  
+  // MARK:- Callbacks
+  func onPageControlChange(sender: AnyObject) {
+    
   }
 
   override func prepareForReuse() {
