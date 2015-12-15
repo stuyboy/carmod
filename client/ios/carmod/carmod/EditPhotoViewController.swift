@@ -114,6 +114,8 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
     self.view.addSubview(self.photoTable)
     
+    let IMAGE_SIZE: CGFloat = LABEL_HEIGHT-OFFSET_STANDARD
+    
     self.titleView = UIView(frame: CGRect(x: 0.0, y: -LABEL_HEIGHT, width: self.view.frame.width, height: LABEL_HEIGHT))
     self.titleView.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.titleView.alpha = 0.8
@@ -121,12 +123,11 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTitle:"))
     self.view.addSubview(self.titleView)
     
-    self.titleLabel = UILabel(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.titleView.frame.width-OFFSET_SMALL*2, height: LABEL_HEIGHT))
+    self.titleLabel = UILabel(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.titleView.frame.width-OFFSET_SMALL*2-IMAGE_SIZE-5.0, height: LABEL_HEIGHT))
     self.titleLabel.textColor = UIColor.whiteColor()
     self.titleLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
     self.titleView.addSubview(self.titleLabel)
     
-    let IMAGE_SIZE: CGFloat = LABEL_HEIGHT-OFFSET_STANDARD
     let closeImage = changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.fromRGB(COLOR_NEAR_BLACK))
     let closeButton = UIButton(frame: CGRect(x: self.titleView.frame.width-IMAGE_SIZE, y: self.titleView.frame.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE))
     closeButton.layer.cornerRadius = IMAGE_SIZE/2
