@@ -3,10 +3,11 @@ import QuartzCore
 import MobileCoreServices
 import ParseUI
 
-class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
+class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate, PathMenuDelegate {
+  let LABEL_HEIGHT: CGFloat = 40.0
+  
   private var alertController: DOAlertController!
   private var keyboardHeight: CGFloat = 0.0
-  private var titleField: CustomTextField!
   private var searchTagField: UITextField!
   private var partTypeButton: UIButton!
   private var cancelButton: UIButton!
@@ -15,10 +16,14 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var photoTable: UITableView!
   var photos: [UIImage] = [] {
     didSet {
+      self.pageControl.hidden = self.photos.count == 1
+      self.pageControl.numberOfPages = self.photos.count
+      
       self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
       self.photoTable.reloadData()
     }
   }
+  private var pageControl: UIPageControl!
   
   private var tagID: Int = 0
   private var tags = Array<Array<TagObject>>()
@@ -26,8 +31,14 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   private var photoTaggerViewOrigin: CGPoint!
   private var tagHelp: UILabel!
 
+  private var addMenu: PathMenu!
+  private var addTitleButton: UIButton!
   private var addPhotoButton: UIButton!
   private var searchResultsTable: UITableView!
+  
+  private var titleView: UIView!
+  private var titleField: UITextField = UITextField()
+  private var titleLabel: UILabel!
   
   private var pickerView: UIView!
   private var partPicker: UIPickerView!
@@ -78,7 +89,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.shouldUploadImage(self.photos[0])
     
-    self.initTitle()
     self.initBody()
     self.initTagger()
     self.initPartPicker()
@@ -86,23 +96,6 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   // MARK:- Initializers
-  private func initTitle() {
-//    let LABEL_HEIGHT: CGFloat = 30.0
-//    
-//    self.titleField = CustomTextField(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.view.frame.width, height: LABEL_HEIGHT))
-//    self.titleField.placeholder = "Story Title (e.g. Grillcraft How-To-Installation-Guide)"
-//    self.titleField.layer.borderColor = UIColor.fromRGB(COLOR_DARK_GRAY).CGColor
-//    self.titleField.layer.borderWidth = 1.0
-//    self.titleField.layer.cornerRadius = 2.0
-//    self.titleField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
-//    self.titleField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-//    self.titleField.autocorrectionType = .No
-//    self.titleField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
-//    self.titleField.setValue(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forKeyPath: "_placeholderLabel.textColor")
-//    self.titleField.keyboardType = .NumberPad
-//    self.view.addSubview(self.titleField)
-  }
-  
   private func initBody() {
     self.photoTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: gPhotoSize))
     self.photoTable.registerClass(PhotoTableViewCell.classForCoder(), forCellReuseIdentifier: "PhotoTableViewCell")
@@ -121,9 +114,41 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
     self.view.addSubview(self.photoTable)
     
-    let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
-    let LABEL_HEIGHT: CGFloat = 70.0
-    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: gPhotoSize+OFFSET_XLARGE, width: LABEL_WIDTH, height: LABEL_HEIGHT))
+    self.titleView = UIView(frame: CGRect(x: 0.0, y: -LABEL_HEIGHT, width: self.view.frame.width, height: LABEL_HEIGHT))
+    self.titleView.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.titleView.alpha = 0.8
+    self.titleView.userInteractionEnabled = true
+    self.titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapTitle:"))
+    self.view.addSubview(self.titleView)
+    
+    self.titleLabel = UILabel(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.titleView.frame.width-OFFSET_SMALL*2, height: LABEL_HEIGHT))
+    self.titleLabel.textColor = UIColor.whiteColor()
+    self.titleLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.titleView.addSubview(self.titleLabel)
+    
+    let IMAGE_SIZE: CGFloat = LABEL_HEIGHT-OFFSET_STANDARD
+    let closeImage = changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.fromRGB(COLOR_NEAR_BLACK))
+    let closeButton = UIButton(frame: CGRect(x: self.titleView.frame.width-IMAGE_SIZE, y: self.titleView.frame.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE))
+    closeButton.layer.cornerRadius = IMAGE_SIZE/2
+    closeButton.clipsToBounds = true
+    closeButton.backgroundColor = UIColor.whiteColor()
+    closeButton.setImage(closeImage, forState: UIControlState.Normal)
+    closeButton.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    closeButton.addTarget(self, action: "onDeleteTitle:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.titleView.addSubview(closeButton)
+    
+    let CONTROL_WIDTH: CGFloat = 200.0
+    self.pageControl = UIPageControl(frame: CGRect(x: self.photoTable.frame.width/2-CONTROL_WIDTH/2, y: self.photoTable.frame.maxY-LABEL_HEIGHT-OFFSET_SMALL, width: CONTROL_WIDTH, height: LABEL_HEIGHT))
+    self.pageControl.currentPage = 0
+    self.pageControl.pageIndicatorTintColor = UIColor.whiteColor()
+    self.pageControl.currentPageIndicatorTintColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.pageControl.userInteractionEnabled = true
+    self.pageControl.addTarget(self, action: "onPageControlChange:", forControlEvents: UIControlEvents.ValueChanged)
+    self.view.addSubview(self.pageControl)
+    
+    let FIELD_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
+    let FIELD_HEIGHT: CGFloat = 70.0
+    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-FIELD_WIDTH/2, y: gPhotoSize+OFFSET_XLARGE, width: FIELD_WIDTH, height: FIELD_HEIGHT))
     self.tagHelp.textColor = UIColor.whiteColor()
     self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     self.tagHelp.textAlignment = .Center
@@ -132,15 +157,38 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.tagHelp.text = "Tap photo to tag parts."
     self.view.addSubview(self.tagHelp)
     
-    let BUTTON_WIDTH: CGFloat = self.view.frame.width-OFFSET_SMALL*2
-    self.addPhotoButton = UIButton(frame: CGRect(x: self.view.frame.width/2-BUTTON_WIDTH/2, y: self.view.frame.height-STANDARD_BUTTON_HEIGHT-OFFSET_XLARGE-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!, width: BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
-    self.addPhotoButton.setTitle("ADD ANOTHER PHOTO", forState: .Normal)
-    self.addPhotoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    self.addPhotoButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
-    self.addPhotoButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
-    self.addPhotoButton.layer.cornerRadius = 4.0
-    self.addPhotoButton.addTarget(self, action: "photoCaptureButtonAction:", forControlEvents: .TouchUpInside)
-    self.view.addSubview(self.addPhotoButton)
+    self.initMenu()
+  }
+  
+  private func initMenu() {
+    let BUTTON_SIZE: CGFloat = 44.0
+    let circleImage = UIImage(named: "ic_circle_sm")!
+    let circleImageLarge = UIImage(named: "ic_circle")!
+    let photoImage = UIImage(named: "ic_camera")!
+    let titleImage = UIImage(named: "ic_title")!
+    
+    let photoButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_BLUE)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(photoImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(photoImage, tintColor: UIColor.fromRGB(COLOR_BLUE)))
+    
+    let titleButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_RED)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(titleImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(titleImage, tintColor: UIColor.fromRGB(COLOR_RED)))
+    
+    let items = [titleButton, photoButton]
+    
+    let plusImage = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.whiteColor())
+    let plusImageHighlighted = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
+    let startButton = PathMenuItem(image: changeImageColor(circleImageLarge, tintColor: UIColor.fromRGB(COLOR_ORANGE)), highlightedImage: changeImageColor(circleImageLarge, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: plusImage, highlightedContentImage: plusImageHighlighted)
+    
+    self.addMenu = PathMenu(frame: self.view.bounds, startItem: startButton, items: items)
+    self.addMenu.delegate = self
+    self.addMenu.startPoint = CGPointMake(self.view.frame.width/2, self.view.frame.height-OFFSET_LARGE-BUTTON_SIZE*2)
+    self.addMenu.alpha = 0.90
+    self.addMenu.menuWholeAngle = CGFloat(degreesToRadians(90))
+    self.addMenu.rotateAngle = CGFloat(degreesToRadians(-45))
+    self.addMenu.timeOffset = 0.0
+    self.addMenu.farRadius = 110.0
+    self.addMenu.nearRadius = 90.0
+    self.addMenu.endRadius = 100.0
+    self.addMenu.animationDuration = 0.3
+    self.view.addSubview(self.addMenu)
   }
   
   private func initTagger() {
@@ -236,6 +284,17 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     }
   }
   
+  func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    if scrollView == self.photoTable {
+      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+      for indexPath in indexPaths {
+        self.pageControl.currentPage = indexPath.row
+        
+        break
+      }
+    }
+  }
+  
   // MARK:- UIPickerViewDelegate
   func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
     return 1
@@ -322,7 +381,7 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     // Create a story
     let story = PFObject(className: kStoryClassKey)
     story.setObject(PFUser.currentUser()!, forKey: kStoryAuthorKey)
-    story.setObject("Test story title", forKey: kStoryTitleKey)
+    story.setObject(self.titleLabel.text!, forKey: kStoryTitleKey)
     let relation = story.relationForKey(kStoryPhotosKey)
     
 //    print("Publishing \(self.photos.count) photos with \(self.tags.count) tags and \(self.photoFiles.count) photo files")
@@ -498,7 +557,57 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.reloadPhotos()
   }
   
+  // MARK: - PathMenuDelegate
+  func pathMenu(menu: PathMenu, didSelectIndex idx: Int) {
+    switch idx {
+    case 0: // Add title
+      self.onAddTitle()
+      break
+    case 1: // Add photo
+      self.onAddPhoto()
+      break
+    default:
+      break
+    }
+  }
+  
+  func pathMenuDidFinishAnimationOpen(menu: PathMenu) {
+    
+  }
+  
+  func pathMenuDidFinishAnimationClose(menu: PathMenu) {
+    
+  }
+  
+  func pathMenuWillAnimateClose(menu: PathMenu) {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.tagHelp.alpha = 1.0
+    }
+  }
+  
+  func pathMenuWillAnimateOpen(menu: PathMenu) {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.tagHelp.alpha = 0.0
+    }
+  }
+  
   // MARK:- Callbacks
+  func onPageControlChange(sender: UIPageControl) {
+    let indexPath = NSIndexPath(forRow: sender.currentPage, inSection: 0)
+    self.photoTable.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+  }
+  
+  func onTapTitle(sender: UITapGestureRecognizer) {
+    self.onAddTitle()
+  }
+  
+  func onDeleteTitle(sender: UIButton) {
+    self.titleLabel.text = ""
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.titleView.frame.origin.y = -self.LABEL_HEIGHT
+    }
+  }
+  
   func onChangeText(sender: UITextField) {
     if sender.text != "" {
       PartManager.sharedInstance.searchPart(sender.text!)
@@ -529,7 +638,39 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
     self.pickerView.hidden = true
   }
   
-  func photoCaptureButtonAction(sender: AnyObject) {
+  func onAddTitle() {
+    let message = self.titleLabel.text == "" ? "Add a title for your project" : "Edit title for your project"
+    self.alertController = DOAlertController(title: "Story Title", message: message, preferredStyle: DOAlertControllerStyle.Alert)
+    self.alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+      textField.text = self.titleLabel.text
+      textField.placeholder = "e.g. Grillcraft How-To-Installation-Guide"
+      textField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+      self.titleField = textField
+    }
+    self.alertController.overlayColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.7)
+    self.alertController.cornerRadius = 8.0
+    self.alertController.alertViewBgColor = UIColor.whiteColor()
+    self.alertController.titleFont = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+    self.alertController.titleTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.alertController.messageFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    self.alertController.messageTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+    self.alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+    self.alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
+    let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: { _ in self.shouldCloseAlertController() })
+    let okAction = DOAlertAction(title: NSLocalizedString("OK", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldAddTitle() })
+
+    self.alertController.addAction(cancelAction)
+    self.alertController.addAction(okAction)
+    
+    self.presentViewController(self.alertController, animated: true, completion: nil)
+  }
+  
+  func onAddPhoto() {
     let cameraDeviceAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
     
@@ -563,6 +704,16 @@ class PAPEditPhotoViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   func shouldCloseAlertController() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func shouldAddTitle() {
+    self.titleLabel.text = self.titleField.text
+    
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.titleView.frame.origin.y = 0.0
+    }
+    
     self.dismissViewControllerAnimated(true, completion: nil)
   }
   

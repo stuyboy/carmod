@@ -57,7 +57,7 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     
     let image = info[UIImagePickerControllerEditedImage] as! UIImage
     
-    let viewController: PAPEditPhotoViewController = PAPEditPhotoViewController(image: image)
+    let viewController: EditPhotoViewController = EditPhotoViewController(image: image)
     viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
     
     self.navController!.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve

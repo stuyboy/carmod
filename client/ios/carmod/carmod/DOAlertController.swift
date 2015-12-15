@@ -159,6 +159,7 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
   // AlertView
   private var alertView = UIView()
   var alertViewBgColor = UIColor(red:239/255, green:240/255, blue:242/255, alpha:1.0)
+  var cornerRadius: CGFloat = 0.0
   private var alertViewWidth: CGFloat = 270.0
   private var alertViewHeightConstraint: NSLayoutConstraint!
   private var alertViewPadding: CGFloat = 15.0
@@ -437,6 +438,8 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
     //------------------------------
     overlayView.backgroundColor = overlayColor
     alertView.backgroundColor = alertViewBgColor
+    alertView.layer.cornerRadius = cornerRadius
+    alertView.clipsToBounds = cornerRadius > 0.0
     
     //------------------------------
     // TextArea Layout

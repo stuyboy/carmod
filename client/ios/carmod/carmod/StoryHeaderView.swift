@@ -21,13 +21,12 @@ class StoryHeaderView: UITableViewCell {
   var userButton: UIButton?
   var timestampLabel: UILabel?
   var timeIntervalFormatter: TTTTimeIntervalFormatter?
+  private var titleLabel: UILabel!
   var story: PFObject? {
     didSet {
       // user's avatar
-      print("setting story...")
       if let user: PFUser = story!.objectForKey(kStoryAuthorKey) as? PFUser {
         user.fetchIfNeeded()
-        print("user name = \(user.objectForKey(kPAPUserDisplayNameKey)!)")
         if PAPUtility.userHasProfilePictures(user) {
           let profilePictureSmall: PFFile = user.objectForKey(kPAPUserProfilePicSmallKey) as! PFFile
           self.avatarImageView!.setFile(profilePictureSmall)
@@ -60,6 +59,8 @@ class StoryHeaderView: UITableViewCell {
         let timeInterval: NSTimeInterval = self.story!.createdAt!.timeIntervalSinceNow
         let timestamp: String = self.timeIntervalFormatter!.stringForTimeInterval(timeInterval)
         self.timestampLabel!.text = timestamp
+        
+        self.titleLabel.text = story!.objectForKey(kStoryTitleKey) as? String
         
         self.setNeedsDisplay()
       }
@@ -102,6 +103,14 @@ class StoryHeaderView: UITableViewCell {
     self.timestampLabel!.textColor = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
     self.timestampLabel!.font = UIFont.systemFontOfSize(11.0)
     self.timestampLabel!.backgroundColor = UIColor.clearColor()
+    
+    let LABEL_WIDTH: CGFloat = 200.0
+    self.titleLabel = UILabel(frame: CGRect(x: self.frame.width-LABEL_WIDTH-OFFSET_SMALL, y: 0.0, width: LABEL_WIDTH, height: self.frame.height))
+    self.titleLabel.numberOfLines = 1
+    self.titleLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)
+    self.titleLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.titleLabel.textAlignment = .Right
+    self.containerView?.addSubview(self.titleLabel)
   }
   
   required init?(coder aDecoder: NSCoder) {

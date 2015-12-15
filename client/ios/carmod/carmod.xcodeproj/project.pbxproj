@@ -32,7 +32,7 @@
 		40678E101BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E0F1BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift */; };
 		40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E111BFA9AC40071BCB8 /* PAPHomeViewController.swift */; };
 		40678E141BFA9AD10071BCB8 /* PAPAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E131BFA9AD10071BCB8 /* PAPAccountViewController.swift */; };
-		40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */; };
+		40678E161BFA9ADC0071BCB8 /* EditPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E151BFA9ADC0071BCB8 /* EditPhotoViewController.swift */; };
 		40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E171BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift */; };
 		40678E1A1BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E191BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift */; };
 		40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40678E1B1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift */; };
@@ -60,6 +60,8 @@
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
 		40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD61C1CC8ED00B46B44 /* TagManager.swift */; };
 		40954BD91C1F9B0600B46B44 /* StoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */; };
+		40954BDC1C20B3CC00B46B44 /* PathMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDA1C20B3CC00B46B44 /* PathMenu.swift */; };
+		40954BDD1C20B3CC00B46B44 /* PathMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -108,7 +110,7 @@
 		40678E0F1BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoTimelineViewController.swift; sourceTree = "<group>"; };
 		40678E111BFA9AC40071BCB8 /* PAPHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPHomeViewController.swift; sourceTree = "<group>"; };
 		40678E131BFA9AD10071BCB8 /* PAPAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPAccountViewController.swift; sourceTree = "<group>"; };
-		40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPEditPhotoViewController.swift; sourceTree = "<group>"; };
+		40678E151BFA9ADC0071BCB8 /* EditPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPhotoViewController.swift; sourceTree = "<group>"; };
 		40678E171BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPActivityFeedViewController.swift; sourceTree = "<group>"; };
 		40678E191BFA9B060071BCB8 /* PAPPhotoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPPhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		40678E1B1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPFindFriendsViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,8 @@
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40954BD61C1CC8ED00B46B44 /* TagManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
 		40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryHeaderView.swift; sourceTree = "<group>"; };
+		40954BDA1C20B3CC00B46B44 /* PathMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathMenu.swift; sourceTree = "<group>"; };
+		40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathMenuItem.swift; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +263,8 @@
 				40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */,
 				40678E291BFA9B770071BCB8 /* UIExtensions.swift */,
 				400818431C121A7F004F7497 /* CustomTextField.swift */,
+				40954BDA1C20B3CC00B46B44 /* PathMenu.swift */,
+				40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -285,7 +291,7 @@
 		40678E021BFA99880071BCB8 /* Take Photo */ = {
 			isa = PBXGroup;
 			children = (
-				40678E151BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift */,
+				40678E151BFA9ADC0071BCB8 /* EditPhotoViewController.swift */,
 			);
 			name = "Take Photo";
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 				40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */,
 				40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */,
 				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
+				40954BDC1C20B3CC00B46B44 /* PathMenu.swift in Sources */,
 				40678E091BFA9A860071BCB8 /* Constants.swift in Sources */,
 				40678E451BFA9C270071BCB8 /* PAPProfileImageView.swift in Sources */,
 				400818441C121A7F004F7497 /* CustomTextField.swift in Sources */,
@@ -696,7 +703,8 @@
 				40954BD91C1F9B0600B46B44 /* StoryHeaderView.swift in Sources */,
 				40678E311BFA9BCB0071BCB8 /* PAPPhotoHeaderView.swift in Sources */,
 				40678E1F1BFA9B280071BCB8 /* PAPTabBarController.swift in Sources */,
-				40678E161BFA9ADC0071BCB8 /* PAPEditPhotoViewController.swift in Sources */,
+				40678E161BFA9ADC0071BCB8 /* EditPhotoViewController.swift in Sources */,
+				40954BDD1C20B3CC00B46B44 /* PathMenuItem.swift in Sources */,
 				40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */,
 				40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */,
 				400818421C1105A9004F7497 /* GarageViewController.swift in Sources */,
