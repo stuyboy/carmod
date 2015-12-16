@@ -554,6 +554,9 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     let image = info[UIImagePickerControllerEditedImage] as! UIImage
     self.photos.append(image)
+
+    self.pageControl.currentPage = self.photos.count-1
+
     let tagArray: [TagObject] = []
     self.tags.append(tagArray) // Add empty Tag Array as init
     
