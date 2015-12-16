@@ -32,7 +32,7 @@ func SearchParts(db *sql.DB, search string) []SearchResult {
 
 	argPhrase := ""
 	for _, term := range individualTerms {
-		argPhrase += "+" + term + " "
+		argPhrase += "+" + term + "* "
 	}
 
 	rows, err := db.Query(sqlPhrase, argPhrase)
