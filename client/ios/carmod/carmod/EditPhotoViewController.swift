@@ -167,12 +167,15 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     let circleImageLarge = UIImage(named: "ic_circle")!
     let photoImage = UIImage(named: "ic_camera")!
     let titleImage = UIImage(named: "ic_title")!
+    let deleteImage = UIImage(named: "ic_delete")!
     
-    let photoButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_BLUE)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(photoImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(photoImage, tintColor: UIColor.fromRGB(COLOR_BLUE)))
+    let titleButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_GREEN)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(titleImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(titleImage, tintColor: UIColor.fromRGB(COLOR_GREEN)))
     
-    let titleButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_RED)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(titleImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(titleImage, tintColor: UIColor.fromRGB(COLOR_RED)))
+    let photoButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_YELLOW)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(photoImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(photoImage, tintColor: UIColor.fromRGB(COLOR_YELLOW)))
     
-    let items = [titleButton, photoButton]
+    let deleteButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_RED)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(deleteImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(deleteImage, tintColor: UIColor.fromRGB(COLOR_RED)))
+    
+    let items = [titleButton, photoButton, deleteButton]
     
     let plusImage = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.whiteColor())
     let plusImageHighlighted = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
@@ -567,6 +570,9 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     case 1: // Add photo
       self.onAddPhoto()
       break
+    case 2: // Delete photo
+      self.onDeletePhoto()
+      break
     default:
       break
     }
@@ -669,6 +675,20 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.alertController.addAction(okAction)
     
     self.presentViewController(self.alertController, animated: true, completion: nil)
+  }
+  
+  func onDeletePhoto() {
+    if self.photos.count == 1 {
+      self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
+      self.photos.removeAll()
+    } else {
+      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+      for indexPath in indexPaths {
+        self.photos.removeAtIndex(indexPath.row)
+        
+        break
+      }
+    }
   }
   
   func onAddPhoto() {
