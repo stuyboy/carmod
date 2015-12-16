@@ -18,7 +18,6 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   private var stories: [PFObject] = []                // Feed of story objects
   private var storyPhotos = Array<Array<PFObject>>()  // Array of photos in each story object
   private var emptyView: UIView!
-  private var isInitialLoad: Bool = true
   private var activityIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
@@ -57,8 +56,22 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.stories.removeAll()
     self.storyPhotos.removeAll()
     
-    let query = PFQuery(className: kStoryClassKey)
-    query.whereKey(kStoryAuthorKey, equalTo: self.user!)
+    let followingActivitiesQuery = PFQuery(className: kPAPActivityClassKey)
+    followingActivitiesQuery.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeFollow)
+    followingActivitiesQuery.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
+    followingActivitiesQuery.cachePolicy = PFCachePolicy.NetworkOnly
+    followingActivitiesQuery.limit = 1000
+    
+    let storiesFromFollowedUsersQuery = PFQuery(className: kStoryClassKey)
+    storiesFromFollowedUsersQuery.whereKey(kStoryAuthorKey, matchesKey: kPAPActivityToUserKey, inQuery: followingActivitiesQuery)
+    
+    let storiesFromCurrentUserQuery = PFQuery(className: kStoryClassKey)
+    storiesFromCurrentUserQuery.whereKey(kStoryAuthorKey, equalTo: PFUser.currentUser()!)
+    
+    let query = PFQuery.orQueryWithSubqueries([storiesFromFollowedUsersQuery, storiesFromCurrentUserQuery])
+    query.limit = 30
+    query.includeKey(kStoryAuthorKey)
+    query.orderByDescending("createdAt")
     query.findObjectsInBackgroundWithBlock {
       (objects: [AnyObject]?, error: NSError?) -> Void in
       if error != nil {
@@ -74,7 +87,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.storyPhotos.append(photos)
       }
       
-      self.isInitialLoad = false
+      self.activityIndicator.stopAnimating()
       
       self.refreshStories()
     }

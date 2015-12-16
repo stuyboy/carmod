@@ -101,6 +101,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
+    
     cell.isInteractionEnabled = false
     
     let photoObject = self.photos[indexPath.row]

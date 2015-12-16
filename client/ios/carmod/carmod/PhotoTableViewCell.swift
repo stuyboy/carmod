@@ -97,19 +97,19 @@ class PhotoTableViewCell: UITableViewCell {
   }
   
   func loadPhoto() {
-    self.progressView = MRProgressOverlayView.showOverlayAddedTo(self.photo, title: "Loading...", mode: MRProgressOverlayViewMode.DeterminateHorizontalBar, animated: true)
-    self.progressView.titleLabel?.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
-    self.progressView.titleLabel?.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+//    self.progressView = MRProgressOverlayView.showOverlayAddedTo(self.photo, title: "Loading...", mode: MRProgressOverlayViewMode.DeterminateHorizontalBar, animated: true)
+//    self.progressView.titleLabel?.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
+//    self.progressView.titleLabel?.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     
     self.photo.loadInBackground({ (image, error) -> Void in
       if error != nil {
         return
       }
   
-      self.progressView.dismiss(true)
+//      self.progressView.dismiss(true)
       
       }) { (percentDone) -> Void in
-        self.progressView.setProgress(Float(percentDone/100), animated: true)
+//        self.progressView.setProgress(Float(percentDone/100), animated: true)
     }
   }
     
