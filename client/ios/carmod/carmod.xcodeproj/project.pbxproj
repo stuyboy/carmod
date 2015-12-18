@@ -65,6 +65,7 @@
 		40954BDF1C20F08800B46B44 /* StoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDE1C20F08800B46B44 /* StoryDetailsViewController.swift */; };
 		40954BE11C21256900B46B44 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE01C21256900B46B44 /* StoryCache.swift */; };
 		40954BE31C2279FF00B46B44 /* StoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE21C2279FF00B46B44 /* StoryManager.swift */; };
+		40954BE51C24B31600B46B44 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE41C24B31600B46B44 /* CommentTableViewCell.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -153,6 +154,7 @@
 		40954BDE1C20F08800B46B44 /* StoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryDetailsViewController.swift; sourceTree = "<group>"; };
 		40954BE01C21256900B46B44 /* StoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCache.swift; sourceTree = "<group>"; };
 		40954BE21C2279FF00B46B44 /* StoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryManager.swift; sourceTree = "<group>"; };
+		40954BE41C24B31600B46B44 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +376,7 @@
 				40678E361BFA9BE80071BCB8 /* PAPLoadMoreCell.swift */,
 				40678E371BFA9BE80071BCB8 /* PAPPhotoCell.swift */,
 				40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */,
+				40954BE41C24B31600B46B44 /* CommentTableViewCell.swift */,
 				40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */,
 				4059732F1C1639C600600615 /* CarTableViewCell.swift */,
 				405973371C17F83900600615 /* PhotoTableViewCell.swift */,
@@ -720,6 +723,7 @@
 				40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */,
 				400818421C1105A9004F7497 /* GarageViewController.swift in Sources */,
 				40954BE31C2279FF00B46B44 /* StoryManager.swift in Sources */,
+				40954BE51C24B31600B46B44 /* CommentTableViewCell.swift in Sources */,
 				400818461C123960004F7497 /* AddCarView.swift in Sources */,
 				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,
 				405973321C163A6000600615 /* CarManager.swift in Sources */,

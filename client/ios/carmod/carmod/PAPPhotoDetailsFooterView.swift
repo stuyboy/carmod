@@ -44,7 +44,11 @@ class PAPPhotoDetailsFooterView: UIView {
   
   // MARK:- PAPPhotoDetailsFooterView
   
+  class func heightForView() -> CGFloat {
+    return 50.0
+  }
+  
   class func rectForView() -> CGRect {
-    return CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.size.width, 69.0)
+    return CGRectMake(0.0, 0.0, UIScreen.mainScreen().bounds.size.width, 50.0)
   }
 }

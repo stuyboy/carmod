@@ -12,6 +12,11 @@ import MobileCoreServices
 import ParseUI
 import MBProgressHUD
 
+class CommentObject: NSObject {
+  var user: PFUser!
+  var comment: String!
+}
+
 class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UINavigationControllerDelegate {
   let LABEL_HEIGHT: CGFloat = 40.0
   private var keyboardHeight: CGFloat = 0.0
@@ -22,10 +27,13 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   private var tagID: Int = 0
   private var tags = Array<Array<TagObject>>()
   
+  private var scrollView: UIScrollView!
   private var headerView: StoryHeaderView!
   private var photoTable: UITableView!
   private var footerView: PAPPhotoDetailsFooterView!
   private var commentTextField: UITextField!
+  private var comments: [CommentObject] = []
+  private var commentsTable: UITableView!
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
@@ -56,6 +64,40 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         self.tags[i].append(tagObject)
       }
     }
+
+    var likers = [PFUser]()
+    var commenters = [PFUser]()
+    var isLikedByCurrentUser = false
+    
+    let query: PFQuery = PAPUtility.queryForActivitiesOnStory(story, cachePolicy: PFCachePolicy.NetworkOnly)
+    query.findObjectsInBackgroundWithBlock { (activityObjects, error) in
+      if error != nil {
+        return
+      }
+      
+      for activity in activityObjects! {
+        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+          likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+        } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+          let commenter = activity.objectForKey(kPAPActivityFromUserKey) as! PFUser
+          let comment = activity.objectForKey(kPAPActivityContentKey) as! String
+          let commentObject = CommentObject()
+          commentObject.user = commenter
+          commentObject.comment = comment
+          self.comments.append(commentObject)
+          
+          commenters.append(commenter)
+        }
+
+        if ((activity.objectForKey(kPAPActivityFromUserKey) as? PFObject)?.objectId) == PFUser.currentUser()!.objectId {
+          if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+            isLikedByCurrentUser = true
+          }
+        }
+      }
+    
+      self.refreshComments(false)
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -65,30 +107,35 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.view.backgroundColor = UIColor.blackColor()
+    self.view.backgroundColor = UIColor.whiteColor()
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     
-    self.initHeader()
     self.initBody()
     self.initFooter()
+    
+    self.view.bringSubviewToFront(self.headerView)
   }
   
   override func viewWillAppear(animated: Bool) {
     self.photoTable.reloadData()
   }
   
-  // MARK:- Initializers
-  private func initHeader() {
+  private func initBody() {
+    self.scrollView = UIScrollView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!-self.tabBarController!.tabBar.frame.height))
+    self.scrollView.backgroundColor = UIColor.whiteColor()
+    self.scrollView.delegate = self
+    self.scrollView.scrollEnabled = true
+    self.scrollView.bounces = true
+    self.view.addSubview(self.scrollView)
+    
     self.headerView = StoryHeaderView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: HEADER_HEIGHT))
     self.headerView.story = self.story
-    self.view.addSubview(self.headerView)    
-  }
-  
-  private func initBody() {
+    self.view.addSubview(self.headerView)
+    
     self.photoTable = UITableView(frame: CGRect(x: 0.0, y: self.headerView.frame.maxY, width: gPhotoSize, height: gPhotoSize))
     self.photoTable.registerClass(PhotoTableViewCell.classForCoder(), forCellReuseIdentifier: "PhotoTableViewCell")
     self.photoTable.clipsToBounds = true
@@ -100,12 +147,14 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     self.photoTable.bounces = false
     self.photoTable.pagingEnabled = true
     self.photoTable.allowsSelection = false
+    self.photoTable.showsHorizontalScrollIndicator = false
+    self.photoTable.showsVerticalScrollIndicator = false
     if self.photoTable.respondsToSelector("separatorInset") {
       self.photoTable.separatorInset = UIEdgeInsetsZero
     }
     self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
     self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
-    self.view.addSubview(self.photoTable)
+    self.scrollView.addSubview(self.photoTable)
     
     let CONTROL_WIDTH: CGFloat = 200.0
     self.pageControl = UIPageControl(frame: CGRect(x: self.photoTable.frame.width/2-CONTROL_WIDTH/2, y: self.photoTable.frame.maxY-LABEL_HEIGHT-OFFSET_SMALL, width: CONTROL_WIDTH, height: LABEL_HEIGHT))
@@ -116,15 +165,31 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     self.pageControl.addTarget(self, action: "onPageControlChange:", forControlEvents: UIControlEvents.ValueChanged)
     self.pageControl.hidden = self.photos.count == 1
     self.pageControl.numberOfPages = self.photos.count
-    self.view.addSubview(self.pageControl)
+    self.scrollView.addSubview(self.pageControl)
   }
   
   private func initFooter() {
-    self.footerView = PAPPhotoDetailsFooterView(frame: CGRect(x: 0.0, y: self.photoTable.frame.maxY, width: self.view.frame.width, height: HEADER_HEIGHT))
-    self.view.addSubview(self.footerView)
+    self.footerView = PAPPhotoDetailsFooterView(frame: CGRect(x: 0.0, y: self.photoTable.frame.maxY, width: self.view.frame.width, height: PAPPhotoDetailsFooterView.heightForView()))
+    self.scrollView.addSubview(self.footerView)
     
     self.commentTextField = self.footerView.commentField
     self.commentTextField!.delegate = self
+    
+    self.commentsTable = UITableView(frame: CGRect(x: 0.0, y: self.photoTable.frame.maxY, width: self.view.frame.width, height: 0.0))
+    self.commentsTable.registerClass(CommentTableViewCell.classForCoder(), forCellReuseIdentifier: "CommentTableViewCell")
+    self.commentsTable.clipsToBounds = true
+    self.commentsTable.backgroundColor = UIColor.whiteColor()
+    self.commentsTable.separatorColor = UIColor.whiteColor()
+    self.commentsTable.rowHeight = CommentTableViewCell.heightForCell()
+    self.commentsTable.delegate = self
+    self.commentsTable.dataSource = self
+    self.commentsTable.bounces = false
+    self.commentsTable.allowsSelection = false
+    self.commentsTable.scrollEnabled = false
+    if self.commentsTable.respondsToSelector("separatorInset") {
+      self.commentsTable.separatorInset = UIEdgeInsetsZero
+    }
+    self.scrollView.addSubview(self.commentsTable)
   }
   
   // MARK:- UITextFieldDelegate
@@ -152,6 +217,11 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
       let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("handleCommentTimeout:"), userInfo: ["comment": comment], repeats: false)
 
       comment.saveEventually { (succeeded, error) in
+        let commentObject = CommentObject()
+        commentObject.user = PFUser.currentUser()
+        commentObject.comment = trimmedComment
+        self.comments.append(commentObject)
+        
         timer.invalidate()
 
         if error != nil && error!.code == PFErrorCode.ErrorObjectNotFound.rawValue {
@@ -167,8 +237,9 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
 
 //        NSNotificationCenter.defaultCenter().postNotificationName(PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification, object: self.photo!, userInfo: ["comments": self.objects!.count + 1])
 
+        self.refreshComments(true)
+        
         MBProgressHUD.hideHUDForView(self.view.superview, animated: true)
-//        self.loadObjects()
       }
     }
     
@@ -178,11 +249,21 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK:- UIScrollViewDelegate
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-
+    
   }
   
   func scrollViewDidScroll(scrollView: UIScrollView) {
-
+    if self.commentTextField.isFirstResponder() {
+      self.commentTextField.resignFirstResponder()
+    }
+    
+    if scrollView == self.scrollView {
+      if self.scrollView.contentOffset.y == 0 {
+        self.headerView.alpha = 1.0
+      } else {
+        self.headerView.alpha = 0.9
+      }
+    }
   }
   
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -202,7 +283,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         self.keyboardHeight = keyboardHeight
         
         UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-          self.footerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-self.footerView.frame.height-6.0
+          self.footerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-PAPPhotoDetailsFooterView.heightForView()
         })
       }
     }
@@ -216,19 +297,35 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   
   // MARK: - UITableViewDataSource
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.photos.count
+    if tableView == self.photoTable {
+      return self.photos.count
+    } else {
+      return self.comments.count
+    }
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
+    if tableView == self.photoTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
+      
+      cell.isInteractionEnabled = false
+      let photoObject = self.photos[indexPath.row]
+      cell.photo.file = photoObject.objectForKey(kPhotoImageKey) as? PFFile
+      cell.tags = self.tags[indexPath.row]
+      cell.loadPhoto()
     
-    cell.isInteractionEnabled = false
-    let photoObject = self.photos[indexPath.row]
-    cell.photo.file = photoObject.objectForKey(kPhotoImageKey) as? PFFile
-    cell.tags = self.tags[indexPath.row]
-    cell.loadPhoto()
+      return cell
+    } else if tableView == self.commentsTable {
+      let cell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as! CommentTableViewCell
+
+      let commentObject = self.comments[indexPath.row]
+      cell.comment = commentObject.comment
+      cell.user = commentObject.user
+      
+      return cell
+    }
     
-    return cell
+    return UITableViewCell()
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -256,6 +353,17 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         
         break
       }
+    }
+  }
+  
+  func refreshComments(scrollToBottom: Bool) {
+    self.commentsTable.frame = CGRect(x: 0.0, y: self.photoTable.frame.maxY+PAPPhotoDetailsFooterView.heightForView(), width: self.view.frame.width, height: CommentTableViewCell.heightForCell()*CGFloat(self.comments.count))
+    self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.commentsTable.frame.maxY)
+    self.commentsTable.reloadData()
+    
+    if scrollToBottom {
+      let bottomOffset = CGPoint(x: 0.0, y: self.scrollView.contentSize.height-self.scrollView.bounds.size.height)
+      self.scrollView.setContentOffset(bottomOffset, animated: true)
     }
   }
   

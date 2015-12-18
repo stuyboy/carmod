@@ -285,13 +285,13 @@ class PAPUtility {
     queryLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
     
     let queryComments = PFQuery(className: kPAPActivityClassKey)
-    queryComments.whereKey(kPAPActivityPhotoKey, equalTo: story)
+    queryComments.whereKey(kPAPActivityStoryKey, equalTo: story)
     queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
     
     let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
     query.cachePolicy = cachePolicy
     query.includeKey(kPAPActivityFromUserKey)
-    query.includeKey(kPAPActivityPhotoKey)
+    query.includeKey(kPAPActivityStoryKey)
     
     return query
   }
