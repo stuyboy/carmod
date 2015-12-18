@@ -10,6 +10,7 @@ import UIKit
 import QuartzCore
 import MobileCoreServices
 import ParseUI
+import MBProgressHUD
 
 class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UINavigationControllerDelegate {
   let LABEL_HEIGHT: CGFloat = 40.0
@@ -24,6 +25,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   private var headerView: StoryHeaderView!
   private var photoTable: UITableView!
   private var footerView: PAPPhotoDetailsFooterView!
+  private var commentTextField: UITextField!
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
@@ -120,13 +122,58 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   private func initFooter() {
     self.footerView = PAPPhotoDetailsFooterView(frame: CGRect(x: 0.0, y: self.photoTable.frame.maxY, width: self.view.frame.width, height: HEADER_HEIGHT))
     self.view.addSubview(self.footerView)
+    
+    self.commentTextField = self.footerView.commentField
+    self.commentTextField!.delegate = self
   }
   
   // MARK:- UITextFieldDelegate
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
+    let trimmedComment = textField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    if trimmedComment.length != 0 {
+      let comment = PFObject(className: kPAPActivityClassKey)
+      comment.setObject(trimmedComment, forKey: kPAPActivityContentKey) // Set comment text
+      comment.setObject(self.story.objectForKey(kStoryAuthorKey)!, forKey: kPAPActivityToUserKey) // Set toUser
+      comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey) // Set fromUser
+      comment.setObject(kPAPActivityTypeComment, forKey:kPAPActivityTypeKey)
+      comment.setObject(self.story, forKey: kPAPActivityStoryKey)
+
+      let ACL = PFACL(user: PFUser.currentUser()!)
+      ACL.setPublicReadAccess(true)
+      ACL.setWriteAccess(true, forUser: self.story.objectForKey(kStoryAuthorKey) as! PFUser)
+      comment.ACL = ACL
+
+      StoryCache.sharedCache.incrementCommentCountForStory(self.story)
+
+      // Show HUD view
+      MBProgressHUD.showHUDAddedTo(self.view.superview, animated: true)
+
+      // If more than 5 seconds pass since we post a comment, stop waiting for the server to respond
+      let timer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("handleCommentTimeout:"), userInfo: ["comment": comment], repeats: false)
+
+      comment.saveEventually { (succeeded, error) in
+        timer.invalidate()
+
+        if error != nil && error!.code == PFErrorCode.ErrorObjectNotFound.rawValue {
+          StoryCache.sharedCache.decrementCommentCountForStory(self.story)
+
+          let alertController = UIAlertController(title: NSLocalizedString("Could not post comment", comment: ""), message: NSLocalizedString("This story is no longer available", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+          let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
+          alertController.addAction(alertAction)
+          self.presentViewController(alertController, animated: true, completion: nil)
+
+          self.navigationController!.popViewControllerAnimated(true)
+        }
+
+//        NSNotificationCenter.defaultCenter().postNotificationName(PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification, object: self.photo!, userInfo: ["comments": self.objects!.count + 1])
+
+        MBProgressHUD.hideHUDForView(self.view.superview, animated: true)
+//        self.loadObjects()
+      }
+    }
     
-    return true
+    textField.text = ""
+    return textField.resignFirstResponder()
   }
   
   // MARK:- UIScrollViewDelegate
@@ -153,12 +200,18 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     if let userInfo = sender.userInfo {
       if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
         self.keyboardHeight = keyboardHeight
+        
+        UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+          self.footerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-self.footerView.frame.height-6.0
+        })
       }
     }
   }
   
   func keyboardWillHide(sender: NSNotification) {
-    
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+      self.footerView.frame.origin.y = self.photoTable.frame.maxY
+    })
   }
   
   // MARK: - UITableViewDataSource

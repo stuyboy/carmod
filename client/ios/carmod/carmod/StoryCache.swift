@@ -108,6 +108,40 @@ final class StoryCache {
     return false
   }
 
+  func incrementLikerCountForStory(story: PFObject) {
+    let likerCount = likeCountForStory(story) + 1
+    var attributes = attributesForStory(story)
+    attributes![kStoryAttributesLikeCountKey] = likerCount
+    setAttributes(attributes!, forStory: story)
+  }
+  
+  func decrementLikerCountForStory(story: PFObject) {
+    let likerCount = likeCountForStory(story) - 1
+    if likerCount < 0 {
+      return
+    }
+    var attributes = attributesForStory(story)
+    attributes![kStoryAttributesLikeCountKey] = likerCount
+    setAttributes(attributes!, forStory: story)
+  }
+  
+  func incrementCommentCountForStory(story: PFObject) {
+    let commentCount = commentCountForStory(story) + 1
+    var attributes = attributesForStory(story)
+    attributes![kStoryAttributesCommentCountKey] = commentCount
+    setAttributes(attributes!, forStory: story)
+  }
+  
+  func decrementCommentCountForStory(story: PFObject) {
+    let commentCount = commentCountForStory(story) - 1
+    if commentCount < 0 {
+      return
+    }
+    var attributes = attributesForStory(story)
+    attributes![kStoryAttributesCommentCountKey] = commentCount
+    setAttributes(attributes!, forStory: story)
+  }
+  
   // MARK:- User Cache
   func setAttributesForUser(user: PFUser, photoCount count: Int, followedByCurrentUser following: Bool) {
     let attributes = [

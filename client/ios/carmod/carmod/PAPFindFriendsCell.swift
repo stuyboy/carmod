@@ -2,6 +2,9 @@ import Foundation
 import ParseUI
 
 class PAPFindFriendsCell: PFTableViewCell {
+  let BUTTON_WIDTH: CGFloat = 120.0
+  let BUTTON_HEIGHT: CGFloat = 32.0
+  
   var delegate: PAPFindFriendsCellDelegate?
   
   var photoLabel: UILabel!
@@ -11,6 +14,40 @@ class PAPFindFriendsCell: PFTableViewCell {
   var nameButton: UIButton!
   var avatarImageButton: UIButton!
   var avatarImageView: PAPProfileImageView!
+  /*! The user represented in the cell */
+  var user: PFUser? {
+    didSet {
+      // Configure the cell
+      if PAPUtility.userHasProfilePictures(self.user!) {
+        self.avatarImageView.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
+      } else {
+        self.avatarImageView.setImage(PAPUtility.defaultProfilePicture()!)
+      }
+      
+      // Set name
+      let nameString: String = self.user!.objectForKey(kPAPUserDisplayNameKey) as! String
+      let nameSize: CGSize = nameString.boundingRectWithSize(CGSizeMake(144.0, CGFloat.max),
+        options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
+        attributes: [NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)!],
+        context: nil).size
+      nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
+      nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Highlighted)
+      
+      nameButton.frame = CGRectMake(60.0, 17.0, nameSize.width, nameSize.height)
+      
+      // Set photo number label
+      let photoLabelSize: CGSize = "photos".boundingRectWithSize(CGSizeMake(144.0, CGFloat.max),
+        options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
+        attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!],
+        context: nil).size
+      photoLabel.frame = CGRectMake(60.0, 17.0 + nameSize.height, 140.0, photoLabelSize.height)
+      
+      // Set follow button
+      //            followButton.frame = CGRectMake(208.0, 20.0, 103.0, 32.0)
+      followButton.frame = CGRect(x: self.bounds.width-BUTTON_WIDTH-OFFSET_SMALL, y: self.bounds.height/2-BUTTON_HEIGHT/2, width: BUTTON_WIDTH, height: BUTTON_HEIGHT)
+      self.followButton.hidden = false
+    }
+  }
   
   // MARK:- NSObject
   
@@ -46,64 +83,24 @@ class PAPFindFriendsCell: PFTableViewCell {
     self.photoLabel.backgroundColor = UIColor.clearColor()
     self.contentView.addSubview(self.photoLabel)
     
-    self.followButton = UIButton(type: UIButtonType.Custom)
+    self.followButton = UIButton()
+    self.followButton.layer.cornerRadius = 4.0
+    self.followButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
     self.followButton.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
     self.followButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
-    self.followButton.setBackgroundImage(UIImage(named: "ButtonFollow.png"), forState: UIControlState.Normal)
-    self.followButton.setBackgroundImage(UIImage(named: "ButtonFollowing.png"), forState: UIControlState.Selected)
     self.followButton.setImage(UIImage(named: "IconTick.png"), forState: UIControlState.Selected)
-    self.followButton.setTitle(NSLocalizedString("Follow  ", comment: "Follow string, with spaces added for centering"), forState: UIControlState.Normal)
+    self.followButton.setTitle(NSLocalizedString("Follow", comment: "Follow string, with spaces added for centering"), forState: UIControlState.Normal)
     self.followButton.setTitle("Following", forState: UIControlState.Selected)
     self.followButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
     self.followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
     self.followButton.addTarget(self, action: Selector("didTapFollowButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+    self.followButton.hidden = true
     self.contentView.addSubview(self.followButton)
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  
-  // MARK:- PAPFindFriendsCell
-  
-  /*! The user represented in the cell */
-  var user: PFUser? {
-    didSet {
-      // Configure the cell
-      if PAPUtility.userHasProfilePictures(self.user!) {
-        self.avatarImageView.setFile(self.user!.objectForKey(kPAPUserProfilePicSmallKey) as? PFFile)
-      } else {
-        self.avatarImageView.setImage(PAPUtility.defaultProfilePicture()!)
-      }
-      
-      // Set name
-      let nameString: String = self.user!.objectForKey(kPAPUserDisplayNameKey) as! String
-      let nameSize: CGSize = nameString.boundingRectWithSize(CGSizeMake(144.0, CGFloat.max),
-        options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
-        attributes: [NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)!],
-        context: nil).size
-      nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Normal)
-      nameButton.setTitle(self.user!.objectForKey(kPAPUserDisplayNameKey) as? String, forState: UIControlState.Highlighted)
-      
-      nameButton.frame = CGRectMake(60.0, 17.0, nameSize.width, nameSize.height)
-      
-      // Set photo number label
-      let photoLabelSize: CGSize = "photos".boundingRectWithSize(CGSizeMake(144.0, CGFloat.max),
-        options: [NSStringDrawingOptions.TruncatesLastVisibleLine, NSStringDrawingOptions.UsesLineFragmentOrigin],
-        attributes: [NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!],
-        context: nil).size
-      photoLabel.frame = CGRectMake(60.0, 17.0 + nameSize.height, 140.0, photoLabelSize.height)
-      
-      // Set follow button
-      //            followButton.frame = CGRectMake(208.0, 20.0, 103.0, 32.0)
-      let BUTTON_WIDTH: CGFloat = 120.0
-      let BUTTON_HEIGHT: CGFloat = 32.0
-      followButton.frame = CGRect(x: self.bounds.width-BUTTON_WIDTH-OFFSET_SMALL, y: self.bounds.height/2-BUTTON_HEIGHT/2, width: BUTTON_WIDTH, height: BUTTON_HEIGHT)
-    }
-  }
-  
-  // MARK:- ()
   
   class func heightForCell() -> CGFloat {
     return 67.0
