@@ -355,6 +355,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     return false
   }
   
+  func shouldNavigateToStory() {
+    
+  }
+  
   func shouldNavigateToPhoto(var targetPhoto: PFObject) {
 //    for photo: PFObject in homeViewController!.objects as! [PFObject] {
 //      if photo.objectId == targetPhoto.objectId {

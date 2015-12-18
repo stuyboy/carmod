@@ -443,6 +443,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     story.save()
     
+    StoryManager.sharedInstance.eventManager.trigger(EVENT_STORY_PUBLISHED)
     self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
   }
   

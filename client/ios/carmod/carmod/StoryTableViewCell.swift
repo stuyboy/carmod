@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol StoryTableViewCellDelegate: class {
+  func tappedPhoto(indexPath: NSIndexPath)
+}
+
 class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
+  weak var delegate: StoryTableViewCellDelegate?
+  var indexPath: NSIndexPath!
   private var photoTable: UITableView!
   private var pageControl: UIPageControl!
   private var photoCount: UILabel!
@@ -56,7 +62,6 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     self.photoTable.dataSource = self
     self.photoTable.bounces = false
     self.photoTable.pagingEnabled = true
-    self.photoTable.allowsSelection = false
     if self.photoTable.respondsToSelector("separatorInset") {
       self.photoTable.separatorInset = UIEdgeInsetsZero
     }
@@ -101,7 +106,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
-    
+    cell.selectionStyle = .None
     cell.isInteractionEnabled = false
     
     let photoObject = self.photos[indexPath.row]
@@ -113,7 +118,9 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
+    if let delegate = self.delegate {
+      delegate.tappedPhoto(self.indexPath)
+    }
   }
   
   func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -130,24 +137,28 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     }
   }
   
-  //
   func loadTags(photo: PFObject, atIndex: Int) {
+    print("StoryTableViewCell::loadTags")
     let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
-    if let annotations = query.findObjects() {
-      for annotation in annotations {
+    if let annotationObjects = query.findObjects() {
+      for annotationObject in annotationObjects {
         let tagObject: TagObject = TagObject()
         
         let partObject: PartObject = PartObject()
-        partObject.brand = annotation.objectForKey(kAnnotationBrandKey) as! String
-        partObject.model = annotation.objectForKey(kAnnotationModelKey) as! String
-        partObject.partNumber = annotation.objectForKey(kAnnotationPartNumberKey) as! String
+        partObject.brand = annotationObject.objectForKey(kAnnotationBrandKey) as! String
+        partObject.model = annotationObject.objectForKey(kAnnotationModelKey) as! String
+        partObject.partNumber = annotationObject.objectForKey(kAnnotationPartNumberKey) as! String
 
         tagObject.partObject = partObject
-        let coordinates = annotation.objectForKey(kAnnotationCoordinatesKey) as! [CGFloat]
+        let coordinates = annotationObject.objectForKey(kAnnotationCoordinatesKey) as! [CGFloat]
         tagObject.coordinates = CGPoint(x: coordinates[0], y: coordinates[1])
         
         self.tags[atIndex].append(tagObject)
+        
+        StoryCache.sharedCache.setAttributesForAnnotation(annotationObject as! PFObject, coordinateX: Double(coordinates[0]), coordinateY: Double(coordinates[1]), brand: partObject.brand, model: partObject.model, productCode: partObject.partNumber)
       }
+      
+      StoryCache.sharedCache.setAttributesForPhoto(photo, annotations: annotationObjects as! [PFObject])
     }
   }
   

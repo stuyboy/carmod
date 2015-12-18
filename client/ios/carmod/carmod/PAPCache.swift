@@ -25,7 +25,7 @@ final class PAPCache {
       kPAPPhotoAttributesCommentCountKey: commenters.count,
       kPAPPhotoAttributesCommentersKey: commenters,
       kPhotoAttributesAnnotationsKey: annotations,
-      kPhotoAttributesAnnotationCountKey: annotations.count
+      kPhotoAttributesAnnotationsCountKey: annotations.count
     ]
     setAttributes(attributes as! [String : AnyObject], forPhoto: photo)
   }
@@ -43,11 +43,11 @@ final class PAPCache {
         kPAPPhotoAttributesLikersKey: likers,
         kPAPPhotoAttributesCommentCountKey: commenters.count,
         kPhotoAttributesAnnotationsKey: annotations,
-        kPhotoAttributesAnnotationCountKey: annotations.count
+        kPhotoAttributesAnnotationsCountKey: annotations.count
       ]
     } else {
       attributes![kPhotoAttributesAnnotationsKey] = annotations
-      attributes![kPhotoAttributesAnnotationCountKey] = annotations.count
+      attributes![kPhotoAttributesAnnotationsCountKey] = annotations.count
     }
     
     setAttributes(attributes! as [String : AnyObject], forPhoto: photo)

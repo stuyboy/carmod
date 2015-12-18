@@ -347,8 +347,8 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   }
   
   func photoHeaderView(photoHeaderView: PAPPhotoHeaderView, didTapCommentOnPhotoButton buton: UIButton, photo: PFObject) {
-    let photoDetailsVC: PAPPhotoDetailsViewController = PAPPhotoDetailsViewController(photo: photo)
-    self.navigationController!.pushViewController(photoDetailsVC, animated: true)
+//    let photoDetailsVC: PAPPhotoDetailsViewController = PAPPhotoDetailsViewController(photo: photo)
+//    self.navigationController!.pushViewController(photoDetailsVC, animated: true)
   }
   
   // MARK:- ()
@@ -493,8 +493,8 @@ class PAPPhotoTimelineViewController: PFQueryTableViewController, PAPPhotoHeader
   func didTapOnPhotoAction(sender: UIButton) {
     let photo: PFObject? = self.objects![sender.tag] as? PFObject
     if photo != nil {
-      let photoDetailsVC = PAPPhotoDetailsViewController(photo: photo!)
-      self.navigationController!.pushViewController(photoDetailsVC, animated: true)
+//      let photoDetailsVC = PAPPhotoDetailsViewController(photo: photo!)
+//      self.navigationController!.pushViewController(photoDetailsVC, animated: true)
     }
   }
   

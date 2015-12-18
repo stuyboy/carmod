@@ -97,8 +97,8 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
     if indexPath.row < self.objects!.count {
       let activity: PFObject = self.objects![indexPath.row] as! PFObject
       if activity.objectForKey(kPAPActivityPhotoKey) != nil {
-        let detailViewController = PAPPhotoDetailsViewController(photo: activity.objectForKey(kPAPActivityPhotoKey) as! PFObject)
-        self.navigationController!.pushViewController(detailViewController, animated: true)
+//        let detailViewController = PAPPhotoDetailsViewController(photo: activity.objectForKey(kPAPActivityPhotoKey) as! PFObject)
+//        self.navigationController!.pushViewController(detailViewController, animated: true)
       } else if activity.objectForKey(kPAPActivityFromUserKey) != nil {
         let detailViewController = PAPAccountViewController(user: activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
         print("Presenting account view controller with user: \(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)")
@@ -223,8 +223,8 @@ class PAPActivityFeedViewController: PFQueryTableViewController, PAPActivityCell
     let photo: PFObject = activity.objectForKey(kPAPActivityPhotoKey) as! PFObject
     
     // Push single photo view controller
-    let photoViewController = PAPPhotoDetailsViewController(photo: photo)
-    self.navigationController!.pushViewController(photoViewController, animated: true)
+//    let photoViewController = PAPPhotoDetailsViewController(photo: photo)
+//    self.navigationController!.pushViewController(photoViewController, animated: true)
   }
   
   func cell(cellView: PAPBaseTextCell, didTapUserButton aUser: PFUser) {

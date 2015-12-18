@@ -53,6 +53,7 @@ let kPAPActivityFromUserKey    = "fromUser"
 let kPAPActivityToUserKey      = "toUser"
 let kPAPActivityContentKey     = "content"
 let kPAPActivityPhotoKey       = "photo"
+let kPAPActivityStoryKey       = "story"
 
 // Type values
 let kPAPActivityTypeLike       = "like"
@@ -90,8 +91,6 @@ let kPAPPhotoAttributesLikeCountKey            = "likeCount"
 let kPAPPhotoAttributesLikersKey               = "likers"
 let kPAPPhotoAttributesCommentCountKey         = "commentCount"
 let kPAPPhotoAttributesCommentersKey           = "commenters"
-let kPhotoAttributesAnnotationCountKey         = "annotationCount"
-let kPhotoAttributesAnnotationsKey             = "annotations"
 
 // MARK:- Cached User Attributes
 // keys

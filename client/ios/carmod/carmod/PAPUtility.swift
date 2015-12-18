@@ -279,6 +279,23 @@ class PAPUtility {
   
   // MARK Activities
   
+  class func queryForActivitiesOnStory(story: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
+    let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
+    queryLikes.whereKey(kPAPActivityStoryKey, equalTo: story)
+    queryLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
+    
+    let queryComments = PFQuery(className: kPAPActivityClassKey)
+    queryComments.whereKey(kPAPActivityPhotoKey, equalTo: story)
+    queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
+    
+    let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
+    query.cachePolicy = cachePolicy
+    query.includeKey(kPAPActivityFromUserKey)
+    query.includeKey(kPAPActivityPhotoKey)
+    
+    return query
+  }
+  
   class func queryForActivitiesOnPhoto(photo: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
     let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
     queryLikes.whereKey(kPAPActivityPhotoKey, equalTo: photo)

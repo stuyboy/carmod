@@ -171,16 +171,4 @@ class PhotoTableViewCell: UITableViewCell {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-//  // MARK:- Debug methods
-//  func printTags() {
-//    print("Number of tags = \(self.tags.count)")
-//    for var i = 0; i < self.tags.count; i++ {
-//      let tagObject: TagObject = self.tags[i]
-//      let partObject: PartObject = tagObject.partObject
-//      
-//      print("Part Object Brand = \(partObject.brand), Model = \(partObject.model)")
-//    }
-//  }
-
 }

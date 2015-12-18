@@ -8,10 +8,10 @@
 
 import UIKit
 import ODRefreshControl
+import Synchronized
 
-class StoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StoryHeaderViewDelegate {
-  let HEADER_HEIGHT: CGFloat = 44.0
-  
+class StoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StoryHeaderViewDelegate, StoryTableViewCellDelegate {
+  var shouldReloadOnAppear: Bool = true
   private var user: PFUser!
   private var storyTable: UITableView!
   private var refreshControl: ODRefreshControl!
@@ -22,6 +22,10 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    StoryManager.sharedInstance.eventManager.listenTo(EVENT_STORY_PUBLISHED) { () -> () in
+      self.loadStories()
+    }
     
     self.view.backgroundColor = UIColor.blackColor()
     
@@ -48,7 +52,10 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
-    self.loadStories()
+    if self.shouldReloadOnAppear {
+      self.shouldReloadOnAppear = false
+      self.loadStories()
+    }
   }
   
   // MARK:- Initializers
@@ -68,27 +75,50 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     let storiesFromCurrentUserQuery = PFQuery(className: kStoryClassKey)
     storiesFromCurrentUserQuery.whereKey(kStoryAuthorKey, equalTo: PFUser.currentUser()!)
     
-    let query = PFQuery.orQueryWithSubqueries([storiesFromFollowedUsersQuery, storiesFromCurrentUserQuery])
-    query.limit = 30
-    query.includeKey(kStoryAuthorKey)
-    query.orderByDescending("createdAt")
-    query.findObjectsInBackgroundWithBlock {
-      (objects: [AnyObject]?, error: NSError?) -> Void in
+    let storyQuery = PFQuery.orQueryWithSubqueries([storiesFromFollowedUsersQuery, storiesFromCurrentUserQuery])
+    storyQuery.limit = 30
+    storyQuery.includeKey(kStoryAuthorKey)
+    storyQuery.orderByDescending("createdAt")
+    storyQuery.findObjectsInBackgroundWithBlock {
+      (storyObjects: [AnyObject]?, error: NSError?) -> Void in
       if error != nil {
         return
       }
       
-      for object in objects! {
-        self.stories.append(object as! PFObject)
+      for storyObject in storyObjects! {
+        self.stories.append(storyObject as! PFObject)
         
-        let relation = object.relationForKey(kStoryPhotosKey)
-        let q = relation.query()
-        let photos: [PFObject] = q?.findObjects() as! [PFObject]
+        let relation = storyObject.relationForKey(kStoryPhotosKey)
+        let relationQuery = relation.query()
+        let photos: [PFObject] = relationQuery?.findObjects() as! [PFObject]
+        
+        var likers = [PFUser]()
+        var commenters = [PFUser]()
+        var isLikedByCurrentUser = false
+        
+        let activityQuery: PFQuery = PAPUtility.queryForActivitiesOnStory(storyObject as! PFObject, cachePolicy: PFCachePolicy.NetworkOnly)
+        let activityObjects = activityQuery.findObjects()
+        for activity in activityObjects as! [PFObject] {
+          if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+            likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+          } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+            commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+          }
+    
+          if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
+            if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+              isLikedByCurrentUser = true
+            }
+          }
+        }
+        
         self.storyPhotos.append(photos)
+        
+        StoryCache.sharedCache.setAttributesForStory(storyObject as! PFObject, photos: photos, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
       }
       
       self.activityIndicator.stopAnimating()
-      
+      self.emptyView.hidden = self.stories.count > 0
       self.refreshStories()
     }
   }
@@ -108,7 +138,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     self.refreshControl = ODRefreshControl(inScrollView: self.storyTable)
     self.refreshControl.tintColor = UIColor.fromRGB(COLOR_ORANGE)
-    self.refreshControl.addTarget(self, action: "refreshStories", forControlEvents:UIControlEvents.ValueChanged)
+    self.refreshControl.addTarget(self, action: "forceRefresh", forControlEvents:UIControlEvents.ValueChanged)
     self.storyTable.addSubview(self.refreshControl)
     
     self.emptyView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: TABLE_HEIGHT))
@@ -148,6 +178,12 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.emptyView.addSubview(sketchArrowImage)
   }
   
+  // MARK:- StoryTableViewCellDelegate
+  func tappedPhoto(indexPath: NSIndexPath) {
+    let detailViewController = StoryDetailsViewController(story: self.stories[indexPath.section])
+    self.navigationController!.pushViewController(detailViewController, animated: true)
+  }
+  
   // MARK:- UITableViewDelegate
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
@@ -159,14 +195,17 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("StoryTableViewCell") as! StoryTableViewCell
+    cell.delegate = self
+    cell.indexPath = indexPath
     cell.selectionStyle = .None
     cell.photos = self.storyPhotos[indexPath.section]
 
     return cell
   }
-  
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let detailViewController = StoryDetailsViewController(story: self.stories[indexPath.section])
+    self.navigationController!.pushViewController(detailViewController, animated: true)
   }
   
   func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -200,6 +239,10 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   }
   
   // MARK:- Public methods
+  func forceRefresh() {
+    self.loadStories()
+  }
+  
   func refreshStories() {
     self.storyTable.contentSize = CGSize(width: self.storyTable.frame.width, height: gPhotoSize*CGFloat(self.storyPhotos.count))
     self.storyTable.reloadData()
@@ -250,3 +293,27 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     return UIStatusBarStyle.LightContent
   }
 }
+
+//synchronized(self) {
+//  let query: PFQuery = PAPUtility.queryForActivitiesOnStory(storyObject as! PFObject, cachePolicy: PFCachePolicy.NetworkOnly)
+//  query.findObjectsInBackgroundWithBlock { (activityObjects, error) in
+//    var likers = [PFUser]()
+//    var commenters = [PFUser]()
+//    var isLikedByCurrentUser = false
+//    let annotations = [PFObject]()
+//    
+//    for activity in activityObjects as! [PFObject] {
+//      if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+//        likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+//      } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+//        commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+//      }
+//      
+//      if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
+//        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+//          isLikedByCurrentUser = true
+//        }
+//      }
+//    }
+//  }
+//}

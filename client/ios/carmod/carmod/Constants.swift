@@ -117,6 +117,7 @@ let NSERROR_NO_INTERNET = NSError(domain: APP_DOMAIN, code: ERROR_NO_INTERNET, u
 let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
 let EVENT_CAR_RESULTS_COMPLETE: String = "Event::CarResultsComplete"
 let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
+let EVENT_STORY_PUBLISHED: String = "Event::StoryPublished"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0
@@ -124,6 +125,7 @@ let TAG_FIELD_HEIGHT: CGFloat = 30.0
 let TAG_ARROW_SIZE: CGFloat = 20.0
 
 let PICKER_HEIGHT: CGFloat = 197.0
+let HEADER_HEIGHT: CGFloat = 44.0
 
 let kJSONArrayKey               = "results"
 
@@ -176,6 +178,25 @@ let kEntityMakeKey              = "make"
 let kEntityModelKey             = "model"
 let kEntityUserKey              = "user"
 
+// MARK:- Cached Story Attributes
+// keys
+let kStoryAttributesPhotosKey                 = "photos"
+let kStoryAttributesIsLikedByCurrentUserKey   = "isLikedByCurrentUser"
+let kStoryAttributesLikeCountKey              = "likeCount"
+let kStoryAttributesLikersKey                 = "likers"
+let kStoryAttributesCommentCountKey           = "commentCount"
+let kStoryAttributesCommentersKey             = "commenters"
 
+// MARK:- Cached Photo Attributes
+// keys
+let kPhotoAttributesAnnotationsKey            = "annotations"
+let kPhotoAttributesAnnotationsCountKey       = "annotationsCount"
 
-
+// MARK:- Cached Annotation Attributes
+// keys
+let kAnnotationAttributesCoordinateXKey       = "coordinateX"
+let kAnnotationAttributesCoordinateYKey       = "coordinateY"
+let kAnnotationAttributesBrandKey             = "brand"
+let kAnnotationAttributesModelKey             = "model"
+let kAnnotationAttributesProductCodeKey       = "productCode"
+let kAnnotationAttributesPartIDKey            = "partID"
