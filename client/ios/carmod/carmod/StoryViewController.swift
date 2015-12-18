@@ -90,6 +90,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let relation = storyObject.relationForKey(kStoryPhotosKey)
         let relationQuery = relation.query()
+        relationQuery!.orderByAscending("createdAt")
         let photos: [PFObject] = relationQuery?.findObjects() as! [PFObject]
         
         var likers = [PFUser]()
