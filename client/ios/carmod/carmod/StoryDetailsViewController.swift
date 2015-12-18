@@ -35,6 +35,25 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     self.story = story
     
     self.photos = StoryCache.sharedCache.photosForStory(story)
+    self.tags = Array(count: self.photos.count, repeatedValue: [TagObject]())
+    
+    for var i = 0; i < self.photos.count; i++ {
+      let annotationObjects = StoryCache.sharedCache.annotationsForPhoto(self.photos[i])
+      for annotationObject in annotationObjects {
+        let tagObject: TagObject = TagObject()
+        
+        let partObject: PartObject = PartObject()
+        partObject.brand = annotationObject.objectForKey(kAnnotationBrandKey) as! String
+        partObject.model = annotationObject.objectForKey(kAnnotationModelKey) as! String
+        partObject.partNumber = annotationObject.objectForKey(kAnnotationPartNumberKey) as! String
+        
+        tagObject.partObject = partObject
+        let coordinates = annotationObject.objectForKey(kAnnotationCoordinatesKey) as! [CGFloat]
+        tagObject.coordinates = CGPoint(x: coordinates[0], y: coordinates[1])
+        
+        self.tags[i].append(tagObject)
+      }
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -153,7 +172,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     cell.isInteractionEnabled = false
     let photoObject = self.photos[indexPath.row]
     cell.photo.file = photoObject.objectForKey(kPhotoImageKey) as? PFFile
-//    cell.tags = self.tags[indexPath.row]
+    cell.tags = self.tags[indexPath.row]
     cell.loadPhoto()
     
     return cell

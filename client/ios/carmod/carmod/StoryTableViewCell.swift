@@ -138,7 +138,6 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   }
   
   func loadTags(photo: PFObject, atIndex: Int) {
-    print("StoryTableViewCell::loadTags")
     let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
     if let annotationObjects = query.findObjects() {
       for annotationObject in annotationObjects {
