@@ -45,7 +45,7 @@ $(function() {
 
   // Photo Collection
   // ----------------
-  
+
   var PhotoList = Parse.Collection.extend({
     model: Photo
   });
@@ -282,7 +282,7 @@ $(function() {
       _.bindAll(this, 'showLandingPage', 'showHomePage', 'render');
 
       this.homePageView = new HomePageView();
-      this.latestPhotosView = new LatestPhotosView();
+      //this.latestPhotosView = new LatestPhotosView();
       this.landingPageView = new PhotoLandingPageView();
       this.annotationListView = new AnnotationListView();
       this.render();
@@ -314,11 +314,13 @@ $(function() {
 
       // clear out landingpage
       this.$("#content").html("");
- 
+
+      /*
       if (!this.$("#photo-list .photo-tumb").is(':visible')) {
         this.$("#latest").html(this.latestPhotosView.render().el);
         this.$("#latest").fadeIn();
       }
+      */
     },
 
     showLandingPage: function() {

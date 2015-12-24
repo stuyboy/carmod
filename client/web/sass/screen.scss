@@ -11,6 +11,7 @@ $orangedarkcolor: #bc3406;
 
 $beige: #f1e1c6;
 $brown: #6c5140;
+$black: #000000;
 
 $linkcolor        : #e18532;
 $linkcolorhover   : darken($linkcolor, 10);
@@ -100,8 +101,7 @@ a {
 body {
   text-align: center;
   padding: 0 25px;
-  background: $beige url('/images/background.png');
-  background-repeat: repeat-x repeat-y;
+  background: $black;
   background-position: center center;
   font-size: 75%;
 }
@@ -138,6 +138,16 @@ p {
   height: 647px;
 }
 
+.carbon {
+  background: $black url('/images/carbon_bg.jpg');
+  background-repeat: repeat-x;
+  background-position: center top;
+  @include background-size(1400px 647px);
+  // margin: 0 auto -1em auto;
+  width: 100%;
+  height: 647px;
+}
+
 #left {
   position: relative;
   float:left;
@@ -167,7 +177,6 @@ p {
 
   img {
     vertical-align: middle;
-
   }
 
   img.logo {
@@ -408,6 +417,73 @@ p.annotation {
   @include font-helvetica-light(white, 15px);
 }
 
+#header {
+  display: block;
+  width: 700px;
+  margin: auto;
+  text-align: left;
+}
+
+img.homepageLogo {
+  text-align: left;
+  margin-top: 40px;
+}
+
+#storyBlock {
+  display: block;
+  width: 700px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+}
+
+#storyPhotos {
+  position: relative;
+  text-align: left;
+  padding-left: 0;
+}
+
+#storyTitle {
+  position: absolute;
+  top: 300px;
+  right: 5%;
+  float: right;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 48px;
+  text-shadow: 2px 2px #000000;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: white;
+}
+
+#storyAuthor {
+  position: absolute;
+  top: 350px;
+  right: 5%;
+  float: right;
+  color: red;
+  font-size: x-large;
+  text-shadow: 2px 2px #000000;
+}
+
+
+#storyPhotoMain  {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  float: left;
+}
+
+#storyPhotoImageMain {
+  width: 100%;
+}
+
+#storyPhotoSmall {
+  float: right;
+}
 
 ////
 
