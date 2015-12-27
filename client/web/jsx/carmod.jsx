@@ -92,6 +92,9 @@ var StoryBlock = React.createClass({
 })
 
 var PartsBlock = React.createClass({
+    PARTS_URL: "http://kursor.co:8000/parts/latest",
+//    PARTS_URL: "http://localhost:8000/parts/latest",
+
     getInitialState: function() {
         return {
             results: []
@@ -100,7 +103,7 @@ var PartsBlock = React.createClass({
 
     componentDidMount: function() {
         $.get(
-            "http://localhost:8000/parts/latest", function(data) {
+            this.PARTS_URL, function(data) {
             if (this.isMounted()) {
                 this.setState({
                     parts: data.results
