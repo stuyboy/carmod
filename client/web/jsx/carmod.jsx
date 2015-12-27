@@ -66,7 +66,7 @@ var StoryBlock = React.createClass({
         var sQuery = new Parse.Query(Story);
         sQuery.include('author');
         return {
-            stories: sQuery.ascending('createdAt')
+            stories: sQuery.descending('createdAt')
         };
     },
 

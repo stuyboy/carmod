@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0fbbcd52-f5f6-45a7-8c3b-ae856ed39047" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sass-cache/5674401ce761ec1ca40bb08cde3f71b3f0426833/screen.scssc" afterPath="$PROJECT_DIR$/.sass-cache/5674401ce761ec1ca40bb08cde3f71b3f0426833/screen.scssc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../server/src/carmod/api/api.go" afterPath="$PROJECT_DIR$/../../server/src/carmod/api/api.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jsx/carmod.jsx" afterPath="$PROJECT_DIR$/jsx/carmod.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.html" afterPath="$PROJECT_DIR$/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/ie.css" afterPath="$PROJECT_DIR$/stylesheets/ie.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../server/src/carmod/api/model/part.go" afterPath="$PROJECT_DIR$/../../server/src/carmod/api/model/part.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/screen.css" afterPath="$PROJECT_DIR$/stylesheets/screen.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/screen.scss" afterPath="$PROJECT_DIR$/sass/screen.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/jsx/carmod.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="36" selection-start-line="93" selection-start-column="36" selection-end-line="93" selection-end-column="36" />
+              <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -44,8 +41,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.875">
-              <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+            <state vertical-scroll-proportion="-20.0">
+              <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
               <folding />
             </state>
           </provider>
@@ -54,8 +51,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.625">
-              <caret line="78" column="40" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state vertical-scroll-proportion="-16.875">
+              <caret line="78" column="27" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,8 +61,8 @@
       <file leaf-file-name="screen.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sass/screen.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38010472">
-              <caret line="440" column="20" selection-start-line="440" selection-start-column="20" selection-end-line="440" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.37472767">
+              <caret line="550" column="18" selection-start-line="550" selection-start-column="18" selection-end-line="550" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -81,6 +78,7 @@
       <list>
         <option value="$PROJECT_DIR$/reactParse.html" />
         <option value="$PROJECT_DIR$/jsx/carmod.jsx" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/home.html" />
         <option value="$PROJECT_DIR$/sass/screen.scss" />
       </list>
@@ -422,31 +420,31 @@
     <entry file="file://$PROJECT_DIR$/jsx/carmod.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="36" selection-start-line="93" selection-start-column="36" selection-end-line="93" selection-end-column="36" />
+          <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.625">
-          <caret line="78" column="40" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state vertical-scroll-proportion="-16.875">
+          <caret line="78" column="27" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875">
-          <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
+        <state vertical-scroll-proportion="-20.0">
+          <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/screen.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38010472">
-          <caret line="440" column="20" selection-start-line="440" selection-start-column="20" selection-end-line="440" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.37472767">
+          <caret line="550" column="18" selection-start-line="550" selection-start-column="18" selection-end-line="550" selection-end-column="18" />
           <folding />
         </state>
       </provider>

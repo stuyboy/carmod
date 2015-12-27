@@ -4,7 +4,7 @@
  *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
  * <![endif]--> */
 /* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
+ * In this file you should write your styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 5, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
@@ -103,7 +103,7 @@ body {
   background: #000000;
   background-position: center center;
   font-family: Verdana, Geneva, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 /* line 110, ../sass/screen.scss */
@@ -321,8 +321,52 @@ p {
   color: #bcbdbe;
   border-top: 1px solid #68461a;
 }
+/* line 265, ../sass/screen.scss */
+.downloadbutton:active img {
+  vertical-align: middle;
+}
+/* line 269, ../sass/screen.scss */
+.downloadbutton:active img.logo {
+  vertical-align: top;
+  padding-top: 6px;
+  padding-left: 20px;
+}
+/* line 275, ../sass/screen.scss */
+.downloadbutton:active h1 {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: left;
+  line-height: 1.2em;
+  color: white;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 35px;
+}
+/* line 283, ../sass/screen.scss */
+.downloadbutton:active h2 {
+  margin-top: 0;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  text-align: left;
+  color: #c0c0c0;
+  font-family: "HelveticaNeueRegular", "HelveticaNeue-Regular", "Helvetica Neue Regular", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 20px;
+}
+/* line 292, ../sass/screen.scss */
+.downloadbutton:active p {
+  margin-top: 0;
+  color: #a7a7a7;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 16px;
+  text-align: left;
+}
 
-/* line 273, ../sass/screen.scss */
+/* line 305, ../sass/screen.scss */
 .footer {
   background: #f1e1c6 url("/images/bottom_bg.jpg");
   background-repeat: repeat-x;
@@ -333,14 +377,14 @@ p {
   margin: 0 auto;
 }
 
-/* line 283, ../sass/screen.scss */
+/* line 315, ../sass/screen.scss */
 #photo-list {
   display: none;
   height: 174px;
   padding: 0 0 0 20px;
 }
 
-/* line 289, ../sass/screen.scss */
+/* line 321, ../sass/screen.scss */
 .credits {
   clear: both;
   margin: 0 auto;
@@ -349,7 +393,7 @@ p {
   text-shadow: #FFFFFF 0 1px 0;
   padding-top: 20px;
 }
-/* line 297, ../sass/screen.scss */
+/* line 329, ../sass/screen.scss */
 .credits h1 {
   color: #6c5140;
   font-family: "HelveticaNeueRegular", "HelveticaNeue-Regular", "Helvetica Neue Regular", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
@@ -358,7 +402,7 @@ p {
   font-size: 27px;
   padding-bottom: 16px;
 }
-/* line 302, ../sass/screen.scss */
+/* line 334, ../sass/screen.scss */
 .credits h2 {
   color: #6c5140;
   font-family: "HelveticaNeueRegular", "HelveticaNeue-Regular", "Helvetica Neue Regular", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
@@ -368,7 +412,7 @@ p {
   padding-bottom: 16px;
 }
 
-/* line 308, ../sass/screen.scss */
+/* line 340, ../sass/screen.scss */
 #copyright {
   color: #6c5140;
   font-family: "HelveticaNeueRegular", "HelveticaNeue-Regular", "Helvetica Neue Regular", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
@@ -378,7 +422,7 @@ p {
   margin-top: 30px;
 }
 
-/* line 313, ../sass/screen.scss */
+/* line 345, ../sass/screen.scss */
 #landingpage {
   background: #f1e1c6 url("/images/background.png");
   background-repeat: repeat-x repeat-y;
@@ -389,7 +433,7 @@ p {
   position: absolute;
   width: 100%;
 }
-/* line 324, ../sass/screen.scss */
+/* line 356, ../sass/screen.scss */
 #landingpage header {
   text-align: left;
   width: 100%;
@@ -398,16 +442,16 @@ p {
   background-repeat: repeat-x repeat-y;
   background-position: center;
 }
-/* line 332, ../sass/screen.scss */
+/* line 364, ../sass/screen.scss */
 #landingpage header img.logo {
   padding: 12px 12px 0 60px;
 }
-/* line 336, ../sass/screen.scss */
+/* line 368, ../sass/screen.scss */
 #landingpage header img.appstore {
   float: right;
 }
 
-/* line 342, ../sass/screen.scss */
+/* line 374, ../sass/screen.scss */
 #main {
   display: block;
   margin: 40px auto 0 auto;
@@ -415,7 +459,7 @@ p {
   width: 80%;
 }
 
-/* line 349, ../sass/screen.scss */
+/* line 381, ../sass/screen.scss */
 #contentColumn {
   position: relative;
   text-align: center;
@@ -423,7 +467,7 @@ p {
   float: left;
 }
 
-/* line 356, ../sass/screen.scss */
+/* line 388, ../sass/screen.scss */
 #rightColumn {
   position: relative;
   float: left;
@@ -431,12 +475,12 @@ p {
   width: 25%;
 }
 
-/* line 363, ../sass/screen.scss */
+/* line 395, ../sass/screen.scss */
 .spinner {
   display: none;
 }
 
-/* line 367, ../sass/screen.scss */
+/* line 399, ../sass/screen.scss */
 #photo-container {
   display: none;
   height: 800px;
@@ -446,7 +490,7 @@ p {
   margin: 0 auto;
   padding: 0;
 }
-/* line 376, ../sass/screen.scss */
+/* line 408, ../sass/screen.scss */
 #photo-container h1 {
   float: left;
   margin: 20px 0 0 20px;
@@ -458,7 +502,7 @@ p {
   text-shadow: #FFFFFF 0 1px 0;
   font-weight: bold;
 }
-/* line 384, ../sass/screen.scss */
+/* line 416, ../sass/screen.scss */
 #photo-container div.avatar {
   width: 60px;
   height: 60px;
@@ -475,7 +519,7 @@ p {
   -o-border-radius: 10px;
   -ms-border-radius: 10px;
 }
-/* line 394, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 #photo-container div.avatar img {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -489,7 +533,7 @@ p {
   width: 60px;
   height: 60px;
 }
-/* line 402, ../sass/screen.scss */
+/* line 434, ../sass/screen.scss */
 #photo-container img.photo {
   border: 5px solid white;
   padding: 0;
@@ -501,7 +545,7 @@ p {
   padding-top: 0;
 }
 
-/* line 410, ../sass/screen.scss */
+/* line 442, ../sass/screen.scss */
 div.photo-thumb {
   float: left;
   width: 144px;
@@ -514,7 +558,7 @@ div.photo-thumb {
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.4);
   margin: 0 0 20px 18px;
 }
-/* line 418, ../sass/screen.scss */
+/* line 450, ../sass/screen.scss */
 div.photo-thumb img {
   -moz-box-shadow: 0 -1px 0 1px rgba(0, 0, 0, 0.6);
   -webkit-box-shadow: 0 -1px 0 1px rgba(0, 0, 0, 0.6);
@@ -524,7 +568,7 @@ div.photo-thumb img {
   height: 144px;
 }
 
-/* line 425, ../sass/screen.scss */
+/* line 457, ../sass/screen.scss */
 p.annotation {
   background-color: black;
   box-shadow: 2px 2px 1px #888888;
@@ -535,7 +579,7 @@ p.annotation {
   font-size: 15px;
 }
 
-/* line 431, ../sass/screen.scss */
+/* line 463, ../sass/screen.scss */
 #header {
   display: block;
   width: 80%;
@@ -543,14 +587,14 @@ p.annotation {
   text-align: left;
 }
 
-/* line 438, ../sass/screen.scss */
+/* line 470, ../sass/screen.scss */
 img.homepageLogo {
   text-align: left;
   margin-top: 40px;
   margin-left: 20px;
 }
 
-/* line 444, ../sass/screen.scss */
+/* line 476, ../sass/screen.scss */
 #storyBlock {
   display: block;
   width: 700px;
@@ -560,14 +604,14 @@ img.homepageLogo {
   margin-bottom: 40px;
 }
 
-/* line 453, ../sass/screen.scss */
+/* line 485, ../sass/screen.scss */
 #storyPhotos {
   position: relative;
   text-align: left;
   padding-left: 0;
 }
 
-/* line 459, ../sass/screen.scss */
+/* line 491, ../sass/screen.scss */
 #storyTitle {
   position: absolute;
   top: 300px;
@@ -582,7 +626,7 @@ img.homepageLogo {
   color: white;
 }
 
-/* line 473, ../sass/screen.scss */
+/* line 505, ../sass/screen.scss */
 #storyAuthor {
   position: absolute;
   top: 350px;
@@ -593,7 +637,7 @@ img.homepageLogo {
   text-shadow: 2px 2px #000000;
 }
 
-/* line 484, ../sass/screen.scss */
+/* line 516, ../sass/screen.scss */
 #storyPhotoMain {
   position: relative;
   width: 600px;
@@ -602,22 +646,22 @@ img.homepageLogo {
   float: left;
 }
 
-/* line 492, ../sass/screen.scss */
+/* line 524, ../sass/screen.scss */
 #storyPhotoImageMain {
   width: 100%;
 }
 
-/* line 496, ../sass/screen.scss */
+/* line 528, ../sass/screen.scss */
 #storyPhotoSmall {
   float: right;
 }
 
-/* line 500, ../sass/screen.scss */
+/* line 532, ../sass/screen.scss */
 #partsBlock {
   width: 340px;
 }
 
-/* line 504, ../sass/screen.scss */
+/* line 536, ../sass/screen.scss */
 #partsTitle {
   border-bottom: solid 3px #e5e5e5;
   color: #c90202;
@@ -631,9 +675,60 @@ img.homepageLogo {
   width: 100%;
 }
 
-/* line 517, ../sass/screen.scss */
+/* line 549, ../sass/screen.scss */
 #partsListing {
   color: white;
+  line-height: 1.5em;
+}
+
+/* line 554, ../sass/screen.scss */
+#download {
+  color: white;
+  margin-top: 20px;
+}
+/* line 557, ../sass/screen.scss */
+#download img {
+  vertical-align: middle;
+}
+/* line 561, ../sass/screen.scss */
+#download img.logo {
+  vertical-align: top;
+  padding-top: 18px;
+  padding-left: 10px;
+}
+/* line 567, ../sass/screen.scss */
+#download h1 {
+  margin-top: 5px;
+  margin-top: 5px;
+  text-align: left;
+  line-height: 1.2em;
+  color: white;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 24px;
+}
+/* line 575, ../sass/screen.scss */
+#download h2 {
+  margin-top: 0;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  text-align: left;
+  color: #c0c0c0;
+  font-family: "HelveticaNeueRegular", "HelveticaNeue-Regular", "Helvetica Neue Regular", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 16rpx;
+}
+/* line 584, ../sass/screen.scss */
+#download p {
+  margin-top: 0;
+  color: #a7a7a7;
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 16px;
+  text-align: left;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
