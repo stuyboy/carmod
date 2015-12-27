@@ -27,7 +27,7 @@ var StoryPhotos = React.createClass({
                 this.data.photoUrls.map(function(p, idx) {
                     if (idx == 0) {
                         return (
-                            <div id="storyPhotoMain">
+                            <div id="storyPhotoMain" key={p.objectId}>
                                 <img id="storyPhotoImageMain" src={p.image.url()}/>
                                 <div id="storyTitle">
                                     {title}
@@ -39,7 +39,7 @@ var StoryPhotos = React.createClass({
                         );
                     } else {
                         return (
-                            <div id="storyPhotoSmall">
+                            <div id="storyPhotoSmall" key={p.objectId}>
                                <img src={p.thumbnail.url()}/>
                             </div>
                         );
@@ -75,7 +75,7 @@ var StoryBlock = React.createClass({
             <div>
             { this.data.stories.map(function(c) {
                 return (
-                    <div>
+                    <div key={c.objectId}>
                         <div id="storyBlock">
                             <StoryPhotos ref="StoryPhotos" storyId={c.objectId} storyTitle={c.title} storyAuthor={c.author.displayName} photoType="main" />
                             <div id="storyDate">
@@ -88,6 +88,47 @@ var StoryBlock = React.createClass({
             }
             </div>
         );
+    }
+})
+
+var PartsBlock = React.createClass({
+    getInitialState: function() {
+        return {
+            results: []
+        };
+    },
+
+    componentDidMount: function() {
+        $.get(
+            "http://localhost:8000/parts/latest", function(data) {
+            if (this.isMounted()) {
+                this.setState({
+                    parts: data.results
+                });
+                //alert(JSON.stringify(this.state.parts));
+            }
+        }.bind(this));
+    },
+
+    render: function() {
+        var parts = this.state.parts;
+        if (parts === undefined) {
+            return <div/>;
+        } else {
+            return (
+                <div id="partsBlock">
+                    <div id="partsTitle">Recently Added Parts</div>
+                    {   this.state.parts.map(function (p) {
+                        return (
+                            <div id="partsListing" key={p.id}>
+                                {p.brand} {p.model}
+                            </div>
+                        );
+                    })
+                    }
+                </div>
+            );
+        }
     }
 })
 

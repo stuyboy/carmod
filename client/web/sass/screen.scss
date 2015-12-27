@@ -103,7 +103,8 @@ body {
   padding: 0 25px;
   background: $black;
   background-position: center center;
-  font-size: 75%;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13px;
 }
 
 html>body {
@@ -338,15 +339,25 @@ p {
   }
 }
 
-#content {
-  text-align: center;
-  margin: 40px 0 0 0;
-  height: 800px;
-  width: 100%;
+#main {
+  display: block;
+  margin: 40px auto 0 auto;
+  overflow: hidden;
+  width: 80%;
+}
 
-  img.spinner {
-    margin: 300px auto;
-  }
+#contentColumn {
+  position: relative;
+  text-align: center;
+  width: 750px;
+  float: left;
+}
+
+#rightColumn {
+  position: relative;
+  float:left;
+  text-align: left;
+  width: 25%;
 }
 
 .spinner {
@@ -419,7 +430,7 @@ p.annotation {
 
 #header {
   display: block;
-  width: 700px;
+  width: 80%;
   margin: auto;
   text-align: left;
 }
@@ -427,6 +438,7 @@ p.annotation {
 img.homepageLogo {
   text-align: left;
   margin-top: 40px;
+  margin-left: 20px;
 }
 
 #storyBlock {
@@ -483,6 +495,27 @@ img.homepageLogo {
 
 #storyPhotoSmall {
   float: right;
+}
+
+#partsBlock {
+  width: 340px;
+}
+
+#partsTitle {
+  border-bottom: solid 3px rgb(229, 229, 229);
+  color: rgb(201, 2, 2);
+  font-family: 'Open Sans',helvetica,arial,sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 17px;
+  margin: 0px 0px 12px 0px;
+  padding: 0 0 2px 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+#partsListing {
+  color: white;
 }
 
 ////

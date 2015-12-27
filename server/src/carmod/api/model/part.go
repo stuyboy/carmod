@@ -23,8 +23,6 @@ func (c Part) Name() string {
 }
 
 func SearchParts(db *sql.DB, search string) []SearchResult {
-	postArr := []SearchResult{}
-
 	sqlPhrase := `select id, classification, brand, model, productCode from parts_unique where
 				  match (classification, brand, model) against (? in boolean mode)`
 
@@ -41,19 +39,7 @@ func SearchParts(db *sql.DB, search string) []SearchResult {
 		panic(err.Error())
 	}
 
-	defer rows.Close()
-	for rows.Next() {
-		var id, classification, brand, model, productCode string
-
-		err := rows.Scan(&id, &classification, &brand, &model, &productCode)
-		if (err != nil) {
-			log.Fatal(err)
-		}
-
-		ar := Part{Id: id, Classification: classification, Brand: brand, Model: model, ProductCode: productCode}
-		postArr = append(postArr, ar)
-	}
-	return postArr
+	return partFromDbRow(rows);
 }
 
 //Save a custom part into the database
@@ -76,5 +62,36 @@ func SavePart(db *sql.DB, newPart *Part) sql.Result {
 	}
 
 	return result
+}
+
+func RecentParts(db *sql.DB, limit int8) []SearchResult {
+	sqlPhrase := `select id, classification, brand, model, productCode from parts_unique order by createdAt desc limit ?`
+
+	rows, err := db.Query(sqlPhrase, limit)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	return partFromDbRow(rows);
+}
+
+func partFromDbRow(rows *sql.Rows) []SearchResult {
+	postArr := []SearchResult{}
+
+	defer rows.Close()
+	for rows.Next() {
+		var id, classification, brand, model, productCode string
+
+		err := rows.Scan(&id, &classification, &brand, &model, &productCode)
+		if (err != nil) {
+			log.Fatal(err)
+		}
+
+		ar := Part{Id: id, Classification: classification, Brand: brand, Model: model, ProductCode: productCode}
+		postArr = append(postArr, ar)
+	}
+
+	return postArr;
 }
 
