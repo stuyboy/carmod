@@ -18,9 +18,16 @@ var StoryPhotos = React.createClass({
         };
     },
 
+    handleClick: function(event) {
+        alert('what to do now?');
+    },
+
     render: function() {
         var title = this.props.storyTitle;
         var author = this.props.storyAuthor;
+        var authorId = this.props.storyAuthorId;
+        var storyLink="/story/" + this.props.storyId;
+        var authorLink="/user/" + authorId;
         return (
             <div id="storyPhotos">
             {
@@ -28,12 +35,16 @@ var StoryPhotos = React.createClass({
                     if (idx == 0) {
                         return (
                             <div id="storyPhotoMain" key={p.objectId}>
-                                <img id="storyPhotoImageMain" src={p.image.url()}/>
+                                <img id="storyPhotoImageMain" src={p.image.url()} onClick={this.clickH}/>
                                 <div id="storyTitle">
+                                    <a href={storyLink}>
                                     {title}
+                                    </a>
                                 </div>
                                 <div id="storyAuthor">
+                                    <a href={authorLink}>
                                     {author}
+                                    </a>
                                 </div>
                             </div>
                         );
@@ -77,7 +88,7 @@ var StoryBlock = React.createClass({
                 return (
                     <div key={c.objectId}>
                         <div id="storyBlock">
-                            <StoryPhotos ref="StoryPhotos" storyId={c.objectId} storyTitle={c.title} storyAuthor={c.author.displayName} photoType="main" />
+                            <StoryPhotos ref="StoryPhotos" storyId={c.objectId} storyTitle={c.title} storyAuthorId={c.author.objectId} storyAuthor={c.author.displayName} photoType="main" />
                             <div id="storyDate">
                             {c.createdAt.toString()}
                             </div>
