@@ -43,6 +43,12 @@ func autoSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func partSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
+
+	//Default functionality
+	if term == "*" {
+		term = "Rims"
+	}
+
 	parts := model.SearchParts(db, term)
 
 	sr := & model.SearchResponse{
