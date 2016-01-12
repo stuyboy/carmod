@@ -38,11 +38,17 @@ func autoSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 		cars}
 
 	jtxt, _ := json.Marshal(sr)
-	fmt.Fprintf(w, string(jtxt))
+	outputJson(w, jtxt)
 }
 
 func partSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 	term := c.URLParams["phrase"]
+
+	//Default functionality
+	if term == "*" {
+		term = "Rims"
+	}
+
 	parts := model.SearchParts(db, term)
 
 	sr := & model.SearchResponse{
@@ -50,7 +56,18 @@ func partSearch(c web.C, w http.ResponseWriter, r *http.Request) {
 		parts}
 
 	jtxt, _ := json.Marshal(sr)
-	fmt.Fprintf(w, string(jtxt))
+	outputJson(w, jtxt)
+}
+
+func partRecents(c web.C, w http.ResponseWriter, r *http.Request) {
+	parts := model.RecentParts(db, 10)
+
+	sr := & model.SearchResponse {
+		"latest",
+		parts }
+
+	jtxt, _ := json.Marshal(sr)
+	outputJson(w, jtxt)
 }
 
 // given a product url, pull out the part and save it into the database?
@@ -68,17 +85,23 @@ func extractPart(c web.C, w http.ResponseWriter, r *http.Request) {
 			}
 
 			jtxt, _ := json.Marshal(part)
-			fmt.Fprintf(w, string(jtxt))
-			return
+			outputJson(w, jtxt)
 		}
 	}
 
 	log.Println("No url found for extraction.")
 }
 
+func outputJson(w http.ResponseWriter, arr []byte) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	fmt.Fprintf(w, string(arr))
+}
+
 func main() {
 	goji.Get("/hello/:name", hello)
 	goji.Get("/search/:phrase", partSearch)
+	goji.Get("/parts/latest", partRecents)
 	goji.Get("/auto/:phrase", autoSearch)
 	goji.Get("/extract", extractPart)
 	goji.Serve()

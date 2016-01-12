@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+    <script src="bower_components/react/react.min.js"></script>
+    <script src="bower_components/react/react-dom.min.js"></script>
+
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+    <script src="https://www.parsecdn.com/js/parse-latest.js"></script>
+    <script src="https://www.parsecdn.com/js/parse-react.js"></script>
+
+    <link rel="stylesheet" media="screen, projection" href="/stylesheets/screen.css" type="text/css" />
+</head>
+<body>
+<div id="homepage" style="">
+    <div id="header">
+        <img src="images/app-logo@2x.png" class="homepageLogo"/>
+    </div>
+    <div id="main">
+        <div id="contentColumn"></div>
+        <div id="rightColumn">
+            <div id="partUpdates"></div>
+            <div id="download">
+                <img src="images/appicon-80x80.png"/>
+                <img src="images/app-logo@2x.png" class="logo"/>
+                <h1>Share your mods, help others.</h1>
+                <h2>Document your fixes and changes.</h2>
+                <p>Carmod is the easiest way to share your modifications and fixes with friends and forums.  Annotate your pics with part numbers, video, instructions!</p>
+
+                <div class="downloadbutton">
+                    <a href="https://itunes.apple.com/us/app/veggie-base-pick-best-fruits/id1038615746?mt=8">Download Now</a> <img src="images/right_arrow.png"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/jsx" src="/jsx/carmod.jsx"></script>
+<!-- script type="text/javascript" src="/jsx/carmod.js"></script -->
+
+<script type="text/jsx">
+    ReactDOM.render(<StoryBlock/>, document.getElementById("contentColumn"));
+    ReactDOM.render(<PartsBlock/>, document.getElementById("partUpdates"));
+</script>
+
+</html>

@@ -1,5 +1,5 @@
 /* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
+ * In this file you should write your styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
@@ -11,6 +11,7 @@ $orangedarkcolor: #bc3406;
 
 $beige: #f1e1c6;
 $brown: #6c5140;
+$black: #000000;
 
 $linkcolor        : #e18532;
 $linkcolorhover   : darken($linkcolor, 10);
@@ -100,10 +101,10 @@ a {
 body {
   text-align: center;
   padding: 0 25px;
-  background: $beige url('/images/background.png');
-  background-repeat: repeat-x repeat-y;
+  background: $black;
   background-position: center center;
-  font-size: 75%;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 16px;
 }
 
 html>body {
@@ -138,6 +139,16 @@ p {
   height: 647px;
 }
 
+.carbon {
+  background: $black url('/images/carbon_bg.jpg');
+  background-repeat: repeat-x;
+  background-position: center top;
+  @include background-size(1400px 647px);
+  // margin: 0 auto -1em auto;
+  width: 100%;
+  height: 647px;
+}
+
 #left {
   position: relative;
   float:left;
@@ -167,7 +178,6 @@ p {
 
   img {
     vertical-align: middle;
-
   }
 
   img.logo {
@@ -252,7 +262,39 @@ p {
     @include box-shadow(0 0 13px rgba($orangelightcolor,0.45));
   };
 
-  &:active{
+  &:active{  img {
+    vertical-align: middle;
+  }
+
+  img.logo {
+    vertical-align: top;
+    padding-top: 6px;
+    padding-left: 20px;
+  }
+
+  h1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: left;
+    line-height: 1.2em;
+    @include font-helvetica-light(white, 35px);
+  };
+
+  h2 {
+    margin-top: 0;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    // padding: 20px 0 0 0;
+    text-align: left;
+    @include font-helvetica-regular(#c0c0c0, 20px);
+  };
+
+  p {
+    margin-top: 0;
+    @include font-helvetica-light(#a7a7a7, 16px);
+    text-align: left;
+  };
+
     @include background-image(linear-gradient(#ac722a, $orangedarkercolor)); 
     @include box-shadow(rgba(0,0,0,0.4) 0 2px 2px inset,rgba(255,255,255,0.4) 0 1px 0);
     color:#bcbdbe;
@@ -329,15 +371,25 @@ p {
   }
 }
 
-#content {
-  text-align: center;
-  margin: 40px 0 0 0;
-  height: 800px;
-  width: 100%;
+#main {
+  display: block;
+  margin: 40px auto 0 auto;
+  overflow: hidden;
+  width: 80%;
+}
 
-  img.spinner {
-    margin: 300px auto;
-  }
+#contentColumn {
+  position: relative;
+  text-align: center;
+  width: 750px;
+  float: left;
+}
+
+#rightColumn {
+  position: relative;
+  float:left;
+  text-align: left;
+  width: 25%;
 }
 
 .spinner {
@@ -408,6 +460,133 @@ p.annotation {
   @include font-helvetica-light(white, 15px);
 }
 
+#header {
+  display: block;
+  width: 80%;
+  margin: auto;
+  text-align: left;
+}
+
+img.homepageLogo {
+  text-align: left;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+#storyBlock {
+  display: block;
+  width: 700px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+}
+
+#storyPhotos {
+  position: relative;
+  text-align: left;
+  padding-left: 0;
+}
+
+#storyTitle {
+  position: absolute;
+  top: 300px;
+  right: 5%;
+  float: right;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 48px;
+  text-shadow: 2px 2px #000000;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: white;
+}
+
+#storyAuthor {
+  position: absolute;
+  top: 350px;
+  right: 5%;
+  float: right;
+  color: red;
+  font-size: x-large;
+  text-shadow: 2px 2px #000000;
+}
+
+
+#storyPhotoMain  {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  float: left;
+}
+
+#storyPhotoImageMain {
+  width: 100%;
+}
+
+#storyPhotoSmall {
+  float: right;
+}
+
+#partsBlock {
+  width: 340px;
+}
+
+#partsTitle {
+  border-bottom: solid 3px rgb(229, 229, 229);
+  color: rgb(201, 2, 2);
+  font-family: 'Open Sans',helvetica,arial,sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 17px;
+  margin: 0px 0px 12px 0px;
+  padding: 0 0 2px 0;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+#partsListing {
+  color: white;
+  line-height: 1.5em;
+}
+
+#download {
+  color: white;
+  margin-top: 20px;
+  img {
+    vertical-align: middle;
+  }
+
+  img.logo {
+    vertical-align: top;
+    padding-top: 18px;
+    padding-left: 10px;
+  }
+
+  h1 {
+    margin-top: 5px;
+    margin-top: 5px;
+    text-align: left;
+    line-height: 1.2em;
+    @include font-helvetica-light(white, 24px);
+  };
+
+  h2 {
+    margin-top: 0;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    // padding: 20px 0 0 0;
+    text-align: left;
+    @include font-helvetica-regular(#c0c0c0, 16rpx);
+  };
+
+  p {
+    margin-top: 0;
+    @include font-helvetica-light(#a7a7a7, 16px);
+    text-align: left;
+  };
+}
 
 ////
 
