@@ -25,7 +25,7 @@ class PartCollectionViewCell: UICollectionViewCell {
     self.contentView.addSubview(self.partImage)
     
     let OFFSET: CGFloat = 5.0
-    self.partLabel = UILabel(frame: CGRect(x: OFFSET, y: self.frame.height-THUMBNAIL_LABEL_HEIGHT-OFFSET*2, width: self.frame.width, height: THUMBNAIL_LABEL_HEIGHT))
+    self.partLabel = UILabel(frame: CGRect(x: OFFSET, y: self.frame.height-THUMBNAIL_LABEL_HEIGHT, width: self.frame.width-OFFSET*2, height: THUMBNAIL_LABEL_HEIGHT))
     self.partLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_TINY)
     self.partLabel.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.partLabel.text = ""

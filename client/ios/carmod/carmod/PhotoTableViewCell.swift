@@ -119,9 +119,9 @@ class PhotoTableViewCell: UITableViewCell {
     self.currentTagView.frame.origin.x = point.x-TAG_WIDTH/2
     self.currentTagView.frame.origin.y = point.y
     
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
-      self.currentTagView.alpha = 0.8
-    }
+//    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+//      self.currentTagView.alpha = 0.8
+//    }
     
     if let delegate = self.delegate {
       delegate.tappedPhoto()

@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 protocol PartCollectionViewDelegate: class {
-  func tappedPart(image: UIImage, isSelected: Bool)
+  func tappedPart(partObject: PartObject, isSelected: Bool)
 }
 
 class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -92,14 +92,24 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
   // MARK: - UICollectionViewDelegate
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     let shouldDeselect = self.selectedIndexPath != nil && self.selectedIndexPath == indexPath
+    var indexPaths: [NSIndexPath] = []
+    indexPaths.append(indexPath)
     
     if shouldDeselect {
       self.selectedIndexPath = nil
     } else {
+      if self.selectedIndexPath != nil {
+        indexPaths.append(self.selectedIndexPath)
+      }
       self.selectedIndexPath = indexPath
     }
     
-    collectionView.reloadData()
+    let partObject = self.partObjects[indexPath.row]
+    if let delegate = self.partCollectionViewDelegate {
+      delegate.tappedPart(partObject, isSelected: !shouldDeselect)
+    }
+    
+    self.reloadItemsAtIndexPaths(indexPaths)
   }
   
   func scrollViewDidScroll(scrollView: UIScrollView) {

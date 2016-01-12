@@ -53,19 +53,28 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
     "Power Stop",
     "Rightline Gear",
   ]
+  
+  private var statusBar: UIView!
+  private var topNavBar: UIView!
+  private var saveButton: UIButton!
   private var filterMenu: DOPDropDownMenu!
   private var partCollectionView: PartCollectionView!
+  private var selectedPart: PartObject!
+  var editPhotoViewController: EditPhotoViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("onCancel:"))
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Done, target: self, action: Selector("onSave:"))
+//    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
+//    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("onCancel:"))
+//    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Done, target: self, action: Selector("onSave:"))
     
-    self.initPartCollectionView()
+    self.initTopNav()
     self.initFilters()
+    self.initPartCollectionView()
     self.loadParts()
+    
+    self.view.bringSubviewToFront(self.filterMenu)
     
     PartManager.sharedInstance.eventManager.listenTo(EVENT_SEARCH_RESULTS_COMPLETE) { () -> () in
       self.partCollectionView.partObjects = PartManager.sharedInstance.searchResults
@@ -81,8 +90,46 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
   }
   
   // MARK:- Initializers
+  private func initTopNav() {
+    self.statusBar = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: STATUS_BAR_HEIGHT))
+    self.statusBar.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.view.addSubview(self.statusBar)
+    
+    self.topNavBar = UIView(frame: CGRect(x: 0.0, y: STATUS_BAR_HEIGHT, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
+    self.topNavBar.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.view.addSubview(self.topNavBar)
+    
+    let logoView = UIImageView(image: UIImage(named: "app_logo"))
+    let LOGO_HEIGHT: CGFloat = 25.0
+    let LOGO_WIDTH: CGFloat = LOGO_HEIGHT*(270/60)
+    logoView.frame = CGRect(x: self.topNavBar.frame.width/2-LOGO_WIDTH/2, y: self.topNavBar.frame.height/2-LOGO_HEIGHT/2, width: LOGO_WIDTH, height: LOGO_HEIGHT)
+    self.topNavBar.addSubview(logoView)
+    
+    let BUTTON_WIDTH: CGFloat = 60.0
+    let BUTTON_HEIGHT: CGFloat = self.topNavBar.frame.height
+    self.saveButton = UIButton(frame: CGRect(x: self.topNavBar.frame.width-BUTTON_WIDTH, y: 0.0, width: BUTTON_WIDTH, height: BUTTON_HEIGHT))
+    self.saveButton.titleLabel?.textAlignment = .Center
+    self.saveButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.saveButton.setTitle("Save", forState: .Normal)
+    self.saveButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: .Normal)
+    self.saveButton.setTitleColor(UIColor.fromRGB(COLOR_MEDIUM_GRAY), forState: .Disabled)
+    self.saveButton.setTitle("Save", forState: .Disabled)
+    self.saveButton.enabled = false
+    self.saveButton.addTarget(self, action: "onSave:", forControlEvents: .TouchUpInside)
+    self.topNavBar.addSubview(self.saveButton)
+    
+    let BUTTON_SIZE: CGFloat = self.topNavBar.frame.height
+    let closeButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: BUTTON_SIZE, height: BUTTON_SIZE))
+    let closeImage = changeImageColor(UIImage(named: "ic_close")!, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY))
+    closeButton.setImage(closeImage, forState: .Normal)
+    let INSET_OFFSET: CGFloat = 15.0
+    closeButton.contentEdgeInsets = UIEdgeInsets(top: INSET_OFFSET, left: INSET_OFFSET, bottom: INSET_OFFSET, right: INSET_OFFSET)
+    closeButton.addTarget(self, action: "onClose:", forControlEvents: .TouchUpInside)
+    self.topNavBar.addSubview(closeButton)
+  }
+  
   private func initFilters() {
-    self.filterMenu = DOPDropDownMenu(origin: CGPoint(x: 0.0, y: 0.0), andHeight: TOPNAV_BAR_SIZE)
+    self.filterMenu = DOPDropDownMenu(origin: CGPoint(x: 0.0, y: self.topNavBar.frame.maxY), andHeight: TOPNAV_BAR_SIZE)
     self.filterMenu.delegate = self
     self.filterMenu.dataSource = self
     self.filterMenu.detailTextFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
@@ -92,7 +139,7 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
   }
   
   private func initPartCollectionView() {
-    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: TOPNAV_BAR_SIZE, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE-(self.navigationController?.navigationBar.frame.height)!))
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.filterMenu.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE))
     self.partCollectionView.partCollectionViewDelegate = self
     self.partCollectionView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.partCollectionView)
@@ -131,21 +178,29 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
   }
   
   // MARK:- PartCollectionViewDelegate
-  func tappedPart(image: UIImage, isSelected: Bool) {
-    
+  func tappedPart(partObject: PartObject, isSelected: Bool) {
+    self.selectedPart = isSelected ? partObject : nil
+    self.saveButton.enabled = isSelected
   }
   
   // MARK:- Private methods
   private func loadParts() {
     PartManager.sharedInstance.searchPart("*")
   }
+  
+  private func closeView() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
 
   // MARK:- Callbacks
-  func onCancel(sender: AnyObject) {
-    self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
+  func onClose(sender: AnyObject) {
+    self.closeView()
   }
   
   func onSave(sender: AnyObject) {
-    
+    if self.selectedPart != nil {
+      self.editPhotoViewController.addTag(self.selectedPart)
+    }
+    self.closeView()
   }
 }

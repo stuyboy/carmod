@@ -34,7 +34,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   private var addMenu: PathMenu!
   private var addTitleButton: UIButton!
   private var addPhotoButton: UIButton!
-  private var searchResultsTable: UITableView!
+//  private var searchResultsTable: UITableView!
   
   private var titleView: UIView!
   private var titleField: UITextField = UITextField()
@@ -92,7 +92,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.initBody()
     self.initTagger()
     self.initPartPicker()
-    self.initResultsTable()
+//    self.initResultsTable()
   }
   
   // MARK:- Initializers
@@ -249,24 +249,24 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.pickerView.hidden = true
   }
   
-  private func initResultsTable() {
-    self.searchResultsTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 0.0))
-    self.searchResultsTable.registerClass(SearchResultsTableViewCell.classForCoder(), forCellReuseIdentifier: "SearchResultsTableViewCell")
-    self.searchResultsTable.layer.borderColor = UIColor.fromRGB(COLOR_LIGHT_GRAY).CGColor
-    self.searchResultsTable.layer.borderWidth = 1.0
-    self.searchResultsTable.clipsToBounds = true
-    self.searchResultsTable.backgroundColor = UIColor.blackColor()
-    self.searchResultsTable.separatorColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
-    self.searchResultsTable.rowHeight = SEARCH_RESULTS_ROW_HEIGHT
-    self.searchResultsTable.delegate = self
-    self.searchResultsTable.dataSource = self
-    self.searchResultsTable.bounces = false
-    self.searchResultsTable.alpha = 0.0
-    if (self.searchResultsTable.respondsToSelector("separatorInset")) {
-      self.searchResultsTable.separatorInset = UIEdgeInsetsZero
-    }
-    self.view.addSubview(self.searchResultsTable)
-  }
+//  private func initResultsTable() {
+//    self.searchResultsTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 0.0))
+//    self.searchResultsTable.registerClass(SearchResultsTableViewCell.classForCoder(), forCellReuseIdentifier: "SearchResultsTableViewCell")
+//    self.searchResultsTable.layer.borderColor = UIColor.fromRGB(COLOR_LIGHT_GRAY).CGColor
+//    self.searchResultsTable.layer.borderWidth = 1.0
+//    self.searchResultsTable.clipsToBounds = true
+//    self.searchResultsTable.backgroundColor = UIColor.blackColor()
+//    self.searchResultsTable.separatorColor = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+//    self.searchResultsTable.rowHeight = SEARCH_RESULTS_ROW_HEIGHT
+//    self.searchResultsTable.delegate = self
+//    self.searchResultsTable.dataSource = self
+//    self.searchResultsTable.bounces = false
+//    self.searchResultsTable.alpha = 0.0
+//    if (self.searchResultsTable.respondsToSelector("separatorInset")) {
+//      self.searchResultsTable.separatorInset = UIEdgeInsetsZero
+//    }
+//    self.view.addSubview(self.searchResultsTable)
+//  }
   
   // MARK:- UITextFieldDelegate  
   func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -277,9 +277,9 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   
   // MARK:- UIScrollViewDelegate
   func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    if scrollView != self.searchResultsTable {
-      self.searchTagField.resignFirstResponder()
-    }
+//    if scrollView != self.searchResultsTable {
+//      self.searchTagField.resignFirstResponder()
+//    }
   }
   
   func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -457,9 +457,10 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     if tableView == self.photoTable {
       count = self.photos.count
-    } else if tableView == self.searchResultsTable {
-      count = PartManager.sharedInstance.searchResults.count
     }
+//    else if tableView == self.searchResultsTable {
+//      count = PartManager.sharedInstance.searchResults.count
+//    }
     
     return count
   }
@@ -476,41 +477,42 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       }
   
       return cell
-    } else if tableView == self.searchResultsTable {
-      let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
-      
-      if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
-        if partObject.partNumber == kPartJSONEmptyKey {
-          cell.partObject = nil
-        } else {
-          cell.partObject = partObject
-        }
-        
-        cell.searchKeywords = self.searchTagField.text
-      }
-      
-      return cell
     }
+//    else if tableView == self.searchResultsTable {
+//      let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
+//      
+//      if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
+//        if partObject.partNumber == kPartJSONEmptyKey {
+//          cell.partObject = nil
+//        } else {
+//          cell.partObject = partObject
+//        }
+//        
+//        cell.searchKeywords = self.searchTagField.text
+//      }
+//      
+//      return cell
+//    }
     
     return UITableViewCell()
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    if tableView == self.photoTable {
-      
-    } else if tableView == self.searchResultsTable {
-      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
-      
-      if partObject.partNumber == kPartJSONEmptyKey {
-        partObject.partNumber = self.searchTagField.text
-        partObject.brand = ""
-        partObject.model = ""
-      }
-      
-      self.addTag(partObject)
-      self.resetView()
-      self.photoTable.reloadData()
-    }
+//    if tableView == self.photoTable {
+//      
+//    } else if tableView == self.searchResultsTable {
+//      let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+//      
+//      if partObject.partNumber == kPartJSONEmptyKey {
+//        partObject.partNumber = self.searchTagField.text
+//        partObject.brand = ""
+//        partObject.model = ""
+//      }
+//      
+//      self.addTag(partObject)
+//      self.resetView()
+//      self.photoTable.reloadData()
+//    }
   }
   
   // MARK:- PhotoTableViewCellDelegate  
@@ -520,8 +522,10 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
 //    }
 //    
 //    self.searchTagField.becomeFirstResponder()
+    
     let taggerViewController = TaggerViewController()
-    self.navigationController!.pushViewController(taggerViewController, animated: true)
+    taggerViewController.editPhotoViewController = self
+    self.presentViewController(taggerViewController, animated: true, completion: nil)
   }
   
   func removedTag(tagIndex: Int) {
@@ -622,12 +626,12 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   }
   
   func onChangeText(sender: UITextField) {
-    if sender.text != "" {
-      PartManager.sharedInstance.searchPart(sender.text!)
-    } else {
-      PartManager.sharedInstance.clearSearchResults()
-      self.searchResultsTable.alpha = 0.0
-    }
+//    if sender.text != "" {
+//      PartManager.sharedInstance.searchPart(sender.text!)
+//    } else {
+//      PartManager.sharedInstance.clearSearchResults()
+//      self.searchResultsTable.alpha = 0.0
+//    }
   }
   
   func onTapPartType(sender: UIButton) {
@@ -841,6 +845,9 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     } else {
       self.tagHelp.text = "Tap photo to tag parts."
     }
+    
+    self.resetView()
+    self.photoTable.reloadData()
   }
     
   // MARK: - Private methods
@@ -857,26 +864,26 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     }
     
     self.searchTagField.text = ""
-    self.searchResultsTable.alpha = 0.0
+//    self.searchResultsTable.alpha = 0.0
     self.photoTaggerView.reset()
     self.photoTaggerView.alpha = 0.0
     self.pickerView.hidden = true
   }
   
   func refreshSearchResults(numResults: Int) {
-    if PartManager.sharedInstance.searchResults.count > 0 {
-      let SEARCH_VIEWABLE_AREA: CGFloat = self.view.frame.height-self.keyboardHeight
-      let SEARCH_HEIGHT: CGFloat = SEARCH_RESULTS_ROW_HEIGHT*CGFloat(numResults)
-      
-      self.searchResultsTable.frame = CGRect(x: 0.0, y: 0.0, width: self.searchResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
-      
-      UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-        self.searchResultsTable.alpha = 0.8
-      })
-      self.searchResultsTable.reloadData()
-    } else {
-      self.searchResultsTable.alpha = 0.0
-    }
+//    if PartManager.sharedInstance.searchResults.count > 0 {
+//      let SEARCH_VIEWABLE_AREA: CGFloat = self.view.frame.height-self.keyboardHeight
+//      let SEARCH_HEIGHT: CGFloat = SEARCH_RESULTS_ROW_HEIGHT*CGFloat(numResults)
+//      
+//      self.searchResultsTable.frame = CGRect(x: 0.0, y: 0.0, width: self.searchResultsTable.frame.width, height: (SEARCH_HEIGHT > SEARCH_VIEWABLE_AREA) ? SEARCH_VIEWABLE_AREA : SEARCH_HEIGHT)
+//      
+//      UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+//        self.searchResultsTable.alpha = 0.8
+//      })
+//      self.searchResultsTable.reloadData()
+//    } else {
+//      self.searchResultsTable.alpha = 0.0
+//    }
   }
   
   override func didReceiveMemoryWarning() {
