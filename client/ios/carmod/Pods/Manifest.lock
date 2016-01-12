@@ -7,6 +7,7 @@ PODS:
   - Bolts/Tasks (1.2.0)
   - Crashlytics (3.4.1):
     - Fabric (~> 1.6.0)
+  - DOPDropDownMenu-Enhanced (1.0.0)
   - Fabric (1.6.1)
   - Facebook-iOS-SDK (3.24.1):
     - Bolts (~> 1.2)
@@ -78,6 +79,7 @@ PODS:
 DEPENDENCIES:
   - Bolts (from `https://github.com/kwkhaw/Bolts-iOS.git`)
   - Crashlytics
+  - DOPDropDownMenu-Enhanced
   - Fabric
   - FormatterKit (~> 1.8.0)
   - MBProgressHUD (~> 0.9.1)
@@ -109,6 +111,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Bolts: c4173988ebd9d67397a18f7142d1414884d2ac9b
   Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  DOPDropDownMenu-Enhanced: 9ec473b16351b5b0b2d6ef87e7f666fe5ff54ad5
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4

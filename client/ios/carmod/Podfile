@@ -21,6 +21,7 @@ target 'carmod' do
   pod 'MGSwipeTableCell'    # UITableViewCell subclass to allow swipeable buttons with transitions]
   pod 'ODRefreshControl'    # Customizable refresh control to replace UIRefreshControl
   pod 'MRProgress'
+  pod 'DOPDropDownMenu-Enhanced'
 end
 
 # Disable bitcode for now.

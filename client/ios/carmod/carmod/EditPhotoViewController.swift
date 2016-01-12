@@ -515,11 +515,13 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   
   // MARK:- PhotoTableViewCellDelegate  
   func tappedPhoto() {
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
-      self.photoTaggerView.alpha = 1.0
-    }
-    
-    self.searchTagField.becomeFirstResponder()
+//    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+//      self.photoTaggerView.alpha = 1.0
+//    }
+//    
+//    self.searchTagField.becomeFirstResponder()
+    let taggerViewController = TaggerViewController()
+    self.navigationController!.pushViewController(taggerViewController, animated: true)
   }
   
   func removedTag(tagIndex: Int) {

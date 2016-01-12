@@ -36,7 +36,7 @@ class CarManager: NSObject {
   func searchCar(query: String) {
     self.clearSearchResults()
     
-    let SEARCH_URL = "http://kursor.co:8000/auto/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
+    let SEARCH_URL = "http://carmod.xyz:8000/auto/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
     let request = NSURLRequest(URL: NSURL(string: SEARCH_URL)!)
     _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
   }

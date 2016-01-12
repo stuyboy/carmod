@@ -107,6 +107,7 @@ let SEARCH_RESULTS_ROW_HEIGHT: CGFloat = 50.0
 
 let THUMBNAIL_SIZE: CGFloat = (IS_IPHONE_4_OR_LESS ) ? 65.0 : (IS_IPHONE_5_OR_LESS) ? 70.0 : 80.0
 let THUMBNAIL_SIZE_XL: CGFloat = (IS_IPHONE_4_OR_LESS ) ? 90.0 : (IS_IPHONE_5_OR_LESS) ? 100.0 : 110.0
+let THUMBNAIL_LABEL_HEIGHT: CGFloat = 30.0
 
 let SPINNER_SIZE: CGFloat = 50.0
 let SPINNER_LARGE_SIZE: CGFloat = 100.0
@@ -136,6 +137,7 @@ let kPartJSONBrandKey           = "brand"
 let kPartJSONModelKey           = "model"
 let kPartJSONProductCodeKey     = "productCode"
 let kPartJSONSearchStringKey    = "searchString"
+let kPartJSONImageURLKey        = "imageUrl"
 let kPartJSONEmptyKey           = "Empty"
 
 // JSON Car Field keys

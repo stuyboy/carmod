@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-carmod/Bolts.framework"
+  install_framework "Pods-carmod/DOPDropDownMenu_Enhanced.framework"
   install_framework "Pods-carmod/FacebookSDK.framework"
   install_framework "Pods-carmod/FormatterKit.framework"
   install_framework "Pods-carmod/MBProgressHUD.framework"
@@ -101,6 +102,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-carmod/Bolts.framework"
+  install_framework "Pods-carmod/DOPDropDownMenu_Enhanced.framework"
   install_framework "Pods-carmod/FacebookSDK.framework"
   install_framework "Pods-carmod/FormatterKit.framework"
   install_framework "Pods-carmod/MBProgressHUD.framework"
