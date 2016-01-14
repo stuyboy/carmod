@@ -19,6 +19,9 @@
 		40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E621C0123A0001CF280 /* Oxygen-Light.ttf */; };
 		40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */; };
 		403AD7EB1C067B300058999B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AD7EA1C067B300058999B /* TagView.swift */; };
+		404C4C481C44643700E21421 /* TaggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C471C44643700E21421 /* TaggerViewController.swift */; };
+		404C4C4B1C447C2D00E21421 /* PartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */; };
+		404C4C4D1C447C8800E21421 /* PartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */; };
 		405973301C1639C600600615 /* CarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059732F1C1639C600600615 /* CarTableViewCell.swift */; };
 		405973321C163A6000600615 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973311C163A6000600615 /* CarManager.swift */; };
 		405973341C17D1EF00600615 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973331C17D1EF00600615 /* StoryViewController.swift */; };
@@ -101,6 +104,9 @@
 		40220E621C0123A0001CF280 /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
 		403AD7EA1C067B300058999B /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		404C4C471C44643700E21421 /* TaggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggerViewController.swift; sourceTree = "<group>"; };
+		404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionView.swift; sourceTree = "<group>"; };
+		404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionViewCell.swift; sourceTree = "<group>"; };
 		4059732F1C1639C600600615 /* CarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTableViewCell.swift; sourceTree = "<group>"; };
 		405973311C163A6000600615 /* CarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
 		405973331C17D1EF00600615 /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +215,23 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		404C4C461C44641A00E21421 /* Tagger */ = {
+			isa = PBXGroup;
+			children = (
+				404C4C471C44643700E21421 /* TaggerViewController.swift */,
+			);
+			name = Tagger;
+			sourceTree = "<group>";
+		};
+		404C4C491C447C1300E21421 /* PartCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */,
+				404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */,
+			);
+			name = PartCollectionView;
+			sourceTree = "<group>";
+		};
 		405973511C1B400600600615 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +243,7 @@
 		40678DFC1BFA99140071BCB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				404C4C461C44641A00E21421 /* Tagger */,
 				405973511C1B400600600615 /* Alert */,
 				40678E011BFA99810071BCB8 /* Login */,
 				40678E031BFA998F0071BCB8 /* Home */,
@@ -236,6 +260,7 @@
 		40678DFD1BFA99190071BCB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				404C4C491C447C1300E21421 /* PartCollectionView */,
 				40678E2D1BFA9B900071BCB8 /* TimelineViews */,
 				40678E2E1BFA9BA10071BCB8 /* PhotoDetailsViews */,
 				40678E2F1BFA9BAB0071BCB8 /* UITableViewCells */,
@@ -675,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */,
+				404C4C4B1C447C2D00E21421 /* PartCollectionView.swift in Sources */,
 				40678E0E1BFA9AA90071BCB8 /* PAPLogInViewController.swift in Sources */,
 				405973551C1B403000600615 /* DOAlertController.swift in Sources */,
 				40678E211BFA9B3E0071BCB8 /* PAPConstants.swift in Sources */,
@@ -685,6 +711,7 @@
 				40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */,
 				40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */,
 				405973301C1639C600600615 /* CarTableViewCell.swift in Sources */,
+				404C4C4D1C447C8800E21421 /* PartCollectionViewCell.swift in Sources */,
 				40678E2A1BFA9B770071BCB8 /* UIExtensions.swift in Sources */,
 				40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */,
 				40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */,
@@ -692,6 +719,7 @@
 				40678E231BFA9B490071BCB8 /* PAPUtility.swift in Sources */,
 				40678E391BFA9BE80071BCB8 /* PAPPhotoCell.swift in Sources */,
 				40678E2C1BFA9B7E0071BCB8 /* String+Common.swift in Sources */,
+				404C4C481C44643700E21421 /* TaggerViewController.swift in Sources */,
 				40678E271BFA9B590071BCB8 /* Reachability.swift in Sources */,
 				40678E101BFA9AB90071BCB8 /* PAPPhotoTimelineViewController.swift in Sources */,
 				40678E441BFA9C270071BCB8 /* PAPImageView.swift in Sources */,

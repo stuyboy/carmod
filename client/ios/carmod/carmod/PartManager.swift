@@ -14,6 +14,7 @@ class PartObject: NSObject {
   var model: String!
   var partNumber: String!
   var partType: String! // classification
+  var imageURL: String!
 }
 
 enum PartType: String {
@@ -66,7 +67,7 @@ class PartManager: NSObject {
 //    print("PartManager::searchPart = \(query)")
     self.clearSearchResults()
     
-    let SEARCH_URL = "http://kursor.co:8000/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
+    let SEARCH_URL = "http://carmod.xyz:8000/search/\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)"
 //    print("The SEARCH URL = \(SEARCH_URL)")
     let request = NSURLRequest(URL: NSURL(string: SEARCH_URL)!)
     _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
@@ -105,6 +106,9 @@ class PartManager: NSObject {
         }
         if let productCode = result[kPartJSONProductCodeKey].string {
           partObject.partNumber = productCode
+        }
+        if let imageURL = result[kPartJSONImageURLKey].string {
+          partObject.imageURL = imageURL
         }
         
         self.searchResults.append(partObject)
