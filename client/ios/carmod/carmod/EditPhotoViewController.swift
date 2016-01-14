@@ -126,6 +126,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.titleLabel = UILabel(frame: CGRect(x: OFFSET_SMALL, y: 0.0, width: self.titleView.frame.width-OFFSET_SMALL*2-IMAGE_SIZE-5.0, height: LABEL_HEIGHT))
     self.titleLabel.textColor = UIColor.whiteColor()
     self.titleLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.titleLabel.text = ""
     self.titleView.addSubview(self.titleLabel)
     
     let closeImage = changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.fromRGB(COLOR_NEAR_BLACK))
@@ -374,7 +375,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   }
   
   func publishStory(sender: AnyObject) {
-    if photos.count == 0 {
+    if self.photos.count == 0 {
       let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
       let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
       alertController.addAction(alertAction)
@@ -399,19 +400,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       photoACL.setPublicReadAccess(true)
       photo.ACL = photoACL
       
-//      // Request a background execution task to allow us to finish uploading the photo even if the app is backgrounded
-//      self.photoPostBackgroundTaskId = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-//        UIApplication.sharedApplication().endBackgroundTask(self.photoPostBackgroundTaskId)
-//      }
-      
-      // userInfo might contain any caption which might have been posted by the uploader
-      
       photo.save()
-//      print("Photo failed to save: \(error)")
-//      let alertController = UIAlertController(title: NSLocalizedString("Couldn't post your photo", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-//      let alertAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
-//      alertController.addAction(alertAction)
-//      self.presentViewController(alertController, animated: true, completion: nil)
       
       relation.addObject(photo)
       
@@ -420,13 +409,13 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       let tags = self.tags[i]
       for tag in tags {
         let annotation = PFObject(className: kAnnotationClassKey)
-//        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
         annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
         annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
         annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
         annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
         annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-//        print("setting tag coordinates to be = \(tag.tagView.frame.origin)")
+        print("setting tag coordinates to be = \(tag.coordinates)")
         let coordinates = [tag.coordinates.x, tag.coordinates.y]
         annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
