@@ -409,13 +409,16 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       let tags = self.tags[i]
       for tag in tags {
         let annotation = PFObject(className: kAnnotationClassKey)
-        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+//        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
         annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
+        annotation.setObject(tag.partObject.partType, forKey: kAnnotationPartTypeKey)
         annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
         annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
         annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
+        annotation.setObject(tag.partObject.imageURL, forKey: kAnnotationImageURLKey)
+        annotation.setObject(PFUser.currentUser()!, forKey: kAnnotationUserKey)
         annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-        print("setting tag coordinates to be = \(tag.coordinates)")
+//        print("setting tag coordinates to be = \(tag.coordinates)")
         let coordinates = [tag.coordinates.x, tag.coordinates.y]
         annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         

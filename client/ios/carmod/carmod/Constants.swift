@@ -119,6 +119,7 @@ let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
 let EVENT_CAR_RESULTS_COMPLETE: String = "Event::CarResultsComplete"
 let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
 let EVENT_STORY_PUBLISHED: String = "Event::StoryPublished"
+let EVENT_PART_SEARCH_COMPLETE: String = "Event::PartSearchComplete"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0
@@ -171,6 +172,9 @@ let kAnnotationModelKey         = "model"
 let kAnnotationPartNumberKey    = "productCode"
 let kAnnotationPartIDKey        = "partId"
 let kAnnotationPhotoKey         = "photo"
+let kAnnotationImageURLKey      = "imageUrl"
+let kAnnotationPartTypeKey      = "classification"
+let kAnnotationUserKey          = "user"
 
 // Entity Field keys
 let kEntityClassKey             = "Entity"

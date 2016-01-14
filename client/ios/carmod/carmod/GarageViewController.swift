@@ -9,7 +9,7 @@
 import MBProgressHUD
 import ParseUI
 
-class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate {
+class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate, PartCollectionViewDelegate {
   let ADD_CAR_TEXT = "Add a car to your garage"
   private var addCarView: AddCarView!
   private var carImage: PFImageView!
@@ -17,6 +17,9 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   private var addCarButton: UIButton!
   private var cars: [CarObject] = []
   private var carIndex = -1
+  private var partCollectionView: PartCollectionView!
+  private var emptyPartView: UIView!
+  private var activityIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,10 +29,20 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     
     self.initCarProfile()
     self.initAddCarView()
+    self.initPartCollectionView()
+    
+    PartManager.sharedInstance.eventManager.listenTo(EVENT_PART_SEARCH_COMPLETE) { () -> () in
+      self.partCollectionView.partObjects = PartManager.sharedInstance.garageParts
+      self.emptyPartView.hidden = self.partCollectionView.partObjects.count > 0
+      self.activityIndicator.stopAnimating()
+    }
   }
   
   override func viewDidAppear(animated: Bool) {
     self.loadCars()
+    
+    self.activityIndicator.startAnimating()
+    PartManager.sharedInstance.getPartsForCurrentUser()
   }
   
   // MARK:- Initializers
@@ -79,6 +92,49 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     closeButton.addTarget(self, action: "onCloseAddCarView", forControlEvents: .TouchUpInside)
   }
   
+  private func initPartCollectionView() {
+    let divider = UIView(frame: CGRect(x: 0.0, y: 175.0, width: self.view.frame.width, height: 1.0))
+    divider.backgroundColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+    self.view.addSubview(divider)
+    
+    let partLabel: UILabel = UILabel()
+    partLabel.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+    partLabel.textColor = UIColor.whiteColor()
+    partLabel.text = "Your car mods:"
+    partLabel.sizeToFit()
+    partLabel.frame.origin = CGPoint(x: 5.0, y: 190.0)
+    self.view.addSubview(partLabel)
+    
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: partLabel.frame.maxY+5.0, width: self.view.frame.width, height: self.view.frame.height-partLabel.frame.maxY-5.0-STATUS_BAR_HEIGHT-TOPNAV_BAR_SIZE-(self.navigationController?.navigationBar.frame.height)!))
+    self.partCollectionView.partCollectionViewDelegate = self
+    self.partCollectionView.backgroundColor = UIColor.clearColor()
+    self.view.addSubview(self.partCollectionView)
+    
+    let INDICATOR_SIZE: CGFloat = 100.0
+    self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.partCollectionView.frame.width/2-INDICATOR_SIZE/2, y: self.partCollectionView.frame.height/2-INDICATOR_SIZE/2, width: INDICATOR_SIZE, height: INDICATOR_SIZE))
+    self.activityIndicator.hidesWhenStopped = true
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+    self.partCollectionView.addSubview(self.activityIndicator)
+    self.activityIndicator.stopAnimating()
+    
+    self.emptyPartView = UIView(frame: self.partCollectionView.frame)
+    self.emptyPartView.backgroundColor = UIColor.blackColor()
+    self.emptyPartView.hidden = true
+    self.view.addSubview(self.emptyPartView)
+    
+    let MESSAGE_WIDTH: CGFloat = self.emptyPartView.frame.width-OFFSET_XLARGE*2
+    let emptyMessage = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: MESSAGE_WIDTH, height: 0.0))
+    emptyMessage.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    emptyMessage.textColor = UIColor.whiteColor()
+    emptyMessage.textAlignment = .Center
+    emptyMessage.text = "No car mods to display.\nTry adding a photo and tagging the parts. They'll appear here \"auto\"matically."
+    emptyMessage.numberOfLines = 0
+    emptyMessage.lineBreakMode = .ByWordWrapping
+    let requiredHeight = emptyMessage.requiredHeight()
+    emptyMessage.frame = CGRect(x: self.emptyPartView.frame.width/2-MESSAGE_WIDTH/2, y: OFFSET_XLARGE*2, width: MESSAGE_WIDTH, height: requiredHeight)
+    self.emptyPartView.addSubview(emptyMessage)
+  }
+  
   // MARK:- Callbacks
   func onTapCar() {
     if self.carTitle.text != ADD_CAR_TEXT {
@@ -126,6 +182,11 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     self.onCloseAddCarView()
   }
   
+  // MARK:- PartCollectionViewDelegate
+  func tappedPart(partObject: PartObject, isSelected: Bool) {
+    
+  }
+  
   // MARK:- Callbacks
   func settingsButtonAction(sender: AnyObject) {
     let alertController = DOAlertController(title: nil, message: nil, preferredStyle: DOAlertControllerStyle.ActionSheet)
@@ -154,6 +215,9 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     
     self.presentViewController(alertController, animated: true, completion: nil)
   }
+  
+  // MARK:- Private methods
+
   
   // MARK:- Public methods
   func loadCars() {

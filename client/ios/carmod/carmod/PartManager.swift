@@ -33,6 +33,7 @@ enum PartType: String {
 class PartManager: NSObject {
   var bytes: NSMutableData?
   var searchResults: [PartObject] = []
+  var garageParts: [PartObject] = []
   var eventManager: EventManager!
   let PART_CATEGORIES: [String] = [
     "Accessories",
@@ -61,6 +62,28 @@ class PartManager: NSObject {
   
   func generateDisplayName(partObject: PartObject) -> String {
     return "\(partObject.brand) \(partObject.model) \(partObject.partNumber)"
+  }
+  
+  func getPartsForCurrentUser() {
+    self.garageParts.removeAll()
+    
+    let query = PFQuery(className: kAnnotationClassKey)
+    query.whereKey(kAnnotationUserKey, equalTo: PFUser.currentUser()!)
+    query.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, error: NSError?) -> Void in
+      for object in objects! {
+        let partObject = PartObject()
+        partObject.id = object.objectForKey(kAnnotationPartIDKey) as! String
+        partObject.brand = object.objectForKey(kAnnotationBrandKey) as! String
+        partObject.model = object.objectForKey(kAnnotationModelKey) as! String
+        partObject.partNumber = object.objectForKey(kAnnotationPartNumberKey) as! String
+        partObject.imageURL = object.objectForKey(kAnnotationImageURLKey) as! String
+        
+        self.garageParts.append(partObject)
+      }
+      
+      self.eventManager.trigger(EVENT_PART_SEARCH_COMPLETE)
+    }
   }
   
   func searchPart(query: String) {
