@@ -55,7 +55,7 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     self.dismissViewControllerAnimated(false, completion: nil)
     
-    let image = info[UIImagePickerControllerEditedImage] as! UIImage
+    let image = cropToSquare(image: info[UIImagePickerControllerEditedImage] as! UIImage)
     
     let viewController: EditPhotoViewController = EditPhotoViewController(image: image)
     viewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve

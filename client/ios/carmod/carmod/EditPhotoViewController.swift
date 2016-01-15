@@ -551,7 +551,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     self.dismissViewControllerAnimated(false, completion: nil)
     
-    let image = info[UIImagePickerControllerEditedImage] as! UIImage
+    let image = cropToSquare(image: info[UIImagePickerControllerEditedImage] as! UIImage)
     self.photos.append(image)
 
     self.pageControl.currentPage = self.photos.count-1
