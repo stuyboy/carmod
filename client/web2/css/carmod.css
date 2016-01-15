@@ -1,3 +1,7 @@
+#home {
+    overflow: hidden;
+}
+
 .button.facebook {
     background: #4a6bb2;
     border: 2px solid #4a6bb2;
@@ -7,7 +11,13 @@
     background: #bdc3c7;
 }
 
-.headser-parallax {
+.auto-vertical {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+ }
+
+.header-parallax {
     background: url(../images/header/header-parallax.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -31,7 +41,10 @@
 }
 
 .video-background {
-    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 .explaination p {
