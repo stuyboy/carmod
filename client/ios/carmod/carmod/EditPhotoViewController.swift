@@ -409,13 +409,16 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       let tags = self.tags[i]
       for tag in tags {
         let annotation = PFObject(className: kAnnotationClassKey)
-        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
+//        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
         annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
+        annotation.setObject(tag.partObject.partType, forKey: kAnnotationPartTypeKey)
         annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
         annotation.setObject(tag.partObject.model, forKey: kAnnotationModelKey)
         annotation.setObject(tag.partObject.partNumber, forKey: kAnnotationPartNumberKey)
+        annotation.setObject(tag.partObject.imageURL, forKey: kAnnotationImageURLKey)
+        annotation.setObject(PFUser.currentUser()!, forKey: kAnnotationUserKey)
         annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-        print("setting tag coordinates to be = \(tag.coordinates)")
+//        print("setting tag coordinates to be = \(tag.coordinates)")
         let coordinates = [tag.coordinates.x, tag.coordinates.y]
         annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
@@ -432,7 +435,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     story.save()
     
-    StoryManager.sharedInstance.eventManager.trigger(EVENT_STORY_PUBLISHED)
+    CarManager.sharedInstance.eventManager.trigger(EVENT_STORY_PUBLISHED)
     self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
   }
   
@@ -548,7 +551,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     self.dismissViewControllerAnimated(false, completion: nil)
     
-    let image = info[UIImagePickerControllerEditedImage] as! UIImage
+    let image = cropToSquare(image: info[UIImagePickerControllerEditedImage] as! UIImage)
     self.photos.append(image)
 
     self.pageControl.currentPage = self.photos.count-1

@@ -56,12 +56,6 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
       count =  partObjects.count
     }
     
-    if count == 0 {
-      MBProgressHUD.showHUDAddedTo(self, animated: true)
-    } else {
-      MBProgressHUD.hideHUDForView(self, animated: true)
-    }
-    
     return count
   }
   

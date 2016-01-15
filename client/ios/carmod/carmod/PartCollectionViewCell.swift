@@ -64,18 +64,12 @@ class PartCollectionViewCell: UICollectionViewCell {
     self.partImage.image = image
   }
   
-  func setThumbnailImageFromURL(url: NSURL){
+  func setThumbnailImageFromURL(url: NSURL) {
     getDataFromUrl(url) { (data, response, error)  in
       dispatch_async(dispatch_get_main_queue()) { () -> Void in
         guard let data = data where error == nil else { return }
         self.partImage.image = UIImage(data: data)
       }
     }
-  }
-  
-  func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-    NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-      completion(data: data, response: response, error: error)
-      }.resume()
   }
 }
