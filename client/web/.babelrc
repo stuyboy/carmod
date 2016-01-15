@@ -1,0 +1,8 @@
+{
+  "plugins": ["transform-react-jsx"],
+  "presets": ["react"],
+  "ignore": [
+    "bower_components/**/*.js",
+    "node_modules/**/*.js"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "CarMod",
+  "authors": [
+    "Joseph Chang <joechang@joechang.com>"
+  ],
+  "homepage": "carmod.xyz",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "~0.2.2"
+  },
+  "resolutions": {
+    "jquery": ">= 1.9.0"
+  }
+}
