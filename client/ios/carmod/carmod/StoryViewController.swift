@@ -23,7 +23,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    StoryManager.sharedInstance.eventManager.listenTo(EVENT_STORY_PUBLISHED) { () -> () in
+    CarManager.sharedInstance.eventManager.listenTo(EVENT_STORY_PUBLISHED) { () -> () in
       self.loadStories()
     }
     

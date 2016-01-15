@@ -61,16 +61,15 @@
 		40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40722E231BFA98B000D6F10C /* Assets.xcassets */; };
 		40722E321BFA98B100D6F10C /* carmodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E311BFA98B100D6F10C /* carmodTests.swift */; };
 		40722E3D1BFA98B100D6F10C /* carmodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40722E3C1BFA98B100D6F10C /* carmodUITests.swift */; };
-		40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD61C1CC8ED00B46B44 /* TagManager.swift */; };
 		40954BD91C1F9B0600B46B44 /* StoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */; };
 		40954BDC1C20B3CC00B46B44 /* PathMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDA1C20B3CC00B46B44 /* PathMenu.swift */; };
 		40954BDD1C20B3CC00B46B44 /* PathMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */; };
 		40954BDF1C20F08800B46B44 /* StoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BDE1C20F08800B46B44 /* StoryDetailsViewController.swift */; };
 		40954BE11C21256900B46B44 /* StoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE01C21256900B46B44 /* StoryCache.swift */; };
-		40954BE31C2279FF00B46B44 /* StoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE21C2279FF00B46B44 /* StoryManager.swift */; };
 		40954BE51C24B31600B46B44 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40954BE41C24B31600B46B44 /* CommentTableViewCell.swift */; };
 		40B0CECD1BFBB748001D3033 /* PhotoTaggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */; };
 		40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */; };
+		40E7609A1C49A3080065E241 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E760991C49A3080065E241 /* ImageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,16 +152,15 @@
 		40722E381BFA98B100D6F10C /* carmodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = carmodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40722E3C1BFA98B100D6F10C /* carmodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = carmodUITests.swift; sourceTree = "<group>"; };
 		40722E3E1BFA98B100D6F10C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40954BD61C1CC8ED00B46B44 /* TagManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
 		40954BD81C1F9B0600B46B44 /* StoryHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryHeaderView.swift; sourceTree = "<group>"; };
 		40954BDA1C20B3CC00B46B44 /* PathMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathMenu.swift; sourceTree = "<group>"; };
 		40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathMenuItem.swift; sourceTree = "<group>"; };
 		40954BDE1C20F08800B46B44 /* StoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryDetailsViewController.swift; sourceTree = "<group>"; };
 		40954BE01C21256900B46B44 /* StoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCache.swift; sourceTree = "<group>"; };
-		40954BE21C2279FF00B46B44 /* StoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryManager.swift; sourceTree = "<group>"; };
 		40954BE41C24B31600B46B44 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		40B0CECC1BFBB748001D3033 /* PhotoTaggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTaggerView.swift; sourceTree = "<group>"; };
 		40B0CECE1BFBDA65001D3033 /* TagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		40E760991C49A3080065E241 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		4C740DDEEA01BA57AD7DDC61 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-carmod.debug.xcconfig"; path = "Pods/Target Support Files/Pods-carmod/Pods-carmod.debug.xcconfig"; sourceTree = "<group>"; };
 		A4E53314AABF5BB21948A9D2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -209,8 +207,7 @@
 				40220E5F1C00310A001CF280 /* EventManager.swift */,
 				405973311C163A6000600615 /* CarManager.swift */,
 				40220E591BFFECAD001CF280 /* PartManager.swift */,
-				40954BD61C1CC8ED00B46B44 /* TagManager.swift */,
-				40954BE21C2279FF00B46B44 /* StoryManager.swift */,
+				40E760991C49A3080065E241 /* ImageManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -708,7 +705,6 @@
 				405973341C17D1EF00600615 /* StoryViewController.swift in Sources */,
 				405973381C17F83900600615 /* PhotoTableViewCell.swift in Sources */,
 				40678E1C1BFA9B120071BCB8 /* PAPFindFriendsViewController.swift in Sources */,
-				40954BD71C1CC8ED00B46B44 /* TagManager.swift in Sources */,
 				40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */,
 				405973301C1639C600600615 /* CarTableViewCell.swift in Sources */,
 				404C4C4D1C447C8800E21421 /* PartCollectionViewCell.swift in Sources */,
@@ -725,6 +721,7 @@
 				40678E441BFA9C270071BCB8 /* PAPImageView.swift in Sources */,
 				40678E401BFA9BFF0071BCB8 /* PAPFindFriendsCell.swift in Sources */,
 				40678E0C1BFA9AA00071BCB8 /* PAPWelcomeViewController.swift in Sources */,
+				40E7609A1C49A3080065E241 /* ImageManager.swift in Sources */,
 				40B0CECF1BFBDA65001D3033 /* TagTableViewCell.swift in Sources */,
 				403AD7EB1C067B300058999B /* TagView.swift in Sources */,
 				40220E601C00310A001CF280 /* EventManager.swift in Sources */,
@@ -750,7 +747,6 @@
 				40678E0A1BFA9A860071BCB8 /* Global.swift in Sources */,
 				40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */,
 				400818421C1105A9004F7497 /* GarageViewController.swift in Sources */,
-				40954BE31C2279FF00B46B44 /* StoryManager.swift in Sources */,
 				40954BE51C24B31600B46B44 /* CommentTableViewCell.swift in Sources */,
 				400818461C123960004F7497 /* AddCarView.swift in Sources */,
 				40678E251BFA9B530071BCB8 /* PAPCache.swift in Sources */,

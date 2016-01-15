@@ -124,6 +124,12 @@ func cropToSquare(image originalImage: UIImage) -> UIImage {
   return image
 }
 
+func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+  NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+    completion(data: data, response: response, error: error)
+    }.resume()
+}
+
 func degreesToRadians(degrees: Double) -> Double {
   return degrees * (M_PI / 180)
 }

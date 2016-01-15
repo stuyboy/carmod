@@ -12,9 +12,8 @@ import ParseUI
 class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate, PartCollectionViewDelegate {
   let ADD_CAR_TEXT = "Add a car to your garage"
   private var addCarView: AddCarView!
-  private var carImage: PFImageView!
+  private var carImage: UIImageView!
   private var carTitle: UILabel!
-  private var addCarButton: UIButton!
   private var cars: [CarObject] = []
   private var carIndex = -1
   private var partCollectionView: PartCollectionView!
@@ -28,13 +27,25 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))
     
     self.initCarProfile()
-    self.initAddCarView()
     self.initPartCollectionView()
-    
+    self.initAddCarView()
+
     PartManager.sharedInstance.eventManager.listenTo(EVENT_PART_SEARCH_COMPLETE) { () -> () in
       self.partCollectionView.partObjects = PartManager.sharedInstance.garageParts
       self.emptyPartView.hidden = self.partCollectionView.partObjects.count > 0
       self.activityIndicator.stopAnimating()
+    }
+    
+    CarManager.sharedInstance.eventManager.listenTo(EVENT_CAR_QUERY_COMPLETE) { () -> () in
+      if self.carTitle.text == self.ADD_CAR_TEXT {
+        self.carImage.image = changeImageColor(UIImage(named: "ic_car")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+      } else {
+        ImageManager.sharedInstance.searchImage(self.carTitle.text!)
+      }
+    }
+    
+    ImageManager.sharedInstance.eventManager.listenTo(EVENT_IMAGE_SEARCH_COMPLETE) { () -> () in
+      self.carImage.image = ImageManager.sharedInstance.image
     }
   }
   
@@ -49,26 +60,17 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   private func initCarProfile() {
     let PROFILE_IMAGE_SIZE: CGFloat = 100.0
     
-    self.carImage = PFImageView(frame: CGRect(x: self.view.frame.width/2-PROFILE_IMAGE_SIZE/2, y: OFFSET_XLARGE, width: PROFILE_IMAGE_SIZE, height: PROFILE_IMAGE_SIZE))
+    self.carImage = UIImageView(frame: CGRect(x: self.view.frame.width/2-PROFILE_IMAGE_SIZE/2, y: OFFSET_XLARGE, width: PROFILE_IMAGE_SIZE, height: PROFILE_IMAGE_SIZE))
+    self.carImage.contentMode = .ScaleAspectFill
     self.carImage.clipsToBounds = true
+    self.carImage.backgroundColor = UIColor.whiteColor()
+    self.carImage.layer.borderColor = UIColor.fromRGB(COLOR_MEDIUM_GRAY).CGColor
+    self.carImage.layer.borderWidth = 3.0
     self.carImage.layer.cornerRadius = PROFILE_IMAGE_SIZE/2
-    self.carImage.alpha = 0.0
-    self.carImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onShowAddCarView"))
+    self.carImage.alpha = 1.0
+    self.carImage.userInteractionEnabled = true
+    self.carImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapCar"))
     self.view.addSubview(self.carImage)
-    
-    self.addCarButton = UIButton(frame: self.carImage.frame)
-    self.addCarButton.backgroundColor = UIColor.whiteColor()
-    self.addCarButton.layer.borderColor = UIColor.fromRGB(COLOR_MEDIUM_GRAY).CGColor
-    self.addCarButton.layer.borderWidth = 3.0
-    self.addCarButton.layer.cornerRadius = PROFILE_IMAGE_SIZE/2
-    self.addCarButton.clipsToBounds = true
-    let carImage = changeImageColor(UIImage(named: "ic_car")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
-    self.addCarButton.setImage(carImage, forState: .Normal)
-    let OFFSET: CGFloat = 15.0
-    self.addCarButton.contentEdgeInsets = UIEdgeInsets(top: OFFSET, left: OFFSET, bottom: OFFSET, right: OFFSET)
-    self.addCarButton.alpha = 1.0
-    self.addCarButton.addTarget(self, action: "onTapCar", forControlEvents: .TouchUpInside)
-    self.view.addSubview(self.addCarButton)
     
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
     self.carTitle = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.carImage.frame.maxY+OFFSET_SMALL, width: LABEL_WIDTH, height: 30.0))
@@ -227,10 +229,6 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     query.cachePolicy = PFCachePolicy.NetworkOnly
     
     query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-      if error != nil {
-        return
-      }
-      
       if let cars = objects {
         for car in cars as! [PFObject] {
           let carObject = CarObject()
@@ -243,6 +241,8 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
           self.carIndex = self.cars.count-1
         }
       }
+      
+      CarManager.sharedInstance.eventManager.trigger(EVENT_CAR_QUERY_COMPLETE)
     }
   }
   

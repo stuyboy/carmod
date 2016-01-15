@@ -17,6 +17,11 @@ class PartObject: NSObject {
   var imageURL: String!
 }
 
+class TagObject: NSObject {
+  var partObject: PartObject!
+  var coordinates: CGPoint!
+}
+
 enum PartType: String {
   case Accessories  = "Accessories"
   case Audio        = "Audio"

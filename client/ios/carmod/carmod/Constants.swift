@@ -27,6 +27,8 @@ let APP_FIRST_OPEN = "AppFirstOpen"
 let APP_FIRST_FAVORITE = "AppFirstFavorite"
 let APP_LOCATION_PROMPT = "AppLocationPrompt"
 let APP_LAST_LOCATION = "AppLastLocation"
+let GOOGLE_API_KEY = "AIzaSyBoPovyx0Z8qIlXtwMWhalqkZXd7JR_BuM"
+let GOOGLE_SEARCH_ENGINE_KEY = "003309163549465394829:h2dzvntgkjm"
 
 let IS_IPHONE = UIDevice.currentDevice().userInterfaceIdiom == .Phone
 let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
@@ -117,9 +119,11 @@ let NSERROR_NO_INTERNET = NSError(domain: APP_DOMAIN, code: ERROR_NO_INTERNET, u
 
 let EVENT_SEARCH_RESULTS_COMPLETE: String = "Event::SearchResultsComplete"
 let EVENT_CAR_RESULTS_COMPLETE: String = "Event::CarResultsComplete"
+let EVENT_CAR_QUERY_COMPLETE: String = "Event::CarQueryComplete"
 let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
 let EVENT_STORY_PUBLISHED: String = "Event::StoryPublished"
 let EVENT_PART_SEARCH_COMPLETE: String = "Event::PartSearchComplete"
+let EVENT_IMAGE_SEARCH_COMPLETE: String = "Event::ImageSearchComplete"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0
