@@ -17,7 +17,7 @@ func main() {
 	port := os.Getenv("OPENSHIFT_GO_PORT")
 
 	//Assume we start this within server/bin, which then needs to go back to ../../client/web
-	dir := flag.String("docroot", "../../client/web", "HTTP Docroot")
+	dir := flag.String("docroot", "../../client/web2", "HTTP Docroot")
 	flag.Parse()
 
 	if ip == "" {
