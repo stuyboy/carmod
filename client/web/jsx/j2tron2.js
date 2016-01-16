@@ -1,3 +1,6 @@
+var Jumbotron = ReactBootstrap.Jumbotron;
+var Button = ReactBootstrap.Button;
+
 const jumbotronInstance = (
     <Jumbotron>
     <h1>Hello, world mang!</h1>

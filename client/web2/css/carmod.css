@@ -1,0 +1,157 @@
+#home {
+    overflow: hidden;
+}
+
+.button.facebook {
+    background: #4a6bb2;
+    border: 2px solid #4a6bb2;
+    font-size: 1.05em;
+}
+.button.facebook:hover {
+    background: #bdc3c7;
+}
+
+.auto-vertical {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+ }
+
+.header-parallax {
+    background: url(../images/header/header-parallax.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    margin: auto;
+}
+
+.header-hero {
+    height: 580px;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-background-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.video-background {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.explaination p {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+#thumbnail-img {
+    height: 100%;
+}
+
+.story-album {
+    padding: 2em 0 2em;
+}
+
+.story-album .story-thumbnail > a .titlehead {
+    position: absolute;
+    left: 0;
+    padding: 1em;
+    top: 0;
+    right: 0;
+    bottom: 105px;
+    text-align: center;
+    line-height: 150px;
+    color: rgba(255,255,255,0.8);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+    font-size: 24px;
+    z-index: 11;
+    opacity: 1;
+    filter: alpha(opacity=0);
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    /*background: rgba(39,174,96,0.93);*/
+    -webkit-transition: opacity .3s;
+    -moz-transition: opacity .7s;
+    -o-transition: opacity .7s;
+    -ms-transition: opacity .7s;
+    transition: opacity .3s;
+}
+
+.story-album .story-thumbnail > a:hover .titlehead {
+    opacity: 1;
+    filter: alpha(opacity=99);
+    /* internet explorer */
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+    /*IE8*/
+}
+
+.story-album .story-thumbnail > a .titlehead .button {
+    line-height: 25px;
+    top: 190px;
+    position: absolute;
+    width: 150px;
+    left: 65px;
+}
+
+.story-album .story-thumbnail > a .titlehead .button:hover {
+    color: #FFFFFF;
+    border: 2px solid #D7D7D7;
+}
+
+.story-thumbnail {
+    position: relative;
+    background: #34495E;
+    width: 275px;
+    height: 275px;
+}
+
+.story-heading {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.5;
+    position: relative;
+    text-transform: capitalize;
+    letter-spacing: -1px;
+    top: 30px;
+    text-shadow: 0px 1px 6px rgba(0,0,0,0.8);
+}
+
+.story-author {
+    z-index: 11;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.story-car {
+    font-size: 16px;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.story-description {
+    font-size: 13px;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.story-overlay {
+    content: " ";
+    z-index: 10;
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
