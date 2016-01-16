@@ -187,17 +187,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     let emptyNavigationController: UINavigationController = UINavigationController()
     let garageNavigationController: UINavigationController = UINavigationController(rootViewController: self.garageViewController!)
     
-    let homeImage = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.whiteColor())
-    let homeImageSelected = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+    let homeImage = changeImageColor(UIImage(named: "ic_nav_home")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
     
-    let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: homeImage, selectedImage: homeImageSelected)
-    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+    let homeTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home"), image: homeImage, selectedImage: homeImage)
+    homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_ORANGE), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
     homeTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
-    
-    let garageImage = changeImageColor(UIImage(named: "ic_garage")!, tintColor: UIColor.whiteColor())
-    let garageImageSelected = changeImageColor(UIImage(named: "ic_garage")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
-    let garageTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Garage", comment: "Garage"), image: garageImage, selectedImage: garageImageSelected)
-    garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
+
+    let garageImage = changeImageColor(UIImage(named: "ic_garage")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+    let garageTabBarItem: UITabBarItem = UITabBarItem(title: NSLocalizedString("Garage", comment: "Garage"), image: garageImage, selectedImage: garageImage)
+    garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_ORANGE), NSFontAttributeName: UIFont(name: FONT_BOLD, size: FONTSIZE_SMALL)!], forState: UIControlState.Selected)
     garageTabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.fromRGB(COLOR_MEDIUM_GRAY), NSFontAttributeName: UIFont(name: FONT_PRIMARY, size: FONTSIZE_SMALL)!], forState: UIControlState.Normal)
     
     homeNavigationController.tabBarItem = homeTabBarItem
