@@ -8,7 +8,7 @@
 
 //
 //  Global.swift
-//  VeggieBase
+//  CarMod
 //
 //  Created by Thad Hwang on 8/21/15.
 //  Copyright (c) 2015 Thunderchicken Labs, LLC. All rights reserved.

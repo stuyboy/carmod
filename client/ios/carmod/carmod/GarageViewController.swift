@@ -8,16 +8,20 @@
 
 import MBProgressHUD
 import ParseUI
+import MobileCoreServices
 
-class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate, PartCollectionViewDelegate {
+class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate, PartCollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   let ADD_CAR_TEXT = "Add a car to your garage"
   private var addCarView: AddCarView!
   private var carImage: UIImageView!
   private var carTitle: UILabel!
+  private var defaultImage: UIImage!
   private var cars: [CarObject] = []
   private var carIndex = -1
   private var partCollectionView: PartCollectionView!
   private var emptyPartView: UIView!
+  private var alertController: DOAlertController!
+  private var carLoadingIndicator: UIActivityIndicatorView!
   private var activityIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
@@ -25,6 +29,8 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
     self.navigationItem.rightBarButtonItem = PAPSettingsButtonItem(target: self, action: Selector("settingsButtonAction:"))
+    
+    self.defaultImage = changeImageColor(UIImage(named: "ic_car")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
     
     self.initCarProfile()
     self.initPartCollectionView()
@@ -38,14 +44,17 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     
     CarManager.sharedInstance.eventManager.listenTo(EVENT_CAR_QUERY_COMPLETE) { () -> () in
       if self.carTitle.text == self.ADD_CAR_TEXT {
-        self.carImage.image = changeImageColor(UIImage(named: "ic_car")!, tintColor: UIColor.fromRGB(COLOR_MEDIUM_GRAY))
+        self.carImage.image = self.defaultImage
+        self.carLoadingIndicator.stopAnimating()
       } else {
+        self.carLoadingIndicator.startAnimating()
         ImageManager.sharedInstance.searchImage(self.carTitle.text!)
       }
     }
     
     ImageManager.sharedInstance.eventManager.listenTo(EVENT_IMAGE_SEARCH_COMPLETE) { () -> () in
       self.carImage.image = ImageManager.sharedInstance.image
+      self.carLoadingIndicator.stopAnimating()
     }
   }
   
@@ -72,6 +81,12 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     self.carImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapCar"))
     self.view.addSubview(self.carImage)
     
+    self.carLoadingIndicator = UIActivityIndicatorView(frame: self.carImage.frame)
+    self.carLoadingIndicator.hidesWhenStopped = true
+    self.carLoadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+    self.view.addSubview(self.carLoadingIndicator)
+    self.carLoadingIndicator.startAnimating()
+    
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
     self.carTitle = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.carImage.frame.maxY+OFFSET_SMALL, width: LABEL_WIDTH, height: 30.0))
     self.carTitle.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
@@ -95,7 +110,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   }
   
   private func initPartCollectionView() {
-    let divider = UIView(frame: CGRect(x: 0.0, y: 175.0, width: self.view.frame.width, height: 1.0))
+    let divider = UIView(frame: CGRect(x: 0.0, y: 185.0, width: self.view.frame.width, height: 1.0))
     divider.backgroundColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     self.view.addSubview(divider)
     
@@ -104,7 +119,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     partLabel.textColor = UIColor.whiteColor()
     partLabel.text = "Your car mods:"
     partLabel.sizeToFit()
-    partLabel.frame.origin = CGPoint(x: 5.0, y: 190.0)
+    partLabel.frame.origin = CGPoint(x: 5.0, y: 200.0)
     self.view.addSubview(partLabel)
     
     self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: partLabel.frame.maxY+5.0, width: self.view.frame.width, height: self.view.frame.height-partLabel.frame.maxY-5.0-STATUS_BAR_HEIGHT-TOPNAV_BAR_SIZE-(self.navigationController?.navigationBar.frame.height)!))
@@ -140,29 +155,36 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   // MARK:- Callbacks
   func onTapCar() {
     if self.carTitle.text != ADD_CAR_TEXT {
-      let alert = UIAlertController(title: "Remove Car?", message: "Remove \(self.carTitle.text!) from your garage?", preferredStyle: UIAlertControllerStyle.Alert)
-      alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
-      alert.addAction(UIAlertAction(title: "Remove", style: .Default, handler: { (alertView) -> Void in
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-
-        let carObject = self.cars[self.carIndex]
-        let query = PFQuery(className: kEntityClassKey)
-        query.whereKey(kEntityObjectIDKey, equalTo: carObject.objectID)
-        query.findObjectsInBackgroundWithBlock {
-          (objects: [AnyObject]?, error: NSError?) -> Void in
-          for object in objects! {
-            object.deleteEventually()
-          }
-        }
-
-        self.cars.removeAtIndex(self.carIndex)
-        self.carIndex = self.cars.count-1
-        self.carTitle.text = self.ADD_CAR_TEXT
-        
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
-      }))
-      self.presentViewController(alert, animated: true, completion: nil)
-
+      let alertController = DOAlertController(title: "Change Car?", message: "Change photo or remove car from your garage?", preferredStyle: DOAlertControllerStyle.Alert)
+      alertController.overlayColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.7)
+      alertController.cornerRadius = 8.0
+      alertController.alertViewBgColor = UIColor.whiteColor()
+      alertController.titleFont = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+      alertController.titleTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+      alertController.messageFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+      alertController.messageTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+      
+      alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+      alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+      
+      alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
+      alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+      
+      alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+      alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+  
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
+      let removeAction = DOAlertAction(title: NSLocalizedString("REMOVE CAR", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.removeCar() })
+      let photoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.addPhoto() })
+  
+      alertController.addAction(cancelAction)
+      alertController.addAction(photoAction)
+      alertController.addAction(removeAction)
+      
+      self.presentViewController(alertController, animated: true, completion: nil)
     } else {
       self.onShowAddCarView()
     }
@@ -187,6 +209,91 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   // MARK:- PartCollectionViewDelegate
   func tappedPart(partObject: PartObject, isSelected: Bool) {
     
+  }
+  
+  // MARK:- UIImagePickerDelegate
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    self.dismissViewControllerAnimated(false, completion: nil)
+    self.carImage.image = info[UIImagePickerControllerEditedImage] as? UIImage
+  }
+  
+  func shouldPresentPhotoCaptureController() -> Bool {
+    var presentedPhotoCaptureController: Bool = self.shouldStartCameraController()
+    
+    if !presentedPhotoCaptureController {
+      presentedPhotoCaptureController = self.shouldStartPhotoLibraryPickerController()
+    }
+    
+    return presentedPhotoCaptureController
+  }
+  
+  func shouldStartCameraController() -> Bool {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == false {
+      return false
+    }
+    
+    let cameraUI = UIImagePickerController()
+    
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.Camera)!.contains(kUTTypeImage as String) {
+        
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        cameraUI.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear) {
+          cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Rear
+        } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front) {
+          cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.Front
+        }
+    } else {
+      return false
+    }
+    
+    cameraUI.allowsEditing = true
+    cameraUI.showsCameraControls = true
+    cameraUI.delegate = self
+    
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
+    
+    return true
+  }
+  
+  func shouldStartPhotoLibraryPickerController() -> Bool {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false
+      && UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) == false {
+        return false
+    }
+    
+    let cameraUI = UIImagePickerController()
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)!.contains(kUTTypeImage as String) {
+        
+        cameraUI.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        
+    } else if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum)
+      && UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.SavedPhotosAlbum)!.contains(kUTTypeImage as String) {
+        cameraUI.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
+        cameraUI.mediaTypes = [kUTTypeImage as String]
+        
+    } else {
+      return false
+    }
+    
+    cameraUI.allowsEditing = true
+    cameraUI.delegate = self
+    
+    self.dismissViewControllerAnimated(true) { () -> Void in
+      self.presentViewController(cameraUI, animated: true, completion: nil)
+    }
+    
+    return true
   }
   
   // MARK:- Callbacks
@@ -222,6 +329,63 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
 
   
   // MARK:- Public methods
+  func addPhoto() {
+    let cameraDeviceAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    let photoLibraryAvailable: Bool = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+    
+    if cameraDeviceAvailable && photoLibraryAvailable {
+      self.alertController = DOAlertController(title: nil, message: nil, preferredStyle: DOAlertControllerStyle.ActionSheet)
+      self.alertController.overlayColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.7)
+      self.alertController.alertViewBgColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+      self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+      self.alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+      self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+      self.alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+      self.alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+      self.alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
+      self.alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+      
+      let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
+      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
+      
+      self.alertController.addAction(takePhotoAction)
+      self.alertController.addAction(choosePhotoAction)
+      self.alertController.addAction(cancelAction)
+      
+      self.dismissViewControllerAnimated(true) { () -> Void in
+        self.presentViewController(self.alertController, animated: true, completion: nil)
+      }
+    } else {
+      // if we don't have at least two options, we automatically show whichever is available (camera or roll)
+      self.shouldPresentPhotoCaptureController()
+    }
+  }
+  
+  func removeCar() {
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+
+    self.carImage.image = self.defaultImage
+    
+    let carObject = self.cars[self.carIndex]
+    let query = PFQuery(className: kEntityClassKey)
+    query.whereKey(kEntityObjectIDKey, equalTo: carObject.objectID)
+    query.findObjectsInBackgroundWithBlock {
+      (objects: [AnyObject]?, error: NSError?) -> Void in
+      for object in objects! {
+        object.deleteEventually()
+      }
+    }
+
+    self.cars.removeAtIndex(self.carIndex)
+    self.carIndex = self.cars.count-1
+    self.carTitle.text = self.ADD_CAR_TEXT
+
+    MBProgressHUD.hideHUDForView(self.view, animated: true)
+  }
+  
   func loadCars() {
     let query = PFQuery(className: kEntityClassKey)
     query.whereKey(kEntityUserKey, equalTo: PFUser.currentUser()!)

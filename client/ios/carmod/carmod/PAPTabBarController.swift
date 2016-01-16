@@ -16,8 +16,11 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
     super.viewDidLoad()
     
     // iOS 7 style
-    self.tabBar.tintColor = UIColor.whiteColor()
+    self.tabBar.tintColor = UIColor.fromRGB(COLOR_ORANGE)
     self.tabBar.barTintColor = UIColor.blackColor()
+    self.tabBar.translucent = false
+    self.tabBar.setValue(true, forKey: "_hidesShadow")
+    self.tabBar.backgroundImage = nil
     
     self.navController = UINavigationController()
   }
@@ -31,12 +34,20 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
   override func setViewControllers(viewControllers: [UIViewController]?, animated: Bool) {
     super.setViewControllers(viewControllers, animated: animated)
     
-    let BUTTON_WIDTH: CGFloat = 131.0
-    let BUTTON_HEIGHT: CGFloat = self.tabBar.bounds.size.height
+    let BUTTON_SIZE: CGFloat = self.tabBar.bounds.size.height+30.0
+    let INSET: CGFloat = 20.0
     let cameraButton = UIButton(type: UIButtonType.Custom)
-    cameraButton.frame = CGRectMake(self.tabBar.frame.width/2-BUTTON_WIDTH/2, 0.0, BUTTON_WIDTH, BUTTON_HEIGHT)
-    cameraButton.setImage(UIImage(named: "ButtonCamera.png"), forState: UIControlState.Normal)
-    cameraButton.setImage(UIImage(named: "ButtonCameraSelected.png"), forState: UIControlState.Highlighted)
+    let cameraButtonImage = changeImageColor(UIImage(named: "ic_plus_circle")!, tintColor: UIColor.whiteColor())
+    let cameraButtonImageHighlighted = changeImageColor(UIImage(named: "ic_plus_circle")!, tintColor: UIColor.fromRGB(COLOR_ORANGE))
+    
+    cameraButton.frame = CGRectMake(self.tabBar.frame.width/2-BUTTON_SIZE/2, -15.0, BUTTON_SIZE, BUTTON_SIZE)
+    cameraButton.backgroundColor = UIColor.blackColor()
+    cameraButton.layer.cornerRadius = BUTTON_SIZE/2
+    cameraButton.clipsToBounds = true
+    cameraButton.setImage(cameraButtonImage, forState: UIControlState.Normal)
+    cameraButton.setImage(cameraButtonImageHighlighted, forState: UIControlState.Highlighted)
+    cameraButton.contentEdgeInsets = UIEdgeInsets(top: INSET-5.0, left: INSET, bottom: INSET+5.0, right: INSET)
+    cameraButton.alpha = 1.0
     cameraButton.addTarget(self, action: Selector("photoCaptureButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
     self.tabBar.addSubview(cameraButton)
     
@@ -100,7 +111,7 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
       let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
-      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: { _ in self.shouldCloseAlertController() })
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
       
       self.alertController.addAction(takePhotoAction)
       self.alertController.addAction(choosePhotoAction)
@@ -112,11 +123,7 @@ class PAPTabBarController: UITabBarController, UIImagePickerControllerDelegate, 
       self.shouldPresentPhotoCaptureController()
     }
   }
-  
-  func shouldCloseAlertController() {
-    self.dismissViewControllerAnimated(true, completion: nil)
-  }
-  
+
   func shouldStartCameraController() -> Bool {
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) == false {
       return false

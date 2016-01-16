@@ -26,11 +26,11 @@ class ImageManager: NSObject {
   }
   
   func searchImage(query: String) {
-    print("PartManager::searchPart = \(query)")
+//    print("PartManager::searchPart = \(query)")
     self.image = nil
     
     let SEARCH_URL = "https://www.googleapis.com/customsearch/v1?key=\(GOOGLE_API_KEY)&cx=\(GOOGLE_SEARCH_ENGINE_KEY)&q=\(query.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!)&searchType=image&imgSize=large&alt=json"
-    print("The SEARCH URL = \(SEARCH_URL)")
+//    print("The SEARCH URL = \(SEARCH_URL)")
     let request = NSURLRequest(URL: NSURL(string: SEARCH_URL)!)
     _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
   }
@@ -48,10 +48,8 @@ class ImageManager: NSObject {
     let json = JSON(data: self.bytes!)
     
     if let results = json["items"].array {
-      print("ok great got here")
       for result in results {
         if let imageURL = result["link"].string {
-          print("the imageURL = \(imageURL)")
           getDataFromUrl(NSURL(string: imageURL)!) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
               guard let data = data where error == nil else { return }

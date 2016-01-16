@@ -670,7 +670,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
     self.alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
     
-    let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: { _ in self.shouldCloseAlertController() })
+    let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
     let okAction = DOAlertAction(title: NSLocalizedString("OK", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldAddTitle() })
 
     self.alertController.addAction(cancelAction)
@@ -713,7 +713,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
       let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
-      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: { _ in self.shouldCloseAlertController() })
+      let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
       
       self.alertController.addAction(takePhotoAction)
       self.alertController.addAction(choosePhotoAction)
@@ -724,10 +724,6 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       // if we don't have at least two options, we automatically show whichever is available (camera or roll)
       self.shouldPresentPhotoCaptureController()
     }
-  }
-  
-  func shouldCloseAlertController() {
-    self.dismissViewControllerAnimated(true, completion: nil)
   }
   
   func shouldAddTitle() {
