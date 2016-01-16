@@ -150,7 +150,7 @@ var UserBlock = React.createClass({
 })
 
 var PartsBlock = React.createClass({
-    PARTS_URL: "http://kursor.co:8000/parts/latest",
+    PARTS_URL: "http://carmod.xyz:8000/parts/latest",
 //    PARTS_URL: "http://localhost:8000/parts/latest",
 
     getInitialState: function() {
@@ -171,6 +171,12 @@ var PartsBlock = React.createClass({
         }.bind(this));
     },
 
+    componentDidUpdate(prevProps, prevState) {
+        //Truncate
+        $('.parts-model').dotdotdot();
+        $('#partsBlock').mixItUp();
+    },
+
     render: function() {
         var parts = this.state.parts;
         if (parts === undefined) {
@@ -178,11 +184,17 @@ var PartsBlock = React.createClass({
         } else {
             return (
                 <div id="partsBlock">
-                    <div id="partsTitle">Recently Added Parts</div>
                     {   this.state.parts.map(function (p) {
+                        var clsNames = "mix center w-col w-col-3 " + p.classification;
                         return (
-                            <div id="partsListing" key={p.id}>
-                                {p.brand} {p.model}
+                            <div id={p.id} className={clsNames} key={p.id}>
+                              <div className="parts-listing">
+                                <div className="parts-image">
+                                    <img className="auto-vertical" src={p.imageUrl} />
+                                </div>
+                                <div className="parts-brand">{p.brand}</div>
+                                <div className="parts-model">{p.model}</div>
+                              </div>
                             </div>
                         );
                     })
@@ -259,3 +271,4 @@ var CreateUser = React.createClass({
 
 module.exports.StoryBlock = StoryBlock;
 module.exports.UserBlock = UserBlock;
+module.exports.PartsBlock = PartsBlock;

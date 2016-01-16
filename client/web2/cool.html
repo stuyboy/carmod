@@ -1,391 +1,274 @@
 <!DOCTYPE html>
 <html>
-  
+
 <head><!-- START HEAD -->
-  <meta charset="utf-8">
-  <!-- START TITLE -->
-  <title>CarMod: Modify Your Ride</title>
-  <!-- END TITLE -->
+    <meta charset="utf-8">
+    <!-- START TITLE -->
+    <title>CarMod: Modify Your Ride</title>
+    <!-- END TITLE -->
 
-  <!-- START META, DESCRIPTION, KEYWORDS, AUTHOR -->
-  <meta name="description" content="A place to share your car modifications" />
-  <meta name="keywords" content="automobiles, car, modding" />
-  <meta name="author" content="carmod" />
-  <!-- END META, DESCRIPTION, KEYWORDS, AUTHOR -->
+    <!-- START META, DESCRIPTION, KEYWORDS, AUTHOR -->
+    <meta name="description" content="A place to share your car modifications"/>
+    <meta name="keywords" content="automobiles, car, modding"/>
+    <meta name="author" content="carmod"/>
+    <!-- END META, DESCRIPTION, KEYWORDS, AUTHOR -->
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- START THEME STYLE -->
-  <link rel="stylesheet" type="text/css" href="css/normal.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/headhesive.css">
-  <link href="css/animate.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- START THEME STYLE -->
+    <link rel="stylesheet" type="text/css" href="css/normal.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/headhesive.css">
+    <link href="css/animate.css" rel="stylesheet">
 
-  <!-- END THEME STYLE -->
+    <!-- END THEME STYLE -->
 
-  <!-- START FONTELLO ICONS STYLESHEET -->
-  <link rel="stylesheet" type="text/css" href="css/fontello.css">
-  <link rel="stylesheet" type="text/css" href="css/fontello-ie7.css">
-  <!-- END FONTELLO ICONS STYLESHEET -->
+    <!-- START FONTELLO ICONS STYLESHEET -->
+    <link rel="stylesheet" type="text/css" href="css/fontello.css">
+    <link rel="stylesheet" type="text/css" href="css/fontello-ie7.css">
+    <!-- END FONTELLO ICONS STYLESHEET -->
 
-  <!-- START MAGNIFIC POPUP STYLESHEET -->
-  <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-  <!-- END MAGNIFIC POPUP STYLESHEET -->
+    <!-- START MAGNIFIC POPUP STYLESHEET -->
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <!-- END MAGNIFIC POPUP STYLESHEET -->
 
-  <!-- LOAD GOOGLE FONT OPEN SANS -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,300,400,600,700" rel="stylesheet" type="text/css">
-  <!-- END GOOGLE FONT OPEN SANS -->
-  
+    <!-- LOAD GOOGLE FONT OPEN SANS -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,300,400,600,700" rel="stylesheet"
+          type="text/css">
+    <!-- END GOOGLE FONT OPEN SANS -->
 
-  <!-- START AJAX WEBFONTS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-  <!-- END AJAX WEBFONTS -->
+    <!-- START AJAX WEBFONTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <!-- END AJAX WEBFONTS -->
 
-  <!-- START MOBILE DETECT -->
-  <script>if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';</script>
-  <!-- END MOBILE DETECT -->
+    <!-- START MOBILE DETECT -->
+    <script>if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';</script>
+    <!-- END MOBILE DETECT -->
 
-  <!-- START FAVICON -->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <!-- EDN FAVICON -->
-    
-  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+    <!-- START FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- EDN FAVICON -->
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
 
 </head><!-- END HEAD -->
 <body> <!-- START BODY TAG -->
-   
-  <!-- START HEADER -->
-  <!-- SCROLL DIV #boxscroll by nicescroll -->
+
+<!-- START HEADER -->
+<!-- SCROLL DIV #boxscroll by nicescroll -->
 
 <div tabindex="1000" style="overflow-y: auto;" id="boxscroll">
+    <!-- CHANGEABLE UNIQUE SECTOIN ID -->
+    <section id="home">
 
+        <!-- START FIXED HEADER DIV -->
+        <div class="banner">
+            <!-- START CONTAINER -->
+            <div class="w-container container">
+                <div class="w-row">
 
-<!-- CHANGEABLE UNIQUE SECTOIN ID -->
-<section id="home">
+                    <!-- START COLUMN 3 -->
+                    <div class="w-col w-col-3 logo">
+                        <!-- START LOGO -->
+                        <a href="#"><img class="logo" src="images/app-logo-black.png" alt="CarMod"></a>
+                        <!-- END LOGO -->
+                    </div><!-- END COLUMN 3 -->
 
-  <!-- START FIXED HEADER DIV -->
-  <div class="banner">
-    <!-- START CONTAINER -->
-    <div class="w-container container">
-      <div class="w-row">
+                    <!-- START COLUMN 9 -->
+                    <div class="w-col w-col-9">
 
-        <!-- START COLUMN 3 -->
-        <div class="w-col w-col-3 logo">
-          <!-- START LOGO -->
-          <a href="#"><img class="logo" src="images/app-logo-black.png" alt="CarMod"></a>
-          <!-- END LOGO -->
-        </div><!-- END COLUMN 3 -->
-      
-        <!-- START COLUMN 9 -->
-        <div class="w-col w-col-9">
+                        <!-- START NAVIGATION -->
+                        <div class="w-nav navbar" data-collapse="medium" data-animation="default" data-duration="400"
+                             data-contain="1">
+                            <div class="w-container nav"><!-- START CONTAINER -->
 
-          <!-- START NAVIGATION -->
-          <div class="w-nav navbar" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
-            <div class="w-container nav"><!-- START CONTAINER -->
+                                <!-- START NAVIGATION LINKS -->
+                                <nav class="w-nav-menu nav-menu" role="navigation">
 
-              <!-- START NAVIGATION LINKS -->
-              <nav class="w-nav-menu nav-menu" role="navigation">
+                                    <a class="w-nav-link menu-li" href="#home">HOME</a>
+                                    <a class="w-nav-link menu-li" href="index.html#stories">STORIES</a>
+                                    <a class="w-nav-link menu-li filter" data-filter="all" href="index.html#parts">PARTS</a>
+                                    <a class="w-nav-link menu-li filter" data-filter=".Tires" href="index.html#parts">TIRES</a>
+                                    <a class="w-nav-link menu-li" href="index.html#parts">WHEELS</a>
+                                    <a class="w-nav-link menu-li" href="index.html#parts">AUDIO</a>
+                                    <a class="w-nav-link menu-li" href="shortcodes.html">CONTACT</a>
 
-                <a class="w-nav-link menu-li" href="#home">HOME</a>
-                <a class="w-nav-link menu-li" href="index.html#stories">STORIES</a>
-                <a class="w-nav-link menu-li" href="index.html#stories">INTERIOR</a>
-                <a class="w-nav-link menu-li" href="index.html#stories">EXTERIOR</a>
-                <a class="w-nav-link menu-li" href="index.html#stories">WHEELS</a>
-                <a class="w-nav-link menu-li" href="index.html#stories">AUDIO</a>
-                <a class="w-nav-link menu-li" href="shortcodes.html">CONTACT</a>
+                                </nav>
+                                <!-- END NAVIGATION LINKS -->
 
-              </nav>
-              <!-- END NAVIGATION LINKS -->
-              
-              <!-- START MOBILE NAVIGATION BUTTON * DO NOT DELETE THIS DIV* -->
-              <div class="w-nav-button">
-                <div class="w-icon-nav-menu"></div>
-              </div><!-- END MOBILE NAVIGATION BUTTON -->
+                                <!-- START MOBILE NAVIGATION BUTTON * DO NOT DELETE THIS DIV* -->
+                                <div class="w-nav-button">
+                                    <div class="w-icon-nav-menu"></div>
+                                </div><!-- END MOBILE NAVIGATION BUTTON -->
 
+                            </div>
+                            <!-- END CONTAINER -->
+                        </div>
+                        <!-- END NAVIGATION -->
+                    </div>
+                    <!-- END COLUMN 9 -->
+                </div>
             </div>
             <!-- END CONTAINER -->
-          </div>
-          <!-- END NAVIGATION -->
         </div>
-        <!-- END COLUMN 9 -->
-      </div>
-    </div>
-    <!-- END CONTAINER -->
-  </div>
- <!-- END FIXED HEADER DIV -->
-</section>
-<!-- END SECTION -->
-<!-- END HEADER -->
+        <!-- END FIXED HEADER DIV -->
+    </section>
+    <!-- END SECTION -->
+    <!-- END HEADER -->
 
-<div class="header-hero" data-stellar-background-ratio="0.5">
-  <div class="video-background-container">
-    <video preload="auto" autoplay="" loop="" muted="" class="video-background">
-      <source type="video/mp4" src="video/importTuning.mp4">
-      <!-- source type="video/ogg" src="http://www.shape.themeturn.com/html/cyprass/videopage/videos/gdrive.ogv">
-      <source type="video/webm" src="http://www.shape.themeturn.com/html/cyprass/videopage/videos/gdrive.webm" -->
-    </video>
-  </div>
-  <div class="slidersection">
-    <div class="overlay">
-      <div class="center auto-vertical">
-        <div class="center-fix">
-        <h1 class="underline animated fadeInDown">A NEW WAY TO PIMP YOUR RIDE</h1>
-        <h4 class="animated fadeInUp delay-05s" style="margin-bottom: 50px;">Share your modifications. Help others.</h4>
-        <a class="button facebook animated fadeInUp delay-1s" href="index.html#features"><span><i class="facebookelegance-icons-"></i></span>Sign In with Facebook</a>
-        <!-- a class="button animated fadeInUp delay-1s" href="index.html#features" style="margin-right: 20px;"><span><i class="cogelegance-icons-"></i></span>Features</a -->
-        <!-- a class="button border animated fadeInUp delay-1s" href="index.html#contact">Get in Touch</a -->
+    <div class="header-hero" data-stellar-background-ratio="0.5">
+        <div class="video-background-container">
+            <video preload="auto" autoplay="" loop="" muted="" class="video-background">
+                <source type="video/mp4" src="video/importTuning.mp4">
+                <!-- source type="video/ogg" src="http://www.shape.themeturn.com/html/cyprass/videopage/videos/gdrive.ogv">
+                <source type="video/webm" src="http://www.shape.themeturn.com/html/cyprass/videopage/videos/gdrive.webm" -->
+            </video>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--///////////////////////////////////////////////////////
-
-       // End slider section 
-
-       //////////////////////////////////////////////////////////-->
-
-
-
-  <div id="features">
-
-    <div class="row-back">
-
-      <div class="w-container wrap">
-
-          <div class="center explaination">
-
-            <h2 class="underline">How CARMOD Works</span></h2>
-
-            <p class="explaination"><strong>Tired</strong> of paging through pages of forums to find more information?</p>
-
-          </div>
-
-          <div class="w-col w-col-4 wp1">
-
-            <div class="icon-box">
-
-              <i class="cameraelegance-icons-"></i>
-
-              <h4 class="icons-heading">SHARE PICTURES AND STORIES</h4>
-
-              <p>
-
-              Show others your ride, your modifications, what you're thinking, where you're heading with it.  Got a great mod?  Write it up as a story, give others the step-by-step on how it's done.  Then publish it to a forum to widen reach!
-
-              </p>
-
+        <div class="slidersection">
+            <div class="overlay">
+                <div class="center auto-vertical">
+                    <div class="center-fix">
+                        <h1 class="underline animated fadeInDown">A NEW WAY TO PIMP YOUR RIDE</h1>
+                        <h4 class="animated fadeInUp delay-05s" style="margin-bottom: 50px;">Share your modifications.
+                            Help others.</h4>
+                        <a class="button facebook animated fadeInUp delay-1s" href="index.html#features"><span><i
+                                class="facebookelegance-icons-"></i></span>Sign In with Facebook</a>
+                        <!-- a class="button animated fadeInUp delay-1s" href="index.html#features" style="margin-right: 20px;"><span><i class="cogelegance-icons-"></i></span>Features</a -->
+                        <!-- a class="button border animated fadeInUp delay-1s" href="index.html#contact">Get in Touch</a -->
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-          </div>
 
-          <div class="w-col w-col-4 wp1 delay-05s">
+    <!--///////////////////////////////////////////////////////
 
-            <div class="icon-box">
+           // End slider section
 
-              <i class="tagelegance-icons-"></i>
+           //////////////////////////////////////////////////////////-->
 
-              <h4 class="icons-heading">ADD & TAG PARTS</h4>
 
-              <p>
+    <div id="features">
+        <div class="row-back">
+            <div class="w-container wrap">
+                <div class="center explaination">
+                    <h2 class="underline">How CARMOD Works</span></h2>
+                    <p class="explaination"><strong>Tired</strong> of paging through pages of forums to find more
+                        information?</p>
+                </div>
+                <div class="w-col w-col-4 wp1">
+                    <div class="icon-box">
+                        <i class="cameraelegance-icons-"></i>
+                        <h4 class="icons-heading">SHARE PICTURES AND STORIES</h4>
+                        <p>
+                            Show others your ride, your modifications, what you're thinking, where you're heading with
+                            it. Got a great mod? Write it up as a story, give others the step-by-step on how it's done.
+                            Then publish it to a forum to widen reach!
+                        </p>
+                    </div>
+                </div>
 
-              Share photos of your car and its modifications, but also tag parts using our extensive part database.  Don't see it?  Help add it by giving us a link to the product page.  We'll make sure it ends up in the right place.
+                <div class="w-col w-col-4 wp1 delay-05s">
+                    <div class="icon-box">
+                        <i class="tagelegance-icons-"></i>
+                        <h4 class="icons-heading">ADD & TAG PARTS</h4>
+                        <p>
+                            Share photos of your car and its modifications, but also tag parts using our extensive part
+                            database. Don't see it? Help add it by giving us a link to the product page. We'll make sure
+                            it ends up in the right place.
+                        </p>
+                    </div>
+                </div>
 
-              </p>
-
+                <div class="w-col w-col-4 wp1 delay-1s">
+                    <div class="icon-box">
+                        <i class="shopelegance-icons-"></i>
+                        <h4 class="icons-heading">SHOP FOR YOUR CAR</h4>
+                        <p>
+                            Coming soon, buy the mods directly from our app or website. Like something you see on
+                            someone else's car? Realize how well it fits? Communicated with the modder and feel safe?
+                            Then jump in a buy it!
+                        </p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-          </div>
-
-          <div class="w-col w-col-4 wp1 delay-1s">
-
-            <div class="icon-box">
-
-              <i class="shopelegance-icons-"></i>
-
-              <h4 class="icons-heading">SHOP FOR YOUR CAR</h4>
-
-              <p>
-
-              Coming soon, buy the mods directly from our app or website.  Like something you see on someone else's car?  Realize how well it fits?  Communicated with the modder and feel safe?  Then jump in a buy it!
-
-              </p>
-
+    <!-- Stories -->
+    <div id="stories">
+        <div class="parallax-back" data-stellar-background-ratio="0.5">
+            <div class="opcaity">
+                <div class="w-container wrap-normal">
+                    <div class="center">
+                        <h2>RECENT STORIES</h2>
+                    </div>
+                    <div id="stories-block" class="wp2 delay-05s">
+                    </div>
+                </div>
             </div>
-
-          </div>
-
         </div>
-
-      </div>
-
     </div>
+    <!-- End Stories -->
 
-
-
-  <!--///////////////////////////////////////////////////////
-
-         // Team section
-
-         //////////////////////////////////////////////////////////-->
-<div id="stories">
-  <div class="parallax-back" data-stellar-background-ratio="0.5">
-    <div class="opcaity">
-    <div class="w-container wrap-normal">
-      <div class="center">
-        <h2>RECENT STORIES</h2>
-      </div>
-      <div id="stories-block">
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-  <!--///////////////////////////////////////////////////////
-
-         // End Team section
-
-         //////////////////////////////////////////////////////////-->
-
-
-
-
-
-  <!--///////////////////////////////////////////////////////
-
-         // Quotes section
-
-         //////////////////////////////////////////////////////////-->
-
-  <div class="row-back" data-stellar-background-ratio="0.5">
-
-    <div class="opcaity">
-
-      <div class="w-container wrap-normal">
-
-        <div class="center">
-
-          <h1 class="underline">NEW MEMBERS</h1>
-
-          <p>Welcome some of our new contributors.</p>
-
+    <!-- Recent Parts -->
+    <div id="parts">
+        <div class="row-back">
+            <div class="w-container wrap-normal">
+                <div class="center">
+                    <h2>NEW PARTS</h2>
+                </div>
+                <div id="parts-block" class="center wp3 delay-05s">
+                </div>
+            </div>
         </div>
-
-        <div class="main">
-          <div id="downloadButton"></div>
-
-          <!---->
-        <!--<div id="cbp-qtrotator" class="cbp-qtrotator">-->
-
-
-          <!--<div class="cbp-qtcontent">-->
-
-            <!--<img src="images/testimonials/image2.png" alt="img02" />-->
-
-            <!--<blockquote>-->
-
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut exercitation ullamco labore et dolore magna aliqua.</p>-->
-
-              <!--<footer>Albert Einstein</footer>-->
-
-            <!--</blockquote>-->
-
-          <!--</div>-->
-
-          <!--<div class="cbp-qtcontent">-->
-
-            <!--<img src="images/testimonials/image3.png" alt="img03" />-->
-
-            <!--<blockquote>-->
-
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut exercitation ullamco labore et dolore magna aliqua.</p>-->
-
-              <!--<footer>Moby</footer>-->
-
-            <!--</blockquote>-->
-
-          <!--</div>-->
-
-          <!--<div class="cbp-qtcontent">-->
-
-            <!--<img src="images/testimonials/image1.png" alt="img04" />-->
-
-            <!--<blockquote>-->
-
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut exercitation ullamco labore et dolore magna aliqua.</p>-->
-
-              <!--<footer>Leonardo Da Vinci</footer>-->
-
-            <!--</blockquote>-->
-
-          <!--</div>-->
-
-        </div>
-
-      </div>
-
-      </div>
-
     </div>
+    <!-- End Parts -->
 
-  </div>
+    <!-- Recent Members -->
+    <div class="row-back" data-stellar-background-ratio="0.5">
+        <div class="opcaity">
+            <div class="w-container wrap-normal">
+                <div class="center">
+                    <h1 class="underline">NEW MEMBERS</h1>
+                    <p>Welcome some of our new contributors.</p>
+                </div>
+                <div class="main">
+                    <div id="user-block"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Members -->
 
-
-<!--///////////////////////////////////////////////////////
-
-       // End Quotes section
-
-       //////////////////////////////////////////////////////////-->
-
-
-
-<!--///////////////////////////////////////////////////////
-
-       // Porfolio section 
-
-       //////////////////////////////////////////////////////////-->
-
-
-
-  <!--///////////////////////////////////////////////////////
-
-       // Footer section 
-
-       //////////////////////////////////////////////////////////-->  
-
-
-
- <div class="row-back">
-  <div class="w-container wrap-normal center">© <strong>Thad & Joe</strong> 2016 - A Work in Progress. </div>
- </div>
-
-       <!--///////////////////////////////////////////////////////
-
-       // End Footer section 
-
-       //////////////////////////////////////////////////////////-->
 </div>
+
+<!-- Footer -->
+<div class="row-back">
+    <div class="w-container wrap-normal center">© <strong>Thad & Joe</strong> 2016 - A Work in Progress.</div>
+</div>
+<!-- End Footer -->
 
 <!-- START JQUERY PLUGINS LOAD -->
-  <script src="js/jquery.js"></script>
-  <script src="js/modernizr.js"></script>
-  <script src="js/normal.js"></script>
-  <!-- script src="js/carousels.js"></script -->
-  <script src="js/jquery.stellar.js"></script>
-  <!--<script src="js/classie.js"></script>-->
-  <script src="js/testimonials.js"></script>
-  <script src="js/jquery.nicescroll.js"></script>
-  <!-- script src="js/rotating-text.js"></script -->
-  <!-- script src="js/jquery.magnific-popup.js"></script -->
-  <script src="js/headhesive.min.js"></script>
-  <script src="js/waypoints.min.js"></script>
-  <script src="js/scripts.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.min.js"></script>
+<script src="bower_components/mixitup/src/jquery.mixitup.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/normal.js"></script>
+<!-- script src="js/carousels.js"></script -->
+<script src="js/jquery.stellar.js"></script>
+<!--<script src="js/classie.js"></script>-->
+<script src="js/testimonials.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<!-- script src="js/rotating-text.js"></script -->
+<!-- script src="js/jquery.magnific-popup.js"></script -->
+<script src="js/headhesive.min.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/scripts.js"></script>
 
-  <!-- END JQUERY PLUGINS LOAD -->
-
-  <script src="dist/build.js"></script>
+<!-- END JQUERY PLUGINS LOAD -->
+<script src="dist/build.js"></script>
 
 </body>
 

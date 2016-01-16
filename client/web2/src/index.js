@@ -6,7 +6,8 @@ var Jumbo = require('./j2tron2.js').jumbotronInstance;
 //alert('what is this cm' + CarMod);
 //ReactDOM.render(Jumbo, document.getElementById("downloadButton"));
 ReactDOM.render(<CarMod.StoryBlock/>, document.getElementById("stories-block"));
-ReactDOM.render(<CarMod.UserBlock/>, document.getElementById("downloadButton"));
+ReactDOM.render(<CarMod.UserBlock/>, document.getElementById("user-block"));
+ReactDOM.render(<CarMod.PartsBlock/>, document.getElementById("parts-block"));
 
 //alert($('#cbp-qtrotator'));
 //$('#cbp-qtrotator').cbpQTRotator();
