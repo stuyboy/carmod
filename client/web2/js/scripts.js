@@ -58,13 +58,7 @@ $(document).ready(function () {
     });
 });
 */
-
-/*
- $(function(){
- $('#Grid').mixitup();
- });
-
-
+ /*
  $(document).ready(function() {
 
  $('.image-popup-no-margins').magnificPopup({type:'image'});

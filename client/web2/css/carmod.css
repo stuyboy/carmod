@@ -155,3 +155,39 @@
     right: 0;
     background: rgba(0, 0, 0, 0.4);
 }
+
+#partsBlock .mix {
+    display: none;
+}
+
+.parts-listing {
+    height: 275px;
+    background: white;
+}
+
+.parts-image {
+    background: #FFFFFF;
+    overflow: hidden;
+    height: 200px;
+    width: auto;
+}
+
+.parts-brand {
+    background: #FFFFFF;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 5px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: black;
+}
+
+.parts-model {
+    background: #FFFFFF;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 5px;
+    line-height: 1.25;
+    height: 52px;
+    color: black;
+}
