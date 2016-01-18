@@ -187,6 +187,7 @@ let kEntityYearKey              = "year"
 let kEntityMakeKey              = "make"
 let kEntityModelKey             = "model"
 let kEntityUserKey              = "user"
+let kEntityImageKey             = "image"
 
 // MARK:- Cached Story Attributes
 // keys

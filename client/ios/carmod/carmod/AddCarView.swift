@@ -9,7 +9,7 @@
 import MBProgressHUD
 
 protocol AddCarDelegate: class {
-  func addedCar()
+  func addedCar(carObject: CarObject)
 }
 
 class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
@@ -218,31 +218,33 @@ class AddCarView: UIView, UITextFieldDelegate, UITableViewDataSource, UITableVie
   func onAddToGarage(sender: UIButton) {
     if sender.enabled {
       self.resetView()
-      
-      // create a car object
-      let car = PFObject(className: kEntityClassKey)
-      car.setObject(PFUser.currentUser()!, forKey: kEntityUserKey)
-      if let year: Int = Int(self.yearField.text!) {
-        car.setObject(year, forKey: kEntityYearKey)
-      } else {
-        car.setObject(self.selectedCarObject.year, forKey: kEntityYearKey)
+      if let delegate = self.delegate {
+        delegate.addedCar(self.selectedCarObject)
       }
-      car.setObject(self.selectedCarObject.make, forKey: kEntityMakeKey)
-      car.setObject(self.selectedCarObject.model, forKey: kEntityModelKey)
-      
-      MBProgressHUD.showHUDAddedTo(self, animated: true)
-      
-      car.saveInBackgroundWithBlock { (success, error) -> Void in
-        MBProgressHUD.hideHUDForView(self, animated: true)
-        
-        if success {
-          if let delegate = self.delegate {
-            delegate.addedCar()
-          }
-        } else {
-          
-        }
-      }
+//      // create a car object
+//      let car = PFObject(className: kEntityClassKey)
+//      car.setObject(PFUser.currentUser()!, forKey: kEntityUserKey)
+//      if let year: Int = Int(self.yearField.text!) {
+//        car.setObject(year, forKey: kEntityYearKey)
+//      } else {
+//        car.setObject(self.selectedCarObject.year, forKey: kEntityYearKey)
+//      }
+//      car.setObject(self.selectedCarObject.make, forKey: kEntityMakeKey)
+//      car.setObject(self.selectedCarObject.model, forKey: kEntityModelKey)
+//      
+//      MBProgressHUD.showHUDAddedTo(self, animated: true)
+//      
+//      car.saveInBackgroundWithBlock { (success, error) -> Void in
+//        MBProgressHUD.hideHUDForView(self, animated: true)
+//        
+//        if success {
+//          if let delegate = self.delegate {
+//            delegate.addedCar()
+//          }
+//        } else {
+//          
+//        }
+//      }
     }
   }
   

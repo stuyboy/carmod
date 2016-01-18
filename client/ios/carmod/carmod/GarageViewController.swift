@@ -13,6 +13,7 @@ import MobileCoreServices
 class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegate, PartCollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   let ADD_CAR_TEXT = "Add a car to your garage"
   private var addCarView: AddCarView!
+  private var selectedCarObject: CarObject!
   private var carImage: UIImageView!
   private var carTitle: UILabel!
   private var defaultImage: UIImage!
@@ -42,18 +43,9 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
       self.activityIndicator.stopAnimating()
     }
     
-    CarManager.sharedInstance.eventManager.listenTo(EVENT_CAR_QUERY_COMPLETE) { () -> () in
-      if self.carTitle.text == self.ADD_CAR_TEXT {
-        self.carImage.image = self.defaultImage
-        self.carLoadingIndicator.stopAnimating()
-      } else {
-        self.carLoadingIndicator.startAnimating()
-        ImageManager.sharedInstance.searchImage(self.carTitle.text!)
-      }
-    }
-    
     ImageManager.sharedInstance.eventManager.listenTo(EVENT_IMAGE_SEARCH_COMPLETE) { () -> () in
       self.carImage.image = ImageManager.sharedInstance.image
+      self.saveCar(self.selectedCarObject)
       self.carLoadingIndicator.stopAnimating()
     }
   }
@@ -85,7 +77,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     self.carLoadingIndicator.hidesWhenStopped = true
     self.carLoadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
     self.view.addSubview(self.carLoadingIndicator)
-    self.carLoadingIndicator.startAnimating()
+    self.carLoadingIndicator.stopAnimating()
     
     let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
     self.carTitle = UILabel(frame: CGRect(x: self.view.frame.width/2-LABEL_WIDTH/2, y: self.carImage.frame.maxY+OFFSET_SMALL, width: LABEL_WIDTH, height: 30.0))
@@ -169,7 +161,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
       alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       
       alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
-      alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_BLUE)
+      alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_RED)
       alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       
       alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
@@ -201,8 +193,18 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   }
   
   // MARK:- AddCarDelegate
-  func addedCar() {
-    self.loadCars()
+  func addedCar(carObject: CarObject) {
+    self.selectedCarObject = carObject
+    self.carTitle.text = CarManager.sharedInstance.generateDisplayName(self.selectedCarObject)
+    self.cars.append(carObject)
+    self.carIndex = self.cars.count-1
+    
+    self.carLoadingIndicator.startAnimating()
+    let displayName = CarManager.sharedInstance.generateDisplayName(carObject)
+    ImageManager.sharedInstance.searchImage(displayName)
+
+//    self.loadCars()
+//    self.saveCar(carObject)
     self.onCloseAddCarView()
   }
   
@@ -218,7 +220,8 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
   
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
     self.dismissViewControllerAnimated(false, completion: nil)
-    self.carImage.image = info[UIImagePickerControllerEditedImage] as? UIImage
+    let carImage = info[UIImagePickerControllerEditedImage] as? UIImage
+    self.updateImage(carImage!)
   }
   
   func shouldPresentPhotoCaptureController() -> Bool {
@@ -348,7 +351,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
       self.alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
-      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHOOSE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHANGE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
       let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
       
       self.alertController.addAction(takePhotoAction)
@@ -364,9 +367,45 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     }
   }
   
+  func updateImage(image: UIImage) {
+    self.carLoadingIndicator.startAnimating()
+    
+    let carEntity = PFObject(withoutDataWithClassName: kEntityClassKey, objectId: self.selectedCarObject.objectID)
+    let imageData = UIImageJPEGRepresentation(image, 0.75)
+    let imageFile = PFFile(name: "image.jpg", data: imageData!)
+    carEntity.setObject(imageFile, forKey: kEntityImageKey)
+    carEntity.saveInBackgroundWithBlock { (success, error) -> Void in
+      if success {
+        self.carImage.image = image
+        self.selectedCarObject.image = image
+        self.carLoadingIndicator.stopAnimating()
+      }
+    }
+  }
+  
+  func saveCar(carObject: CarObject) {
+    // create a car object
+    let car = PFObject(className: kEntityClassKey)
+    car.setObject(PFUser.currentUser()!, forKey: kEntityUserKey)
+    car.setObject(carObject.year, forKey: kEntityYearKey)
+    car.setObject(carObject.make, forKey: kEntityMakeKey)
+    car.setObject(carObject.model, forKey: kEntityModelKey)
+    
+    let imageData = UIImagePNGRepresentation(self.carImage.image!)
+    let imageFile = PFFile(name: "image.png", data: imageData!)
+    car.setObject(imageFile, forKey: kEntityImageKey)
+
+    car.saveInBackgroundWithBlock { (success, error) -> Void in
+      if success {
+        self.selectedCarObject.objectID = car.objectId
+      }
+    }
+  }
+  
   func removeCar() {
     MBProgressHUD.showHUDAddedTo(self.view, animated: true)
 
+    self.selectedCarObject = nil
     self.carImage.image = self.defaultImage
     
     let carObject = self.cars[self.carIndex]
@@ -400,13 +439,26 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
           carObject.year = car.objectForKey(kEntityYearKey) as! Int
           carObject.make = car.objectForKey(kEntityMakeKey) as! String
           carObject.model = car.objectForKey(kEntityModelKey) as! String
-          self.carTitle.text = "\(carObject.year!) \(carObject.make!) \(carObject.model!)"
+          if let carImage = car.objectForKey(kEntityImageKey) as? PFFile {
+            var error: NSError?
+            let imageData = carImage.getData(&error)
+            if error == nil {
+              let image = UIImage(data: imageData!)
+              carObject.image = image
+              self.carImage.image = image
+            }
+          }
+          self.selectedCarObject = carObject
+          
+          self.carTitle.text = CarManager.sharedInstance.generateDisplayName(self.selectedCarObject)
           self.cars.append(carObject)
           self.carIndex = self.cars.count-1
         }
       }
       
-      CarManager.sharedInstance.eventManager.trigger(EVENT_CAR_QUERY_COMPLETE)
+      if self.selectedCarObject == nil || self.selectedCarObject.image == nil {
+        self.carImage.image = self.defaultImage
+      }
     }
   }
   
