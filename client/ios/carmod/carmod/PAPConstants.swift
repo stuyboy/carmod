@@ -45,7 +45,7 @@ let kPAPInstallationUserKey = "user"
 
 // MARK:- Activity Class
 // Class key
-let kPAPActivityClassKey = "Activity"
+let kPAPActivityClassKey       = "Activity"
 
 // Field keys
 let kPAPActivityTypeKey        = "type"
@@ -56,10 +56,11 @@ let kPAPActivityPhotoKey       = "photo"
 let kPAPActivityStoryKey       = "story"
 
 // Type values
-let kPAPActivityTypeLike       = "like"
-let kPAPActivityTypeFollow     = "follow"
-let kPAPActivityTypeComment    = "comment"
-let kPAPActivityTypeJoined     = "joined"
+let kPAPActivityTypeLike        = "like"
+let kPAPActivityTypeFollow      = "follow"
+let kPAPActivityTypeComment     = "comment"
+let kPAPActivityTypeJoined      = "joined"
+let kPAPActivityTypeDescription = "describe"
 
 // MARK:- User Class
 // Field keys

@@ -20,12 +20,13 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
     }
   }
   var selectedIndexPath: NSIndexPath!
+  var isSelectable: Bool = true
   
   private var thumbnailSize: CGFloat = 0.0
   
   weak var partCollectionViewDelegate: PartCollectionViewDelegate?
   
-  init(frame: CGRect) {
+  init(frame: CGRect, isSelectable: Bool) {
     let OFFSET: CGFloat = 4.0
     let layout = UICollectionViewFlowLayout()
     layout.minimumInteritemSpacing = OFFSET/2
@@ -34,6 +35,8 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
     layout.itemSize = CGSize(width: self.thumbnailSize, height: self.thumbnailSize+THUMBNAIL_LABEL_HEIGHT)
     
     super.init(frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height), collectionViewLayout: layout)
+    
+    self.isSelectable = isSelectable
     
     self.delegate = self
     self.dataSource = self
@@ -85,25 +88,27 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
   
   // MARK: - UICollectionViewDelegate
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let shouldDeselect = self.selectedIndexPath != nil && self.selectedIndexPath == indexPath
-    var indexPaths: [NSIndexPath] = []
-    indexPaths.append(indexPath)
-    
-    if shouldDeselect {
-      self.selectedIndexPath = nil
-    } else {
-      if self.selectedIndexPath != nil {
-        indexPaths.append(self.selectedIndexPath)
+    if self.isSelectable {
+      let shouldDeselect = self.selectedIndexPath != nil && self.selectedIndexPath == indexPath
+      var indexPaths: [NSIndexPath] = []
+      indexPaths.append(indexPath)
+      
+      if shouldDeselect {
+        self.selectedIndexPath = nil
+      } else {
+        if self.selectedIndexPath != nil {
+          indexPaths.append(self.selectedIndexPath)
+        }
+        self.selectedIndexPath = indexPath
       }
-      self.selectedIndexPath = indexPath
+      
+      let partObject = self.partObjects[indexPath.row]
+      if let delegate = self.partCollectionViewDelegate {
+        delegate.tappedPart(partObject, isSelected: !shouldDeselect)
+      }
+      
+      self.reloadItemsAtIndexPaths(indexPaths)
     }
-    
-    let partObject = self.partObjects[indexPath.row]
-    if let delegate = self.partCollectionViewDelegate {
-      delegate.tappedPart(partObject, isSelected: !shouldDeselect)
-    }
-    
-    self.reloadItemsAtIndexPaths(indexPaths)
   }
   
   func scrollViewDidScroll(scrollView: UIScrollView) {

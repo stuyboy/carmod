@@ -3,9 +3,10 @@ import QuartzCore
 import MobileCoreServices
 import ParseUI
 
-class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate, PathMenuDelegate {
+class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
   let LABEL_HEIGHT: CGFloat = 40.0
   
+  private var navBarHeight: CGFloat = 0.0
   private var alertController: DOAlertController!
   private var keyboardHeight: CGFloat = 0.0
   private var searchTagField: UITextField!
@@ -30,11 +31,16 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   
   private var photoTaggerViewOrigin: CGPoint!
   private var tagHelp: UILabel!
+  
+  private var descriptions: [String] = [""]
+  private var descriptionView: UIView!
+  private var descriptionField: UITextField!
 
-  private var addMenu: PathMenu!
+  private var actionButtons: UIView!
+  private var deleteButton: UIButton!
+  private var addTagButton: UIButton!
   private var addTitleButton: UIButton!
   private var addPhotoButton: UIButton!
-//  private var searchResultsTable: UITableView!
   
   private var titleView: UIView!
   private var titleField: UITextField = UITextField()
@@ -89,9 +95,12 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     self.shouldUploadImage(self.photos[0])
     
+    self.navBarHeight = (self.navigationController?.navigationBar.frame.height)!
+    
     self.initBody()
     self.initTagger()
     self.initPartPicker()
+    self.initActionButtons()
 //    self.initResultsTable()
   }
   
@@ -130,12 +139,13 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.titleView.addSubview(self.titleLabel)
     
     let closeImage = changeImageColor(UIImage(named: "ic_delete")!, tintColor: UIColor.fromRGB(COLOR_NEAR_BLACK))
-    let closeButton = UIButton(frame: CGRect(x: self.titleView.frame.width-IMAGE_SIZE, y: self.titleView.frame.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE))
+    let closeButton = UIButton(frame: CGRect(x: self.titleView.frame.width-IMAGE_SIZE-2.5, y: self.titleView.frame.height/2-IMAGE_SIZE/2, width: IMAGE_SIZE, height: IMAGE_SIZE))
     closeButton.layer.cornerRadius = IMAGE_SIZE/2
     closeButton.clipsToBounds = true
     closeButton.backgroundColor = UIColor.whiteColor()
     closeButton.setImage(closeImage, forState: UIControlState.Normal)
-    closeButton.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    let INSET: CGFloat = 9.0
+    closeButton.contentEdgeInsets = UIEdgeInsets(top: INSET, left: INSET, bottom: INSET, right: INSET)
     closeButton.addTarget(self, action: "onDeleteTitle:", forControlEvents: UIControlEvents.TouchUpInside)
     self.titleView.addSubview(closeButton)
     
@@ -148,52 +158,82 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.pageControl.addTarget(self, action: "onPageControlChange:", forControlEvents: UIControlEvents.ValueChanged)
     self.view.addSubview(self.pageControl)
     
-    let FIELD_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*2
-    let FIELD_HEIGHT: CGFloat = 70.0
-    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-FIELD_WIDTH/2, y: gPhotoSize+OFFSET_XLARGE, width: FIELD_WIDTH, height: FIELD_HEIGHT))
+    let FIELD_WIDTH: CGFloat = 175
+    let FIELD_HEIGHT: CGFloat = 35.0
+    
+    self.tagHelp = UILabel(frame: CGRect(x: self.view.frame.width/2-FIELD_WIDTH/2, y: self.photoTable.frame.maxY-FIELD_HEIGHT-OFFSET_SMALL, width: FIELD_WIDTH, height: FIELD_HEIGHT))
+    self.tagHelp.layer.cornerRadius = 4.0
+    self.tagHelp.clipsToBounds = true
+    self.tagHelp.backgroundColor = UIColor.blackColor()
     self.tagHelp.textColor = UIColor.whiteColor()
-    self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.tagHelp.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
     self.tagHelp.textAlignment = .Center
-    self.tagHelp.lineBreakMode = .ByWordWrapping
-    self.tagHelp.numberOfLines = 0
-    self.tagHelp.text = "Tap photo to tag parts."
+    self.tagHelp.text = "Tap photo to tag parts"
+    self.tagHelp.alpha = 0.7
     self.view.addSubview(self.tagHelp)
     
-    self.initMenu()
+    let FIELD_HEIGHT_2 = self.view.frame.height-self.photoTable.frame.maxY-STATUS_BAR_HEIGHT-self.navBarHeight-LARGE_BUTTON_SIZE-OFFSET_SMALL
+    
+    self.descriptionView = UIView(frame: CGRect(x: 0.0, y: self.photoTable.frame.maxY, width: self.view.frame.width, height: FIELD_HEIGHT_2))
+    self.descriptionView.backgroundColor = UIColor.whiteColor()
+    self.view.addSubview(self.descriptionView)
+    
+    let BOX_WIDTH: CGFloat = self.descriptionView.frame.width-OFFSET_SMALL*2
+    let BOX_HEIGHT: CGFloat = self.descriptionView.frame.height-OFFSET_SMALL*2
+    let descriptionBox = UIView(frame: CGRect(x: self.descriptionView.frame.width/2-BOX_WIDTH/2, y: self.descriptionView.frame.height/2-BOX_HEIGHT/2, width: BOX_WIDTH, height: BOX_HEIGHT))
+    descriptionBox.layer.borderColor = UIColor.fromRGB(COLOR_ORANGE).CGColor
+    descriptionBox.layer.borderWidth = 1.0
+    descriptionBox.layer.cornerRadius = 4.0
+    self.descriptionView.addSubview(descriptionBox)
+    
+    let TEXT_WIDTH: CGFloat = BOX_WIDTH-OFFSET_XSMALL*2
+    let TEXT_HEIGHT: CGFloat = BOX_HEIGHT-OFFSET_XSMALL*2
+    self.descriptionField = UITextField(frame: CGRect(x: self.descriptionView.frame.width/2-TEXT_WIDTH/2, y: self.descriptionView.frame.height/2-TEXT_HEIGHT/2, width: TEXT_WIDTH, height: TEXT_HEIGHT))
+    self.descriptionField.backgroundColor = UIColor.clearColor()
+    self.descriptionField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.descriptionField.tintColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.descriptionField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.descriptionField.placeholder = "Add a description for this photo"
+    self.descriptionField.contentVerticalAlignment = .Top
+    self.descriptionField.returnKeyType = .Done
+    self.descriptionField.delegate = self
+    self.descriptionView.addSubview(self.descriptionField)
   }
   
-  private func initMenu() {
-    let BUTTON_SIZE: CGFloat = 44.0
-    let circleImage = UIImage(named: "ic_circle_sm")!
-    let circleImageLarge = UIImage(named: "ic_circle")!
-    let photoImage = UIImage(named: "ic_camera")!
-    let titleImage = UIImage(named: "ic_title")!
-    let deleteImage = UIImage(named: "ic_delete")!
+  private func initActionButtons() {
+    let BUTTON_SIZE: CGFloat = SMALL_BUTTON_SIZE
+    self.deleteButton = UIButton(frame: CGRect(x: OFFSET_SMALL, y: OFFSET_SMALL, width: BUTTON_SIZE, height: BUTTON_SIZE))
+    self.deleteButton.backgroundColor = UIColor.blackColor()
+    self.deleteButton.layer.cornerRadius = SMALL_BUTTON_SIZE/2
+    let closeImage = changeImageColor(UIImage(named: "ic_close")!, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY))
+    self.deleteButton.setImage(closeImage, forState: .Normal)
+    let INSET_OFFSET: CGFloat = 8.0
+    self.deleteButton.contentEdgeInsets = UIEdgeInsets(top: INSET_OFFSET, left: INSET_OFFSET, bottom: INSET_OFFSET, right: INSET_OFFSET)
+    self.deleteButton.alpha = 0.6
+    self.deleteButton.addTarget(self, action: "onDeletePhoto", forControlEvents: .TouchUpInside)
+    self.view.addSubview(self.deleteButton)
     
-    let titleButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_GREEN)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(titleImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(titleImage, tintColor: UIColor.fromRGB(COLOR_GREEN)))
+    self.actionButtons = UIView(frame: CGRect(x: 0.0, y: self.view.frame.height-LARGE_BUTTON_SIZE-OFFSET_SMALL-STATUS_BAR_HEIGHT-self.navBarHeight, width: self.view.frame.width, height: LARGE_BUTTON_SIZE))
+    self.actionButtons.backgroundColor = UIColor.blackColor()
+    self.view.addSubview(self.actionButtons)
     
-    let photoButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_YELLOW)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(photoImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(photoImage, tintColor: UIColor.fromRGB(COLOR_YELLOW)))
-    
-    let deleteButton = PathMenuItem(image: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_RED)), highlightedImage: changeImageColor(circleImage, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: changeImageColor(deleteImage, tintColor: UIColor.whiteColor()), highlightedContentImage: changeImageColor(deleteImage, tintColor: UIColor.fromRGB(COLOR_RED)))
-    
-    let items = [titleButton, photoButton, deleteButton]
+    let titleImage = changeImageColor(UIImage(named: "ic_t")!, tintColor: UIColor.whiteColor())
+    let addTitleView = LabelButton(frame: CGRect(x: self.view.frame.width/4-LARGE_BUTTON_SIZE/2-OFFSET_LARGE, y: 0.0, width: LARGE_BUTTON_SIZE, height: LARGE_BUTTON_SIZE), buttonSize: LARGE_BUTTON_SIZE, buttonInset: 14.0, buttonImage: titleImage, buttonText: "Add Title")
+    self.actionButtons.addSubview(addTitleView)
+    self.addTitleButton = addTitleView.labelButton
+    self.addTitleButton.addTarget(self, action: "onAddTitle", forControlEvents: .TouchUpInside)
     
     let plusImage = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.whiteColor())
-    let plusImageHighlighted = changeImageColor(UIImage(named: "ic_plus")!, tintColor: UIColor.fromRGB(COLOR_DARK_GRAY))
-    let startButton = PathMenuItem(image: changeImageColor(circleImageLarge, tintColor: UIColor.fromRGB(COLOR_ORANGE)), highlightedImage: changeImageColor(circleImageLarge, tintColor: UIColor.fromRGB(COLOR_LIGHT_GRAY)), contentImage: plusImage, highlightedContentImage: plusImageHighlighted)
+    let addPhotoView = LabelButton(frame: CGRect(x: self.view.frame.width/2-LARGE_BUTTON_SIZE/2, y: 0.0, width: LARGE_BUTTON_SIZE, height: LARGE_BUTTON_SIZE), buttonSize: LARGE_BUTTON_SIZE, buttonInset: 9.0, buttonImage: plusImage, buttonText: "Add Photo")
+    self.actionButtons.addSubview(addPhotoView)
+    self.addPhotoButton = addPhotoView.labelButton
+    self.addPhotoButton.addTarget(self, action: "onAddPhoto", forControlEvents: .TouchUpInside)
     
-    self.addMenu = PathMenu(frame: self.view.bounds, startItem: startButton, items: items)
-    self.addMenu.delegate = self
-    self.addMenu.startPoint = CGPointMake(self.view.frame.width/2, self.view.frame.height-OFFSET_LARGE-BUTTON_SIZE*2)
-    self.addMenu.alpha = 0.90
-    self.addMenu.menuWholeAngle = CGFloat(degreesToRadians(90))
-    self.addMenu.rotateAngle = CGFloat(degreesToRadians(-45))
-    self.addMenu.timeOffset = 0.0
-    self.addMenu.farRadius = 110.0
-    self.addMenu.nearRadius = 90.0
-    self.addMenu.endRadius = 100.0
-    self.addMenu.animationDuration = 0.3
-    self.view.addSubview(self.addMenu)
+    let tagImage = changeImageColor(UIImage(named: "ic_tag_v2")!, tintColor: UIColor.whiteColor())
+    let addTagView = LabelButton(frame: CGRect(x: (self.view.frame.width*3/4)-LARGE_BUTTON_SIZE/2+OFFSET_LARGE, y: 0.0, width: LARGE_BUTTON_SIZE, height: LARGE_BUTTON_SIZE), buttonSize: LARGE_BUTTON_SIZE, buttonInset: 9.0, buttonImage: tagImage, buttonText: "Add Tag")
+    self.actionButtons.addSubview(addTagView)
+    self.addTagButton = addTagView.labelButton
+    self.addTagButton.addTarget(self, action: "tappedPhoto", forControlEvents: .TouchUpInside)
   }
   
   private func initTagger() {
@@ -271,9 +311,18 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   
   // MARK:- UITextFieldDelegate  
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
+    self.view.endEditing(true)
+    return false
+  }
+  
+  func textFieldDidEndEditing(textField: UITextField) {
+    print("ended editing")
     
-    return true
+    if self.pageControl.currentPage >= self.descriptions.count {
+      self.descriptions.append(self.descriptionField.text!)
+    } else {
+      self.descriptions[self.pageControl.currentPage] = self.descriptionField.text!
+    }
   }
   
   // MARK:- UIScrollViewDelegate
@@ -294,6 +343,10 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
       for indexPath in indexPaths {
         self.pageControl.currentPage = indexPath.row
+        
+        if self.pageControl.currentPage < self.descriptions.count {
+          self.descriptionField.text = self.descriptions[self.pageControl.currentPage]
+        }
         
         break
       }
@@ -366,12 +419,19 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     if let userInfo = sender.userInfo {
       if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
         self.keyboardHeight = keyboardHeight
+        UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+          self.descriptionView.frame.origin.y = self.view.frame.height-keyboardHeight-self.descriptionView.frame.height
+          self.tagHelp.alpha = 0.0
+        })
       }
     }
   }
   
   func keyboardWillHide(sender: NSNotification) {
-
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
+      self.descriptionView.frame.origin.y = self.photoTable.frame.maxY
+      self.tagHelp.alpha = 0.7
+    })
   }
   
   func publishStory(sender: AnyObject) {
@@ -404,6 +464,21 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       
       relation.addObject(photo)
       
+      // Handle descriptions
+      let description = self.descriptions[i]
+      if description != "" {
+        let activity = PFObject(className: kPAPActivityClassKey)
+        activity.setObject(kPAPActivityTypeDescription, forKey: kPAPActivityTypeKey)
+        activity.setObject(description, forKey: kPAPActivityContentKey)
+        activity.setObject(photo, forKey: kPAPActivityPhotoKey)
+        activity.setObject(story, forKey: kPAPActivityStoryKey)
+        activity.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey)
+        activity.setObject(PFUser.currentUser()!, forKey: kPAPActivityToUserKey)
+        
+        activity.save()
+      }
+      
+      // Handle annotations
       var annotations: [PFObject] = []
       
       let tags = self.tags[i]
@@ -515,9 +590,13 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
 //    
 //    self.searchTagField.becomeFirstResponder()
     
-    let taggerViewController = TaggerViewController()
-    taggerViewController.editPhotoViewController = self
-    self.presentViewController(taggerViewController, animated: true, completion: nil)
+    if self.descriptionView.frame.origin.y != self.photoTable.frame.maxY {
+      self.descriptionField.resignFirstResponder()
+    } else {
+      let taggerViewController = TaggerViewController()
+      taggerViewController.editPhotoViewController = self
+      self.presentViewController(taggerViewController, animated: true, completion: nil)
+    }
   }
   
   func removedTag(tagIndex: Int) {
@@ -559,45 +638,11 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     let tagArray: [TagObject] = []
     self.tags.append(tagArray) // Add empty Tag Array as init
     
+    self.descriptionField.text = ""
+    self.descriptions.append("")
+    
     self.shouldUploadImage(image)
     self.reloadPhotos()
-  }
-  
-  // MARK: - PathMenuDelegate
-  func pathMenu(menu: PathMenu, didSelectIndex idx: Int) {
-    switch idx {
-    case 0: // Add title
-      self.onAddTitle()
-      break
-    case 1: // Add photo
-      self.onAddPhoto()
-      break
-    case 2: // Delete photo
-      self.onDeletePhoto()
-      break
-    default:
-      break
-    }
-  }
-  
-  func pathMenuDidFinishAnimationOpen(menu: PathMenu) {
-    
-  }
-  
-  func pathMenuDidFinishAnimationClose(menu: PathMenu) {
-    
-  }
-  
-  func pathMenuWillAnimateClose(menu: PathMenu) {
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
-      self.tagHelp.alpha = 1.0
-    }
-  }
-  
-  func pathMenuWillAnimateOpen(menu: PathMenu) {
-    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
-      self.tagHelp.alpha = 0.0
-    }
   }
   
   // MARK:- Callbacks
@@ -614,6 +659,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.titleLabel.text = ""
     UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
       self.titleView.frame.origin.y = -self.LABEL_HEIGHT
+      self.deleteButton.frame.origin.y = OFFSET_SMALL
     }
   }
   
@@ -680,17 +726,28 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   }
   
   func onDeletePhoto() {
-    if self.photos.count == 1 {
-      self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
-      self.photos.removeAll()
-    } else {
-      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
-      for indexPath in indexPaths {
-        self.photos.removeAtIndex(indexPath.row)
-        
-        break
-      }
-    }
+    self.alertController = DOAlertController(title: "Delete Photo?", message: "Are you sure you want to delete this photo?", preferredStyle: DOAlertControllerStyle.Alert)
+    self.alertController.overlayColor = UIColor(red: 34/255, green: 34/255, blue: 34/255, alpha: 0.7)
+    self.alertController.cornerRadius = 8.0
+    self.alertController.alertViewBgColor = UIColor.whiteColor()
+    self.alertController.titleFont = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+    self.alertController.titleTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.alertController.messageFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    self.alertController.messageTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
+    self.alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    self.alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    self.alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+    self.alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
+    let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
+    let okAction = DOAlertAction(title: NSLocalizedString("OK", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.deletePhoto() })
+    
+    self.alertController.addAction(cancelAction)
+    self.alertController.addAction(okAction)
+    
+    self.presentViewController(self.alertController, animated: true, completion: nil)
   }
   
   func onAddPhoto() {
@@ -731,6 +788,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
       self.titleView.frame.origin.y = 0.0
+      self.deleteButton.frame.origin.y = self.titleView.frame.height+OFFSET_SMALL
     }
     
     self.dismissViewControllerAnimated(true, completion: nil)
@@ -828,17 +886,38 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       break
     }
     
+    var fieldWidth: CGFloat = 175.0
+    let fieldHeight: CGFloat = 35.0
     if self.tags.count > 0 {
-      self.tagHelp.text = "Tap photo to tag parts.\n\nDrag to move, or tap to remove."
+      fieldWidth = 220.0
+      self.tagHelp.text = "Drag to move, or tap to remove"
     } else {
-      self.tagHelp.text = "Tap photo to tag parts."
+      fieldWidth = 175.0
+      self.tagHelp.text = "Tap photo to tag parts"
     }
+    self.tagHelp.frame = CGRect(x: self.view.frame.width/2-fieldWidth/2, y: self.photoTable.frame.maxY-fieldHeight-OFFSET_SMALL, width: fieldWidth, height: fieldHeight)
     
     self.resetView()
     self.photoTable.reloadData()
   }
     
   // MARK: - Private methods
+  private func deletePhoto() {
+    if self.photos.count == 1 {
+      self.dismissViewControllerAnimated(true) { () -> Void in
+        self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
+        self.photos.removeAll()
+      }
+    } else {
+      let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
+      for indexPath in indexPaths {
+        self.photos.removeAtIndex(indexPath.row)
+        
+        break
+      }
+    }
+  }
+  
   private func reloadPhotos() {
     self.photoTable.reloadData()
     UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in

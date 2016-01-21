@@ -109,12 +109,12 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     let partLabel: UILabel = UILabel()
     partLabel.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
     partLabel.textColor = UIColor.whiteColor()
-    partLabel.text = "Your car mods:"
+    partLabel.text = "Your car parts:"
     partLabel.sizeToFit()
     partLabel.frame.origin = CGPoint(x: 5.0, y: 200.0)
     self.view.addSubview(partLabel)
     
-    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: partLabel.frame.maxY+5.0, width: self.view.frame.width, height: self.view.frame.height-partLabel.frame.maxY-5.0-STATUS_BAR_HEIGHT-TOPNAV_BAR_SIZE-(self.navigationController?.navigationBar.frame.height)!))
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: partLabel.frame.maxY+5.0, width: self.view.frame.width, height: self.view.frame.height-partLabel.frame.maxY-5.0-STATUS_BAR_HEIGHT-TOPNAV_BAR_SIZE-(self.navigationController?.navigationBar.frame.height)!), isSelectable: false)
     self.partCollectionView.partCollectionViewDelegate = self
     self.partCollectionView.backgroundColor = UIColor.clearColor()
     self.view.addSubview(self.partCollectionView)

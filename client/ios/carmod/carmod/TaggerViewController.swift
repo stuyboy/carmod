@@ -139,7 +139,7 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
   }
   
   private func initPartCollectionView() {
-    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.filterMenu.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE))
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.filterMenu.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE), isSelectable: true)
     self.partCollectionView.partCollectionViewDelegate = self
     self.partCollectionView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.partCollectionView)
