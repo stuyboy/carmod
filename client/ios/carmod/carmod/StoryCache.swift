@@ -22,14 +22,10 @@ final class StoryCache {
   }
   
   // MARK:- Story Cache
-  func setAttributesForStory(story: PFObject, photos: [PFObject], likers: [PFUser], commenters: [PFUser], likedByCurrentUser: Bool) {
+  func setAttributesForStory(story: PFObject, title: String, photos: [PFObject]) {
     let attributes = [
-      kStoryAttributesPhotosKey: photos,
-      kStoryAttributesIsLikedByCurrentUserKey: likedByCurrentUser,
-      kStoryAttributesLikeCountKey: likers.count,
-      kStoryAttributesLikersKey: likers,
-      kStoryAttributesCommentCountKey: commenters.count,
-      kStoryAttributesCommentersKey: commenters
+      kStoryAttributesTitleKey: title,
+      kStoryAttributesPhotosKey: photos
     ]
     setAttributes(attributes as! [String : AnyObject], forStory: story)
   }
@@ -39,13 +35,22 @@ final class StoryCache {
     return cache.objectForKey(key) as? [String:AnyObject]
   }
   
-  func setAttributes(attributes: [String:AnyObject], forStory photo: PFObject) {
+  func setAttributes(attributes: [String : AnyObject], forStory photo: PFObject) {
     let key: String = self.keyForStory(photo)
     cache.setObject(attributes, forKey: key)
   }
   
   func keyForStory(story: PFObject) -> String {
     return "story_\(story.objectId)"
+  }
+  
+  func titleForStory(story: PFObject) -> String {
+    let attributes = self.attributesForStory(story)
+    if attributes != nil {
+      return attributes![kStoryAttributesTitleKey] as! String
+    }
+    
+    return ""
   }
   
   func photosForStory(story: PFObject) -> [PFObject] {
@@ -55,91 +60,6 @@ final class StoryCache {
     }
     
     return [PFObject]()
-  }
-  
-  func likeCountForStory(story: PFObject) -> Int {
-    let attributes: [NSObject:AnyObject]? = self.attributesForStory(story)
-    if attributes != nil {
-      return attributes![kStoryAttributesLikeCountKey] as! Int
-    }
-    
-    return 0
-  }
-  
-  func commentCountForStory(story: PFObject) -> Int {
-    let attributes = self.attributesForStory(story)
-    if attributes != nil {
-      return attributes![kStoryAttributesCommentCountKey] as! Int
-    }
-    
-    return 0
-  }
-  
-  func likersForStory(story: PFObject) -> [PFUser] {
-    let attributes = self.attributesForStory(story)
-    if attributes != nil {
-      return attributes![kStoryAttributesLikersKey] as! [PFUser]
-    }
-    
-    return [PFUser]()
-  }
-  
-  func commentersForStory(story: PFObject) -> [PFUser] {
-    let attributes = self.attributesForStory(story)
-    if attributes != nil {
-      return attributes![kStoryAttributesCommentersKey] as! [PFUser]
-    }
-    
-    return [PFUser]()
-  }
-  
-  func setStoryIsLikedByCurrentUser(story: PFObject, liked: Bool) {
-    var attributes = self.attributesForStory(story)
-    attributes![kStoryAttributesIsLikedByCurrentUserKey] = liked
-    setAttributes(attributes!, forStory: story)
-  }
-  
-  func isStoryLikedByCurrentUser(story: PFObject) -> Bool {
-    let attributes = self.attributesForStory(story)
-    if attributes != nil {
-      return attributes![kStoryAttributesIsLikedByCurrentUserKey] as! Bool
-    }
-    
-    return false
-  }
-
-  func incrementLikerCountForStory(story: PFObject) {
-    let likerCount = likeCountForStory(story) + 1
-    var attributes = attributesForStory(story)
-    attributes![kStoryAttributesLikeCountKey] = likerCount
-    setAttributes(attributes!, forStory: story)
-  }
-  
-  func decrementLikerCountForStory(story: PFObject) {
-    let likerCount = likeCountForStory(story) - 1
-    if likerCount < 0 {
-      return
-    }
-    var attributes = attributesForStory(story)
-    attributes![kStoryAttributesLikeCountKey] = likerCount
-    setAttributes(attributes!, forStory: story)
-  }
-  
-  func incrementCommentCountForStory(story: PFObject) {
-    let commentCount = commentCountForStory(story) + 1
-    var attributes = attributesForStory(story)
-    attributes![kStoryAttributesCommentCountKey] = commentCount
-    setAttributes(attributes!, forStory: story)
-  }
-  
-  func decrementCommentCountForStory(story: PFObject) {
-    let commentCount = commentCountForStory(story) - 1
-    if commentCount < 0 {
-      return
-    }
-    var attributes = attributesForStory(story)
-    attributes![kStoryAttributesCommentCountKey] = commentCount
-    setAttributes(attributes!, forStory: story)
   }
   
   // MARK:- User Cache
@@ -167,10 +87,16 @@ final class StoryCache {
   }
   
   // MARK:- Photo Cache
-  func setAttributesForPhoto(photo: PFObject, annotations: [PFObject]) {
+  func setAttributesForPhoto(photo: PFObject, annotations: [PFObject], description: String, likers: [PFUser], commenters: [PFUser], likedByCurrentUser: Bool) {
     let attributes = [
       kPhotoAttributesAnnotationsKey: annotations,
-      kPhotoAttributesAnnotationsCountKey: annotations.count
+      kPhotoAttributesAnnotationsCountKey: annotations.count,
+      kPhotoAttributesDescriptionKey: description,
+      kPAPPhotoAttributesIsLikedByCurrentUserKey: likedByCurrentUser,
+      kPAPPhotoAttributesLikeCountKey: likers.count,
+      kPAPPhotoAttributesLikersKey: likers,
+      kPAPPhotoAttributesCommentCountKey: commenters.count,
+      kPAPPhotoAttributesCommentersKey: commenters,
     ]
     setAttributes(attributes as! [String : AnyObject], forPhoto: photo)
   }
@@ -205,6 +131,100 @@ final class StoryCache {
     }
     
     return [PFObject]()
+  }
+  
+  func descriptionForPhoto(photo: PFObject) -> String {
+    let attributes = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesDescriptionKey] as! String
+    }
+    
+    return ""
+  }
+  
+  func likeCountForPhoto(photo: PFObject) -> Int {
+    let attributes: [NSObject:AnyObject]? = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesLikeCountKey] as! Int
+    }
+    
+    return 0
+  }
+  
+  func commentCountForPhoto(photo: PFObject) -> Int {
+    let attributes = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesCommentCountKey] as! Int
+    }
+    
+    return 0
+  }
+  
+  func likersForPhoto(photo: PFObject) -> [PFUser] {
+    let attributes = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesLikersKey] as! [PFUser]
+    }
+    
+    return [PFUser]()
+  }
+  
+  func commentersForPhoto(photo: PFObject) -> [PFUser] {
+    let attributes = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesCommentersKey] as! [PFUser]
+    }
+    
+    return [PFUser]()
+  }
+  
+  func setPhotoIsLikedByCurrentUser(photo: PFObject, liked: Bool) {
+    var attributes = self.attributesForPhoto(photo)
+    attributes![kPhotoAttributesIsLikedByCurrentUserKey] = liked
+    setAttributes(attributes!, forPhoto: photo)
+  }
+  
+  func isPhotoLikedByCurrentUser(photo: PFObject) -> Bool {
+    let attributes = self.attributesForPhoto(photo)
+    if attributes != nil {
+      return attributes![kPhotoAttributesIsLikedByCurrentUserKey] as! Bool
+    }
+    
+    return false
+  }
+  
+  func incrementLikerCountForPhoto(photo: PFObject) {
+    let likerCount = likeCountForPhoto(photo) + 1
+    var attributes = attributesForPhoto(photo)
+    attributes![kPhotoAttributesLikeCountKey] = likerCount
+    setAttributes(attributes!, forPhoto: photo)
+  }
+  
+  func decrementLikerCountForPhoto(photo: PFObject) {
+    let likerCount = likeCountForPhoto(photo) - 1
+    if likerCount < 0 {
+      return
+    }
+    var attributes = attributesForStory(photo)
+    attributes![kPhotoAttributesLikeCountKey] = likerCount
+    setAttributes(attributes!, forPhoto: photo)
+  }
+  
+  func incrementCommentCountForPhoto(photo: PFObject) {
+    let commentCount = commentCountForPhoto(photo) + 1
+    var attributes = attributesForPhoto(photo)
+    attributes![kPhotoAttributesCommentCountKey] = commentCount
+    setAttributes(attributes!, forPhoto: photo)
+  }
+  
+  func decrementCommentCountForPhoto(photo: PFObject) {
+    let commentCount = commentCountForPhoto(photo) - 1
+    if commentCount < 0 {
+      return
+    }
+    var attributes = attributesForPhoto(photo)
+    attributes![kPhotoAttributesCommentCountKey] = commentCount
+    setAttributes(attributes!, forPhoto: photo)
   }
   
   // MARK:- Annotation Cache

@@ -193,16 +193,18 @@ let kEntityImageKey             = "image"
 // MARK:- Cached Story Attributes
 // keys
 let kStoryAttributesPhotosKey                 = "photos"
-let kStoryAttributesIsLikedByCurrentUserKey   = "isLikedByCurrentUser"
-let kStoryAttributesLikeCountKey              = "likeCount"
-let kStoryAttributesLikersKey                 = "likers"
-let kStoryAttributesCommentCountKey           = "commentCount"
-let kStoryAttributesCommentersKey             = "commenters"
+let kStoryAttributesTitleKey                  = "title"
 
 // MARK:- Cached Photo Attributes
 // keys
 let kPhotoAttributesAnnotationsKey            = "annotations"
 let kPhotoAttributesAnnotationsCountKey       = "annotationsCount"
+let kPhotoAttributesDescriptionKey            = "description"
+let kPhotoAttributesIsLikedByCurrentUserKey   = "isLikedByCurrentUser"
+let kPhotoAttributesLikeCountKey              = "likeCount"
+let kPhotoAttributesLikersKey                 = "likers"
+let kPhotoAttributesCommentCountKey           = "commentCount"
+let kPhotoAttributesCommentersKey             = "commenters"
 
 // MARK:- Cached Annotation Attributes
 // keys

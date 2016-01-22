@@ -31,8 +31,13 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   private var headerView: StoryHeaderView!
   private var photoTable: UITableView!
   private var footerView: PAPPhotoDetailsFooterView!
+  
+  private var descriptions: [String] = []
+  private var descriptionView: UIView!
+  private var descriptionLabel: UILabel!
+  
   private var commentTextField: UITextField!
-  private var comments: [CommentObject] = []
+  private var comments = Array<Array<CommentObject>>()
   private var commentsTable: UITableView!
   
   deinit {
@@ -46,7 +51,9 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     
     self.photos = StoryCache.sharedCache.photosForStory(story)
     self.tags = Array(count: self.photos.count, repeatedValue: [TagObject]())
+    self.comments = Array(count: self.photos.count, repeatedValue: [CommentObject]())
     
+    // Load photo attributes
     for var i = 0; i < self.photos.count; i++ {
       let annotationObjects = StoryCache.sharedCache.annotationsForPhoto(self.photos[i])
       for annotationObject in annotationObjects {
@@ -63,40 +70,11 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         
         self.tags[i].append(tagObject)
       }
-    }
-
-    var likers = [PFUser]()
-    var commenters = [PFUser]()
-    var isLikedByCurrentUser = false
-    
-    let query: PFQuery = PAPUtility.queryForActivitiesOnStory(story, cachePolicy: PFCachePolicy.NetworkOnly)
-    query.findObjectsInBackgroundWithBlock { (activityObjects, error) in
-      if error != nil {
-        return
-      }
       
-      for activity in activityObjects! {
-        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-          likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-        } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-          let commenter = activity.objectForKey(kPAPActivityFromUserKey) as! PFUser
-          let comment = activity.objectForKey(kPAPActivityContentKey) as! String
-          let commentObject = CommentObject()
-          commentObject.user = commenter
-          commentObject.comment = comment
-          self.comments.append(commentObject)
-          
-          commenters.append(commenter)
-        }
-
-        if ((activity.objectForKey(kPAPActivityFromUserKey) as? PFObject)?.objectId) == PFUser.currentUser()!.objectId {
-          if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
-            isLikedByCurrentUser = true
-          }
-        }
-      }
-    
-      self.refreshComments(false)
+      let description = StoryCache.sharedCache.descriptionForPhoto(self.photos[i])
+      self.descriptions.append(description)
+      
+      self.queryForComments(self.photos[i], index: i)
     }
   }
   
@@ -154,6 +132,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     }
     self.photoTable.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI * 0.5))
     self.photoTable.contentSize = CGSize(width: gPhotoSize, height: gPhotoSize*CGFloat(photos.count))
+    self.photoTable.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPhoto:"))
     self.scrollView.addSubview(self.photoTable)
     
     let CONTROL_WIDTH: CGFloat = 200.0
@@ -166,6 +145,29 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     self.pageControl.hidden = self.photos.count == 1
     self.pageControl.numberOfPages = self.photos.count
     self.scrollView.addSubview(self.pageControl)
+    
+    self.descriptionView = UIView(frame: CGRect(x: 0.0, y: self.headerView.frame.maxY, width: self.view.frame.width, height: 60.0))
+    self.descriptionView.alpha = 0.7
+    self.descriptionView.backgroundColor = UIColor.blackColor()
+    self.descriptionView.userInteractionEnabled = true
+    self.descriptionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapDescription:"))
+    self.scrollView.addSubview(self.descriptionView)
+    
+    self.descriptionLabel = UILabel(frame: CGRect(x: OFFSET_SMALL, y: OFFSET_SMALL, width: self.descriptionView.frame.width-OFFSET_SMALL*2, height: self.descriptionView.frame.height-OFFSET_SMALL*2))
+    self.descriptionLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.descriptionLabel.textColor = UIColor.whiteColor()
+    self.descriptionLabel.numberOfLines = 0
+    self.descriptionLabel.lineBreakMode = .ByWordWrapping
+    self.descriptionLabel.text = self.descriptions[0]
+    self.descriptionView.addSubview(self.descriptionLabel)
+    
+    if self.descriptionLabel.text == "" {
+      self.descriptionView.alpha = 0.0
+    } else {
+      let requiredHeight = self.descriptionLabel.requiredHeight()
+      self.descriptionLabel.frame = CGRect(x: OFFSET_SMALL, y: OFFSET_SMALL, width: self.descriptionView.frame.width-OFFSET_SMALL*2, height: requiredHeight)
+      self.descriptionView.frame = CGRect(x: 0.0, y: self.headerView.frame.maxY, width: self.view.frame.width, height: self.descriptionLabel.frame.maxY+OFFSET_SMALL)
+    }
   }
   
   private func initFooter() {
@@ -201,6 +203,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
       comment.setObject(self.story.objectForKey(kStoryAuthorKey)!, forKey: kPAPActivityToUserKey) // Set toUser
       comment.setObject(PFUser.currentUser()!, forKey: kPAPActivityFromUserKey) // Set fromUser
       comment.setObject(kPAPActivityTypeComment, forKey:kPAPActivityTypeKey)
+      comment.setObject(self.photos[self.pageControl.currentPage], forKey: kPAPActivityPhotoKey)
       comment.setObject(self.story, forKey: kPAPActivityStoryKey)
 
       let ACL = PFACL(user: PFUser.currentUser()!)
@@ -208,7 +211,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
       ACL.setWriteAccess(true, forUser: self.story.objectForKey(kStoryAuthorKey) as! PFUser)
       comment.ACL = ACL
 
-      StoryCache.sharedCache.incrementCommentCountForStory(self.story)
+      StoryCache.sharedCache.incrementCommentCountForPhoto(self.photos[self.pageControl.currentPage])
 
       // Show HUD view
       MBProgressHUD.showHUDAddedTo(self.view.superview, animated: true)
@@ -220,22 +223,20 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         let commentObject = CommentObject()
         commentObject.user = PFUser.currentUser()
         commentObject.comment = trimmedComment
-        self.comments.append(commentObject)
+        self.comments[self.pageControl.currentPage].append(commentObject)
         
         timer.invalidate()
 
         if error != nil && error!.code == PFErrorCode.ErrorObjectNotFound.rawValue {
-          StoryCache.sharedCache.decrementCommentCountForStory(self.story)
+          StoryCache.sharedCache.decrementCommentCountForPhoto(self.photos[self.pageControl.currentPage])
 
-          let alertController = UIAlertController(title: NSLocalizedString("Could not post comment", comment: ""), message: NSLocalizedString("This story is no longer available", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+          let alertController = UIAlertController(title: NSLocalizedString("Could not post comment", comment: ""), message: NSLocalizedString("This photo is no longer available", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
           let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
           alertController.addAction(alertAction)
           self.presentViewController(alertController, animated: true, completion: nil)
 
           self.navigationController!.popViewControllerAnimated(true)
         }
-
-//        NSNotificationCenter.defaultCenter().postNotificationName(PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification, object: self.photo!, userInfo: ["comments": self.objects!.count + 1])
 
         self.refreshComments(true)
         
@@ -271,9 +272,20 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
       let indexPaths: [NSIndexPath] = self.photoTable.indexPathsForVisibleRows!
       for indexPath in indexPaths {
         self.pageControl.currentPage = indexPath.row
+        self.descriptionLabel.text = self.descriptions[self.pageControl.currentPage]
+        self.descriptionView.alpha = 0.7
         
+        if self.descriptionLabel.text == "" {
+          self.descriptionView.alpha = 0.0
+        } else {
+          let requiredHeight = self.descriptionLabel.requiredHeight()
+          self.descriptionLabel.frame = CGRect(x: OFFSET_SMALL, y: OFFSET_SMALL, width: self.descriptionView.frame.width-OFFSET_SMALL*2, height: requiredHeight)
+          self.descriptionView.frame = CGRect(x: 0.0, y: self.headerView.frame.maxY, width: self.view.frame.width, height: self.descriptionLabel.frame.maxY+OFFSET_SMALL)
+        }
         break
       }
+      
+      self.refreshComments(false)
     }
   }
   
@@ -283,7 +295,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
         self.keyboardHeight = keyboardHeight
         
         UIView.animateWithDuration(TRANSITION_TIME_NORMAL, animations: { () -> Void in
-          self.footerView.frame.origin.y = self.view.frame.height-self.keyboardHeight-PAPPhotoDetailsFooterView.heightForView()
+          self.footerView.frame.origin.y = self.view.frame.height-self.keyboardHeight
         })
       }
     }
@@ -300,7 +312,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     if tableView == self.photoTable {
       return self.photos.count
     } else {
-      return self.comments.count
+      return self.comments[self.pageControl.currentPage].count
     }
   }
   
@@ -318,7 +330,7 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     } else if tableView == self.commentsTable {
       let cell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as! CommentTableViewCell
 
-      let commentObject = self.comments[indexPath.row]
+      let commentObject = self.comments[self.pageControl.currentPage][indexPath.row]
       cell.comment = commentObject.comment
       cell.user = commentObject.user
       
@@ -333,6 +345,24 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
   }
   
   // MARK:- Callbacks
+  func onTapPhoto(sender: UITapGestureRecognizer) {
+    if self.descriptionView.alpha == 0.0 {
+      UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+        self.descriptionView.alpha = 0.7
+      }
+    }
+    
+    if self.commentTextField.isFirstResponder() {
+      self.commentTextField.resignFirstResponder()
+    }
+  }
+  
+  func onTapDescription(sender: UITapGestureRecognizer) {
+    UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+      self.descriptionView.alpha = 0.0
+    }
+  }
+  
   func onPageControlChange(sender: UIPageControl) {
     let indexPath = NSIndexPath(forRow: sender.currentPage, inSection: 0)
     self.photoTable.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
@@ -364,6 +394,27 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
     if scrollToBottom {
       let bottomOffset = CGPoint(x: 0.0, y: self.scrollView.contentSize.height-self.scrollView.bounds.size.height)
       self.scrollView.setContentOffset(bottomOffset, animated: true)
+    }
+  }
+  
+  // MARK:- Private methods
+  func queryForComments(photo: PFObject, index: Int) {
+    let query = PFQuery(className: kPAPActivityTypeKey)
+    query.whereKey(kPAPActivityPhotoKey, equalTo: photo)
+    query.includeKey(kPAPActivityFromUserKey)
+    query.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
+    query.orderByAscending("createdAt")
+    query.cachePolicy = PFCachePolicy.NetworkOnly
+    
+    query.findObjectsInBackgroundWithBlock { (activities, error) -> Void in
+      for activity in activities! {
+        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+          let commentObject = CommentObject()
+          commentObject.user = activity.objectForKey(kPAPActivityFromUserKey) as! PFUser
+          commentObject.comment = activity.objectForKey(kPAPActivityContentKey) as! String
+          self.comments[index].append(commentObject)
+        }
+      }
     }
   }
   

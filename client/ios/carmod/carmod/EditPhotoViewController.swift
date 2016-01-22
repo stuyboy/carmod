@@ -3,7 +3,7 @@ import QuartzCore
 import MobileCoreServices
 import ParseUI
 
-class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
+class EditPhotoViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PhotoTableViewCellDelegate {
   let LABEL_HEIGHT: CGFloat = 40.0
   
   private var navBarHeight: CGFloat = 0.0
@@ -34,7 +34,8 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   
   private var descriptions: [String] = [""]
   private var descriptionView: UIView!
-  private var descriptionField: UITextField!
+  private var descriptionField: UITextView!
+  private var descriptionPlaceholder: UILabel!
 
   private var actionButtons: UIView!
   private var deleteButton: UIButton!
@@ -178,26 +179,30 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.descriptionView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.descriptionView)
     
-    let BOX_WIDTH: CGFloat = self.descriptionView.frame.width-OFFSET_SMALL*2
-    let BOX_HEIGHT: CGFloat = self.descriptionView.frame.height-OFFSET_SMALL*2
-    let descriptionBox = UIView(frame: CGRect(x: self.descriptionView.frame.width/2-BOX_WIDTH/2, y: self.descriptionView.frame.height/2-BOX_HEIGHT/2, width: BOX_WIDTH, height: BOX_HEIGHT))
-    descriptionBox.layer.borderColor = UIColor.fromRGB(COLOR_ORANGE).CGColor
-    descriptionBox.layer.borderWidth = 1.0
-    descriptionBox.layer.cornerRadius = 4.0
-    self.descriptionView.addSubview(descriptionBox)
-    
-    let TEXT_WIDTH: CGFloat = BOX_WIDTH-OFFSET_XSMALL*2
-    let TEXT_HEIGHT: CGFloat = BOX_HEIGHT-OFFSET_XSMALL*2
-    self.descriptionField = UITextField(frame: CGRect(x: self.descriptionView.frame.width/2-TEXT_WIDTH/2, y: self.descriptionView.frame.height/2-TEXT_HEIGHT/2, width: TEXT_WIDTH, height: TEXT_HEIGHT))
+    let TEXT_WIDTH: CGFloat = self.descriptionView.frame.width-OFFSET_SMALL*2
+    let TEXT_HEIGHT: CGFloat = self.descriptionView.frame.height-OFFSET_SMALL*2
+    self.descriptionField = UITextView(frame: CGRect(x: self.descriptionView.frame.width/2-TEXT_WIDTH/2, y: self.descriptionView.frame.height/2-TEXT_HEIGHT/2, width: TEXT_WIDTH, height: TEXT_HEIGHT))
     self.descriptionField.backgroundColor = UIColor.clearColor()
+    self.descriptionField.layer.borderColor = UIColor.fromRGB(COLOR_ORANGE).CGColor
+    self.descriptionField.layer.borderWidth = 1.0
+    self.descriptionField.layer.cornerRadius = 4.0
     self.descriptionField.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
     self.descriptionField.tintColor = UIColor.fromRGB(COLOR_ORANGE)
     self.descriptionField.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-    self.descriptionField.placeholder = "Add a description for this photo"
-    self.descriptionField.contentVerticalAlignment = .Top
-    self.descriptionField.returnKeyType = .Done
+    self.descriptionField.textContainer.maximumNumberOfLines = 7
+    self.descriptionField.textContainer.lineBreakMode = .ByTruncatingTail
     self.descriptionField.delegate = self
     self.descriptionView.addSubview(self.descriptionField)
+    
+    self.descriptionPlaceholder = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: self.descriptionView.frame.width, height: self.descriptionView.frame.height))
+    self.descriptionPlaceholder.text = "Add a description for this photo"
+    self.descriptionPlaceholder.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+    self.descriptionPlaceholder.textColor = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
+    self.descriptionPlaceholder.textAlignment = .Center
+    self.descriptionPlaceholder.alpha = 1.0
+    self.descriptionPlaceholder.userInteractionEnabled = true
+    self.descriptionPlaceholder.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTapPlaceholder:"))
+    self.descriptionView.addSubview(self.descriptionPlaceholder)
   }
   
   private func initActionButtons() {
@@ -243,9 +248,9 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     self.photoTaggerView.alpha = 0.0
     self.navigationController?.navigationBar.addSubview(self.photoTaggerView)
     
-    self.searchTagField = self.photoTaggerView.tagField
-    self.searchTagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
-    self.searchTagField!.delegate = self
+//    self.searchTagField = self.photoTaggerView.tagField
+//    self.searchTagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
+//    self.searchTagField!.delegate = self
     
     self.partTypeButton = self.photoTaggerView.partTypeButton
     self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
@@ -309,14 +314,11 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
 //    self.view.addSubview(self.searchResultsTable)
 //  }
   
-  // MARK:- UITextFieldDelegate  
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
-    self.view.endEditing(true)
-    return false
-  }
-  
-  func textFieldDidEndEditing(textField: UITextField) {
-    print("ended editing")
+  // MARK:- UITextFieldDelegate
+  func textViewDidEndEditing(textView: UITextView) {
+    if self.descriptionField.text == "" {
+      self.descriptionPlaceholder.alpha = 1.0
+    }
     
     if self.pageControl.currentPage >= self.descriptions.count {
       self.descriptions.append(self.descriptionField.text!)
@@ -346,6 +348,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
         
         if self.pageControl.currentPage < self.descriptions.count {
           self.descriptionField.text = self.descriptions[self.pageControl.currentPage]
+          self.descriptionPlaceholder.alpha = self.descriptionField.text == "" ? 1.0 : 0.0
         }
         
         break
@@ -450,6 +453,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     let relation = story.relationForKey(kStoryPhotosKey)
     
 //    print("Publishing \(self.photos.count) photos with \(self.tags.count) tags and \(self.photoFiles.count) photo files")
+    var photoObjects: [PFObject] = []
     for var i = 0; i < self.photos.count; i++ {
       let photo = PFObject(className: kPAPPhotoClassKey)
       photo.setObject(PFUser.currentUser()!, forKey: kPAPPhotoUserKey)
@@ -463,6 +467,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       photo.save()
       
       relation.addObject(photo)
+      photoObjects.append(photo)
       
       // Handle descriptions
       let description = self.descriptions[i]
@@ -484,7 +489,6 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       let tags = self.tags[i]
       for tag in tags {
         let annotation = PFObject(className: kAnnotationClassKey)
-//        print("Adding \(PartManager.sharedInstance.generateDisplayName(tag.partObject))")
         annotation.setObject(tag.partObject.id, forKey: kAnnotationPartIDKey)
         annotation.setObject(tag.partObject.partType, forKey: kAnnotationPartTypeKey)
         annotation.setObject(tag.partObject.brand, forKey: kAnnotationBrandKey)
@@ -493,7 +497,6 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
         annotation.setObject(tag.partObject.imageURL, forKey: kAnnotationImageURLKey)
         annotation.setObject(PFUser.currentUser()!, forKey: kAnnotationUserKey)
         annotation.setObject(photo, forKey: kAnnotationPhotoKey)
-//        print("setting tag coordinates to be = \(tag.coordinates)")
         let coordinates = [tag.coordinates.x, tag.coordinates.y]
         annotation.addObjectsFromArray(coordinates, forKey: kAnnotationCoordinatesKey)
         
@@ -505,10 +508,16 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
         annotation.save()
       }
       
-      PAPCache.sharedCache.setAttributesForPhoto(photo, likers: [PFUser](), commenters: [PFUser](), likedByCurrentUser: false, annotations: annotations)
+      let likers = [PFUser]()
+      let commenters = [PFUser]()
+      let isLikedByCurrentUser = false
+
+      StoryCache.sharedCache.setAttributesForPhoto(photo, annotations: annotations, description: description, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
     }
     
     story.save()
+    
+    StoryCache.sharedCache.setAttributesForStory(story, title: self.titleLabel.text!, photos: photoObjects)
     
     CarManager.sharedInstance.eventManager.trigger(EVENT_STORY_PUBLISHED)
     self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
@@ -640,6 +649,7 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
     
     self.descriptionField.text = ""
     self.descriptions.append("")
+    self.descriptionPlaceholder.alpha = 1.0
     
     self.shouldUploadImage(image)
     self.reloadPhotos()
@@ -661,6 +671,11 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
       self.titleView.frame.origin.y = -self.LABEL_HEIGHT
       self.deleteButton.frame.origin.y = OFFSET_SMALL
     }
+  }
+  
+  func onTapPlaceholder(sender: UITapGestureRecognizer) {
+    self.descriptionPlaceholder.alpha = 0.0
+    self.descriptionField.becomeFirstResponder()
   }
   
   func onChangeText(sender: UITextField) {
@@ -926,11 +941,11 @@ class EditPhotoViewController: UIViewController, UITextFieldDelegate, UITableVie
   }
   
   func resetView() {
-    if self.searchTagField.isFirstResponder() {
-      self.searchTagField.resignFirstResponder()
-    }
+//    if self.searchTagField.isFirstResponder() {
+//      self.searchTagField.resignFirstResponder()
+//    }
     
-    self.searchTagField.text = ""
+//    self.searchTagField.text = ""
 //    self.searchResultsTable.alpha = 0.0
     self.photoTaggerView.reset()
     self.photoTaggerView.alpha = 0.0

@@ -92,30 +92,10 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         let relationQuery = relation.query()
         relationQuery!.orderByAscending("createdAt")
         let photos: [PFObject] = relationQuery?.findObjects() as! [PFObject]
-        
-        var likers = [PFUser]()
-        var commenters = [PFUser]()
-        var isLikedByCurrentUser = false
-        
-        let activityQuery: PFQuery = PAPUtility.queryForActivitiesOnStory(storyObject as! PFObject, cachePolicy: PFCachePolicy.NetworkOnly)
-        let activityObjects = activityQuery.findObjects()
-        for activity in activityObjects as! [PFObject] {
-          if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-            likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-          } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-            commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-          }
-    
-          if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
-            if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
-              isLikedByCurrentUser = true
-            }
-          }
-        }
-        
         self.storyPhotos.append(photos)
         
-        StoryCache.sharedCache.setAttributesForStory(storyObject as! PFObject, photos: photos, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
+        let title = storyObject.objectForKey(kStoryAttributesTitleKey) as! String
+        StoryCache.sharedCache.setAttributesForStory(storyObject as! PFObject, title: title, photos: photos)
       }
       
       self.activityIndicator.stopAnimating()
@@ -123,6 +103,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
       self.refreshStories()
     }
   }
+  
   private func initStoryTable() {
     let TABLE_HEIGHT: CGFloat = self.view.frame.height-STATUS_BAR_HEIGHT-(self.navigationController?.navigationBar.frame.height)!-50.0
     self.storyTable = UITableView(frame: CGRect(x: 0.0, y: 0.0, width: gPhotoSize, height: TABLE_HEIGHT), style: UITableViewStyle.Grouped)
@@ -154,18 +135,18 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.emptyView.addSubview(introImage)
     
     let TEXT_WIDTH: CGFloat = self.emptyView.frame.width-OFFSET_LARGE*2
-    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: introImage.frame.maxY+OFFSET_LARGE*2, width: TEXT_WIDTH, height: 20.0))
+    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: introImage.frame.maxY+OFFSET_XLARGE, width: TEXT_WIDTH, height: 20.0))
     emptyText.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     emptyText.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     emptyText.textAlignment = .Center
     emptyText.numberOfLines = 0
     emptyText.lineBreakMode = .ByWordWrapping
-    emptyText.text = "No stories to show. Try adding your first story or find people to follow."
-    let requiredHeight = emptyText.requiredHeight()
+    emptyText.text = "No stories to show. Find friends to follow."
+    var requiredHeight = emptyText.requiredHeight()
     emptyText.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: emptyText.frame.origin.y, width: TEXT_WIDTH, height: requiredHeight)
     self.emptyView.addSubview(emptyText)
     
-    let findFriendsButton = UIButton(frame: CGRect(x: self.emptyView.frame.width/2-STANDARD_BUTTON_WIDTH/2, y: emptyText.frame.maxY+OFFSET_LARGE, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
+    let findFriendsButton = UIButton(frame: CGRect(x: self.emptyView.frame.width/2-STANDARD_BUTTON_WIDTH/2, y: emptyText.frame.maxY+OFFSET_STANDARD, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
     findFriendsButton.setTitle("FIND FRIENDS TO FOLLOW", forState: .Normal)
     findFriendsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
     findFriendsButton.titleLabel?.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
@@ -176,8 +157,19 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let IMAGE_SIZE: CGFloat = 70.0
     let sketchArrowImage = UIImageView(image: changeImageColor(UIImage(named: "ic_arrow_sketch")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)))
-    sketchArrowImage.frame = CGRect(x: self.emptyView.frame.width/2-IMAGE_SIZE, y: self.emptyView.frame.height-IMAGE_SIZE-50.0, width: IMAGE_SIZE, height: IMAGE_SIZE)
+    sketchArrowImage.frame = CGRect(x: self.emptyView.frame.width/2-IMAGE_SIZE, y: self.emptyView.frame.height-IMAGE_SIZE-OFFSET_LARGE, width: IMAGE_SIZE, height: IMAGE_SIZE)
     self.emptyView.addSubview(sketchArrowImage)
+    
+    let emptyText2 = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: sketchArrowImage.frame.origin.y-OFFSET_LARGE, width: TEXT_WIDTH, height: 20.0))
+    emptyText2.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    emptyText2.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
+    emptyText2.textAlignment = .Center
+    emptyText2.numberOfLines = 0
+    emptyText2.lineBreakMode = .ByWordWrapping
+    emptyText2.text = "Or try adding your first story."
+    requiredHeight = emptyText2.requiredHeight()
+    emptyText2.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: sketchArrowImage.frame.origin.y-requiredHeight-OFFSET_SMALL, width: TEXT_WIDTH, height: requiredHeight)
+    self.emptyView.addSubview(emptyText2)
   }
   
   // MARK:- StoryTableViewCellDelegate
@@ -301,27 +293,3 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     return UIStatusBarStyle.LightContent
   }
 }
-
-//synchronized(self) {
-//  let query: PFQuery = PAPUtility.queryForActivitiesOnStory(storyObject as! PFObject, cachePolicy: PFCachePolicy.NetworkOnly)
-//  query.findObjectsInBackgroundWithBlock { (activityObjects, error) in
-//    var likers = [PFUser]()
-//    var commenters = [PFUser]()
-//    var isLikedByCurrentUser = false
-//    let annotations = [PFObject]()
-//    
-//    for activity in activityObjects as! [PFObject] {
-//      if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-//        likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-//      } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-//        commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-//      }
-//      
-//      if (activity.objectForKey(kPAPActivityFromUserKey) as? PFUser)?.objectId == PFUser.currentUser()!.objectId {
-//        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
-//          isLikedByCurrentUser = true
-//        }
-//      }
-//    }
-//  }
-//}

@@ -351,7 +351,7 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
       self.alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
       
       let takePhotoAction = DOAlertAction(title: NSLocalizedString("TAKE PHOTO", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.shouldStartCameraController() })
-      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("CHANGE PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
+      let choosePhotoAction = DOAlertAction(title: NSLocalizedString("PICK PHOTO", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in self.shouldStartPhotoLibraryPickerController() })
       let cancelAction = DOAlertAction(title: NSLocalizedString("CANCEL", comment: ""), style: DOAlertActionStyle.Cancel, handler: nil)
       
       self.alertController.addAction(takePhotoAction)
