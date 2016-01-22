@@ -125,6 +125,7 @@ let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
 let EVENT_STORY_PUBLISHED: String = "Event::StoryPublished"
 let EVENT_PART_SEARCH_COMPLETE: String = "Event::PartSearchComplete"
 let EVENT_IMAGE_SEARCH_COMPLETE: String = "Event::ImageSearchComplete"
+let EVENT_QUERY_COMPLETE: String = "Event::QueryComplete"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0

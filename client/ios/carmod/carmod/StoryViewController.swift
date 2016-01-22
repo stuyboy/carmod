@@ -194,7 +194,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     cell.selectionStyle = .None
 //    print("self.storyPhotos count = \(self.storyPhotos.count) indexPath.section = \(indexPath.section)")
     cell.photos = self.storyPhotos[indexPath.section]
-
+    
     return cell
   }
 

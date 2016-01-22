@@ -35,13 +35,15 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
       for var i = 0; i < self.tags.count; i++ {
         self.loadPhotoAttributes(self.photos[i], atIndex: i)
       }
-      
-      self.photoTable.reloadData()
     }
   }
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    QueryManager.sharedInstance.eventManager.listenTo(EVENT_QUERY_COMPLETE) { () -> () in
+      self.photoTable.reloadData()
+    }
     
     self.backgroundColor = UIColor.whiteColor()
     
@@ -137,10 +139,8 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     }
   }
   
-  func loadPhotoAttributes(photo: PFObject, atIndex: Int) {
-    var query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
-    let annotationObjects = query.findObjects()
-    for annotationObject in annotationObjects! {
+  private func loadAnnotationsForPhoto(annotationObjects: [PFObject], atIndex: Int, isCached: Bool) {
+    for annotationObject in annotationObjects {
       let tagObject: TagObject = TagObject()
       
       let partObject: PartObject = PartObject()
@@ -154,34 +154,55 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
       
       self.tags[atIndex].append(tagObject)
       
-      StoryCache.sharedCache.setAttributesForAnnotation(annotationObject as! PFObject, coordinateX: Double(coordinates[0]), coordinateY: Double(coordinates[1]), brand: partObject.brand, model: partObject.model, productCode: partObject.partNumber)
-    }
-    
-    var description: String = ""
-    var likers = [PFUser]()
-    var commenters = [PFUser]()
-    var isLikedByCurrentUser = false
-    
-    query = PAPUtility.queryForActivitiesOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
-    let activityObjects = query.findObjects()
-    for activity in activityObjects! {
-      if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeDescription {
-        description = activity.objectForKey(kPAPActivityContentKey) as! String
-      } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-        likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
-      } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
-        commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+      if !isCached {
+        StoryCache.sharedCache.setAttributesForAnnotation(annotationObject, coordinateX: Double(coordinates[0]), coordinateY: Double(coordinates[1]), brand: partObject.brand, model: partObject.model, productCode: partObject.partNumber)
       }
+    }
+  }
+  
+  func loadPhotoAttributes(photo: PFObject, atIndex: Int) {
+    if let _ = StoryCache.sharedCache.attributesForPhoto(photo) {
+      let annotationObjects = StoryCache.sharedCache.annotationsForPhoto(photo)
       
-      if ((activity.objectForKey(kPAPActivityFromUserKey) as? PFObject)?.objectId) == PFUser.currentUser()!.objectId {
-        if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
-          isLikedByCurrentUser = true
+      self.loadAnnotationsForPhoto(annotationObjects, atIndex: atIndex, isCached: true)
+    } else {
+      let query: PFQuery = PAPUtility.queryForAnnotationsOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
+      query.findObjectsInBackgroundWithBlock({ (annotationObjects, error) -> Void in
+        if error == nil {
+          self.loadAnnotationsForPhoto(annotationObjects as! [PFObject], atIndex: atIndex, isCached: false)
+          
+          let query2: PFQuery = PAPUtility.queryForActivitiesOnPhoto(photo, cachePolicy: PFCachePolicy.NetworkOnly)
+          query2.findObjectsInBackgroundWithBlock({ (activityObjects, error) -> Void in
+            if error == nil {
+              var description: String = ""
+              var likers = [PFUser]()
+              var commenters = [PFUser]()
+              var isLikedByCurrentUser = false
+              
+              for activity in activityObjects! {
+                if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeDescription {
+                  description = activity.objectForKey(kPAPActivityContentKey) as! String
+                } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+                  likers.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+                } else if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeComment && activity.objectForKey(kPAPActivityFromUserKey) != nil {
+                  commenters.append(activity.objectForKey(kPAPActivityFromUserKey) as! PFUser)
+                }
+                
+                if ((activity.objectForKey(kPAPActivityFromUserKey) as? PFObject)?.objectId) == PFUser.currentUser()!.objectId {
+                  if (activity.objectForKey(kPAPActivityTypeKey) as! String) == kPAPActivityTypeLike {
+                    isLikedByCurrentUser = true
+                  }
+                }
+              }
+              
+              StoryCache.sharedCache.setAttributesForPhoto(photo, annotations: annotationObjects as! [PFObject], description: description, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
+              
+              QueryManager.sharedInstance.eventManager.trigger(EVENT_QUERY_COMPLETE)
+            }
+          })
         }
-      }
+      })
     }
-    
-    StoryCache.sharedCache.setAttributesForPhoto(photo, annotations: annotationObjects as! [PFObject], description: description, likers: likers, commenters: commenters, likedByCurrentUser: isLikedByCurrentUser)
-
   }
   
   // MARK:- Callbacks
