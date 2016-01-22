@@ -350,6 +350,10 @@ class StoryDetailsViewController: UIViewController, UITextFieldDelegate, UITable
       UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
         self.descriptionView.alpha = 0.7
       }
+    } else {
+      UIView.animateWithDuration(TRANSITION_TIME_NORMAL) { () -> Void in
+        self.descriptionView.alpha = 0.0
+      }
     }
     
     if self.commentTextField.isFirstResponder() {

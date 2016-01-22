@@ -79,13 +79,13 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
     self.addSubview(self.pageControl)
     
     self.photoCount = UILabel()
-    self.photoCount.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.photoCount.textColor = UIColor.whiteColor()
     self.photoCount.textAlignment = .Center
     self.photoCount.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
-    self.photoCount.alpha = 0.8
-    self.photoCount.layer.cornerRadius = 8.0
+    self.photoCount.alpha = 0.7
+    self.photoCount.layer.cornerRadius = 4.0
     self.photoCount.clipsToBounds = true
-    self.photoCount.backgroundColor = UIColor.whiteColor()
+    self.photoCount.backgroundColor = UIColor.blackColor()
     self.addSubview(self.photoCount)
   }
   
