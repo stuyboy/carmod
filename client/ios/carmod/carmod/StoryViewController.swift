@@ -89,13 +89,14 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.stories.append(storyObject as! PFObject)
         
         let relation = storyObject.relationForKey(kStoryPhotosKey)
-        let relationQuery = relation.query()
-        relationQuery!.orderByAscending("createdAt")
-        let photos: [PFObject] = relationQuery?.findObjects() as! [PFObject]
-        self.storyPhotos.append(photos)
-        
-        let title = storyObject.objectForKey(kStoryAttributesTitleKey) as! String
-        StoryCache.sharedCache.setAttributesForStory(storyObject as! PFObject, title: title, photos: photos)
+        if let relationQuery = relation.query() {
+          relationQuery.orderByAscending("createdAt")
+          let photos: [PFObject] = relationQuery.findObjects() as! [PFObject]
+          self.storyPhotos.append(photos)
+          
+          let title = storyObject.objectForKey(kStoryAttributesTitleKey) as! String
+          StoryCache.sharedCache.setAttributesForStory(storyObject as! PFObject, title: title, photos: photos)
+        }
       }
       
       self.activityIndicator.stopAnimating()
