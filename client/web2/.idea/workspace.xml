@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="768fe2a6-23ae-4bee-8acf-1a8828e472f3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/story.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/index.jsx" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/index.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/js/scripts.js" afterPath="$PROJECT_DIR$/src/scripts.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/favicon.ico" afterPath="$PROJECT_DIR$/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/app-logo-black.png" afterPath="$PROJECT_DIR$/images/app-logo-black.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gulpfile.coffee" afterPath="$PROJECT_DIR$/Gulpfile.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/carmod.css" afterPath="$PROJECT_DIR$/css/carmod.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/build.js" afterPath="$PROJECT_DIR$/dist/build.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shortcodes.html" afterPath="$PROJECT_DIR$/shortcodes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/carmod.jsx" afterPath="$PROJECT_DIR$/src/carmod.jsx" />
     </list>
     <ignored path="web2.iws" />
     <ignored path=".idea/workspace.xml" />
