@@ -1,12 +1,16 @@
 var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
+var Headhesive = require('headhesive');
 
 var APPLICATION_ID = "riUILiEFVsRGLUquLhPNIkRoIaNoEuglJJXrqXVS";
 var JAVASCRIPT_KEY = "zzlpOfn3WLxtRGWcqZAFcj0Rx1eNLgUHmJC6aBIt";
 
 Parse.initialize(APPLICATION_ID, JAVASCRIPT_KEY);
 
+var Activity = Parse.Object.extend("Activity");
+var Entity = Parse.Object.extend("Entity");
+var Photo = Parse.Object.extend("Photo");
 var Story = Parse.Object.extend("Story", {
     authorName: function() {
         return this.get("author").get("displayName");
@@ -18,7 +22,10 @@ var StoryPhotos = React.createClass({
 
     observe: function() {
         return {
-            photoUrls: this.getPhotosForStory(this.props.storyId)
+            author: this.getAuthorForStory(this.props.storyAuthorId),
+            photoUrls: this.getPhotosForStory(this.props.storyId),
+            description: this.getDescriptionForStory(this.props.storyId),
+            car: this.getCarForStory(this.props.storyAuthorId)
         };
     },
 
@@ -28,51 +35,79 @@ var StoryPhotos = React.createClass({
 
     render: function() {
         var title = this.props.storyTitle;
-        var author = this.props.storyAuthor;
         var authorId = this.props.storyAuthorId;
-        var storyLink="/story/" + this.props.storyId;
-        var authorLink="/user/" + authorId;
+        var storyLink="/story.html?storyId=" + this.props.storyId;
+        var authorLink="/user.html/" + authorId;
+        var renderType = this.props.renderType;
+
+        var description = this.data.description.map(function(d, idx) {
+            return (
+                <div id="story-description" className="story-description" key={d.objectId}>{d.content}</div>
+            );
+        });
+
+        var car = this.data.car.map(function(c, idx) {
+            return (
+                <div id="story-car" className="story-car" key={c.objectId}>{c.year} {c.make} {c.model}</div>
+            );
+        });
+
+        var author = this.data.author.map(function(c, idx) {
+            return (
+                <div id="story-author" className="story-author" key={c.objectId}>
+                    <img className="story-author-avatar" src={c.profilePictureSmall.url()}/>
+                    {c.displayName}
+                </div>
+            );
+        });
+
         return (
             <div id="storyPhotos">
             {
                 this.data.photoUrls.map(function(p, idx) {
-                    if (idx == 0) {
-                        return (
-                            <div className="center w-col w-col-3" key={p.objectId}>
-                                <div className="story-album">
-                                    <div className="story-thumbnail">
-                                        <a className="team-hyper">
-                                            <img id="thumbnail-img" src={p.image.url()} onClick={this.clickH}/>
-                                            <span className="titlehead">
-                                              <h3 className="story-heading">{title}</h3>
-                                              <div className="button small border" href="#">Full Story</div>
-                                            </span>
-                                        </a>
-                                        <div className="story-overlay"></div>
-                                    </div>
-                                    <div className="story-author">
+                    if (renderType == 'thumbnail') {
+                        if (idx == 0) {
+                            return (
+                                <div className="center w-col w-col-3" key={p.objectId}>
+                                    <div className="story-album">
+                                        <div className="story-thumbnail">
+                                            <a className="team-hyper" href={storyLink}>
+                                                <img id="thumbnail-img" src={p.image.url()} onClick={this.clickH}/>
+                                                <span className="titlehead">
+                                                  <h3 className="story-heading">{title}</h3>
+                                                  <div className="button small border" href="#">Full Story</div>
+                                                </span>
+                                            </a>
+                                            <div className="story-overlay"></div>
+                                        </div>
                                         {author}
-                                    </div>
-                                    <div className="story-car">
-                                        2015 Volkswagen GTI
-                                    </div>
-                                    <div className="story-description">
-                                        Bringing some sound to the GTI with the addition of a new exhaust!
+                                        {car}
+                                        {description}
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    } /* else {
+                            );
+                        }
+                    } else {
                         return (
-                            <div id="storyPhotoSmall" key={p.objectId}>
-                               <img src={p.thumbnail.url()}/>
+                            <div id="story-photo-large" key={p.objectId}>
+                                <img src={p.image.url()}/>
+                                {author}
+                                {car}
+                                {description}
                             </div>
                         );
-                    } */
+                   }
                 })
             }
             </div>
         );
+    },
+
+    getAuthorForStory: function(authorId) {
+        var uQuery = new Parse.Query(Parse.User);
+        uQuery.get(authorId);
+        uQuery.limit(1);
+        return uQuery;
     },
 
     getPhotosForStory: function(storyId) {
@@ -80,6 +115,24 @@ var StoryPhotos = React.createClass({
         var s = new Story({objectId : storyId});
         var photosRelation = new Parse.Relation(s, 'Photos');
         return photosRelation.query();
+    },
+
+    getDescriptionForStory: function(storyId) {
+        var aQuery = new Parse.Query(Activity);
+        var sQuery = new Parse.Query(Story);
+        sQuery.get(storyId);
+        aQuery.matchesQuery("story", sQuery);
+        aQuery.limit(1);
+        return aQuery;
+    },
+
+    getCarForStory: function(authorId) {
+        var uQuery = new Parse.Query(Parse.User);
+        var cQuery = new Parse.Query(Entity);
+        uQuery.get(authorId);
+        cQuery.matchesQuery("user", uQuery);
+        cQuery.limit(1);
+        return cQuery;
     }
 })
 
@@ -90,19 +143,29 @@ var StoryBlock = React.createClass({
         //Get all the stories, display
         var sQuery = new Parse.Query(Story);
         sQuery.include('author');
+        if (this.props.storyId) {
+            sQuery.get(this.props.storyId);
+        }
         return {
             stories: sQuery.descending('createdAt').limit(8)
         };
     },
 
     render: function() {
+        var renderType = this.props.renderType;
         return (
             <div>
             { this.data.stories.map(function(c) {
                 return (
                     <div key={c.objectId}>
                         <div id="storyBlock">
-                            <StoryPhotos ref="StoryPhotos" storyId={c.objectId} storyTitle={c.title} storyAuthorId={c.author.objectId} storyAuthor={c.author.displayName} storyDate={c.createdAt.toString()} photoType="main" />
+                            <StoryPhotos ref="StoryPhotos"
+                                         storyId={c.objectId}
+                                         storyTitle={c.title}
+                                         storyAuthorId={c.author.objectId}
+                                         storyAuthor={c.author.displayName}
+                                         storyDate={c.createdAt.toString()}
+                                         renderType={renderType} />
                         </div>
                     </div>
                 );
@@ -245,7 +308,7 @@ var CreateUser = React.createClass({
                     <input type="submit" value="Signup"/>
                 </form>
             </div>
-        )
+        );
     },
 
     handleSubmit: function(e) {
@@ -269,6 +332,69 @@ var CreateUser = React.createClass({
     }
 });
 
+var Footer = React.createClass({
+    render: function() {
+        return (
+            <div className="row-back">
+                <div className="w-container wrap-normal center">© <strong>Thad & Joe</strong> 2016 - A Work in Progress.</div>
+            </div>
+        );
+    }
+});
+
+var Header = React.createClass({
+    componentDidMount: function() {
+        var options = {
+            offset: "#startHeadhesive",
+            classes: {
+                clone: 'banner--clone',
+                stick: 'banner--stick',
+                unstick: 'banner--unstick'
+            }
+        };
+
+        new Headhesive(".banner", options);
+    },
+
+    render: function() {
+        return (
+        <section id="home">
+            <div id="banner" className="banner">
+                <div className="w-container container">
+                    <div className="w-row">
+                        <div className="w-col w-col-3 logo">
+                            <a href="#"><img className="logo" src="images/app-logo-black.png" alt="CarMod"></img></a>
+                        </div>
+                        <div className="w-col w-col-9">
+                            <div className="w-nav navbar" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+                                <div className="w-container nav">
+                                    <nav className="w-nav-menu nav-menu" role="navigation">
+                                        <a className="w-nav-link menu-li" href="#home">HOME</a>
+                                        <a className="w-nav-link menu-li" href="index.html#stories">STORIES</a>
+                                        <a className="w-nav-link menu-li filter" data-filter="all" href="index.html#parts">PARTS</a>
+                                        <a className="w-nav-link menu-li filter" data-filter=".Tires" href="index.html#parts">TIRES</a>
+                                        <a className="w-nav-link menu-li" href="index.html#parts">WHEELS</a>
+                                        <a className="w-nav-link menu-li" href="index.html#parts">AUDIO</a>
+                                        <a className="w-nav-link menu-li" href="shortcodes.html">CONTACT</a>
+                                    </nav>
+                                    <div className="w-nav-button">
+                                        <div className="w-icon-nav-menu"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="startHeadhesive"></div>
+        </section>
+            );
+    }
+
+});
+
 module.exports.StoryBlock = StoryBlock;
 module.exports.UserBlock = UserBlock;
 module.exports.PartsBlock = PartsBlock;
+module.exports.Footer = Footer;
+module.exports.Header = Header;

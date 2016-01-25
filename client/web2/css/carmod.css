@@ -138,6 +138,13 @@
     margin-left: 5px;
 }
 
+.story-author-avatar {
+    margin-right: 1em;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+
 .story-description {
     font-size: 13px;
     text-align: left;

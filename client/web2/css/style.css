@@ -304,8 +304,6 @@ h1.underline-dotted,h2.underline-dotted,h3.underline-dotted,h4.underline-dotted 
   margin-bottom: 0;
   padding-top: 0;
   border-bottom: 0 none #e03163;
-  background-image: 0;
-  background-image: 0;
   background-image: linear-gradient(white,white);
   box-shadow: none;
 }
@@ -370,7 +368,7 @@ background: #FFFFFF !important;
 }
 
 .logo {
-  margin-top: 0;
+  margin-top: 7px;
 }
 
 /***************************************************

@@ -6,8 +6,7 @@ source          = require 'vinyl-source-stream'
 browserify      = require 'browserify'
 watchify        = require 'watchify'
 cjsxify         = require 'cjsxify'
-# browserifyShim  = require 'browserify-shim'
-
+reactify        = require 'reactify'
 
 handleErrors = (title) -> (args...)->
   # TODO: Send error to notification center with gulp-notify
@@ -20,11 +19,12 @@ buildBrowserify = (srcPath, destDir, destFile, isWatching) ->
   args = (if isWatching then watchify.args else {})
   args.entries = [srcPath]
   args.extensions = ['.js', '.jsx']
-  args.transform = 'reactify'
   args.debug = true if isWatching
+
   bundler = browserify(args)
-  # bundler.transform(browserifyShim)
+
   bundler.transform(cjsxify)
+  bundler.transform(reactify)
 
   bundler = watchify(bundler, {}) if isWatching
 
@@ -44,7 +44,7 @@ build = (isWatching)->
   destDirFonts = './fonts'
 
   destFile = './dist/build.js'
-  srcPath = './src/index.js'
+  srcPath = './src/index.jsx'
   buildBrowserify(srcPath, destDir, destFile, isWatching)
   .on 'end', ->
     gulp.src('bower_components/**/*.{eot,svg,ttf,woff,woff2}')
