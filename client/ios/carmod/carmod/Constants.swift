@@ -99,6 +99,7 @@ let SEARCH_BAR_OFFSET: CGFloat = 0.0
 
 let LARGE_BUTTON_SIZE: CGFloat = 50.0
 let STANDARD_BUTTON_SIZE: CGFloat = 44.0
+let SMALL_BUTTON_SIZE: CGFloat = IS_IPHONE_4_OR_LESS ? 18.0 : IS_IPHONE_5_OR_LESS ? 24.0 : 32.0
 let STANDARD_TAB_HEIGHT: CGFloat = 48.0
 let STANDARD_BUTTON_HEIGHT: CGFloat = 44.0
 let STANDARD_BUTTON_WIDTH: CGFloat = 250.0
@@ -124,6 +125,7 @@ let EVENT_PICKER_CANCELLED: String = "Event::PickerCancelled"
 let EVENT_STORY_PUBLISHED: String = "Event::StoryPublished"
 let EVENT_PART_SEARCH_COMPLETE: String = "Event::PartSearchComplete"
 let EVENT_IMAGE_SEARCH_COMPLETE: String = "Event::ImageSearchComplete"
+let EVENT_QUERY_COMPLETE: String = "Event::QueryComplete"
 
 // TAG size constants
 let TAG_WIDTH: CGFloat = 145.0
@@ -187,20 +189,23 @@ let kEntityYearKey              = "year"
 let kEntityMakeKey              = "make"
 let kEntityModelKey             = "model"
 let kEntityUserKey              = "user"
+let kEntityImageKey             = "image"
 
 // MARK:- Cached Story Attributes
 // keys
 let kStoryAttributesPhotosKey                 = "photos"
-let kStoryAttributesIsLikedByCurrentUserKey   = "isLikedByCurrentUser"
-let kStoryAttributesLikeCountKey              = "likeCount"
-let kStoryAttributesLikersKey                 = "likers"
-let kStoryAttributesCommentCountKey           = "commentCount"
-let kStoryAttributesCommentersKey             = "commenters"
+let kStoryAttributesTitleKey                  = "title"
 
 // MARK:- Cached Photo Attributes
 // keys
 let kPhotoAttributesAnnotationsKey            = "annotations"
 let kPhotoAttributesAnnotationsCountKey       = "annotationsCount"
+let kPhotoAttributesDescriptionKey            = "description"
+let kPhotoAttributesIsLikedByCurrentUserKey   = "isLikedByCurrentUser"
+let kPhotoAttributesLikeCountKey              = "likeCount"
+let kPhotoAttributesLikersKey                 = "likers"
+let kPhotoAttributesCommentCountKey           = "commentCount"
+let kPhotoAttributesCommentersKey             = "commenters"
 
 // MARK:- Cached Annotation Attributes
 // keys

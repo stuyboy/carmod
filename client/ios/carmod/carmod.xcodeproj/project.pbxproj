@@ -11,6 +11,7 @@
 		400818421C1105A9004F7497 /* GarageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818411C1105A9004F7497 /* GarageViewController.swift */; };
 		400818441C121A7F004F7497 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818431C121A7F004F7497 /* CustomTextField.swift */; };
 		400818461C123960004F7497 /* AddCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400818451C123960004F7497 /* AddCarView.swift */; };
+		401CF1941C52AEEB00A44A4F /* QueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CF1931C52AEEB00A44A4F /* QueryManager.swift */; };
 		40220E5A1BFFECAD001CF280 /* PartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E591BFFECAD001CF280 /* PartManager.swift */; };
 		40220E5C1BFFEF8F001CF280 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */; };
 		40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */; };
@@ -19,6 +20,7 @@
 		40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E621C0123A0001CF280 /* Oxygen-Light.ttf */; };
 		40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */; };
 		403AD7EB1C067B300058999B /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403AD7EA1C067B300058999B /* TagView.swift */; };
+		404263491C515B62002A6A9C /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404263481C515B62002A6A9C /* LabelButton.swift */; };
 		404C4C481C44643700E21421 /* TaggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C471C44643700E21421 /* TaggerViewController.swift */; };
 		404C4C4B1C447C2D00E21421 /* PartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */; };
 		404C4C4D1C447C8800E21421 /* PartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */; };
@@ -95,6 +97,7 @@
 		400818411C1105A9004F7497 /* GarageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageViewController.swift; sourceTree = "<group>"; };
 		400818431C121A7F004F7497 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		400818451C123960004F7497 /* AddCarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarView.swift; sourceTree = "<group>"; };
+		401CF1931C52AEEB00A44A4F /* QueryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryManager.swift; sourceTree = "<group>"; };
 		40220E591BFFECAD001CF280 /* PartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartManager.swift; sourceTree = "<group>"; };
 		40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		40220E5D1C0003BA001CF280 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		40220E621C0123A0001CF280 /* Oxygen-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Light.ttf"; sourceTree = "<group>"; };
 		40220E631C0123A0001CF280 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxygen-Regular.ttf"; sourceTree = "<group>"; };
 		403AD7EA1C067B300058999B /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		404263481C515B62002A6A9C /* LabelButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
 		404C4C471C44643700E21421 /* TaggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggerViewController.swift; sourceTree = "<group>"; };
 		404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionView.swift; sourceTree = "<group>"; };
 		404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 				405973311C163A6000600615 /* CarManager.swift */,
 				40220E591BFFECAD001CF280 /* PartManager.swift */,
 				40E760991C49A3080065E241 /* ImageManager.swift */,
+				401CF1931C52AEEB00A44A4F /* QueryManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				40220E5B1BFFEF8F001CF280 /* SwiftyJSON.swift */,
 				40678E291BFA9B770071BCB8 /* UIExtensions.swift */,
 				400818431C121A7F004F7497 /* CustomTextField.swift */,
+				404263481C515B62002A6A9C /* LabelButton.swift */,
 				40954BDA1C20B3CC00B46B44 /* PathMenu.swift */,
 				40954BDB1C20B3CC00B46B44 /* PathMenuItem.swift */,
 			);
@@ -712,6 +718,7 @@
 				40678E181BFA9AF50071BCB8 /* PAPActivityFeedViewController.swift in Sources */,
 				40678E351BFA9BD80071BCB8 /* PAPPhotoDetailsHeaderView.swift in Sources */,
 				40722E1D1BFA98B000D6F10C /* AppDelegate.swift in Sources */,
+				404263491C515B62002A6A9C /* LabelButton.swift in Sources */,
 				40678E231BFA9B490071BCB8 /* PAPUtility.swift in Sources */,
 				40678E391BFA9BE80071BCB8 /* PAPPhotoCell.swift in Sources */,
 				40678E2C1BFA9B7E0071BCB8 /* String+Common.swift in Sources */,
@@ -729,6 +736,7 @@
 				40220E5E1C0003BA001CF280 /* SearchResultsTableViewCell.swift in Sources */,
 				40954BE11C21256900B46B44 /* StoryCache.swift in Sources */,
 				40954BDF1C20F08800B46B44 /* StoryDetailsViewController.swift in Sources */,
+				401CF1941C52AEEB00A44A4F /* QueryManager.swift in Sources */,
 				40678E121BFA9AC40071BCB8 /* PAPHomeViewController.swift in Sources */,
 				40678E461BFA9C270071BCB8 /* PAPSettingsButtonItem.swift in Sources */,
 				40954BDC1C20B3CC00B46B44 /* PathMenu.swift in Sources */,

@@ -11,9 +11,22 @@ class PAPLogInViewController: UIViewController, FBLoginViewDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let backgroundImageView = UIImageView(image: UIImage(named: "bg_login"))
-    backgroundImageView.frame = self.view.frame
-    self.view.addSubview(backgroundImageView)
+    self.view.backgroundColor = UIColor.blackColor()
+    
+    let appLogo = UIImageView(image: UIImage(named: "app_logo_lg"))
+    let LOGO_WIDTH: CGFloat = 244.0
+    let LOGO_HEIGHT: CGFloat = LOGO_WIDTH/5.4
+    appLogo.frame = CGRect(x: self.view.frame.width/2-LOGO_WIDTH/2, y: self.view.frame.height/3, width: LOGO_WIDTH, height: LOGO_HEIGHT)
+    self.view.addSubview(appLogo)
+    
+    let appSlogan = UILabel()
+    appSlogan.text = "Share your mods. Help others."
+    appSlogan.textColor = UIColor.whiteColor()
+    appSlogan.textAlignment = .Center
+    appSlogan.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    appSlogan.sizeToFit()
+    appSlogan.frame = CGRect(x: self.view.frame.width/2-appSlogan.frame.width/2, y: appLogo.frame.maxY+OFFSET_SMALL, width: appSlogan.frame.width, height: appSlogan.frame.height)
+    self.view.addSubview(appSlogan)
     
     let LOGIN_WIDTH: CGFloat = 244.0
     let LOGIN_HEIGHT: CGFloat = 44.0

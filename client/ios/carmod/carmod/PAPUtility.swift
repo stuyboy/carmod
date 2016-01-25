@@ -278,24 +278,6 @@ class PAPUtility {
   }
   
   // MARK Activities
-  
-  class func queryForActivitiesOnStory(story: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
-    let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
-    queryLikes.whereKey(kPAPActivityStoryKey, equalTo: story)
-    queryLikes.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeLike)
-    
-    let queryComments = PFQuery(className: kPAPActivityClassKey)
-    queryComments.whereKey(kPAPActivityStoryKey, equalTo: story)
-    queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
-    
-    let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
-    query.cachePolicy = cachePolicy
-    query.includeKey(kPAPActivityFromUserKey)
-    query.includeKey(kPAPActivityStoryKey)
-    
-    return query
-  }
-  
   class func queryForActivitiesOnPhoto(photo: PFObject, cachePolicy: PFCachePolicy) -> PFQuery {
     let queryLikes: PFQuery = PFQuery(className: kPAPActivityClassKey)
     queryLikes.whereKey(kPAPActivityPhotoKey, equalTo: photo)
@@ -305,7 +287,11 @@ class PAPUtility {
     queryComments.whereKey(kPAPActivityPhotoKey, equalTo: photo)
     queryComments.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeComment)
     
-    let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments])
+    let queryDescription = PFQuery(className: kPAPActivityClassKey)
+    queryDescription.whereKey(kPAPActivityPhotoKey, equalTo: photo)
+    queryDescription.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeDescription)
+    
+    let query = PFQuery.orQueryWithSubqueries([queryLikes,queryComments,queryDescription])
     query.cachePolicy = cachePolicy
     query.includeKey(kPAPActivityFromUserKey)
     query.includeKey(kPAPActivityPhotoKey)

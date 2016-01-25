@@ -14,6 +14,7 @@ class CarObject: NSObject {
   var year: Int!
   var make: String!
   var model: String!
+  var image: UIImage!
 }
 
 class CarManager: NSObject {
@@ -31,6 +32,10 @@ class CarManager: NSObject {
   override init() {
     super.init()
     self.eventManager = EventManager()
+  }
+  
+  func generateDisplayName(carObject: CarObject) -> String {
+    return "\(carObject.year) \(carObject.make) \(carObject.model)"
   }
   
   func searchCar(query: String) {

@@ -5,10 +5,10 @@ PODS:
   - Bolts/AppLinks (1.2.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.2.0)
-  - Crashlytics (3.5.0):
-    - Fabric (~> 1.6.0)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
   - DOPDropDownMenu-Enhanced (1.0.0)
-  - Fabric (1.6.1)
+  - Fabric (1.6.4)
   - Facebook-iOS-SDK (3.24.1):
     - Bolts (~> 1.2)
   - FormatterKit (1.8.0):
@@ -78,9 +78,9 @@ PODS:
 
 DEPENDENCIES:
   - Bolts (from `https://github.com/kwkhaw/Bolts-iOS.git`)
-  - Crashlytics
+  - Crashlytics (~> 3.6.0)
   - DOPDropDownMenu-Enhanced
-  - Fabric
+  - Fabric (~> 1.6.3)
   - FormatterKit (~> 1.8.0)
   - MBProgressHUD (~> 0.9.1)
   - MGSwipeTableCell
@@ -110,9 +110,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Bolts: c4173988ebd9d67397a18f7142d1414884d2ac9b
-  Crashlytics: fabfd45d0e8b8dc936c682b97e302b9a49a1c827
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   DOPDropDownMenu-Enhanced: 9ec473b16351b5b0b2d6ef87e7f666fe5ff54ad5
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   Facebook-iOS-SDK: 08689c2690dc4e087b9c8e171e48667608b72a2a
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
