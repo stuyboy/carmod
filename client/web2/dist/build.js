@@ -14,7 +14,9 @@ if (location.pathname != '/story.html') {
     ReactDOM.render(React.createElement(CarMod.PartsBlock, null), document.getElementById("parts-block"));
 } else {
     var storyId = URI().query(true).storyId;
-    ReactDOM.render(React.createElement(CarMod.StoryBlock, {renderType: "large", storyId: storyId}), document.getElementById("stories-block"));
+    //ReactDOM.render(<CarMod.StoryBlock renderType="large" storyId={storyId}/>, document.getElementById("stories-block"));
+    ReactDOM.render(React.createElement(CarMod.Stories, {renderType: "large", storyId: storyId}), document.getElementById("stories-block"));
+    ReactDOM.render(React.createElement(CarMod.PartsBlock, null), document.getElementById("parts-block"));
 }
 
 ReactDOM.render(React.createElement(CarMod.Header, null), document.getElementById("header-block"));
@@ -35212,6 +35214,124 @@ var Story = Parse.Object.extend("Story", {
     }}
 );
 
+var Stories = React.createClass({displayName: "Stories",
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            descriptions: this.getDescriptionForStory(this.props.storyId)
+        };
+    },
+
+    handleClick: function(event) {
+        alert('what to do now?');
+    },
+
+    render: function() {
+        var storyLink="/story.html?storyId=" + this.props.storyId;
+        var renderType = this.props.renderType;
+
+        return (
+            React.createElement("div", {id: "storyPhotos"}, 
+                React.createElement(Author, {storyId: this.props.storyId}), 
+                
+                    this.data.descriptions.map(function(a, idx) {
+                        return (
+                            React.createElement("div", {id: "story-photo-large", key: a.objectId}, 
+                                React.createElement("img", {src: a.photo.image.url()}), 
+                                React.createElement("div", {id: "story-description", className: "story-description"}, 
+                                    a.content
+                                )
+                            )
+                        );
+                    })
+                
+            )
+        );
+    },
+
+    getDescriptionForStory: function(storyId) {
+        var aQuery = new Parse.Query(Activity);
+        var sQuery = new Parse.Query(Story);
+        sQuery.get(storyId);
+        aQuery.include("photo");
+        aQuery.include("story");
+        aQuery.include("fromUser");
+        aQuery.matchesQuery("story", sQuery);
+        aQuery.limit(20);
+        return aQuery;
+    }
+})
+
+var CarInfo = React.createClass({displayName: "CarInfo",
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            car: this.getCarForUser(this.props.userId)
+        };
+    },
+
+    render: function() {
+        return (
+            React.createElement("div", {id: "carWrapper"}, 
+            
+                this.data.car.map(function (c, idx) {
+                    return (
+                        React.createElement("div", {id: "story-car", className: "story-car", key: c.objectId}, c.year, " ", c.make, " ", c.model)
+                    );
+                })
+            
+            )
+        );
+    },
+
+    getCarForUser: function(userId) {
+        var uQuery = new Parse.Query(Parse.User);
+        var cQuery = new Parse.Query(Entity);
+        uQuery.get(userId);
+        cQuery.matchesQuery("user", uQuery);
+        cQuery.limit(1);
+        return cQuery;
+    }
+})
+
+var Author = React.createClass({displayName: "Author",
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            story: this.getStoryWithAuthor(this.props.storyId)
+        };
+    },
+
+    render: function() {
+        return (
+            React.createElement("div", {id: "story-author", className: "story-author"}, 
+            
+                this.data.story.map(function(s, idx) {
+                    return (
+                        React.createElement("div", null, 
+                            React.createElement("img", {className: "story-author-avatar", src: s.author.profilePictureSmall.url()}), 
+                            s.author.displayName, 
+                            React.createElement(CarInfo, {userId: s.author.objectId})
+                        )
+                    );
+                })
+            
+            )
+        );
+    },
+
+    getStoryWithAuthor: function(storyId) {
+        var sQuery = new Parse.Query(Story);
+        sQuery.get(storyId);
+        sQuery.include("author");
+        sQuery.limit(1);
+        return sQuery;
+    }
+})
+
 var StoryPhotos = React.createClass({displayName: "StoryPhotos",
     mixins: [ParseReact.Mixin],
 
@@ -35591,8 +35711,10 @@ var Header = React.createClass({displayName: "Header",
 module.exports.StoryBlock = StoryBlock;
 module.exports.UserBlock = UserBlock;
 module.exports.PartsBlock = PartsBlock;
+module.exports.Stories = Stories;
 module.exports.Footer = Footer;
 module.exports.Header = Header;
+module.exports.Author = Author;
 
 },{"headhesive":67,"parse":88,"parse-react":68,"react":255}],261:[function(require,module,exports){
 

@@ -13,7 +13,9 @@ if (location.pathname != '/story.html') {
     ReactDOM.render(<CarMod.PartsBlock/>, document.getElementById("parts-block"));
 } else {
     var storyId = URI().query(true).storyId;
-    ReactDOM.render(<CarMod.StoryBlock renderType="large" storyId={storyId}/>, document.getElementById("stories-block"));
+    //ReactDOM.render(<CarMod.StoryBlock renderType="large" storyId={storyId}/>, document.getElementById("stories-block"));
+    ReactDOM.render(<CarMod.Stories renderType="large" storyId={storyId}/>, document.getElementById("stories-block"));
+    ReactDOM.render(<CarMod.PartsBlock/>, document.getElementById("parts-block"));
 }
 
 ReactDOM.render(<CarMod.Header/>, document.getElementById("header-block"));

@@ -17,6 +17,124 @@ var Story = Parse.Object.extend("Story", {
     }}
 );
 
+var Stories = React.createClass({
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            descriptions: this.getDescriptionForStory(this.props.storyId)
+        };
+    },
+
+    handleClick: function(event) {
+        alert('what to do now?');
+    },
+
+    render: function() {
+        var storyLink="/story.html?storyId=" + this.props.storyId;
+        var renderType = this.props.renderType;
+
+        return (
+            <div id="storyPhotos">
+                <Author storyId={this.props.storyId}/>
+                {
+                    this.data.descriptions.map(function(a, idx) {
+                        return (
+                            <div id="story-photo-large" key={a.objectId}>
+                                <img src={a.photo.image.url()}/>
+                                <div id="story-description" className="story-description">
+                                    {a.content}
+                                </div>
+                            </div>
+                        );
+                    })
+                }
+            </div>
+        );
+    },
+
+    getDescriptionForStory: function(storyId) {
+        var aQuery = new Parse.Query(Activity);
+        var sQuery = new Parse.Query(Story);
+        sQuery.get(storyId);
+        aQuery.include("photo");
+        aQuery.include("story");
+        aQuery.include("fromUser");
+        aQuery.matchesQuery("story", sQuery);
+        aQuery.limit(20);
+        return aQuery;
+    }
+})
+
+var CarInfo = React.createClass({
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            car: this.getCarForUser(this.props.userId)
+        };
+    },
+
+    render: function() {
+        return (
+            <div id="carWrapper">
+            {
+                this.data.car.map(function (c, idx) {
+                    return (
+                        <div id="story-car" className="story-car" key={c.objectId}>{c.year} {c.make} {c.model}</div>
+                    );
+                })
+            }
+            </div>
+        );
+    },
+
+    getCarForUser: function(userId) {
+        var uQuery = new Parse.Query(Parse.User);
+        var cQuery = new Parse.Query(Entity);
+        uQuery.get(userId);
+        cQuery.matchesQuery("user", uQuery);
+        cQuery.limit(1);
+        return cQuery;
+    }
+})
+
+var Author = React.createClass({
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        return {
+            story: this.getStoryWithAuthor(this.props.storyId)
+        };
+    },
+
+    render: function() {
+        return (
+            <div id="story-author" className="story-author">
+            {
+                this.data.story.map(function(s, idx) {
+                    return (
+                        <div>
+                            <img className="story-author-avatar" src={s.author.profilePictureSmall.url()}/>
+                            {s.author.displayName}
+                            <CarInfo userId={s.author.objectId}/>
+                        </div>
+                    );
+                })
+            }
+            </div>
+        );
+    },
+
+    getStoryWithAuthor: function(storyId) {
+        var sQuery = new Parse.Query(Story);
+        sQuery.get(storyId);
+        sQuery.include("author");
+        sQuery.limit(1);
+        return sQuery;
+    }
+})
+
 var StoryPhotos = React.createClass({
     mixins: [ParseReact.Mixin],
 
@@ -396,5 +514,7 @@ var Header = React.createClass({
 module.exports.StoryBlock = StoryBlock;
 module.exports.UserBlock = UserBlock;
 module.exports.PartsBlock = PartsBlock;
+module.exports.Stories = Stories;
 module.exports.Footer = Footer;
 module.exports.Header = Header;
+module.exports.Author = Author;
