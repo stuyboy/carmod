@@ -8,6 +8,7 @@
 
 import UIKit
 import ODRefreshControl
+import MBProgressHUD
 import Synchronized
 
 class StoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StoryHeaderViewDelegate, StoryTableViewCellDelegate {
@@ -24,7 +25,12 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     super.viewDidLoad()
     
     CarManager.sharedInstance.eventManager.listenTo(EVENT_STORY_PUBLISHED) { () -> () in
-      self.loadStories()
+      let progressHUD = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+      progressHUD.labelText = "Publishing..."
+      progressHUD.labelFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_MEDIUM)
+      self.loadStories({ (error) -> Void in
+        progressHUD.hide(true)
+      })
     }
     
     self.view.backgroundColor = UIColor.blackColor()
@@ -54,12 +60,14 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     if self.shouldReloadOnAppear {
       self.shouldReloadOnAppear = false
-      self.loadStories()
+      self.loadStories({ (error) -> Void in
+        self.activityIndicator.stopAnimating()
+      })
     }
   }
   
   // MARK:- Initializers
-  private func loadStories() {
+  private func loadStories(completion: ((NSError?) -> Void)) {
     let followingActivitiesQuery = PFQuery(className: kPAPActivityClassKey)
     followingActivitiesQuery.whereKey(kPAPActivityTypeKey, equalTo: kPAPActivityTypeFollow)
     followingActivitiesQuery.whereKey(kPAPActivityFromUserKey, equalTo: PFUser.currentUser()!)
@@ -73,7 +81,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     storiesFromCurrentUserQuery.whereKey(kStoryAuthorKey, equalTo: PFUser.currentUser()!)
     
     let storyQuery = PFQuery.orQueryWithSubqueries([storiesFromFollowedUsersQuery, storiesFromCurrentUserQuery])
-    storyQuery.limit = 30
+    storyQuery.limit = 100
     storyQuery.includeKey(kStoryAuthorKey)
     storyQuery.orderByDescending("createdAt")
     storyQuery.findObjectsInBackgroundWithBlock {
@@ -99,9 +107,10 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
       }
       
-      self.activityIndicator.stopAnimating()
       self.emptyView.hidden = self.stories.count > 0
       self.refreshStories()
+      
+      completion(nil)
     }
   }
   
@@ -193,7 +202,6 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     cell.delegate = self
     cell.indexPath = indexPath
     cell.selectionStyle = .None
-//    print("self.storyPhotos count = \(self.storyPhotos.count) indexPath.section = \(indexPath.section)")
     cell.photos = self.storyPhotos[indexPath.section]
     
     return cell
@@ -236,7 +244,9 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
   
   // MARK:- Public methods
   func forceRefresh() {
-    self.loadStories()
+    self.loadStories({ (error) -> Void in
+
+    })
   }
   
   func refreshStories() {

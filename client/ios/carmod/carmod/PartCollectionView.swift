@@ -23,6 +23,7 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
   var isSelectable: Bool = true
   
   private var thumbnailSize: CGFloat = 0.0
+  private var emptyView: UIView!
   
   weak var partCollectionViewDelegate: PartCollectionViewDelegate?
   
@@ -44,6 +45,20 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
     
     self.contentInset = UIEdgeInsets(top: OFFSET, left: OFFSET/2, bottom: OFFSET, right: OFFSET/2)
     self.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    
+    self.emptyView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.frame.width, height: self.frame.height))
+    self.emptyView.backgroundColor = UIColor.whiteColor()
+    self.emptyView.hidden = true
+    self.addSubview(self.emptyView)
+    
+    let emptyLabel = UILabel()
+    emptyLabel.font = UIFont(name: FONT_BOLD, size: FONTSIZE_LARGE)
+    emptyLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    emptyLabel.textAlignment = .Center
+    emptyLabel.text = "No matching parts found."
+    emptyLabel.sizeToFit()
+    emptyLabel.frame.origin = CGPoint(x: self.emptyView.frame.width/2-emptyLabel.frame.width/2, y: OFFSET_XLARGE*4)
+    self.emptyView.addSubview(emptyLabel)
   }
   
   // MARK: - Private methods
@@ -56,8 +71,10 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
     var count = 0
     
     if let partObjects = self.partObjects {
-      count =  partObjects.count
+      count = partObjects.count
     }
+    
+    self.emptyView.hidden = count > 0
     
     return count
   }
@@ -80,7 +97,10 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
     }
     
     let partObject = self.partObjects[indexPath.row]
-    cell.setThumbnailImageFromURL(NSURL(string: partObject.imageURL)!)
+    
+    if let imageURL = partObject.imageURL {
+      cell.setThumbnailImageFromURL(NSURL(string: imageURL)!)
+    }
     cell.setPartName(PartManager.sharedInstance.generateDisplayName(partObject))
     
     return cell
@@ -114,6 +134,4 @@ class PartCollectionView: UICollectionView, UICollectionViewDataSource, UICollec
   func scrollViewDidScroll(scrollView: UIScrollView) {
     
   }
-
-
 }
