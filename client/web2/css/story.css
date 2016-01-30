@@ -1,3 +1,80 @@
-#storyPhotos {
-    background: #000000;
+#story-content {
+    width: 1400px;
+    overflow: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3em;
+    padding-top: 1em;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#story-block {
+    float: left;
+
+    width: 66%;
+    padding: 1em;
+
+    background: #ffffff;
+    color: #000000;
+    font-size: 24px;
+    border: 1px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08)
+}
+
+#story-block .story-photo-large {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#story-block .story-photo-large img {
+    width: 100%;
+}
+
+#story-block .story-description {
+    font-size: 18px;
+}
+
+#masthead .story-title {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 16px 0;
+}
+
+#masthead .story-author {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    margin-top: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    font-weight: 100;
+    margin-left: 0px;
+}
+
+#masthead .story-car {
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: 0px;
+}
+
+#masthead .story-author img {
+    height: 40px;
+    width: auto;
+}
+
+.rightbar {
+    width: 33%;
+    float: right;
+    background: #ffffff;
+    color: #000000;
+    font-size: 24px;
+    border: 1px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08)
+}
+
+#annotation {
+    padding-bottom: 0;
 }

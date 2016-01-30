@@ -2,6 +2,7 @@ var React = require('react');
 var Parse = require('parse');
 var ParseReact = require('parse-react');
 var Headhesive = require('headhesive');
+var DateFormat = require('dateformat');
 
 var APPLICATION_ID = "riUILiEFVsRGLUquLhPNIkRoIaNoEuglJJXrqXVS";
 var JAVASCRIPT_KEY = "zzlpOfn3WLxtRGWcqZAFcj0Rx1eNLgUHmJC6aBIt";
@@ -9,6 +10,7 @@ var JAVASCRIPT_KEY = "zzlpOfn3WLxtRGWcqZAFcj0Rx1eNLgUHmJC6aBIt";
 Parse.initialize(APPLICATION_ID, JAVASCRIPT_KEY);
 
 var Activity = Parse.Object.extend("Activity");
+var Annotation = Parse.Object.extend("Annotation");
 var Entity = Parse.Object.extend("Entity");
 var Photo = Parse.Object.extend("Photo");
 var Story = Parse.Object.extend("Story", {
@@ -40,7 +42,7 @@ var Stories = React.createClass({
                 {
                     this.data.descriptions.map(function(a, idx) {
                         return (
-                            <div id="story-photo-large" key={a.objectId}>
+                            <div className="story-photo-large" key={a.objectId}>
                                 <img src={a.photo.image.url()}/>
                                 <div id="story-description" className="story-description">
                                     {a.content}
@@ -99,6 +101,74 @@ var CarInfo = React.createClass({
     }
 })
 
+var Annotations = React.createClass({
+    mixins: [ParseReact.Mixin],
+
+    observe: function() {
+        if (this.props.photoId) {
+            return {
+                annotations: this.getAnnotationsForPhoto(this.props.photoId)
+            };
+        } else if (this.props.storyId) {
+            return {
+                annotations: this.getAnnotationsForStory(this.props.storyId)
+            };
+        }
+    },
+
+    render: function() {
+        if (this.data.annotations.length == 0) {
+            return (<div/>);
+        }
+
+        return (
+            <div id="partsBlock">
+                <div className="title">Parts Used in Project</div>
+            {
+                this.data.annotations.map(function (a, idx) {
+                    return (
+                        <div id="annotation" className="center w-inline-block w-col-6" key={a.objectId}>
+                            <div className="parts-listing">
+                                <div className="parts-image">
+                                    <img className="auto-vertical" src={a.imageUrl}></img>
+                                </div>
+                                <div className="parts-text">
+                                    <div className="parts-brand">{a.brand}</div>
+                                    <div className="parts-model">{a.model}</div>
+                                    <div className="parts-code">{a.productCode}</div>
+                                    <div className="price">$49.95</div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })
+            }
+                <div className="separator"></div>
+            </div>
+        );
+    },
+
+    getAnnotationsForPhoto: function(photoId) {
+        var aQuery = new Parse.Query(Annotation);
+        var pQuery = new Parse.Query(Photo);
+        pQuery.get(photoId);
+        aQuery.matchesQuery("photo", pQuery);
+        aQuery.limit(10);
+        return aQuery;
+    },
+
+    getAnnotationsForStory: function(storyId) {
+        var story = Parse.Object.extend(Story);
+        var s = new Story({objectId : storyId});
+        var photosRelation = new Parse.Relation(s, 'Photos');
+        var qQuery = photosRelation.query();
+        var aQuery = new Parse.Query(Annotation);
+        aQuery.matchesQuery("photo", qQuery);
+        aQuery.limit(10);
+        return aQuery;
+    }
+})
+
 var Author = React.createClass({
     mixins: [ParseReact.Mixin],
 
@@ -113,11 +183,16 @@ var Author = React.createClass({
             <div id="story-author" className="story-author">
             {
                 this.data.story.map(function(s, idx) {
+                    //var s2 = (new DateFormat()).dateFormat(new Date(s.createdAt), "mmmm dS, yyyy");
+                    //alert(JSON.stringify(s2));
                     return (
-                        <div>
-                            <img className="story-author-avatar" src={s.author.profilePictureSmall.url()}/>
-                            {s.author.displayName}
+                        <div key={s.objectId} id="masthead">
+                            <div className="story-title">{s.title}</div>
                             <CarInfo userId={s.author.objectId}/>
+                            <div className="story-author">
+                                <img className="story-author-avatar" src={s.author.profilePictureSmall.url()}/>
+                                {s.author.displayName}
+                            </div>
                         </div>
                     );
                 })
@@ -360,24 +435,36 @@ var PartsBlock = React.createClass({
 
     render: function() {
         var parts = this.state.parts;
+        var num = this.props.number ? this.props.number : 8;
+        var cols = this.props.colClass ? this.props.colClass : "w-col-3";
+        var title = this.props.title ? this.props.title : "";
+
         if (parts === undefined) {
             return <div/>;
         } else {
             return (
                 <div id="partsBlock">
-                    {   this.state.parts.map(function (p) {
-                        var clsNames = "mix center w-col w-col-3 " + p.classification;
-                        return (
-                            <div id={p.id} className={clsNames} key={p.id}>
-                              <div className="parts-listing">
-                                <div className="parts-image">
-                                    <img className="auto-vertical" src={p.imageUrl} />
+                    <div className="title">{title}</div>
+                {
+                    this.state.parts.map(function (p, idx) {
+                        if (idx < num) {
+                            var clsNames = "mix center w-col " + cols + " " + p.classification;
+                            return (
+                                <div id={p.id} className={clsNames} key={p.id}>
+                                    <div className="parts-listing">
+                                        <div className="parts-image">
+                                            <img className="auto-vertical" src={p.imageUrl}/>
+                                        </div>
+                                        <div className="parts-text">
+                                            <div className="parts-brand">{p.brand}</div>
+                                            <div className="parts-model">{p.model}</div>
+                                            <div className="parts-code">{p.productCode}</div>
+                                            <div className="price">$49.95</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="parts-brand">{p.brand}</div>
-                                <div className="parts-model">{p.model}</div>
-                              </div>
-                            </div>
-                        );
+                            );
+                        }
                     })
                     }
                 </div>
@@ -481,13 +568,13 @@ var Header = React.createClass({
                 <div className="w-container container">
                     <div className="w-row">
                         <div className="w-col w-col-3 logo">
-                            <a href="#"><img className="logo" src="images/app-logo-black.png" alt="CarMod"></img></a>
+                            <a href="/"><img className="logo" src="images/app-logo-black.png" alt="CarMod"></img></a>
                         </div>
                         <div className="w-col w-col-9">
                             <div className="w-nav navbar" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
                                 <div className="w-container nav">
                                     <nav className="w-nav-menu nav-menu" role="navigation">
-                                        <a className="w-nav-link menu-li" href="#home">HOME</a>
+                                        <a className="w-nav-link menu-li" href="/">HOME</a>
                                         <a className="w-nav-link menu-li" href="index.html#stories">STORIES</a>
                                         <a className="w-nav-link menu-li filter" data-filter="all" href="index.html#parts">PARTS</a>
                                         <a className="w-nav-link menu-li filter" data-filter=".Tires" href="index.html#parts">TIRES</a>
@@ -518,3 +605,4 @@ module.exports.Stories = Stories;
 module.exports.Footer = Footer;
 module.exports.Header = Header;
 module.exports.Author = Author;
+module.exports.Annotations = Annotations;
