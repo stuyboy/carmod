@@ -164,11 +164,11 @@ class TaggerViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     self.filterMenu.detailTextFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.filterMenu.detailTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.filterMenu.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-    self.view.addSubview(self.filterMenu)
+//    self.view.addSubview(self.filterMenu)
   }
   
   private func initPartCollectionView() {
-    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.filterMenu.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE), isSelectable: true)
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE), isSelectable: true)
     self.partCollectionView.partCollectionViewDelegate = self
     self.partCollectionView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.partCollectionView)

@@ -308,14 +308,20 @@ class GarageViewController: UIViewController, AddCarDelegate, UITextFieldDelegat
     alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
     alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
     alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_DARK_GRAY)
     alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
+    alertController.buttonFont[.Alternate] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    alertController.buttonBgColor[.Alternate] = UIColor.fromRGB(COLOR_BLUE)
+    alertController.buttonBgColorHighlighted[.Alternate] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
     alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
     alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
     
-    let myProfileAction = DOAlertAction(title: NSLocalizedString("MY PROFILE", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.navigationController!.pushViewController(PAPAccountViewController(user: PFUser.currentUser()!), animated: true) })
+    let myProfileAction = DOAlertAction(title: NSLocalizedString("MY PROFILE", comment: ""), style: DOAlertActionStyle.Alternate, handler: { _ in self.navigationController!.pushViewController(PAPAccountViewController(user: PFUser.currentUser()!), animated: true) })
     let findFriendsAction = DOAlertAction(title: NSLocalizedString("FIND FRIENDS", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.navigationController!.pushViewController(PAPFindFriendsViewController(style: UITableViewStyle.Plain), animated: true) })
     let logOutAction = DOAlertAction(title: NSLocalizedString("LOG OUT", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in (UIApplication.sharedApplication().delegate as! AppDelegate).logOut() })
     let cancelAction = DOAlertAction(title: "CANCEL", style: DOAlertActionStyle.Cancel, handler: nil)

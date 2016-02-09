@@ -145,13 +145,13 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     self.emptyView.addSubview(introImage)
     
     let TEXT_WIDTH: CGFloat = self.emptyView.frame.width-OFFSET_LARGE*2
-    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: introImage.frame.maxY+OFFSET_XLARGE, width: TEXT_WIDTH, height: 20.0))
+    let emptyText = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: introImage.frame.maxY+OFFSET_LARGE, width: TEXT_WIDTH, height: 20.0))
     emptyText.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     emptyText.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     emptyText.textAlignment = .Center
     emptyText.numberOfLines = 0
     emptyText.lineBreakMode = .ByWordWrapping
-    emptyText.text = "No stories to show. Find friends to follow."
+    emptyText.text = "No stories to show."
     var requiredHeight = emptyText.requiredHeight()
     emptyText.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: emptyText.frame.origin.y, width: TEXT_WIDTH, height: requiredHeight)
     self.emptyView.addSubview(emptyText)
@@ -165,12 +165,7 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     findFriendsButton.addTarget(self, action: "onFindFriends:", forControlEvents: .TouchUpInside)
     self.emptyView.addSubview(findFriendsButton)
     
-    let IMAGE_SIZE: CGFloat = 70.0
-    let sketchArrowImage = UIImageView(image: changeImageColor(UIImage(named: "ic_arrow_sketch")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)))
-    sketchArrowImage.frame = CGRect(x: self.emptyView.frame.width/2-IMAGE_SIZE, y: self.emptyView.frame.height-IMAGE_SIZE-OFFSET_LARGE, width: IMAGE_SIZE, height: IMAGE_SIZE)
-    self.emptyView.addSubview(sketchArrowImage)
-    
-    let emptyText2 = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: sketchArrowImage.frame.origin.y-OFFSET_LARGE, width: TEXT_WIDTH, height: 20.0))
+    let emptyText2 = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: findFriendsButton.frame.maxY+OFFSET_XLARGE, width: TEXT_WIDTH, height: 20.0))
     emptyText2.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     emptyText2.textColor = UIColor.fromRGB(COLOR_DARK_GRAY)
     emptyText2.textAlignment = .Center
@@ -178,8 +173,15 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     emptyText2.lineBreakMode = .ByWordWrapping
     emptyText2.text = "Or try adding your first story."
     requiredHeight = emptyText2.requiredHeight()
-    emptyText2.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: sketchArrowImage.frame.origin.y-requiredHeight-OFFSET_SMALL, width: TEXT_WIDTH, height: requiredHeight)
+    emptyText2.frame = CGRect(x: self.emptyView.frame.width/2-TEXT_WIDTH/2, y: findFriendsButton.frame.maxY+OFFSET_STANDARD, width: TEXT_WIDTH, height: requiredHeight)
     self.emptyView.addSubview(emptyText2)
+    
+    let IMAGE_SIZE: CGFloat = self.emptyView.frame.height-emptyText2.frame.maxY-OFFSET_LARGE > 70.0 ? 70.0 : self.emptyView.frame.height-emptyText2.frame.maxY-OFFSET_STANDARD*2
+    let sketchArrowImage = UIImageView(image: changeImageColor(UIImage(named: "ic_arrow_sketch")!, tintColor: UIColor.fromRGB(COLOR_ORANGE)))
+    sketchArrowImage.frame = CGRect(x: self.emptyView.frame.width/2-IMAGE_SIZE, y: self.emptyView.frame.height-IMAGE_SIZE-OFFSET_STANDARD, width: IMAGE_SIZE, height: IMAGE_SIZE)
+    self.emptyView.addSubview(sketchArrowImage)
+    
+    emptyText2.frame.origin.y = sketchArrowImage.frame.origin.y-emptyText2.frame.height-OFFSET_SMALL/2
   }
   
   // MARK:- StoryTableViewCellDelegate
@@ -272,14 +274,20 @@ class StoryViewController: UIViewController, UITableViewDataSource, UITableViewD
     alertController.buttonFont[.Default] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Default] = UIColor.fromRGB(COLOR_ORANGE)
     alertController.buttonBgColorHighlighted[.Default] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
     alertController.buttonFont[.Destructive] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Destructive] = UIColor.fromRGB(COLOR_DARK_GRAY)
     alertController.buttonBgColorHighlighted[.Destructive] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
+    alertController.buttonFont[.Alternate] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    alertController.buttonBgColor[.Alternate] = UIColor.fromRGB(COLOR_BLUE)
+    alertController.buttonBgColorHighlighted[.Alternate] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
+    
     alertController.buttonFont[.Cancel] = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
     alertController.buttonBgColor[.Cancel] = UIColor.fromRGB(COLOR_MEDIUM_GRAY)
     alertController.buttonBgColorHighlighted[.Cancel] = UIColor.fromRGB(COLOR_LIGHT_GRAY)
     
-    let myProfileAction = DOAlertAction(title: NSLocalizedString("MY PROFILE", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.navigationController!.pushViewController(PAPAccountViewController(user: PFUser.currentUser()!), animated: true) })
+    let myProfileAction = DOAlertAction(title: NSLocalizedString("MY PROFILE", comment: ""), style: DOAlertActionStyle.Alternate, handler: { _ in self.navigationController!.pushViewController(PAPAccountViewController(user: PFUser.currentUser()!), animated: true) })
     let findFriendsAction = DOAlertAction(title: NSLocalizedString("FIND FRIENDS", comment: ""), style: DOAlertActionStyle.Default, handler: { _ in self.navigationController!.pushViewController(PAPFindFriendsViewController(style: UITableViewStyle.Plain), animated: true) })
     let logOutAction = DOAlertAction(title: NSLocalizedString("LOG OUT", comment: ""), style: DOAlertActionStyle.Destructive, handler: { _ in (UIApplication.sharedApplication().delegate as! AppDelegate).logOut() })
     let cancelAction = DOAlertAction(title: "CANCEL", style: DOAlertActionStyle.Cancel, handler: nil)
