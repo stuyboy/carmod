@@ -24,7 +24,7 @@ ReactDOM.render(<CarMod.Header/>, document.getElementById("header-block"));
 ReactDOM.render(<CarMod.Footer/>, document.getElementById("footer-block"));
 
 const responseFacebook = function(response) {
-    console.log(response);
+    //console.log(response);
     document.getElementById("fb-login").style.visibility='hidden';
 }
 
