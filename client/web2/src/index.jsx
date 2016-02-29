@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var FBLogin = require('react-facebook-login');
 var CarMod = require('./carmod.jsx');
 var Initialize = require('./scripts.jsx');
 var URI = require('urijs');
@@ -21,3 +22,13 @@ if (location.pathname != '/story.html') {
 
 ReactDOM.render(<CarMod.Header/>, document.getElementById("header-block"));
 ReactDOM.render(<CarMod.Footer/>, document.getElementById("footer-block"));
+
+const responseFacebook = function(response) {
+    console.log(response);
+    document.getElementById("fb-login").style.visibility='hidden';
+}
+
+ReactDOM.render(<FBLogin appId="671292719680423" autoLoad={true} callback={responseFacebook} textButton="Sign In with Facebook" size="small" />, document.getElementById("fb-login"));
+
+
+

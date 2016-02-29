@@ -26,6 +26,7 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
+    "react-facebook-login": "^2.0.5",
     "reactify": "^1.1.1",
     "urijs": "^1.17.0",
     "vinyl-source-stream": "^1.0.0",
