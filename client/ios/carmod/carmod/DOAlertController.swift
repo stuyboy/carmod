@@ -18,6 +18,7 @@ enum DOAlertActionStyle : Int {
   case Default
   case Cancel
   case Destructive
+  case Alternate
 }
 
 enum DOAlertControllerStyle : Int {
@@ -219,22 +220,26 @@ class DOAlertController : UIViewController, UITextFieldDelegate, UIViewControlle
   var buttonFont: [DOAlertActionStyle : UIFont!] = [
     .Default : UIFont(name: "HelveticaNeue-Bold", size: 16),
     .Cancel  : UIFont(name: "HelveticaNeue-Bold", size: 16),
-    .Destructive  : UIFont(name: "HelveticaNeue-Bold", size: 16)
+    .Destructive  : UIFont(name: "HelveticaNeue-Bold", size: 16),
+    .Alternate  : UIFont(name: "HelveticaNeue-Bold", size: 16)
   ]
   var buttonTextColor: [DOAlertActionStyle : UIColor] = [
     .Default : UIColor.whiteColor(),
     .Cancel  : UIColor.whiteColor(),
-    .Destructive  : UIColor.whiteColor()
+    .Destructive  : UIColor.whiteColor(),
+    .Alternate  : UIColor.whiteColor()
   ]
   var buttonBgColor: [DOAlertActionStyle : UIColor] = [
     .Default : UIColor(red:52/255, green:152/255, blue:219/255, alpha:1),
     .Cancel  : UIColor(red:127/255, green:140/255, blue:141/255, alpha:1),
-    .Destructive  : UIColor(red:231/255, green:76/255, blue:60/255, alpha:1)
+    .Destructive  : UIColor(red:231/255, green:76/255, blue:60/255, alpha:1),
+    .Alternate  : UIColor(red:231/255, green:76/255, blue:60/255, alpha:1),
   ]
   var buttonBgColorHighlighted: [DOAlertActionStyle : UIColor] = [
     .Default : UIColor(red:74/255, green:163/255, blue:223/255, alpha:1),
     .Cancel  : UIColor(red:140/255, green:152/255, blue:153/255, alpha:1),
-    .Destructive  : UIColor(red:234/255, green:97/255, blue:83/255, alpha:1)
+    .Destructive  : UIColor(red:234/255, green:97/255, blue:83/255, alpha:1),
+    .Alternate  : UIColor(red:234/255, green:97/255, blue:83/255, alpha:1)
   ]
   private var buttonCornerRadius: CGFloat = 4.0
   

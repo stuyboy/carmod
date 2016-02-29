@@ -17,6 +17,8 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
   private var selectedEmailAddress: String
   private var outstandingFollowQueries: [NSObject: AnyObject]
   private var outstandingCountQueries: [NSIndexPath: AnyObject]
+  private var emptyView: UIView = UIView()
+  private var shareButton: UIButton!
   
   // MARK:- Initialization
   
@@ -48,6 +50,10 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     self.tableView.backgroundColor = UIColor.blackColor()
+    self.tableView.separatorColor = UIColor.clearColor()
+    if (self.tableView.respondsToSelector("separatorInset")) {
+      self.tableView.separatorInset = UIEdgeInsetsZero
+    }
     
     self.navigationItem.titleView = UIImageView(image: UIImage(named: "img_find_friends"))
     
@@ -81,11 +87,41 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
       self.headerView!.addSubview(inviteLabel)
       self.tableView!.tableHeaderView = self.headerView
     }
+    
+    self.emptyView.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
+    self.emptyView.backgroundColor = UIColor.blackColor()
+    self.emptyView.hidden = true
+    self.view.addSubview(self.emptyView)
+    
+    let LABEL_WIDTH: CGFloat = self.view.frame.width-OFFSET_XLARGE*4
+    let emptyLabel = UILabel(frame: CGRect(x: self.emptyView.frame.width/2-LABEL_WIDTH/2, y: 0.0, width: LABEL_WIDTH, height: 0.0))
+    emptyLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    emptyLabel.textColor = UIColor.whiteColor()
+    emptyLabel.textAlignment = .Center
+    emptyLabel.numberOfLines = 0
+    emptyLabel.lineBreakMode = .ByWordWrapping
+    emptyLabel.text = "No Facebook friends currently using \(APP_NAME).\n\nTry inviting some friends to check out \(APP_NAME)"
+    let requiredHeight = emptyLabel.requiredHeight()
+    emptyLabel.frame = CGRect(x: emptyLabel.frame.origin.x, y: OFFSET_XLARGE*4, width: LABEL_WIDTH, height: requiredHeight)
+    self.emptyView.addSubview(emptyLabel)
+    
+    self.shareButton = UIButton(frame: CGRect(x: self.emptyView.center.x-STANDARD_BUTTON_WIDTH/2, y: emptyLabel.frame.maxY+OFFSET_XLARGE, width: STANDARD_BUTTON_WIDTH, height: STANDARD_BUTTON_HEIGHT))
+    self.shareButton.setTitle("INVITE FRIENDS", forState: UIControlState.Normal)
+    self.shareButton.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_STANDARD)
+    self.shareButton.enabled = true
+    self.shareButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    self.shareButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Disabled)
+    self.shareButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
+    self.shareButton.layer.cornerRadius = 4.0
+    self.shareButton.addTarget(self, action: "onShareApp:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.emptyView.addSubview(self.shareButton)
   }
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    self.tableView.separatorColor = UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+    
+//    self.emptyView.hidden = self.objects!.count > 0
+    self.view.bringSubviewToFront(self.emptyView)
   }
   
   func dismissPresentingViewController() {
@@ -93,6 +129,13 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
   }
   
   // MARK:- UITableViewDelegate
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let count = self.objects!.count
+    
+    self.emptyView.hidden = count > 0
+    
+    return count
+  }
   
   override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     if indexPath.row < self.objects!.count {
@@ -264,7 +307,6 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
     return cell!
   }
   
-  
   // MARK:- PAPFindFriendsCellDelegate
   
   func cell(cellView: PAPFindFriendsCell, didTapUserButton aUser: PFUser) {
@@ -295,31 +337,31 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
   /* Called when the user selects a property of a person in their address book (ex. phone, email, location,...)
   This method will allow them to send a text or email inviting them to Anypic.  */
   func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, shouldContinueAfterSelectingPerson person: ABRecord, property: ABPropertyID, identifier: ABMultiValueIdentifier) -> Bool {
-    //        if property == kABPersonEmailProperty {
-    //            let emailProperty: ABMultiValueRef = ABRecordCopyValue(person,property)
-    //            let email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailProperty,identifier);
-    //            self.selectedEmailAddress = email;
-    //
-    //            if ([MFMailComposeViewController canSendMail] && [MFMessageComposeViewController canSendText]) {
-    //                // ask user
-    //                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Invite %@",@""] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email", @"iMessage", nil];
-    //                [actionSheet showFromTabBar:self.tabBarController.tabBar];
-    //            } else if ([MFMailComposeViewController canSendMail]) {
-    //                // go directly to mail
-    //                [self presentMailComposeViewController:email];
-    //            } else if ([MFMessageComposeViewController canSendText]) {
-    //                // go directly to iMessage
-    //                [self presentMessageComposeViewController:email];
-    //            }
-    //
-    //        } else if (property == kABPersonPhoneProperty) {
-    //            ABMultiValueRef phoneProperty = ABRecordCopyValue(person,property);
-    //            NSString *phone = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phoneProperty,identifier);
-    //
-    //            if ([MFMessageComposeViewController canSendText]) {
-    //                [self presentMessageComposeViewController:phone];
-    //            }
-    //        }
+//            if property == kABPersonEmailProperty {
+//                let emailProperty: ABMultiValueRef = ABRecordCopyValue(person,property)
+//                let email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailProperty,identifier);
+//                self.selectedEmailAddress = email;
+//    
+//                if ([MFMailComposeViewController canSendMail] && [MFMessageComposeViewController canSendText]) {
+//                    // ask user
+//                    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Invite %@",@""] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email", @"iMessage", nil];
+//                    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+//                } else if ([MFMailComposeViewController canSendMail]) {
+//                    // go directly to mail
+//                    [self presentMailComposeViewController:email];
+//                } else if ([MFMessageComposeViewController canSendText]) {
+//                    // go directly to iMessage
+//                    [self presentMessageComposeViewController:email];
+//                }
+//    
+//            } else if (property == kABPersonPhoneProperty) {
+//                ABMultiValueRef phoneProperty = ABRecordCopyValue(person,property);
+//                NSString *phone = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(phoneProperty,identifier);
+//    
+//                if ([MFMessageComposeViewController canSendText]) {
+//                    [self presentMessageComposeViewController:phone];
+//                }
+//            }
     
     return false
   }
@@ -497,5 +539,29 @@ class PAPFindFriendsViewController: PFQueryTableViewController, PAPFindFriendsCe
   func followUsersTimerFired(timer: NSTimer) {
     self.tableView.reloadData()
     NSNotificationCenter.defaultCenter().postNotificationName(PAPUtilityUserFollowingChangedNotification, object: nil)
+  }
+  
+  func onShareApp(sender: UIButton) {
+    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+    
+    if (!MFMessageComposeViewController.canSendText()) {
+      MBProgressHUD.hideHUDForView(self.view, animated: true)
+      
+//      TSMessage.setDefaultViewController(self)
+//      TSMessage.showNotificationWithTitle("Cannot send text messages on this device", type: TSMessageNotificationType.Error)
+      
+      return
+    }
+    
+    let messageController = MFMessageComposeViewController()
+    messageController.navigationBar.barTintColor = UIColor.blackColor()
+    messageController.messageComposeDelegate = self
+    messageController.body = "Check out \(APP_NAME). \(APP_DOWNLOAD_URL)"
+    let url: NSURL = NSBundle.mainBundle().URLForResource("carmod", withExtension: "gif")!
+    messageController.addAttachmentURL(url, withAlternateFilename: "carmod.gif")
+    
+    self.presentViewController(messageController, animated: false) { () -> Void in
+      MBProgressHUD.hideHUDForView(self.view, animated: true)
+    }
   }
 }

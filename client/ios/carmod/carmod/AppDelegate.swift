@@ -235,9 +235,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSURLConnectionDataDelega
     // V4???       FBSDKAccessToken.currentAccessToken().tokenString
     
     // clear out cached data, view controllers, etc
-    navController!.popToRootViewControllerAnimated(false)
-    
-    presentLoginViewController()
+    self.navController?.dismissViewControllerAnimated(false, completion: { () -> Void in
+      self.navController?.popToRootViewControllerAnimated(false)
+      
+      self.presentLoginViewController()
+    })
     
     self.homeViewController = nil
     self.garageViewController = nil

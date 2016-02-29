@@ -88,14 +88,6 @@ class PhotoTableViewCell: UITableViewCell {
     self.photo.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.width, height: self.bounds.height)
   }
   
-  override func prepareForReuse() {
-    for view in self.contentView.subviews {
-      if view.isKindOfClass(TagView) && view != self.currentTagView {
-        view.removeFromSuperview()
-      }
-    }
-  }
-  
   func loadPhoto() {
 //    self.progressView = MRProgressOverlayView.showOverlayAddedTo(self.photo, title: "Loading...", mode: MRProgressOverlayViewMode.DeterminateHorizontalBar, animated: true)
 //    self.progressView.titleLabel?.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
@@ -166,6 +158,19 @@ class PhotoTableViewCell: UITableViewCell {
   func onTapTagView(sender: UITapGestureRecognizer) {
     let tappedTagView: TagView = sender.view as! TagView
     tappedTagView.toggleRemoveVisibility(false)
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    for view in self.contentView.subviews {
+      if view.isKindOfClass(TagView) && view != self.currentTagView {
+        view.removeFromSuperview()
+      }
+    }
+    
+    self.photo.file = nil
+    self.photo.image = nil
   }
   
   required init?(coder aDecoder: NSCoder) {

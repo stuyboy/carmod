@@ -17,10 +17,9 @@ import UIKit
 let IS_DEBUG: Bool = false
 
 let APP_NAME: String = "Car Mod"
-let APP_ID: UInt = 0
-let APP_DOMAIN = "com.thunderchickenlabs.carmod"
+let APP_ID: UInt = 1082762027
+let APP_DOMAIN = "com.thunderchickenlabs.CarMod"
 let APP_DOWNLOAD_URL: String = "https://itunes.apple.com/us/app/id\(APP_ID)"
-let APP_DOWNLOAD_URL_SHORTENED: String = "http://apple.co/1KaRNRE"
 let APP_RATE_URL: String = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(APP_ID)&pageNumber=0&type=Purple+Software&mt=8"
 let APP_RATE_MESSAGE: String = "If you enjoy using \(APP_NAME), mind taking a moment to rate it? Thanks for your support!"
 let APP_FIRST_OPEN = "AppFirstOpen"

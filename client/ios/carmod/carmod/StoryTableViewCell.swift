@@ -108,6 +108,7 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("PhotoTableViewCell") as! PhotoTableViewCell
+    
     cell.selectionStyle = .None
     cell.isInteractionEnabled = false
     
@@ -217,7 +218,9 @@ class StoryTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
   }
 
   override func prepareForReuse() {
-    self.photos.removeAll()
+    super.prepareForReuse()
+    
+    self.photoTable.reloadData()
   }
   
   required init?(coder aDecoder: NSCoder) {

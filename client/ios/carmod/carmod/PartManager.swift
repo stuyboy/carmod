@@ -142,12 +142,6 @@ class PartManager: NSObject {
         self.searchResults.append(partObject)
       }
       
-      if self.searchResults.count == 0 {
-        let emptyPartObject = PartObject()
-        emptyPartObject.partNumber = kPartJSONEmptyKey
-        self.searchResults.append(emptyPartObject)
-      }
-      
       self.eventManager.trigger(EVENT_SEARCH_RESULTS_COMPLETE)
     }
   }

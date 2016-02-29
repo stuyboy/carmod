@@ -9,7 +9,7 @@
 import UIKit
 import DOPDropDownMenu_Enhanced
 
-class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDropDownMenuDelegate, PartCollectionViewDelegate {
+class TaggerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, DOPDropDownMenuDataSource, DOPDropDownMenuDelegate, PartCollectionViewDelegate {
   private let categories: [String] = [
     "All Categories",
     "Accessories",
@@ -56,29 +56,40 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
   
   private var statusBar: UIView!
   private var topNavBar: UIView!
+  private var keyboardHeight: CGFloat = 0.0
+  
   private var saveButton: UIButton!
   private var filterMenu: DOPDropDownMenu!
   private var partCollectionView: PartCollectionView!
   private var selectedPart: PartObject!
+  
+  private var photoTaggerView: PhotoTaggerView!
+  private var photoTaggerViewOrigin: CGPoint!
+  private var searchTagField: UITextField!
+  private var partTypeButton: UIButton!
+  private var cancelButton: UIButton!
+  private var pickerView: UIView!
+  private var partPicker: UIPickerView!
+  
   var editPhotoViewController: EditPhotoViewController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    self.navigationItem.titleView = UIImageView(image: UIImage(named: "app_logo"))
-//    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("onCancel:"))
-//    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Done, target: self, action: Selector("onSave:"))
-    
-    self.initTopNav()
-    self.initFilters()
-    self.initPartCollectionView()
-    self.loadParts()
-    
-    self.view.bringSubviewToFront(self.filterMenu)
-    
     PartManager.sharedInstance.eventManager.listenTo(EVENT_SEARCH_RESULTS_COMPLETE) { () -> () in
       self.partCollectionView.partObjects = PartManager.sharedInstance.searchResults
     }
+    
+    self.initTopNav()
+    self.initTaggerBar()
+    
+    self.initFilters()
+    self.initPartCollectionView()
+    self.searchParts("*")
+    
+    self.initPartPicker()
+    
+    self.view.bringSubviewToFront(self.filterMenu)
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -128,21 +139,75 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
     self.topNavBar.addSubview(closeButton)
   }
   
+  private func initTaggerBar() {
+    self.photoTaggerView = PhotoTaggerView(frame: CGRect(x: 0.0, y: self.topNavBar.frame.maxY, width: self.view.frame.width, height: TOPNAV_BAR_SIZE))
+    self.photoTaggerView.backgroundColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    self.photoTaggerViewOrigin = self.photoTaggerView.frame.origin
+    
+    self.searchTagField = self.photoTaggerView.tagField
+    self.searchTagField.addTarget(self, action: "onChangeText:", forControlEvents: UIControlEvents.EditingChanged)
+    self.searchTagField!.delegate = self
+    
+    self.partTypeButton = self.photoTaggerView.partTypeButton
+    self.partTypeButton.addTarget(self, action: "onTapPartType:", forControlEvents: .TouchUpInside)
+    
+    self.cancelButton = self.photoTaggerView.cancelButton
+    self.cancelButton.addTarget(self, action: "stopTagging", forControlEvents: .TouchUpInside)
+    
+    self.view.addSubview(self.photoTaggerView)
+  }
+  
   private func initFilters() {
-    self.filterMenu = DOPDropDownMenu(origin: CGPoint(x: 0.0, y: self.topNavBar.frame.maxY), andHeight: TOPNAV_BAR_SIZE)
+    self.filterMenu = DOPDropDownMenu(origin: CGPoint(x: 0.0, y: self.photoTaggerView.frame.maxY), andHeight: TOPNAV_BAR_SIZE)
     self.filterMenu.delegate = self
     self.filterMenu.dataSource = self
     self.filterMenu.detailTextFont = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.filterMenu.detailTextColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
     self.filterMenu.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
-    self.view.addSubview(self.filterMenu)
+//    self.view.addSubview(self.filterMenu)
   }
   
   private func initPartCollectionView() {
-    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.filterMenu.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE), isSelectable: true)
+    self.partCollectionView = PartCollectionView(frame: CGRect(x: 0.0, y: self.photoTaggerView.frame.maxY, width: self.view.frame.width, height: self.view.frame.height-TOPNAV_BAR_SIZE), isSelectable: true)
     self.partCollectionView.partCollectionViewDelegate = self
     self.partCollectionView.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(self.partCollectionView)
+  }
+  
+  private func initPartPicker() {
+    let PICKER_Y: CGFloat = gPhotoSize+self.photoTaggerView.frame.height
+    self.pickerView = UIView(frame: CGRect(x: 0.0, y: PICKER_Y, width: self.view.frame.width, height: self.view.frame.height-PICKER_Y))
+    self.pickerView.backgroundColor = UIColor.whiteColor()
+    self.view.addSubview(self.pickerView)
+    
+    let actionBar = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.pickerView.frame.width, height: 44.0))
+    
+    self.partPicker = UIPickerView()
+    self.partPicker.center = CGPoint(x: self.pickerView.frame.width/2, y: (self.pickerView.frame.height-actionBar.frame.height)/2)
+    self.partPicker.showsSelectionIndicator = true
+    self.partPicker.delegate = self
+    self.partPicker.dataSource = self
+    self.pickerView.addSubview(self.partPicker)
+    
+    self.pickerView.addSubview(actionBar)
+    
+    let BUTTON_WIDTH: CGFloat = 60.0
+    let cancelButton = UIButton(frame: CGRect(x: 5.0, y: 0.0, width: BUTTON_WIDTH, height: actionBar.frame.height))
+    cancelButton.setTitle("Cancel", forState: .Normal)
+    cancelButton.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    cancelButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
+    cancelButton.addTarget(self, action: "onCancelPicker:", forControlEvents: .TouchUpInside)
+    self.pickerView.addSubview(cancelButton)
+    
+    let doneButton = UIButton(frame: CGRect(x: self.pickerView.frame.width-5.0-BUTTON_WIDTH, y: 0.0, width: BUTTON_WIDTH, height: actionBar.frame.height))
+    doneButton.setTitle("Done", forState: .Normal)
+    doneButton.titleLabel?.textAlignment = .Right
+    doneButton.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_LARGE)
+    doneButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
+    doneButton.addTarget(self, action: "onDonePicker:", forControlEvents: .TouchUpInside)
+    self.pickerView.addSubview(doneButton)
+    
+    self.pickerView.hidden = true
   }
   
   // MARK:- DOPDropDownMenuDataSource
@@ -183,16 +248,97 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
     self.saveButton.enabled = isSelected
   }
   
-  // MARK:- Private methods
-  private func loadParts() {
-    PartManager.sharedInstance.searchPart("*")
+  // MARK: - UITableViewDataSource
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return PartManager.sharedInstance.searchResults.count
   }
   
-  private func closeView() {
-    self.dismissViewControllerAnimated(true, completion: nil)
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("SearchResultsTableViewCell") as! SearchResultsTableViewCell
+    
+    if let partObject = PartManager.sharedInstance.searchResults[safe: indexPath.row] {
+      if partObject.partNumber == kPartJSONEmptyKey {
+        cell.partObject = nil
+      } else {
+        cell.partObject = partObject
+      }
+      
+      cell.searchKeywords = self.searchTagField.text
+    }
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let partObject = PartManager.sharedInstance.searchResults[indexPath.row]
+    
+    if partObject.partNumber == kPartJSONEmptyKey {
+      partObject.partNumber = self.searchTagField.text
+      partObject.brand = ""
+      partObject.model = ""
+    }
+    
+//    self.addTag(partObject)
+    self.resetView()
+//    self.photoTable.reloadData()
+  }
+  
+  // MARK:- UIPickerViewDelegate
+  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    let pickerLabel = UILabel()
+    pickerLabel.textColor = UIColor.fromRGB(COLOR_NEAR_BLACK)
+    pickerLabel.text = PartManager.sharedInstance.PART_CATEGORIES[row]
+    pickerLabel.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
+    pickerLabel.textAlignment = NSTextAlignment.Center
+    return pickerLabel
+  }
+  
+  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return PartManager.sharedInstance.PART_CATEGORIES[row]
+  }
+  
+  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return PartManager.sharedInstance.PART_CATEGORIES.count
+  }
+  
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//    self.selectedPart = PartManager.sharedInstance.PART_CATEGORIES[row]
   }
 
   // MARK:- Callbacks
+  func onChangeText(sender: UITextField) {
+    if sender.text != "" {
+      self.searchParts(sender.text!)
+    } else {
+      PartManager.sharedInstance.clearSearchResults()
+    }
+  }
+  
+  func onTapPartType(sender: UIButton) {
+    if self.searchTagField.isFirstResponder() {
+      self.searchTagField.resignFirstResponder()
+    }
+    self.pickerView.hidden = false
+  }
+  
+  func stopTagging() {
+    self.resetView()
+    PartManager.sharedInstance.eventManager.trigger(EVENT_PICKER_CANCELLED)
+  }
+  
+  func onDonePicker(sender: UIButton) {
+//    self.photoTaggerView.partType = PartType(rawValue: self.selectedPart) as PartType!
+    self.pickerView.hidden = true
+  }
+  
+  func onCancelPicker(sender: UIButton) {
+    self.pickerView.hidden = true
+  }
+  
   func onClose(sender: AnyObject) {
     self.closeView()
   }
@@ -202,5 +348,38 @@ class TaggerViewController: UIViewController, DOPDropDownMenuDataSource, DOPDrop
       self.editPhotoViewController.addTag(self.selectedPart)
     }
     self.closeView()
+  }
+  
+  // MARK:- Private methods
+  func resetView() {
+    if self.searchTagField.isFirstResponder() {
+      self.searchTagField.resignFirstResponder()
+    }
+    
+    self.searchTagField.text = ""
+    self.photoTaggerView.reset()
+    self.pickerView.hidden = true
+    
+    self.searchParts("*")
+  }
+  
+  private func searchParts(query: String) {
+    PartManager.sharedInstance.searchPart(query)
+  }
+  
+  private func closeView() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func keyboardWillShow(sender: NSNotification) {
+    if let userInfo = sender.userInfo {
+      if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
+        self.keyboardHeight = keyboardHeight
+      }
+    }
+  }
+  
+  func keyboardWillHide(sender: NSNotification) {
+
   }
 }

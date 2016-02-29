@@ -86,13 +86,13 @@ class PAPFindFriendsCell: PFTableViewCell {
     self.followButton = UIButton()
     self.followButton.layer.cornerRadius = 4.0
     self.followButton.backgroundColor = UIColor.fromRGB(COLOR_ORANGE)
-    self.followButton.titleLabel!.font = UIFont(name: FONT_BOLD, size: FONTSIZE_MEDIUM)
+    self.followButton.titleLabel!.font = UIFont(name: FONT_PRIMARY, size: FONTSIZE_STANDARD)
     self.followButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
     self.followButton.setImage(UIImage(named: "IconTick.png"), forState: UIControlState.Selected)
-    self.followButton.setTitle(NSLocalizedString("Follow", comment: "Follow string, with spaces added for centering"), forState: UIControlState.Normal)
-    self.followButton.setTitle("Following", forState: UIControlState.Selected)
-    self.followButton.setTitleColor(UIColor.fromRGB(COLOR_ORANGE), forState: UIControlState.Normal)
-    self.followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Selected)
+    self.followButton.setTitle(NSLocalizedString("FOLLOW", comment: "Follow string, with spaces added for centering"), forState: UIControlState.Normal)
+    self.followButton.setTitle("FOLLOWING", forState: UIControlState.Selected)
+    self.followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    self.followButton.setTitleColor(UIColor.fromRGB(COLOR_LIGHT_GRAY), forState: UIControlState.Selected)
     self.followButton.addTarget(self, action: Selector("didTapFollowButtonAction:"), forControlEvents: UIControlEvents.TouchUpInside)
     self.followButton.hidden = true
     self.contentView.addSubview(self.followButton)

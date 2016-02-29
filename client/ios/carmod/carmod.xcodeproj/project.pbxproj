@@ -24,6 +24,7 @@
 		404C4C481C44643700E21421 /* TaggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C471C44643700E21421 /* TaggerViewController.swift */; };
 		404C4C4B1C447C2D00E21421 /* PartCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */; };
 		404C4C4D1C447C8800E21421 /* PartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */; };
+		404FA9631C6AA534001B73C6 /* carmod.gif in Resources */ = {isa = PBXBuildFile; fileRef = 404FA9621C6AA534001B73C6 /* carmod.gif */; };
 		405973301C1639C600600615 /* CarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059732F1C1639C600600615 /* CarTableViewCell.swift */; };
 		405973321C163A6000600615 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973311C163A6000600615 /* CarManager.swift */; };
 		405973341C17D1EF00600615 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405973331C17D1EF00600615 /* StoryViewController.swift */; };
@@ -110,6 +111,7 @@
 		404C4C471C44643700E21421 /* TaggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaggerViewController.swift; sourceTree = "<group>"; };
 		404C4C4A1C447C2D00E21421 /* PartCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionView.swift; sourceTree = "<group>"; };
 		404C4C4C1C447C8800E21421 /* PartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCollectionViewCell.swift; sourceTree = "<group>"; };
+		404FA9621C6AA534001B73C6 /* carmod.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = carmod.gif; sourceTree = "<group>"; };
 		4059732F1C1639C600600615 /* CarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTableViewCell.swift; sourceTree = "<group>"; };
 		405973311C163A6000600615 /* CarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
 		405973331C17D1EF00600615 /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,14 @@
 			name = PartCollectionView;
 			sourceTree = "<group>";
 		};
+		404FA9611C6AA52E001B73C6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				404FA9621C6AA534001B73C6 /* carmod.gif */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		405973511C1B400600600615 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +288,7 @@
 		40678DFE1BFA99270071BCB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				404FA9611C6AA52E001B73C6 /* Images */,
 				40B0CED01BFBE167001D3033 /* Fonts */,
 				40678E001BFA993F0071BCB8 /* Resources */,
 				40678DFF1BFA99380071BCB8 /* Extensions */,
@@ -616,6 +627,7 @@
 				40722E241BFA98B000D6F10C /* Assets.xcassets in Resources */,
 				40220E661C0123A0001CF280 /* Oxygen-Regular.ttf in Resources */,
 				40220E641C0123A0001CF280 /* Oxygen-Bold.ttf in Resources */,
+				404FA9631C6AA534001B73C6 /* carmod.gif in Resources */,
 				40220E651C0123A0001CF280 /* Oxygen-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,17 +892,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 67EFCCA25B720D9942AF2ACC /* Pods-carmod.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Thad Hwang (35AR497389)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Thunderchicken Labs LLC (M9343M6EJU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Thunderchicken Labs LLC (M9343M6EJU)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = carmod/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.CarMod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
+				PROVISIONING_PROFILE = "8d95db11-fa0c-4984-b85c-8894590493e3";
 				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-Bridging-Header.h";
 			};
 			name = Debug;
@@ -899,17 +912,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15465C57AA63019A023267DA /* Pods-carmod.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Thad Hwang (35AR497389)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Thunderchicken Labs LLC (M9343M6EJU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Thunderchicken Labs LLC (M9343M6EJU)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = carmod/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.carmod;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderchickenlabs.CarMod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efdc3fd7-e8f1-4997-b916-3b68fa3997f9";
+				PROVISIONING_PROFILE = "8d95db11-fa0c-4984-b85c-8894590493e3";
 				SWIFT_OBJC_BRIDGING_HEADER = "carmod/carmod-Bridging-Header.h";
 			};
 			name = Release;
