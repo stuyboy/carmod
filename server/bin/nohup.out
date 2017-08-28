@@ -1,0 +1,35 @@
+listening to 171.31.17.151:80 with cwd /home/joechang/dev/petrolhead/carmod/server/bin
+2016/01/04 11:58:57 listen tcp 171.31.17.151:80: bind: cannot assign requested address
+2016/01/04 12:20:30.320931 Starting Goji on [::]:8000
+2016/01/04 12:20:47.340677 [JCT440s/E5P150Y7tx-000001] Started GET "/search/p" from [::1]:33574
+2016/01/04 12:20:47.353030 [JCT440s/E5P150Y7tx-000001] Returning 200 in 12.295212ms
+2016/01/04 12:20:47.598221 [JCT440s/E5P150Y7tx-000002] Started GET "/favicon.ico" from [::1]:33574
+2016/01/04 12:20:47.598274 [JCT440s/E5P150Y7tx-000002] Returning 404 in 14.56µs
+2016/01/04 13:43:58.211932 Starting Goji on [::]:8000
+2016/01/04 13:44:07.561350 [JCT440s/V97lqj2ZpL-000001] Started GET "/search/p" from [::1]:34284
+2016/01/04 13:44:07.567796 [JCT440s/V97lqj2ZpL-000001] Returning 200 in 6.394968ms
+2016/01/04 13:44:13.134804 [JCT440s/V97lqj2ZpL-000002] Started GET "/search/p" from [::1]:34284
+2016/01/04 13:44:13.139640 [JCT440s/V97lqj2ZpL-000002] Returning 200 in 4.774486ms
+2016/01/04 13:44:15.742247 [JCT440s/V97lqj2ZpL-000003] Started GET "/search/p" from [::1]:34284
+2016/01/04 13:44:15.750429 [JCT440s/V97lqj2ZpL-000003] Returning 200 in 8.105235ms
+2016/01/04 13:44:31.888911 [JCT440s/V97lqj2ZpL-000004] Started GET "/search/p" from [::1]:34284
+2016/01/04 13:44:31.902948 [JCT440s/V97lqj2ZpL-000004] Returning 200 in 13.943221ms
+2016/01/04 13:44:32.142961 [JCT440s/V97lqj2ZpL-000005] Started GET "/favicon.ico" from [::1]:34284
+2016/01/04 13:44:32.143019 [JCT440s/V97lqj2ZpL-000005] Returning 404 in 16.768µs
+2016/01/04 13:44:33.834037 Starting Goji on [::]:8000
+2016/01/04 13:44:36.816407 [JCT440s/KtmLLdoRXX-000001] Started GET "/search/p" from [::1]:34290
+2016/01/04 13:44:36.823076 [JCT440s/KtmLLdoRXX-000001] Returning 200 in 6.619439ms
+2016/01/04 13:44:37.002368 [JCT440s/KtmLLdoRXX-000002] Started GET "/favicon.ico" from [::1]:34290
+2016/01/04 13:44:37.002431 [JCT440s/KtmLLdoRXX-000002] Returning 404 in 13.359µs
+2016/01/04 13:44:45.172282 Starting Goji on [::]:8000
+2016/01/04 13:44:46.714989 [JCT440s/9y92yxUBiZ-000001] Started GET "/search/p" from [::1]:34298
+2016/01/04 13:44:46.718584 [JCT440s/9y92yxUBiZ-000001] Returning 200 in 3.558304ms
+2016/01/04 13:44:46.893218 [JCT440s/9y92yxUBiZ-000002] Started GET "/favicon.ico" from [::1]:34298
+2016/01/04 13:44:46.893290 [JCT440s/9y92yxUBiZ-000002] Returning 404 in 32.457µs
+listening to 172.31.17.151:8888 with cwd /home/joechang/dev/petrolhead/carmod/server/bin
+2016/01/04 17:57:08 listen tcp 172.31.17.151:8888: bind: cannot assign requested address
+2016/01/04 17:57:49.924160 Starting Goji on [::]:8000
+listening to 172.31.17.151:8888 with cwd /home/joechang/dev/petrolhead/carmod/server/bin
+2016/01/04 17:57:54 listen tcp 172.31.17.151:8888: bind: cannot assign requested address
+listening to 172.31.17.151:8888 with cwd /home/joechang/dev/petrolhead/carmod/server/bin
+2016/01/04 17:58:36 listen tcp 172.31.17.151:8888: bind: cannot assign requested address

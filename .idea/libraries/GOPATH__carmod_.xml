@@ -1,0 +1,35 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;carmod&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com" />
+      <root url="file://$PROJECT_DIR$/../../go/src/gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../go/src/golang.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/vendor/github.com/Masterminds/cookoo/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/golang.org/x/sys/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/inconshreveable/mousetrap/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/vendor/github.com/codegangsta/cli/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/shurcooL/sanitized_anchor_name/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/zenazn/goji/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/derekparker/delve/_fixtures" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/russross/blackfriday/testdata" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/go-sql-driver/mysql/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/derekparker/delve/dwarf/frame/testdata" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/peterh/liner/.git" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/cpuguy83/go-md2man/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/vendor/gopkg.in/yaml.v2/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/spf13/cobra/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/vendor/github.com/Masterminds/vcs/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/derekparker/delve/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/spf13/pflag/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/vendor/github.com/Masterminds/semver/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/gopkg.in/yaml.v2/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/russross/blackfriday/.git" />
+      <root url="file://$PROJECT_DIR$/../../go/src/github.com/Masterminds/glide/.git" />
+    </excluded>
+  </library>
+</component>

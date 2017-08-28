@@ -38,7 +38,7 @@ var Stories = React.createClass({
 
         return (
             <div id="storyPhotos">
-                <Author storyId={this.props.storyId}/>
+                <Masthead storyId={this.props.storyId}/>
                 {
                     this.data.descriptions.map(function(a, idx) {
                         return (
@@ -169,7 +169,7 @@ var Annotations = React.createClass({
     }
 })
 
-var Author = React.createClass({
+var Masthead = React.createClass({
     mixins: [ParseReact.Mixin],
 
     observe: function() {
@@ -230,7 +230,7 @@ var StoryPhotos = React.createClass({
         var title = this.props.storyTitle;
         var authorId = this.props.storyAuthorId;
         var storyLink="/story.html?storyId=" + this.props.storyId;
-        var authorLink="/user.html/" + authorId;
+        var authorLink="/user.html?userId=" + authorId;
         var renderType = this.props.renderType;
 
         var description = this.data.description.map(function(d, idx) {
@@ -248,8 +248,10 @@ var StoryPhotos = React.createClass({
         var author = this.data.author.map(function(c, idx) {
             return (
                 <div id="story-author" className="story-author" key={c.objectId}>
-                    <img className="story-author-avatar" src={c.profilePictureSmall.url()}/>
-                    {c.displayName}
+                    <a href={authorLink}>
+                        <img className="story-author-avatar" src={c.profilePictureSmall.url()}/>
+                        {c.displayName}
+                    </a>
                 </div>
             );
         });
@@ -369,7 +371,7 @@ var StoryBlock = React.createClass({
     }
 })
 
-var UserBlock = React.createClass({
+var NewUsersBlock = React.createClass({
     mixins: [ParseReact.Mixin],
 
     observe: function () {
@@ -396,6 +398,37 @@ var UserBlock = React.createClass({
                                 <p>I love CarMod.  Thad and Joe are studs.</p>
                                 <footer>{c.displayName}</footer>
                             </blockquote>
+                        </div>
+                    );
+                  })
+                }
+            </div>
+        );
+    }
+})
+
+var UserBlock = React.createClass({
+    mixins: [ParseReact.Mixin],
+
+    observe: function () {
+        //Get the user
+        var uQuery = new Parse.Query(Parse.User);
+        if (this.props.userId) {
+            uQuery.get(this.props.userId);
+        }
+        return {
+            user: uQuery.descending('createdAt').limit(1)
+        };
+    },
+
+    render: function () {
+        return (
+            <div id="user-info" className="user-info">
+                { this.data.user.map(function (c) {
+                    return (
+                        <div className="user-content" key={c.objectId}>
+                            <img src={c.profilePictureMedium.url()} alt="img01" />
+                            {c.displayName}
                         </div>
                     );
                   })
@@ -600,9 +633,9 @@ var Header = React.createClass({
 
 module.exports.StoryBlock = StoryBlock;
 module.exports.UserBlock = UserBlock;
+module.exports.NewUsersBlock = NewUsersBlock;
 module.exports.PartsBlock = PartsBlock;
 module.exports.Stories = Stories;
 module.exports.Footer = Footer;
 module.exports.Header = Header;
-module.exports.Author = Author;
 module.exports.Annotations = Annotations;

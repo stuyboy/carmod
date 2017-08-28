@@ -7,6 +7,7 @@ browserify      = require 'browserify'
 watchify        = require 'watchify'
 cjsxify         = require 'cjsxify'
 reactify        = require 'reactify'
+templatify      = require 'gulp-template-html'
 
 handleErrors = (title) -> (args...)->
   # TODO: Send error to notification center with gulp-notify
@@ -65,6 +66,13 @@ gulp.task 'styles', ->
   .pipe(flatten())
   .pipe(gulp.dest(destDirCssFonts))
 
+gulp.task 'template', ->
+  contentSrc = 'src/*.html'
+  templateDir = 'templates/template.html'
+  destDir = './'
+  gulp.src(contentSrc)
+  .pipe(templatify(templateDir))
+  .pipe(gulp.dest(destDir))
 
 gulp.task 'dist', ['styles'], -> build(false)
 
